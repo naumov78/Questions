@@ -12,8 +12,8 @@
 
 ### Design Docs
 
-* [View Wireframes](docs/wireframes)
-* [React Components](docs/component-hierarchy.md)
+* [Wireframes](docs/wireframes)
+* [Component Hierarchy](docs/component-hierarchy.md)
 * [API endpoints](docs/api-endpoints.md)
 * [DB schema](docs/schema.md)
 * [Sample State](docs/sample-state.md)
