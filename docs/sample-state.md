@@ -1,3 +1,5 @@
+```javascript
+
 {
   currentUser: {
     id: 1,
@@ -19,3 +21,4 @@
   },
   topics: {[]},
 }
+```
