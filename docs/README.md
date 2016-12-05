@@ -1,48 +1,41 @@
-Heroku Link
 
+### Minimum Viable Product
+"Questions" is a web application inspired by "Quora" built using Ruby on Rails and React/Redux. By the end of Week 9, this app will, at a minimum, satisfy the following criteria with smooth, bug-free navigation, adequate seed data and sufficient CSS styling
 
-
-
-
-
-
-Minimum Viable Product
-Questions is a web application inspired by Quora built using Ruby on Rails and React/Redux. By the end of Week 9, this app will, at a minimum, satisfy the following criteria with smooth, bug-free navigation, adequate seed data and sufficient CSS styling
-
-- Hosting o Heroku
-- Answers/comments on answers
+- Hosting on Heroku
+- Questions/Answers/Comments on answers
 - Search Questions
-- Topics/Tags
-- production README
+- Topics
+- Development README, later replaced with a production README
 
 
 
+### Design Docs
+
+* [View Wireframes](wireframes)
+* [React Components](component-hierarchy.md)
+* [API endpoints](api-endpoints.md)
+* [DB schema](schema.md)
+* [Sample State](sample-state.md)
 
 
 
+### Implementation Timeline
 
-Implementation Timeline
+#####  Phase 1: Backend setup and Front End User Authentication (2 days /December 6-7/)
 
-Phase 1: Backend setup and Front End User Authentication (2 days)
+**Objective:** Functioning rails project with front-end Authentication
 
-Objective: Functioning rails project with front-end Authentication
+##### Phase 2: User Model, API, and components (2 days /December 8-9/)
 
-Phase 2: Notes Model, API, and components (2 days)
+**Objective:** User can be created through the API.
 
-Objective: Notes can be created, read, edited and destroyed through the API.
+##### Phase 3: Questions (2 days /December 12-13/)
 
-Phase 3: Notebooks (2 day)
+**Objective:** Questions can be created, read through the API.
 
-Objective: Notes belong to Notebooks that can be created, read, edited and destroyed through the API.
+##### Phase 4: Answers (2 days /December 14-15/)
 
-Phase 4: Tags (1 days)
+**Objective:** Answers can be created, read through the API.
 
-Objective: Notes can be tagged with multiple tags, and tags are searchable.
-
-Phase 5: Allow Complex Styling in Notes (1 days, W2 Th 6pm)
-
-objective: Allow rich text editing of notes.
-
-Phase 6: - Pagination / infinite scroll for Notes Index (1 day, W2 F 6pm)
-
-objective: Add infinite scroll to Notes Index
+##### Phase 5: Polishing project (1 day /December 16/)

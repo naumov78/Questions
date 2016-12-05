@@ -7,19 +7,21 @@ id                 | integer   | not null, primary key
 first_name         | string    | not null, indexed
 last_name          | string    | not null, indexed
 email              | string    | not null, indexed, unique
+description        | string    |
 password_digest    | string    | not null
 session_token      | string    | not null, indexed, unique
-asked_questions    | array     |
-subscribed_topics  | array
+asked_questions    | string    | not null, array: true, default: []
+answers            | string    | not null, array: true, default: []
+subscribed_topics  | string    | not null, array: true, default: []
 
 
 ## topics
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
-title       | string    | not null
-questions   | array     |
-subscribers | array     |
+name        | string    | not null
+questions   | string    | not null, array: true, default: []
+subscribers | string    | not null, array: true, default: []
 
 
 ## questions
@@ -28,8 +30,8 @@ column name | data type | details
 id          | integer   | not null, primary key
 author_id   | integer   | not null, foreign key (references users), indexed
 body        | string    | not null
-topics      | array     |
-answers     | array     |
+topics      | string    | not null, array: true, default: []
+answers     | string    | not null, array: true, default: []
 views       | integer   |
 rating      | integer   |
 
@@ -43,7 +45,7 @@ body        | string    | not null
 views       | integer   |
 rating      | integer   |
 
-## comments
+## answer_comments
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
