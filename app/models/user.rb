@@ -2,23 +2,20 @@
 #
 # Table name: users
 #
-#  id                :integer          not null, primary key
-#  first_name        :string           not null
-#  last_name         :string           not null
-#  email             :string           not null
-#  description       :string
-#  password_digest   :string           not null
-#  session_token     :string           not null
-#  asked_questions   :string           default([]), not null, is an Array
-#  answers           :string           default([]), not null, is an Array
-#  subscribed_topics :string           default([]), not null, is an Array
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
+#  id              :integer          not null, primary key
+#  first_name      :string           not null
+#  last_name       :string           not null
+#  email           :string           not null
+#  description     :string
+#  password_digest :string           not null
+#  session_token   :string           not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 
 class User < ActiveRecord::Base
   validates :first_name, :last_name, :email, :password_digest, :session_token, presence: true
-  validates :password, length: { minimum: 5 }, allow_nil: true
+  validates :password, length: { minimum: 1 }, allow_nil: true
   validates :email, :session_token, uniqueness: true
 
   attr_reader :password
@@ -26,7 +23,7 @@ class User < ActiveRecord::Base
   after_initialize :ensure_session_token
 
   def self.find_by_credentials(email, password)
-    user = user.find_by(email: email)
+    user = User.find_by(email: email)
     return nil if user.nil?
     user.matches_password?(password) ? user : nil
   end

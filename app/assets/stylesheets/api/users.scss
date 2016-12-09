@@ -1,3 +1,152 @@
 // Place all the styles related to the API::Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.invis-drop-down {
+  visibility: hidden;
+}
+
+.vis-drop-down {
+  visibility: visible;
+  border: 1px solid #ccc;
+  width: 188px;
+  border-radius: 3px;
+  position: relative;
+}
+
+.vis-drop-down > ul {
+  border-radius: 5px;
+}
+
+.vis-drop-down > li {
+  padding: 8px 16px;
+  background: #f6f6f6;
+  border-bottom: 1px solid #ccc;
+  color: #2b6dad;
+}
+
+// .vis-drop-down:after {
+//   content: '';
+//   display: block;
+//   width: 0;
+//   height: 0;
+//   background: #f6f6f6;
+//   border-color: rgba(204,204,204,0);
+//   border-left: 7.5px solid black;
+//   border-right: 7.5px solid black;
+//   border-bottom: 7px solid rgba(0,0,0,0);
+//   position: absolute;
+//   z-index: 1;
+//   top: -6px;
+//   left: 50%;
+//   margin-left: -7px;
+// }
+
+#item-0:after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    background: #f6f6f6;
+    border-color: rgba(204,204,204,0);
+    border-left: 7.5px solid transparent;
+    border-right: 7.5px solid transparent;
+    border-bottom: 7px solid rgba(0,0,0,0);
+    position: absolute;
+
+    z-index: 1;
+    top: -6px;
+    left: 50%;
+    margin-left: -7px;
+
+}
+
+// #item-0:
+
+.vis-drop-down > li:hover {
+  background: #dfeffa;
+  cursor: pointer;
+}
+
+
+.vis-drop-down:enabled {
+  // display: none;
+  position: absolute;
+  left: 50%;
+  // transform: translateX(-50%);
+  bottom: 65px;
+  background: #000;
+  color: #fff;
+  // font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+
+// uu-form
+
+.uu-form-container {
+  margin: 0 auto;
+  width: 500px;
+  border: 1px solid black;
+
+
+}
+
+.uu-form {
+  border: 1px solid black;
+  padding: 20px;
+  // display: block;
+}
+
+
+
+
+.uu-input {
+  // display: inline;
+}
+
+.uu-field-title {
+
+}
+
+.uu-input-field-container {
+  // padding: 0 0 0 15px;
+}
+
+.uu-input > label {
+  width: 72px;
+  border: 1px solid black;
+}
+
+.uu-input > input {
+  margin: 0 0 0 15px;
+
+}
+
+
+
+.uu-buttons {
+  display: inline;
+  border: 1px solid black;
+  float: right;
+
+  li {
+    // float: right;
+  }
+
+  input {
+    margin: 0 0 0 10px;
+  }
+}
+
+.cancel-link {
+  color: #2b6dad;
+  font-size: 14px;
+  margin: 0 0 0 10px;
+}
+
+.cancel-link:hover {
+  text-decoration: underline;
+}

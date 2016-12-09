@@ -1,11 +1,11 @@
 import React from 'react';
 import GreetingContainer from './greeting_container';
+import HeaderContainer from './header_container';
 
 const App =({ children }) => {
   return (
     <div>
-      <h2>App name</h2>
-
+      <HeaderContainer />
       { children }
     </div>
   );
@@ -13,6 +13,5 @@ const App =({ children }) => {
 
 
 export default App;
-
 
 // <GreetingContainer />

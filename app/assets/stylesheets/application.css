@@ -13,3 +13,55 @@
  *= require_tree .
  *= require_self
  */
+
+
+
+ html, body, header, nav, h1, a, ul, li,
+ strong, main, section, img, div, h2, p,
+ form, fieldset, label, input, textarea,
+ button, article, footer, small {
+   margin: 0;
+   padding: 0;
+   border: 0;
+   outline: 0;
+   font: inherit;
+   box-sizing: inherit;
+   text-align: inherit;
+   text-decoration: inherit;
+   vertical-align: inherit;
+   color: inherit;
+   background: transparent;
+   list-style: none;
+
+ }
+
+ body {
+  box-sizing: content-box;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 16px;
+  background: #eee;
+  color: #000;
+  /*background-image: url("background.png");
+  background-repeat: no-repeat;*/
+ }
+
+ img {
+   width: 100%;
+   display: block;
+   height: auto;
+ }
+
+ .group:after {
+   clear: both;
+   display: block;
+   content: "";
+ }
+
+
+ .button:hover {
+   cursor: pointer;
+ }
+
+ .link:hover {
+   cursor: pointer;
+ }
