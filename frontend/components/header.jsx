@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router';
+import GreetingContainer from './greeting_container';
 
 class Header extends React.Component {
   constructor(props) {
@@ -16,13 +17,10 @@ class Header extends React.Component {
 
 render() {
   // debugger
-    if(this.props.currentUser){
-    // if (store.getState().session.currentUser) {
+    if(this.props.currentUser && this.props.location.pathname !== "/settopics"){
       return (
           <nav>
-            <form onSubmit={this.handleSubmit}>
-              <input className="auth-form-btn" type="submit" value="User profile" />
-            </form>
+            <GreetingContainer />
           </nav>
       );
     } else {
@@ -35,3 +33,10 @@ render() {
 
 
 export default withRouter(Header);
+
+
+
+
+// <form onSubmit={this.handleSubmit}>
+//   <input className="auth-form-btn" type="submit" value="User profile" />
+// </form>

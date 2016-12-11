@@ -38,7 +38,7 @@ topic_id           | string    | not null, foreign key (references topics), inde
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
-name        | string    | not null
+title        | string    | not null
 
 
 ## topic_questions (JOIN table)

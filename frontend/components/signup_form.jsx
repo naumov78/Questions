@@ -33,7 +33,7 @@ class SignUpForm extends React.Component {
     const user = this.state;
 		// debugger
     this.props.signup({user}).then(() => {
-			this.props.router.push("/");
+			this.props.router.push("/settopics");
 		});
   }
 	// this.props.router.push(`/users/${this.props.currentUser.id}`);

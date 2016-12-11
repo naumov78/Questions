@@ -3,9 +3,9 @@ import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import App from './app';
 import SessionFormContainerNew from './session_form_container_new';
-import AuthForm from './auth_form';
+import { AuthForm, IndexLogo } from './auth_form';
 import UserProfileContainer from './user/user_profile_container';
-
+import TopicFormContainer from './topics/topic_form_container';
 
 
 
@@ -32,6 +32,7 @@ return (
       <Route path="/" component={ App } >
         <IndexRoute onEnter={_ensureLogIn}/>
         <Route path="/login" component={ AuthForm } />
+        <Route path="/settopics" component={ TopicFormContainer } onEnter={_ensureLogIn}/>
         <Route path="/users/:id" component={ UserProfileContainer } onEnter={_ensureLogIn}/>
       </Route>
     </Router>

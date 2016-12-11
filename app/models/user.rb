@@ -14,9 +14,14 @@
 #
 
 class User < ActiveRecord::Base
+
+  
   validates :first_name, :last_name, :email, :password_digest, :session_token, presence: true
   validates :password, length: { minimum: 1 }, allow_nil: true
   validates :email, :session_token, uniqueness: true
+
+  has_many :user_subscribed_topics
+  has_many :topics, through: :user_subscribed_topics
 
   attr_reader :password
 

@@ -89,13 +89,13 @@
 .uu-form-container {
   margin: 0 auto;
   width: 500px;
-  border: 1px solid black;
+  // border: 1px solid black;
 
 
 }
 
 .uu-form {
-  border: 1px solid black;
+  // border: 1px solid black;
   padding: 20px;
   // display: block;
 }
@@ -104,7 +104,7 @@
 
 
 .uu-input {
-  // display: inline;
+  display: inline;
 }
 
 .uu-field-title {
@@ -117,7 +117,7 @@
 
 .uu-input > label {
   width: 72px;
-  border: 1px solid black;
+  // border: 1px solid black;
 }
 
 .uu-input > input {
@@ -129,7 +129,7 @@
 
 .uu-buttons {
   display: inline;
-  border: 1px solid black;
+  // border: 1px solid black;
   float: right;
 
   li {
@@ -149,4 +149,97 @@
 
 .cancel-link:hover {
   text-decoration: underline;
+}
+
+// signup topic list selector
+
+.topic-list{
+  font-size: 16px;
+
+}
+
+.topic-list-form {
+
+}
+
+.topic-list-title {
+  width: 100%;
+  text-align: center;
+
+
+  h2 {
+    font-size: 19px;
+    font-family: 'Taviraj', serif;
+    font-weight: 600;
+  }
+
+}
+
+.three-columns {
+  display: block;
+  padding: 15px 0 0 30px;
+
+}
+
+
+
+.topics-left {
+  display: inline-block;
+  // float: left;
+  width: 184px;
+  padding: 0;
+
+  input {
+    margin: 0 10px 0 0;
+  }
+
+  li {
+    margin: 5px 0 5px 0;
+  }
+
+}
+
+.topics-middle {
+  display: inline-block;;
+  // float: left;
+  width: 174px;
+  padding: 0 0 0 10px;
+
+  input {
+    margin: 0 10px 0 0;
+  }
+
+  li {
+    margin: 5px 0 5px 0;
+  }
+
+}
+
+
+
+.topics-right {
+  display: inline-block;;
+  // float: left;
+  width: 164px;
+  padding: 0 0 0 20px;
+
+  input {
+    margin: 0 10px 0 0;
+  }
+
+  li {
+    margin: 5px 0 5px 0;
+  }
+
+}
+
+.submit-topics {
+  float: right;
+  // border: 1px solid black;
+  // width: 200px;
+
+  input {
+    margin: 40px 40px 20px 0;
+  }
+
 }

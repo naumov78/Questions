@@ -1,24 +1,13 @@
 import { connect } from 'react-redux';
-import UserProfile from './user_profile';
+import SetTopics from './user_profile';
 import { updateUser, fetchUser } from '../../actions/user_actions';
 
 
-// const mapStateToProps = ({ session }) => {
-//   // debugger
-//   return {
-//   loggedIn: Boolean(session.currentUser),
-//   currentUser: session.currentUser,
-//   errors: session.errors
-// };
-// };
-
-
-const mapStateToProps = ({ user }) => {
+const mapStateToProps = ({ session }) => {
 
   return ({
-    user: user.user,
-    errors: user.errors,
-    topics: user.topics
+    user
+    currentUser: session.currentUser
   });
 };
 

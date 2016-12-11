@@ -6,25 +6,31 @@ import SignUpFormContainer from './signup_form_container';
 import SessionFormNewContainer from './session_form_container_new';
 
 
-const AuthForm = () => {
+export const IndexLogo = () => {
+  return (
+    <div className="index-logo-pair">
+        <div className="logo">
+          <h1>Questions</h1>
+        </div>
+
+        <div className="slogan">
+          <h2>Answer to any question</h2>
+        </div>
+    </div>
+
+  );
+}
+
+
+export const AuthForm = () => {
 return (
   <div className="index-page">
-    <div className="logo">
-      <h1>Questions</h1>
-    </div>
-
-    <div className="slogan">
-      <h2>Answer to any question</h2>
-    </div>
-
+    <IndexLogo />
     <div className="auth-form">
       <SignUpFormContainer />
       <SessionFormNewContainer />
     </div>
-
   </div>
 );
 
 }
-
-export default AuthForm;

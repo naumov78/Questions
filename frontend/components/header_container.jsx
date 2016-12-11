@@ -10,10 +10,10 @@ const mapStateToProps = ({ session }) => {
   });
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => ({
 
-}
+});
 
 export default connect(
-  mapStateToProps,
+  mapStateToProps
 )(Header);

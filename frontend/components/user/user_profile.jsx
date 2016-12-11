@@ -9,25 +9,15 @@ class UserProfile extends React.Component {
     super(props);
     this.state = { edit: false, first_name: "", last_name: "", description: "" }
     this.changeToEdit = this.changeToEdit.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
   }
 
   componentDidMount() {
-    // const user_id = store.getState().session.currentUser.id;
-    // fetchUser(user_id);
-    // return this.setState(fetchUser(user_id));
-    // debugger
     this.props.fetchUser(this.props.params.id);
   }
 
-  componentWillReceiveProps(newProps) {
-    // debugger
-    // if (this.props.params.id !== newProps.params.id) {
-    //   this.props.fetchUser(newProps.params.id);
-    // }
-  }
 
   update(field) {
-
     return e => {
       // debugger
       this.setState({
@@ -36,9 +26,26 @@ class UserProfile extends React.Component {
   }
   }
 
+  getTopics() {
+    // debugger
+      return $.ajax({
+        type: "GET",
+        url: '/api/user_subscribed_topics',
+      });
+    }
+
+  renderSubscribedTopics() {
+    return (
+      <ul>
+        {this.props.user.topics.map((topic) => {
+          return <li>{topic}</li>
+        })}
+      </ul>
+    )
+  }
+
   changeToEdit(e) {
     e.preventDefault();
-    // debugger
     this.setState({
       edit: true,
       first_name: this.props.user.first_name,
@@ -47,25 +54,22 @@ class UserProfile extends React.Component {
     });
   }
 
-  createDropDown() {
-    // e.preventDefault();
-    const menuItems = ['Profile', 'Edit User', 'Log out'];
-    return (
-      <ul id="user-profile-menu" className="invis-drop-down">
-        {menuItems.map((item, i) => (
-          <li key={`item-${i}`} id={`item-${i}`}>{item}</li>
-        ))}
-      </ul>
-    );
-  }
 
-  toggleDropDown() {
-    if ($('#user-profile-menu').hasClass('invis-drop-down')) {
-      $('.invis-drop-down').removeClass().addClass('vis-drop-down');
-    } else {
-      $('.vis-drop-down').removeClass().addClass('invis-drop-down');
-    }
-  }
+
+  renderSpecificError(fieldName) {
+		let singleError = "";
+		const allErrors = this.props.errors;
+
+		allErrors.forEach(error => {
+			if(error.includes(fieldName)){
+				singleError = error;
+			}
+		});
+		if (singleError === "Password is too short (minimum is 1 character)"){
+			singleError = "Password is too short"
+		}
+		return singleError;
+	}
 
 
   getDescription(){
@@ -76,13 +80,18 @@ class UserProfile extends React.Component {
     return descr;
   }
 
+  handleUpdate(e) {
+    e.preventDefault();
+    this.props.updateUser(this.getUser()).then(() => this.setState({edit: false}));
+  }
+
   getUser() {
     // debugger
     return {
       id: this.props.user.id,
       first_name: this.state.first_name,
       last_name: this.state.last_name,
-      description: this.props.user.description
+      description: this.state.description
   };
 }
 
@@ -94,7 +103,7 @@ class UserProfile extends React.Component {
     // debugger
     return (
       <div className="uu-form-container">
-        <form onSubmit={ () => {this.props.updateUser(this.getUser()).then(() => this.setState({edit: false}))}}
+        <form onSubmit={ this.handleUpdate }
           className="uu-form">
 
           <div className="uu-input">
@@ -104,6 +113,7 @@ class UserProfile extends React.Component {
               type="text"
               value={`${this.state.first_name}`}
               onChange={this.update("first_name")} />
+            <div className="signup-form-errors">{this.renderSpecificError("First name")}</div>
             <br />
           </div>
 
@@ -114,6 +124,7 @@ class UserProfile extends React.Component {
               type="text"
               value={`${this.state.last_name}`}
               onChange={this.update("last_name")} />
+            <div className="signup-form-errors">{this.renderSpecificError("Last name")}</div>
             <br />
           </div>
 
@@ -124,9 +135,10 @@ class UserProfile extends React.Component {
               type = "text"
               value={`${this.getDescription()}`}
               onChange={this.update("description")} />
+            <div className="signup-form-errors">{this.renderSpecificError("Description")}</div>
           </div>
 
-
+          <br />
         <div className="uu-buttons group">
             <Link className="cancel-link link" onClick={() => this.setState({edit: false})}>Cancel</Link>
             <input type="submit" className="auth-form-btn button" value="Update" />
@@ -139,18 +151,25 @@ class UserProfile extends React.Component {
     );
 
   } else {
+    // debugger
 
     return (
     <div>
       <div className="user-profile-greeting">
         <GreetingContainer />
       </div>
-      <Link onClick={() => this.toggleDropDown()} >Link</Link>
-      {this.createDropDown()}
+
       <div className="user-profile">
         <div className="user-name">
           <p>{this.props.user.first_name}&nbsp;&nbsp;{this.props.user.last_name}</p>
         </div>
+        <div className="user-descr">
+          <p>{this.props.user.description}</p>
+        </div>
+
+        <div>{this.renderSubscribedTopics()}</div>
+
+
       </div>
 
       <div className="edit-btn">
@@ -170,6 +189,8 @@ class UserProfile extends React.Component {
 export default withRouter(UserProfile);
 
 
+// <Link onClick={() => this.toggleDropDown()} >Link</Link>
+// {this.createDropDown()}
 
 
 
