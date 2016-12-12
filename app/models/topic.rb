@@ -13,6 +13,10 @@ class Topic < ActiveRecord::Base
 has_many :user_subscribed_topics
 has_many :users, through: :user_subscribed_topics
 
+has_many :questions,
+class_name: "Question",
+primary_key: :id,
+foreign_key: :topic_id
 
 end
 

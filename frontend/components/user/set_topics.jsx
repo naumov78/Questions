@@ -9,6 +9,7 @@ class SetTopics extends React.Component {
 
 
   handleSubmit(e) {
+    debugger
     e.preventDefault();
     this.props.router.push("/");
   }
@@ -28,7 +29,7 @@ class SetTopics extends React.Component {
         </div>
 
 
-        <form onSubmit={this.handleSubmit} className="set-topics-form" onSubmit={this.handleSubmit()}>
+        <form onSubmit={(e) => this.handleSubmit(e)} className="set-topics-form" onSubmit={this.handleSubmit()}>
 
           <div className="credentials-input">
             <label className="auth-form-field-titles"></label>

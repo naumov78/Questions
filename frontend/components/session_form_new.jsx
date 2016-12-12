@@ -8,28 +8,11 @@ class SessionFormNew extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-	// componentWillReceiveProps(newProps){
-	// 	debugger
-	// }
-
-	// componentDidUpdate() {
-	// 	this.redirectIfLoggedIn();
-	// }
-	//
-	// redirectIfLoggedIn() {
-	// 	// if (this.props.loggedIn) {
-	// 	// 	// this.props.router.push("/login");
-	// 	// 	// debugger
-	// 	// 	this.props.router.push(`/users/${this.props.currentUser.id}`);
-	// 	// }
-	// }
-
 	update(field) {
 		return e => this.setState({
 			[field]: e.currentTarget.value
 		});
 	}
-
 
   handleSubmit(e) {
     e.preventDefault();
@@ -38,20 +21,26 @@ class SessionFormNew extends React.Component {
 			this.props.router.push("/");
 		})
   }
-	// this.props.router.push(`/users/${this.props.currentUser.id}`);
 
-		renderLoginErrors() {
-		// debugger
-			return(
-				<ul>
-					{this.props.errors.map((error, i) => (
-						<li key={`error-${i}`}>
-							{error}
-						</li>
-					))}
-				</ul>
-			);
-		}
+	renderLoginErrors() {
+		return(
+			<ul>
+				{this.props.errors.map((error, i) => (
+					<li key={`error-${i}`}>
+						{error}
+					</li>
+				))}
+			</ul>
+		);
+	}
+
+	guestLogin(e) {
+		e.preventDefault();
+		const user = { email: 'z', password: 'z' }
+		this.props.login({user}).then(() => {
+			this.props.router.push("/");
+		})
+	}
 
 
 	render() {
@@ -85,12 +74,20 @@ class SessionFormNew extends React.Component {
                 onChange={this.update("password")} />
 						</div>
 
-						<div className="submit login-btn">
-	            <input type="submit"
-	              className="auth-form-btn"
-	              value="Login" />
-						</div>
+						<div className="login-buttons">
+								<div className="guest-login-btn">
+									<input type="button"
+										onClick={(e) => this.guestLogin(e)}
+										className="auth-form-btn btn"
+										value="Guest login" />
+								</div>
 
+								<div className="submit login-btn">
+			            <input type="submit"
+			              className="auth-form-btn btn"
+			              value="Login" />
+								</div>
+						</div>
           </form>
 
 					<div className="login-form-errors">
@@ -106,21 +103,3 @@ class SessionFormNew extends React.Component {
 }
 
 export default withRouter(SessionFormNew);
-
-
-// <div className="444login-form-errors">
-//
-// </div>
-// {this.renderErrors()}
-
-//
-// <div className="index-page">
-// 	<div className="logo">
-// 		<h1>Questions</h1>
-// 	</div>
-//
-// 	<div className="slogan">
-// 		<h2>Answer to any question</h2>
-// 	</div>
-//
-// 	<div className="auth-form">

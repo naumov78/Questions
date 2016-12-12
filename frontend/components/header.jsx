@@ -19,9 +19,40 @@ render() {
   // debugger
     if(this.props.currentUser && this.props.location.pathname !== "/settopics"){
       return (
-          <nav>
-            <GreetingContainer />
-          </nav>
+          <div className="header">
+            <div className="header-nav">
+              <div className="header-logo">
+                <h2><a href="/">Questions</a></h2>
+              </div>
+              <div className="header-content">
+
+                <div className="ask-form-container">
+                  <form className="ask-form">
+                    <input className="text-input" type="text" placeholder="Ask Question"></input>
+                    <input className="header-ask-btn" type="submit" value="Ask Question"/>
+                  </form>
+                </div>
+
+                <div className="nav-container group">
+                  <div className="nav-links">
+                    <div className="read-link">
+                      <a>Read</a>
+                    </div>
+                    <div className="answer-link">
+                      <a>Answer</a>
+                    </div>
+                    <div className="notifications-link">
+                      <a>Notifications</a>
+                    </div>
+                    <div className="greeting-container">
+                      <GreetingContainer />
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+          </div>
+        </div>
       );
     } else {
       return (<div></div>);

@@ -2,26 +2,38 @@
 #
 # Table name: users
 #
-#  id              :integer          not null, primary key
-#  first_name      :string           not null
-#  last_name       :string           not null
-#  email           :string           not null
-#  description     :string
-#  password_digest :string           not null
-#  session_token   :string           not null
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  id                   :integer          not null, primary key
+#  first_name           :string           not null
+#  last_name            :string           not null
+#  email                :string           not null
+#  description          :string
+#  password_digest      :string           not null
+#  session_token        :string           not null
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  userpic_file_name    :string
+#  userpic_content_type :string
+#  userpic_file_size    :integer
+#  userpic_updated_at   :datetime
 #
 
 class User < ActiveRecord::Base
 
-  
+
   validates :first_name, :last_name, :email, :password_digest, :session_token, presence: true
   validates :password, length: { minimum: 1 }, allow_nil: true
   validates :email, :session_token, uniqueness: true
 
+  has_attached_file :userpic, default_url: "missing-userpic.png"
+  validates_attachment_content_type :userpic, content_type: /\Aimage\/.*\z/
+
   has_many :user_subscribed_topics
   has_many :topics, through: :user_subscribed_topics
+
+  has_many :questions,
+  class_name: "Question",
+  primary_key: :id,
+  foreign_key: :author_id
 
   attr_reader :password
 

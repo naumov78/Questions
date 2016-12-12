@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161209171454) do
+ActiveRecord::Schema.define(version: 20161212192202) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "asked_questions", force: :cascade do |t|
+    t.integer "author_id",   null: false
+    t.integer "question_id", null: false
+  end
+
+  add_index "asked_questions", ["author_id"], name: "index_asked_questions_on_author_id", using: :btree
+  add_index "asked_questions", ["question_id"], name: "index_asked_questions_on_question_id", using: :btree
 
   create_table "questions", force: :cascade do |t|
     t.integer  "author_id",              null: false
@@ -23,9 +31,11 @@ ActiveRecord::Schema.define(version: 20161209171454) do
     t.integer  "rating",     default: 0
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.integer  "topic_id",               null: false
   end
 
   add_index "questions", ["author_id"], name: "index_questions_on_author_id", using: :btree
+  add_index "questions", ["topic_id"], name: "index_questions_on_topic_id", using: :btree
 
   create_table "topics", force: :cascade do |t|
     t.string   "title"
@@ -42,14 +52,18 @@ ActiveRecord::Schema.define(version: 20161209171454) do
   add_index "user_subscribed_topics", ["user_id"], name: "index_user_subscribed_topics_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "first_name",      null: false
-    t.string   "last_name",       null: false
-    t.string   "email",           null: false
+    t.string   "first_name",           null: false
+    t.string   "last_name",            null: false
+    t.string   "email",                null: false
     t.string   "description"
-    t.string   "password_digest", null: false
-    t.string   "session_token",   null: false
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.string   "password_digest",      null: false
+    t.string   "session_token",        null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.string   "userpic_file_name"
+    t.string   "userpic_content_type"
+    t.integer  "userpic_file_size"
+    t.datetime "userpic_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

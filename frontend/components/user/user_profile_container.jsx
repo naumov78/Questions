@@ -13,12 +13,12 @@ import { updateUser, fetchUser } from '../../actions/user_actions';
 // };
 
 
-const mapStateToProps = ({ user }) => {
+const mapStateToProps = ({ session, user }) => {
 
   return ({
-    user: user.user,
+    currentUser: session.currentUser,
     errors: user.errors,
-    topics: user.topics
+    topics: session.currentUser.topics
   });
 };
 

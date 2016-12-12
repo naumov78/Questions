@@ -1,17 +1,20 @@
 import { RECEIVE_TOPICS } from '../actions/topic_actions';
+import merge from 'lodash/merge';
 
 const initState = {
   topics: []
 }
 
 
-const TopicReducer = (state = initState, action) => {
+const TopicsReducer = (state = initState, action) => {
   switch(action.type) {
     case RECEIVE_TOPICS:
-      return action.topics;
+      // const newState = action.topics;
+      // debugger
+      return merge({}, state, { topics: action.topics });
     default:
       return state;
   }
 }
 
-export default TopicReducer;
+export default TopicsReducer;

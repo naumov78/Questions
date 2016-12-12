@@ -7,6 +7,9 @@
 
 # debugger
 json.array! @topics, :id, :title
+# json.array! @topics, :title
+# debugger
+
 
 
 #

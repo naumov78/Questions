@@ -1,0 +1,33 @@
+
+
+.topic-menu {
+
+
+  li {
+    margin: 0 0 4px -5px;
+    padding: 4px 5px;
+    position: relative;
+  }
+
+  li::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #2b6dad;
+    position: absolute;
+    left: -12px;
+    top: 9px;
+  }
+
+
+  a {
+    color: #666;
+  }
+
+  a:hover {
+    color: #2b6dad;
+  }
+
+
+}

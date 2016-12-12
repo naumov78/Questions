@@ -2,7 +2,6 @@ import React from 'react';
 import { Link, withRouter } from 'react-router';
 
 
-// <button onClick={(e) => this.goToUserProfile(e).then(() => this.handleMenuToggle())}>
 
 class Greeting extends React.Component  {
 	constructor(props) {
@@ -12,43 +11,74 @@ class Greeting extends React.Component  {
 		this.handleMenuToggle = this.handleMenuToggle.bind(this);
 	}
 
+  // createDropDown_old() {
+  //   const menuItems = ['Profile', 'Log out'];
+  //   return (
+	// 		<div className="user-profile-menu">
+	//       <ul id="user-profile-menu" className="vis-drop-down">
+	//         {menuItems.map((item, i) => {
+	//           if ( i === 0 ){
+	//             return (
+	//               <li key={`item-${i}`} id={`item-${i}`}>
+	//               <a onClick={(e) => this.setState( {dropDownMenu: false}, this.goToUserProfile(e)) }>
+	//                 {item}
+	//               </a>
+	//               </li>);
+	//         } else {
+	//             return (
+	// 							<li key={`item-${i}`} id={`item-${i}`}>
+	//               <a onClick={(e) => this.handleLogout(e)}>
+	// 								{item}
+	// 							</a>
+	//               </li>);
+	//         }
+	//       })}
+	//       </ul>
+	// 		</div>
+  //   );
+  // }
 
-  createDropDown() {
-      // e.preventDefault();
-      const menuItems = ['Profile', 'Log out'];
-      return (
-        <ul id="user-profile-menu" className="vis-drop-down">
-          {menuItems.map((item, i) => {
-            if ( i === 0 ){
-              return (
-                <li key={`item-${i}`} id={`item-${i}`}>
-                <button onClick={(e) => this.handleMenuToggle(e).then(() => this.goToUserProfile())}>
-                  {item}
-                </button>
-                </li>);
-          } else {
-              return (<li key={`item-${i}`} id={`item-${i}`}>
-                <button onClick={(e) => this.handleLogout(e)}>{item}</button></li>);
-          }
-        })}
-        </ul>
-      );
-    }
+	createDropDown() {
+		return (
+	  	<div id="myDropdown" className="dropdown-content">
+	    	<a onClick={(e) => this.setState( {dropDownMenu: false}, this.goToUserProfile(e)) }>Profile</a>
+	    	<a onClick={(e) => this.handleLogout(e)}>Logout</a>
+	  	</div>
+		);
+	}
 
-    goToUserProfile(e) {
-      e.preventDefault();
-      if (this.props.location.pathname !== `/users/${this.props.currentUser.id}`) {
-        this.props.router.push(`/users/${this.props.currentUser.id}`)
-      }
-    }
+	renderDropDown() {
+		document.getElementById("myDropdown").classList.toggle("show");
+}
 
-    handleLogout(e) {
-      this.props.logout().then(() => this.props.router.push("/login"))
+	// window.onclick = function(e) {
+	// 	if (!e.target.matches('.drop-btn')) {
+	// 		const dropdowns = document.getElementsByClassName("dropdown-content");
+	// 		let i;
+	// 		for (i = 0; i < dropdowns.length; i++ ) {
+	// 			let openDropdown = dropdowns[1];
+	// 			if (openDropdown.classList.contains('show')) {
+	// 				openDropdown.classList.remove('show');
+	// 			}
+	// 		}
+	// 	}
+	// }
+
+
+  goToUserProfile(e) {
+    e.preventDefault();
+    if (this.props.location.pathname !== `/users/${this.props.currentUser.id}`) {
+      this.props.router.push(`/users/${this.props.currentUser.id}`)
     }
+  }
+
+  handleLogout(e) {
+    this.props.logout().then(() => this.props.router.push("/login"))
+  }
 
 	handleMenuToggle(e) {
 		e.preventDefault();
-		return this.setState(prevState => ({
+		this.setState(prevState => ({
 			dropDownMenu: !prevState.dropDownMenu
 		}));
 	}
@@ -67,23 +97,25 @@ class Greeting extends React.Component  {
 		}
 	}
 
+	formatName() {
+		let name = this.props.currentUser.first_name;
+		if (name.length > 9) {
+			name = name.slice(0, 5) + "...";
+		}
+		return name;
+	}
 
 render() {
-  // debugger
 if(this.props.loggedIn){
-  if(!this.state.dropDownMenu){
-		return (
-			<div className="header-group">
-					<button onClick={this.handleMenuToggle}>{this.props.currentUser.first_name}</button>
-			</div>
-			);
-  }
-    return (
-      <div className="header-group">
-					<button onClick={this.handleMenuToggle}>{this.props.currentUser.first_name}</button>
-          {this.createDropDown()}
-			</div>
-      );
+	return (
+		<div className="dropdown">
+				<a className="drop-btn" onClick={this.renderDropDown}>{this.formatName()}</a>
+					<div id="myDropdown" className="dropdown-content">
+			    	<a onClick={(e) => this.setState( {dropDownMenu: false}, this.goToUserProfile(e)) }>Profile&nbsp;</a>
+						<a onClick={(e) => this.handleLogout(e)}>Logout</a>
+			  	</div>
+		</div>
+		);
 }
 	return (<div></div>);
 }
@@ -92,15 +124,46 @@ if(this.props.loggedIn){
 
 export default withRouter(Greeting);
 
-
-
-// value={`${this.props.currentUser.first_name}`}
-
-
-// <form onSubmit={this.handleSubmit}>
-// 	<input className="auth-form-btn" type="submit" value="Log out"/>
-// </form>
+// <div className="user-name">
 
 
 
-// <h3 className="header-name"></h3>
+// <a className="drop-btn" onClick={this.handleMenuToggle}>{this.formatName()}</a>
+
+
+// <a>Blog</a>
+// <a>Messages</a>
+// <a>Your Content</a>
+// <a>Stats</a>
+// <a>Setting</a>
+
+
+
+
+
+
+
+
+// render() {
+// if(this.props.loggedIn){
+//   if(!this.state.dropDownMenu){
+// 		return (
+// 			<div className="dropdown">
+// 					<a className="drop-btn" onClick={this.renderDropDown}>{this.formatName()}</a>
+// 						<div id="myDropdown" className="dropdown-content">
+// 				    	<a onClick={(e) => this.setState( {dropDownMenu: false}, this.goToUserProfile(e)) }>Profile</a>
+//
+// 				    	<a onClick={(e) => this.handleLogout(e)}>Logout</a>
+// 				  	</div>
+// 			</div>
+// 			);
+//   }
+//     return (
+//       <div className="user-name">
+// 					<a onClick={this.handleMenuToggle}>{this.formatName()}</a>
+//           {this.createDropDown()}
+// 			</div>
+//       );
+// }
+// 	return (<div></div>);
+// }

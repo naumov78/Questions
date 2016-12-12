@@ -84,6 +84,20 @@
 }
 
 
+// user-info
+
+.ui_container {
+  margin: 0 auto;
+  width: 500px;
+}
+
+.user-profile {
+  // margin: 0 auto;
+}
+
+
+
+
 // uu-form
 
 .uu-form-container {
@@ -240,6 +254,25 @@
 
   input {
     margin: 40px 40px 20px 0;
+  }
+
+}
+
+// user profile info
+
+.user-profile {
+
+}
+
+.userpic-profile {
+  display: block;
+
+
+  img {
+    width: 142px;
+    height: 142px;
+    border: 1px solid #e2e2e2;
+    border-radius: 50%;
   }
 
 }

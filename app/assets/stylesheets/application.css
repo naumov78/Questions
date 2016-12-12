@@ -39,7 +39,7 @@
   box-sizing: content-box;
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 16px;
-  background: #eee;
+  background: #fff;
   color: #000;
   /*background-image: url("background.png");
   background-repeat: no-repeat;*/
@@ -63,5 +63,13 @@
  }
 
  .link:hover {
+   cursor: pointer;
+ }
+
+ .btn:hover {
+   cursor: pointer;
+ }
+
+ a:hover {
    cursor: pointer;
  }

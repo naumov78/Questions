@@ -20,10 +20,11 @@ class TopicForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    // debugger
     const user = this.state;
     // debugger
     this.props.signup({user}).then(() => {
-      this.props.router.push("/settopics");
+      this.props.router.push("/");
     });
   }
 
@@ -31,7 +32,7 @@ class TopicForm extends React.Component {
 renderTopics() {
   return (
   <div className="auth-form topic-list">
-    <form className="topic-list-form">
+    <form className="topic-list-form" onSubmit={(e) => this.handleSubmit(e)}>
     <div className="topic-list-title"><h2>What are your interests</h2></div>
       <div className="three-columns">
         <div className="topics-left">
