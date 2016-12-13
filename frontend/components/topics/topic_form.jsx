@@ -21,11 +21,12 @@ class TopicForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     // debugger
-    const user = this.state;
+    // const user = this.state;
     // debugger
-    this.props.signup({user}).then(() => {
-      this.props.router.push("/");
-    });
+    // this.props.signup({user}).then(() => {
+    //   this.props.router.push("/");
+  // });
+    this.props.router.push('/');
   }
 
 

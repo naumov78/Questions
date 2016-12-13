@@ -13,10 +13,13 @@ class UserProfile extends React.Component {
     this.changeToEdit = this.changeToEdit.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
     this.updateFile = this.updateFile.bind(this);
+    // this.renderSubscribedTopics = this.renderSubscribedTopics.bind(this);
   }
 
 
   componentDidMount() {
+    // this.renderSubscribedTopics();
+    // debugger
     this.props.fetchUser(this.props.params.id).then(() => this.validateUser());
   }
 
@@ -56,6 +59,7 @@ class UserProfile extends React.Component {
     return (
       <ul>
         {this.props.topics.map((topic) => {
+          debugger
           return <li>{topic}</li>
         })}
       </ul>

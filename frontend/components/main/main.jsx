@@ -10,6 +10,7 @@ class Main extends React.Component {
 
   render() {
     if(this.props.currentUser && this.props.location.pathname !== "/settopics"){
+      // debugger
       return (
         <div className="page-wraper">
           <div className="grid_page">
@@ -17,7 +18,10 @@ class Main extends React.Component {
               <SideBar currentUser={this.props.currentUser} />
             </div>
             <div className="feed-container">
-              <Feed currentUser={this.props.currentUser} />
+              <Feed
+                currentUser={this.props.currentUser}
+                topic_id={this.props.params.topic_id}
+                question_id={this.props.params.question_id} />
             </div>
           </div>
         </div>

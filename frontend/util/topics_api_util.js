@@ -8,3 +8,12 @@ export const fetchTopics = () => {
     url: 'api/topics'
   });
 };
+
+
+export const fetchSingleTopic = (id) => {
+  // debugger
+  return $.ajax({
+    type: "GET",
+    url: `api/topics/${id}`
+  });
+};

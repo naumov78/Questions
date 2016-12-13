@@ -2,6 +2,7 @@ class Api::QuestionsController < ApplicationController
 
 
   def index
+    # debugger
     @questions = Question.all.where(:topic_id == question_params[:topic_id])
   end
 

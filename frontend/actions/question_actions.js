@@ -6,6 +6,7 @@ export const RECEIVE_ERRORS = "RECEIVE_ERRORS"
 
 
 export const receiveSingleQuestion = (question) => {
+  debugger
   return ({
     type: RECEIVE_SINGLE_QUESTION,
     question: question
@@ -42,13 +43,15 @@ export const createQuestion = (question) => {
 
 
 
-export const fetchSingeleQuestion = ({question}) => {
+export const fetchSingeleQuestion = (question) => {
+  debugger
   return (dispatch) => {
     return APIUtil.fetchSingeleQuestion(question).then(result => dispatch(receiveSingleQuestion(result)) );
   }
 }
 
 export const fetchQuestions = (topic_id) => {
+  debugger
   return (dispatch) => {
     return APIUtil.fetchQuestions(topic_id).then(result => dispatch(receiveQuestions(result)) );
   }
