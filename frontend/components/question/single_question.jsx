@@ -11,8 +11,10 @@ class SingleQuestion extends React.Component {
   }
 
   componentDidMount() {
+    const question_data = {topic_id: this.props.topic_id , question_id: this.props.question_id };
     debugger
-    this.props.fetchSingleQuestion(parseInt(this.props.question_id));
+
+    this.props.fetchSingleQuestion({question_data});
   }
 
 //this.props = Object {currentUser: Object, topic_id: "5", question_id: "2", body: undefined}

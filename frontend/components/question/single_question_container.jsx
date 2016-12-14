@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import SingleQuestion from './single_question';
-import { fetchSingeleQuestion } from '../../actions/question_actions';
+import { fetchSingleQuestion } from '../../actions/question_actions';
 // import { fetchTopics } from '../../actions/topic_actions';
 
 
-const mapStateToProps = ({question}) => {
+const mapStateToProps = ({question}, ownProps) => {
+  debugger
   return ({
     body: question.body
   })
@@ -13,12 +14,9 @@ const mapStateToProps = ({question}) => {
 
 
 const mapDispatchToProps = (dispatch) => {
-  debugger
+  // debugger
   return ({
-    fetchSingleQuestion: (id) => {
-      debugger
-      return (dispatch(fetchSingleQuestion(id)) );
-    }
+    fetchSingleQuestion: ({question_data}) => dispatch(fetchSingleQuestion({question_data}))
   });
 }
 

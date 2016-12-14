@@ -6,7 +6,7 @@ import { IndexLogo } from '../auth_form';
 class TopicForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { topics: [] };
+    this.state = { topics: [], subscribedTopics: [] };
   }
 
   componentDidMount() {
@@ -29,18 +29,43 @@ class TopicForm extends React.Component {
     this.props.router.push('/');
   }
 
+  handleSelection(id) {
+    debugger
+    if (this.state.subscribedTopics.includes(id)) {
+      const idx = this.state.subscribedTopics.indexOf(id);
+      const arrayOfTopics = this.state.subscribedTopics;
+      const spliced = arrayOfTopics.splice(idx, 1);
+      this.setState({ subscribedTopics: arrayOfTopics});
+    } else {
+      const arrayOfTopics = this.state.subscribedTopics;
+      arrayOfTopics.push(id);
+      this.setState({ subscribedTopics: arrayOfTopics});
+      }
+  }
+
+  createSubscriptions(e) {
+    debugger
+    e.preventDefault();
+    this.state.subscribedTopics.forEach((id) => {
+      new UserSubscribedTopic(user_id: currentUser.id, topic_id: id);
+    });
+    this.props.router.push("/");
+  }
+
+
 
 renderTopics() {
+  // debugger
   return (
   <div className="auth-form topic-list">
-    <form className="topic-list-form" onSubmit={(e) => this.handleSubmit(e)}>
+    <form className="topic-list-form" onSubmit={(e) => this.createSubscriptions(e)}>
     <div className="topic-list-title"><h2>What are your interests</h2></div>
       <div className="three-columns">
         <div className="topics-left">
           <ul>
             {this.state.topics.map((topic, i) => {
               if (i < 9) {
-              return (<li key={`topic-${topic.id}`}><input type="checkbox"/>{topic.title}</li>);
+              return (<li key={`topic-${topic.id}`}><input type="checkbox" onClick={() => this.handleSelection(i)} id={`${i}`}/>{topic.title}</li>);
             }
           })}
           </ul>
@@ -49,7 +74,7 @@ renderTopics() {
           <ul>
             {this.state.topics.map((topic, i) => {
               if (i > 8 && i < 18) {
-              return (<li key={`topic-${topic.id}`}><input type="checkbox"/>{topic.title}</li>);
+              return (<li key={`topic-${topic.id}`}><input type="checkbox" onClick={() => this.handleSelection(id)}  id={`${i}`}/>{topic.title}</li>);
             }
           })}
           </ul>
@@ -58,7 +83,7 @@ renderTopics() {
           <ul>
             {this.state.topics.map((topic, i) => {
               if (i > 17) {
-              return (<li key={`topic-${topic.id}`}><input type="checkbox"/>{topic.title}</li>);
+              return (<li key={`topic-${topic.id}`}><input type="checkbox"  onClick={() => this.handleSelection(id)}  id={`${i}`}/>{topic.title}</li>);
             }
           })}
           </ul>
@@ -91,3 +116,7 @@ render () {
 }
 
 export default withRouter(TopicForm);
+
+
+
+//

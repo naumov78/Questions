@@ -4,7 +4,7 @@ export const RECEIVE_TOPICS = "RECEIVE_TOPICS";
 export const RECEIVE_SINGLE_TOPIC = "RECEIVE_SINGLE_TOPIC";
 
 export const receiveTopics = (topics) => {
-  debugger
+  // debugger
   return ({
     type: RECEIVE_TOPICS,
     topics: topics
@@ -12,7 +12,7 @@ export const receiveTopics = (topics) => {
 }
 
 export const receiveSingleTopic = (topic) => {
-  debugger
+  // debugger
   return ({
     type: RECEIVE_TOPICS,
     topic_id: topis.id,

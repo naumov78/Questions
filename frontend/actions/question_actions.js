@@ -43,10 +43,12 @@ export const createQuestion = (question) => {
 
 
 
-export const fetchSingeleQuestion = (question) => {
+export const fetchSingleQuestion = (question_data) => {
   debugger
   return (dispatch) => {
-    return APIUtil.fetchSingeleQuestion(question).then(result => dispatch(receiveSingleQuestion(result)) );
+    return APIUtil.fetchSingeleQuestion(question_data).then((result) => {
+      return dispatch(receiveSingleQuestion(result))
+    });
   }
 }
 

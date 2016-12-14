@@ -24,7 +24,6 @@ const App =({ children }) => {
   return (
     <div>
       <HeaderContainer />
-      <MainContainer />
       { children }
     </div>
   );
@@ -32,3 +31,5 @@ const App =({ children }) => {
 
 
 export default App;
+
+// <MainContainer />
