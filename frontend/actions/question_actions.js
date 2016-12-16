@@ -6,10 +6,9 @@ export const RECEIVE_ERRORS = "RECEIVE_ERRORS"
 
 
 export const receiveSingleQuestion = (question) => {
-  debugger
   return ({
     type: RECEIVE_SINGLE_QUESTION,
-    question: question
+    question: question,
   });
 }
 
@@ -27,9 +26,6 @@ export const receiveErrors = (errors) => {
   })
 }
 
-
-
-
 export const createQuestion = (question) => {
   return (dispatch) => {
     return APIUtil.createQuestion(question).then((result) => {
@@ -41,10 +37,7 @@ export const createQuestion = (question) => {
   }
 }
 
-
-
 export const fetchSingleQuestion = (question_data) => {
-  debugger
   return (dispatch) => {
     return APIUtil.fetchSingeleQuestion(question_data).then((result) => {
       return dispatch(receiveSingleQuestion(result))
@@ -53,8 +46,9 @@ export const fetchSingleQuestion = (question_data) => {
 }
 
 export const fetchQuestions = (topic_id) => {
-  debugger
   return (dispatch) => {
-    return APIUtil.fetchQuestions(topic_id).then(result => dispatch(receiveQuestions(result)) );
+    return APIUtil.fetchQuestions(topic_id).then((result) => {
+      return dispatch(receiveQuestions(result))
+    });
   }
 }

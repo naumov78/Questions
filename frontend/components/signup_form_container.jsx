@@ -4,7 +4,6 @@ import SignUpForm from './signup_form';
 
 
 const mapStateToProps = ({ session }) => {
-  // debugger
   return {
   loggedIn: Boolean(session.currentUser),
   errors: session.errors.signup,

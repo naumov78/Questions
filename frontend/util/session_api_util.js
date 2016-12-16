@@ -21,3 +21,21 @@ export const logout = () => {
     url: "/api/session"
   });
 };
+
+export const updateUser = (user, id) => {
+  if (user instanceof FormData) {
+    return $.ajax({
+      method: "PATCH",
+      url: `/api/users/${id}`,
+      contentType: false,
+      processData: false,
+      data: user
+    });
+  } else {
+    return $.ajax({
+      method: "PATCH",
+      url: `/api/users/${id}`,
+      data: {user}
+    });
+  }
+};

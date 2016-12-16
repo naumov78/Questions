@@ -1,3 +1,25 @@
 // Place all the styles related to the Api::topics controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.topic-questions {
+  float: left;
+  padding: 0 0 0 40px;
+  width: 500px;
+}
+
+
+.single-q-list {
+  border-bottom: 1px solid #e2e2e2;
+  padding: 20px 0 20px 0;
+}
+
+.q-body {
+  font-size: 18px;
+}
+
+.q-date {
+  color: #999;
+  font-size: 13px;
+}

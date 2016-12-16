@@ -9,7 +9,7 @@
 .header-nav {
   box-sizing: border-box;
   position: relative;
-  padding: 0 0 0 55px; //88
+  padding: 0 0 0 55px;
   width: 1032px;
   margin: 0 auto;
   line-height: 1.4;
@@ -17,14 +17,12 @@
 
 .header-logo {
   position: absolute;
-  // z-index: 1;
   top: 7px;
   left: 0;
   overflow: hidden;
 
   a {
     display: block;
-    // width: 134px;
     height: 50px;
     color: #b82b28;
     font-family: 'Taviraj', serif;
@@ -40,7 +38,6 @@
   display: table;
   padding-left: 88px;
   box-sizing: border-box;
-  // border: 1px solid black;
 }
 
 .ask-form-container {
@@ -48,7 +45,6 @@
   display: table-cell;
   vertical-align: middle;
   box-sizing: border-box;
-  // border: 1px solid black;
 }
 
 
@@ -65,7 +61,6 @@
   height: 31px;
   border: 1px solid #e2e2e2;
   background: #f2f2f2;
-  // box-shadow: inset 0 1px 1px #f2f2f2;
   padding: 3px 8px;
   width: 349px;
   border-radius: 3px;
@@ -88,7 +83,6 @@
   text-align: center;
   background: #fff;
   color: #585a61;
-  // float: right;
   font-size: 13px;
   padding: 5px 8px 6px 10px;
   border-radius: 3px;
@@ -104,14 +98,11 @@
 .nav-container {
   padding: 0 0 0 14px;
   display: block;
-  // border: 1px solid black;
 }
 
 .nav-links {
   float: left;
   width: 100%;
-  // box-sizing: border-box;
-  // vertical-align: middle;
 }
 
 .read-link {
@@ -139,14 +130,12 @@
   left: -32px;
   width: 25px;
   height: 25px;
-  // background-size: 20px 40px;
   background-image: url("read.png");
 
 }
 
 
 .answer-link {
-  // display: block;
   float: left;
   color: #999;
   padding: 23px 14px 11px 38px;
@@ -170,7 +159,6 @@
   left: -32px;
   width: 24px;
   height: 25px;
-  // background-size: 20px 40px;
   background-image: url("answer.png");
 
 }
@@ -180,7 +168,6 @@
   float: left;
   color: #999;
   padding: 23px 14px 11px 38px;
-  // position: relative;
 
   a {
     margin: -4px 0 0 0;
@@ -201,7 +188,6 @@
   left: -32px;
   width: 25px;
   height: 25px;
-  // background-size: 20px 40px;
   background-image: url("notifications.png");
 
 }
@@ -228,15 +214,3 @@
   background: #f2f2f2;
   cursor: pointer;
   }
-
-  // .greeting-container a::before {
-  //   position: absolute;
-  //   content: "";
-  //   top: -3px;
-  //   left: -32px;
-  //   width: 25px;
-  //   height: 25px;
-  //   // background-size: 20px 40px;
-  //   background-image: url("notifications.png");
-  //
-  // }

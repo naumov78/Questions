@@ -3,8 +3,6 @@ import UserTopicsMenu from './user_topic_menu';
 import { fetchQuestions } from '../../../actions/question_actions';
 
 
-
-
 const mapDispatchToProps = (dispatch) => {
   return ({
     fetchTopics: () => dispatch(fetchTopics())
@@ -12,5 +10,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(
+  null,
   mapDispatchToProps
 )(UserTopicsMenu)

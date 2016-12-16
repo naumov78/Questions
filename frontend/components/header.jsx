@@ -13,10 +13,13 @@ class Header extends React.Component {
     this.props.router.push(`/users/${this.props.currentUser.id}`)
   }
 
+  handleAskQuestion(e) {
+    e.preventDefault();
+    this.props.router.push("/createq")
+  }
 
 
-render() {
-  // debugger
+  render() {
     if(this.props.currentUser && this.props.location.pathname !== "/settopics"){
       return (
           <div className="header">
@@ -27,7 +30,7 @@ render() {
               <div className="header-content">
 
                 <div className="ask-form-container">
-                  <form className="ask-form">
+                  <form className="ask-form" onSubmit={(e) => this.handleAskQuestion(e)}>
                     <input className="text-input" type="text" placeholder="Ask Question"></input>
                     <input className="header-ask-btn" type="submit" value="Ask Question"/>
                   </form>
@@ -57,17 +60,9 @@ render() {
     } else {
       return (<div></div>);
     }
-
-}
+  }
 
 }
 
 
 export default withRouter(Header);
-
-
-
-
-// <form onSubmit={this.handleSubmit}>
-//   <input className="auth-form-btn" type="submit" value="User profile" />
-// </form>

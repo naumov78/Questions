@@ -9,7 +9,6 @@ class Api::SessionsController < ApplicationController
     if @user
       login!(@user)
       render 'api/users/show'
-      # render json: ['user loggedin']
     else
       render json: ['Wrong Email or Password'], status: 401
     end
@@ -22,7 +21,6 @@ class Api::SessionsController < ApplicationController
     unless current_user.nil?
       logout
       render json: {}
-      # render json: ['user loggedout']
     else
       render json: ['no current user'], status: 404
     end

@@ -9,6 +9,7 @@
 #  rating     :integer          default(0)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  topic_id   :integer          not null
 #
 
 require 'test_helper'

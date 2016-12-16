@@ -2,8 +2,6 @@ import React from 'react';
 import { withRouter } from 'react-router';
 
 
-// this.props.author_id
-
 class QuestionForm extends React.Component {
   constructor(props) {
     super(props);
@@ -25,7 +23,6 @@ class QuestionForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const newQuestion = this.state;
-    debugger
     this.props.createQuestion(newQuestion).then(
       this.props.router.push(`/topics/${this.state.topic_id}/questions`)
     )
@@ -51,22 +48,25 @@ class QuestionForm extends React.Component {
     return (
       <div className="create-question-container">
         <form id="ask-question-form" onSubmit={this.handleSubmit} className="create-question-form">
-
-          <input type="text"
-            className="auth-form-input question-body-input"
-            value={this.state.body}
-            onChange={this.update("body")} />
-          <div className="dd-topic">{this.getTopics()}</div>
-          <input type="submit"
-            className="auth-form-btn button"
-            value="Ask Question" />
+          <div className="question-input">
+            <textarea
+            onChange={this.update("body")}
+            className="auth-form-input answer-input"/>
+          </div>
+          <br />
+          <div className="button-part">
+            <div className="dd-topic">{this.getTopics()}</div>
+            <div id="add-question" className="answer-buttons">
+              <input type="submit"
+                className="ans-btn"
+                value="Ask Question" />
+            </div>
+          </div>
         </form>
+
       </div>
     );
   }
-
-
-
 
 }
 

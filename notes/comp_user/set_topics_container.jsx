@@ -13,7 +13,6 @@ const mapStateToProps = ({ session }) => {
 
 
 const mapDispatchToProps = (dispatch) => {
-  // debugger
   return ({
   updateUser: (user) => dispatch(updateUser(user)),
   fetchUser: (id) => dispatch(fetchUser(id))

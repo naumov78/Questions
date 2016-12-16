@@ -9,6 +9,7 @@
 #  rating     :integer          default(0)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  topic_id   :integer          not null
 #
 
 class Question < ActiveRecord::Base
@@ -26,5 +27,9 @@ class Question < ActiveRecord::Base
   foreign_key: :author_id,
   primary_key: :id
 
+  has_many :answers,
+  class_name: "Answer",
+  primary_key: :id,
+  foreign_key: :question_id
 
 end

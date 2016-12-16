@@ -17,20 +17,21 @@ class TopicForm extends React.Component {
     });
   }
 
+  getUser() {
+    return {
+      id: this.props.currentUser.id,
+      topic_ids: this.state.subscribedTopics
+  };
+}
 
   handleSubmit(e) {
     e.preventDefault();
-    // debugger
-    // const user = this.state;
-    // debugger
-    // this.props.signup({user}).then(() => {
-    //   this.props.router.push("/");
-  // });
-    this.props.router.push('/');
+    this.props.updateUser(this.getUser(), this.props.currentUser.id).then(() => {
+      this.props.router.push('/');
+    });
   }
 
   handleSelection(id) {
-    debugger
     if (this.state.subscribedTopics.includes(id)) {
       const idx = this.state.subscribedTopics.indexOf(id);
       const arrayOfTopics = this.state.subscribedTopics;
@@ -44,79 +45,69 @@ class TopicForm extends React.Component {
   }
 
   createSubscriptions(e) {
-    debugger
     e.preventDefault();
     this.state.subscribedTopics.forEach((id) => {
-      new UserSubscribedTopic(user_id: currentUser.id, topic_id: id);
+      this.props.createSubscribedTopic(id + 1)
     });
     this.props.router.push("/");
   }
 
-
-
-renderTopics() {
-  // debugger
-  return (
-  <div className="auth-form topic-list">
-    <form className="topic-list-form" onSubmit={(e) => this.createSubscriptions(e)}>
-    <div className="topic-list-title"><h2>What are your interests</h2></div>
-      <div className="three-columns">
-        <div className="topics-left">
-          <ul>
-            {this.state.topics.map((topic, i) => {
-              if (i < 9) {
-              return (<li key={`topic-${topic.id}`}><input type="checkbox" onClick={() => this.handleSelection(i)} id={`${i}`}/>{topic.title}</li>);
-            }
-          })}
-          </ul>
+  renderTopics() {
+    return (
+    <div className="auth-form topic-list">
+      <form className="topic-list-form" onSubmit={(e) => this.handleSubmit(e)}>
+      <div className="topic-list-title"><h2>What are your interests</h2></div>
+        <div className="three-columns">
+          <div className="topics-left">
+            <ul>
+              {this.state.topics.map((topic, i) => {
+                if (i < 9) {
+                return (<li key={`topic-${topic.id}`}><input type="checkbox" onClick={() => this.handleSelection(topic.id)} id={`${i}`}/>{topic.title}</li>);
+              }
+            })}
+            </ul>
+          </div>
+          <div className="topics-middle">
+            <ul>
+              {this.state.topics.map((topic, i) => {
+                if (i > 8 && i < 18) {
+                return (<li key={`topic-${topic.id}`}><input type="checkbox" onClick={() => this.handleSelection(topic.id)}  id={`${i}`}/>{topic.title}</li>);
+              }
+            })}
+            </ul>
+          </div>
+          <div className="topics-right group">
+            <ul>
+              {this.state.topics.map((topic, i) => {
+                if (i > 17) {
+                return (<li key={`topic-${topic.id}`}><input type="checkbox"  onClick={() => this.handleSelection(topic.id)}  id={`${i}`}/>{topic.title}</li>);
+              }
+            })}
+            </ul>
+          </div>
         </div>
-        <div className="topics-middle">
-          <ul>
-            {this.state.topics.map((topic, i) => {
-              if (i > 8 && i < 18) {
-              return (<li key={`topic-${topic.id}`}><input type="checkbox" onClick={() => this.handleSelection(id)}  id={`${i}`}/>{topic.title}</li>);
-            }
-          })}
-          </ul>
+
+        <div className="submit-topics">
+          <input type="submit"
+            className="auth-form-btn"
+            value="Save" />
         </div>
-        <div className="topics-right group">
-          <ul>
-            {this.state.topics.map((topic, i) => {
-              if (i > 17) {
-              return (<li key={`topic-${topic.id}`}><input type="checkbox"  onClick={() => this.handleSelection(id)}  id={`${i}`}/>{topic.title}</li>);
-            }
-          })}
-          </ul>
-        </div>
-      </div>
 
-      <div className="submit-topics">
-        <input type="submit"
-          className="auth-form-btn"
-          value="Save" />
-      </div>
-
-    </form>
-  </div>
-  );
-}
-
-
-
-render () {
-  // debugger
-  return (
-    <div className="index-page">
-      <IndexLogo />
-      {this.renderTopics()}
+      </form>
     </div>
-  );
+    );
 }
+
+
+  render () {
+    return (
+      <div className="index-page">
+        <IndexLogo />
+        {this.renderTopics()}
+      </div>
+    );
+  }
 
 }
 
 export default withRouter(TopicForm);
-
-
-
-//

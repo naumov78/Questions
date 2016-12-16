@@ -20,11 +20,13 @@ export const IndexLogo = () => {
 
 export const AuthForm = () => {
   return (
-    <div className="index-page">
-      <IndexLogo />
-      <div className="auth-form">
-        <SignUpFormContainer />
-        <SessionFormNewContainer />
+    <div className="auth-form-general">
+      <div className="index-page">
+        <IndexLogo />
+        <div className="auth-form">
+          <SignUpFormContainer />
+          <SessionFormNewContainer />
+        </div>
       </div>
     </div>
   );

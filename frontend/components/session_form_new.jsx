@@ -36,23 +36,19 @@ class SessionFormNew extends React.Component {
 
 	guestLogin(e) {
 		e.preventDefault();
-		const user = { email: 'z', password: 'z' }
+		const user = { email: 'han_solo@starwars.com', password: '12345' }
 		this.props.login({user}).then(() => {
 			this.props.router.push("/");
 		})
 	}
 
-
 	render() {
-		// debugger
 		return (
-
         <div className="login-form-container group">
 
 					<div className="login-title">
 						<p>Login</p>
 					</div>
-
 
           <form onSubmit={this.handleSubmit} className="login-form group">
 
@@ -95,8 +91,6 @@ class SessionFormNew extends React.Component {
 					</div>
 
         </div>
-
-
 		);
 	}
 

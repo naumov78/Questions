@@ -4,39 +4,30 @@ export const RECEIVE_TOPICS = "RECEIVE_TOPICS";
 export const RECEIVE_SINGLE_TOPIC = "RECEIVE_SINGLE_TOPIC";
 
 export const receiveTopics = (topics) => {
-  // debugger
   return ({
     type: RECEIVE_TOPICS,
     topics: topics
   });
 }
 
-export const receiveSingleTopic = (topic) => {
-  // debugger
+export const receiveSingleTopic = (questions) => {
   return ({
-    type: RECEIVE_TOPICS,
-    topic_id: topis.id,
-    topic_title: topic.title
+    type: RECEIVE_SINGLE_TOPIC,
+    questions
   });
 }
 
-
-
 export const fetchTopics = () => {
-  // debugger
   return (dispatch) => {
     return APIUtil.fetchTopics().then((topics) => {
-      // debugger
       return dispatch(receiveTopics(topics));
     });
   };
 }
 
 export const fetchSingleTopic = (id) => {
-  // debugger
   return (dispatch) => {
-    return APIUtil.fetchSingleTopics(id).then((topic) => {
-      // debugger
+    return APIUtil.fetchSingleTopic(id).then((topic) => {
       return dispatch(receiveSingleTopic(topic));
     });
   };

@@ -1,4 +1,4 @@
-import { RECEIVE_QUESTIONS } from '../actions/question_actions';
+import { RECEIVE_SINGLE_TOPIC } from '../actions/topic_actions';
 import merge from 'lodash/merge';
 
 const initState = {
@@ -8,11 +8,12 @@ const initState = {
 const TopicReducer = (state = initState, action) => {
   Object.freeze(state);
   switch (action.type) {
-    case RECEIVE_QUESTIONS:
-      return action.questions;
+    case RECEIVE_SINGLE_TOPIC:
+      return ({ questions: action.questions });
     default:
       return state;
   }
 }
+
 
 export default TopicReducer;

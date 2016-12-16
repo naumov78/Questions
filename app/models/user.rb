@@ -21,17 +21,22 @@ class User < ActiveRecord::Base
 
 
   validates :first_name, :last_name, :email, :password_digest, :session_token, presence: true
-  validates :password, length: { minimum: 1 }, allow_nil: true
+  validates :password, length: { minimum: 5 }, allow_nil: true
   validates :email, :session_token, uniqueness: true
 
   has_attached_file :userpic, default_url: "missing-userpic.png"
   validates_attachment_content_type :userpic, content_type: /\Aimage\/.*\z/
 
-  has_many :user_subscribed_topics
+  has_many :user_subscribed_topics, inverse_of: :user
   has_many :topics, through: :user_subscribed_topics
 
   has_many :questions,
   class_name: "Question",
+  primary_key: :id,
+  foreign_key: :author_id
+
+  has_many :answers,
+  class_name: "Answer",
   primary_key: :id,
   foreign_key: :author_id
 

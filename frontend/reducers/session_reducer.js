@@ -10,20 +10,17 @@ const initState = {
 
 const SessionReducer = (state = initState, action) => {
   Object.freeze(state);
-  // debugger
   switch(action.type){
     case RECEIVE_CURRENT_USER:
       const currentUser = action.currentUser;
       return Object.assign({}, state, { currentUser });
     case logout:
-      return Object.assign({}, state);
+      return initState;
     case  RECEIVE_ERRORS:
-    // debugger
       let errors = action.errors;
       errors = merge({}, state.errors, errors);
       const newState = Object.assign({}, state);
       newState.errors = errors;
-      // debugger
       return newState;
     default:
       return state;

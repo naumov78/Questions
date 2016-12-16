@@ -2,23 +2,18 @@ class Api::UserSubscribedTopicsController < ApplicationController
 
 
   def index
-    # topics = current_user.topics
-    # titles = []
-    # topics.each do |topic|
-    #   titles << topic.title
-    # end
-    # debugger
     @user_subscribed_topics = current_user.topics
   end
 
 
   def create
-    @user_subscribed_topic = UserSubscribedTopic.new(topics_params)
+    @user_subscribed_topics = current_user.user_subscribed_topics.new(topics_params)
 
-    if @user_subscribed_topic.save
-      render 'api/users/show'
+    if @user_subscribed_topics.save
+      @topic = @user_subscribed_topics.topic
+      render 'api/topics/show'
     else
-      render json: @user_subscribed_topic.errors.full_messages, status: 422
+      render json: @user_subscribed_topics.errors.full_messages, status: 422
     end
   end
 
@@ -38,7 +33,7 @@ class Api::UserSubscribedTopicsController < ApplicationController
   private
 
   def topics_params
-    params.require(:user_subscribed_topic).permit(:user_id, :topic_id)
+    params.require(:user_subscribed_topic).permit(:topic_id)
   end
 
 

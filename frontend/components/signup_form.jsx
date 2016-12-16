@@ -10,18 +10,6 @@ class SignUpForm extends React.Component {
 
 	}
 
-
-
-  // componentDidUpdate() {
-  //   this.redirectIfLoggedIn();
-  // }
-	//
-  // redirectIfLoggedIn() {
-  //   // if (this.props.loggedIn) {
-  //   //   this.props.router.push("/");
-  //   // }
-  // }
-
   update(field) {
     return e => this.setState({
       [field]: e.currentTarget.value
@@ -36,35 +24,6 @@ class SignUpForm extends React.Component {
 			this.props.router.push("/settopics");
 		});
   }
-	// this.props.router.push(`/users/${this.props.currentUser.id}`);
-
-
-	// renderErrors() {
-	// 	// debugger
-	// 	return(
-			// <ul>
-			// 	{this.props.errors.map((error, i) => (
-			// 		<li key={`error-${i}`}>
-			// 			{error}
-			// 		</li>
-			// 	))}
-			// </ul>
-	// 	);
-	// }
-
-
-// this.props.errors.filter((error) => (error.includes("Password"))).toString()
-
-	// renderSignupErrors(fieldName) {
-	// 	debugger
-	// 	return(
-	// 		<div>
-	// 			{this.props.errors.filter((error) => (
-	// 				<div>{error.includes(fieldName)}</div>))}
-	// 		</div>
-	// 	);
-	// }
-
 
 	renderSpecificError(fieldName) {
 		let singleError = "";
@@ -80,11 +39,7 @@ class SignUpForm extends React.Component {
 		return singleError;
 	}
 
-
-
-
   render() {
-    // debugger
     return (
 			<div className="signup-form-container">
 
@@ -165,7 +120,4 @@ class SignUpForm extends React.Component {
 
 }
 
-
-  export default withRouter(SignUpForm);
-
-	// {this.renderErrors()}
+export default withRouter(SignUpForm);

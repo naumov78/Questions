@@ -9,8 +9,6 @@ const initState = {
 const TopicsReducer = (state = initState, action) => {
   switch(action.type) {
     case RECEIVE_TOPICS:
-      // const newState = action.topics;
-      // debugger
       return merge({}, state, { topics: action.topics });
     default:
       return state;

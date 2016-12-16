@@ -7,11 +7,8 @@ import { AuthForm, IndexLogo } from './auth_form';
 import UserProfileContainer from './user/user_profile_container';
 import TopicFormContainer from './topics/topic_form_container';
 import QuestionFormContainer from './question/question_form_container';
-import TopicIndexContainer from './main/feed/topic_index_container';
+import TopicIndexContainer from './main/topic_index_container';
 import SingleQuestionContainer from './question/single_question_container';
-import Feed from './main/feed/feed';
-
-
 
 const Root = ({ store }) => {
 const _ensureLogIn = (nextState, replace) => {
@@ -20,7 +17,6 @@ const _ensureLogIn = (nextState, replace) => {
     replace('/login');
   }
 }
-
 
 const _redirectIfLoggedIn = () => {
   const currentUser = store.getState().session.currentUser;
@@ -41,10 +37,8 @@ return (
         <Route path="/login" component={ AuthForm } />
         <Route path="/settopics" component={ TopicFormContainer } onEnter={_ensureLogIn}/>
         <Route path="/users/:id" component={ UserProfileContainer } onEnter={_ensureLogIn}/>
-
-
+        <Route path="/topics/:topic_id/questions" component={ TopicIndexContainer } />
         <Route path="/topics/:topic_id/questions/:question_id" component={ SingleQuestionContainer } />
-
         <Route path="/createq" component={ QuestionFormContainer } onEnter={_ensureLogIn}/>
       </Route>
     </Router>
@@ -53,13 +47,3 @@ return (
 };
 
 export default Root;
-// <Route path="/users/:id" component={ UserProfile } />
-// onEnter={_ensureLogIn}
-// <Route path="/checkuser" component={ UserProfileContainer } />
-// onEnter={_redirectIfLoggedIn}
-// <Route path="/signup" component={ AuthForm } />
-
-// <Route path="/topics/:topic_id/questions" component={ TopicIndexContainer } >
-// <Route path="/topics/:id" component={ TopicIndexContainer } />
-
-// <Route path="/topics/:id" onEnter={redirectToQuestions(:id)} />

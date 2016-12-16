@@ -67,15 +67,6 @@ class SetTopics extends React.Component {
     );
   }
 
-
-
-
-
-
-
-
-
 }
-
 
 export default withRouter(SetTopics);

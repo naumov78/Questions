@@ -6,17 +6,13 @@ const initState = {
   errors: []
 }
 
-
 const UserReducer = (state = initState, action ) => {
   let newState;
   switch(action.type) {
     case RECEIVE_USER:
-      // return action.user;
       newState = {user: action.user, errors: []};
       return merge({}, state, newState);
-      // return merge({}, state, newState);
     case RECEIVE_ERRORS:
-    // debugger
       newState = {user: {}, errors: action.errors};
       return merge({}, state, newState);
     default:

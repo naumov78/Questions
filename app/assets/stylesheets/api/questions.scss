@@ -1,9 +1,5 @@
 
-.create-question-container {
-  width: 400px;
-  margin: 0 auto;
 
-}
 
 
 .dd-topic {
@@ -14,4 +10,181 @@
     height: 20px;
     font-size: 16px;
   }
+}
+
+.single-question-container {
+  float: left;
+  padding: 10px 0 0 40px;
+}
+
+.single-question-body {
+  width: 500px;
+  font-size: 18px;
+  font-weight: bold;
+
+}
+
+.answer-form {
+  display: block;
+
+  textarea {
+    width: 500px;
+    height: 100px;
+  }
+
+  input[type="text"] {
+    width: 500px;
+    height: 200px;
+  }
+
+}
+
+.answer-buttons {
+  display: inline;
+  float: right;
+
+
+  button {
+    color: #2b6dad;
+    font-size: 14px;
+    padding: 0 20px 0 0;
+  }
+
+  button:hover {
+    text-decoration: underline;
+  }
+}
+
+
+.answers {
+  padding: 20px 0 0 0;
+}
+
+.question-part {
+
+}
+
+.single-answer-list {
+  border-top: 1px solid #e2e2e2;
+  padding: 5px 0 20px 0;
+  font-size: 15px;
+  line-height: 20px;
+}
+
+.questions-attr{
+  padding: 10px 0 0 0;
+}
+
+.upvote-btn {
+  border: 1px solid #bbcadc;
+  background: #f1f8fb;
+  border-radius: 3px;
+  font-weight: 500;
+  padding: 3px 7px 4px 7px;
+  color: #2b6dad;
+  font-size: 15px;
+}
+
+.upvote-btn:hover {
+  border: 1px solid #577ba8;
+  cursor: pointer;
+}
+
+.attt-links {
+  padding: 0 0 0 15px;
+  color: #999;
+  font-size: 13px;
+}
+
+.attt-links:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.comments-count {
+  margin: 0 0 0 5px;
+  padding: 1px 2px;
+  font-size: 13px;
+  background: #e2e2e2;
+  color: #999;
+  border: 1px solid #e2e2e2;
+  border-radius: 2px;
+}
+
+.views-count {
+  color: #999;
+  font-size: 13px;
+  padding: 0 0 5px 5px;
+}
+
+
+.ans-date {
+  color: #999;
+  font-size: 13px;
+}
+
+.ans-btn {
+  border: 1px solid #bbcadc;
+  background: #f1f8fb;
+  border-radius: 3px;
+  font-weight: 500;
+  padding: 3px 7px 4px 7px;
+  color: #2b6dad;
+  font-size: 15px;
+}
+
+.ans-btn:hover {
+  border: 1px solid #577ba8;
+  cursor: pointer;
+}
+
+#request {
+  margin: 0 0 0 20px;
+}
+
+.question-buttons {
+  padding: 10px 0 0 0;
+}
+
+.answers-quan {
+  padding: 0 0 5px 0;
+  margin: -10px 0 0 0;
+}
+
+.answers-list {
+  width: 500px;
+}
+
+// ask question page
+
+.question-input {
+
+  textarea {
+    width: 494px;
+    height: 100px;
+  }
+
+}
+
+.create-question-container {
+  width: 500px;
+  float: left;
+  padding: 10px 0 0 40px;
+
+}
+
+
+.button-part {
+  display: block;
+  width: 500px;
+}
+
+.dd-topic {
+  float: left;
+  margin: 25px 0 0 160px;
+}
+
+#add-question {
+  float: right;
+  margin: 20px 0 0 10px;
 }

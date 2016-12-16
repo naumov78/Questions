@@ -11,10 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161212192202) do
+ActiveRecord::Schema.define(version: 20161215231641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "answers", force: :cascade do |t|
+    t.integer  "question_id",             null: false
+    t.integer  "author_id",               null: false
+    t.string   "body",                    null: false
+    t.integer  "views",       default: 0
+    t.integer  "rating",      default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "answers", ["author_id"], name: "index_answers_on_author_id", using: :btree
+  add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
 
   create_table "asked_questions", force: :cascade do |t|
     t.integer "author_id",   null: false
@@ -23,6 +36,14 @@ ActiveRecord::Schema.define(version: 20161212192202) do
 
   add_index "asked_questions", ["author_id"], name: "index_asked_questions_on_author_id", using: :btree
   add_index "asked_questions", ["question_id"], name: "index_asked_questions_on_question_id", using: :btree
+
+  create_table "question_answers", force: :cascade do |t|
+    t.integer "question_id", null: false
+    t.integer "answer_id",   null: false
+  end
+
+  add_index "question_answers", ["answer_id"], name: "index_question_answers_on_answer_id", using: :btree
+  add_index "question_answers", ["question_id"], name: "index_question_answers_on_question_id", using: :btree
 
   create_table "questions", force: :cascade do |t|
     t.integer  "author_id",              null: false
@@ -42,6 +63,14 @@ ActiveRecord::Schema.define(version: 20161212192202) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "user_answers", force: :cascade do |t|
+    t.integer "user_id",   null: false
+    t.integer "answer_id", null: false
+  end
+
+  add_index "user_answers", ["answer_id"], name: "index_user_answers_on_answer_id", using: :btree
+  add_index "user_answers", ["user_id"], name: "index_user_answers_on_user_id", using: :btree
 
   create_table "user_subscribed_topics", force: :cascade do |t|
     t.integer "user_id"

@@ -2,18 +2,16 @@ class Api::QuestionsController < ApplicationController
 
 
   def index
-    # debugger
-    @questions = Question.all.where(:topic_id == question_params[:topic_id])
+    @questions = Question.all
   end
 
   def show
-    @question = Question.find(params[:id])
+    @question = Question.includes(:answers).find(params[:id])
     render :show
   end
 
   def create
     @question = current_user.questions.new(question_params)
-    # @question = Question.new(question_params)
     if @question.save
       render :show
     else

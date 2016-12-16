@@ -4,15 +4,15 @@ import { connect } from 'react-redux'
 
 
 const mapStateToProps = ({ session }) => {
-  // debugger
   return ({
     currentUser: session.currentUser
   });
 }
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => {
 
-});
+}
+
 
 export default connect(
   mapStateToProps

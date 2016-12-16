@@ -1,32 +1,22 @@
 import { connect } from 'react-redux';
 import UserProfile from './user_profile';
-import { updateUser, fetchUser } from '../../actions/user_actions';
-
-
-// const mapStateToProps = ({ session }) => {
-//   // debugger
-//   return {
-//   loggedIn: Boolean(session.currentUser),
-//   currentUser: session.currentUser,
-//   errors: session.errors
-// };
-// };
+import { fetchUser } from '../../actions/user_actions';
+import { updateUser } from '../../actions/session_actions';
 
 
 const mapStateToProps = ({ session, user }) => {
 
   return ({
     currentUser: session.currentUser,
-    errors: user.errors,
-    topics: session.currentUser.topics
+    topics: session.currentUser? session.currentUser.topics : [],
+    errors: user.errors
   });
 };
 
 
 const mapDispatchToProps = (dispatch) => {
-  // debugger
   return ({
-  updateUser: (user) => dispatch(updateUser(user)),
+  updateUser: (user, id) => dispatch(updateUser(user, id)),
   fetchUser: (id) => dispatch(fetchUser(id))
   });
 };
