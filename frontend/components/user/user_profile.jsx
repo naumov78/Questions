@@ -51,15 +51,7 @@ class UserProfile extends React.Component {
       });
     }
 
-  renderSubscribedTopics() {
-    return (
-      <ul>
-        {this.props.topics.map((topic) => {
-          return <li>{topic}</li>
-        })}
-      </ul>
-    )
-  }
+  
 
   changeToEdit(e) {
     e.preventDefault();

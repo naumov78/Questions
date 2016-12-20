@@ -130,10 +130,11 @@
   left: -32px;
   width: 25px;
   height: 25px;
-  background-image: url("read.png");
-
+  background-image: image-url("read.png");
 }
 
+// background-image: url(<%= asset_path 'read.png' %>);
+// background-image: url(<%= asset_path 'image.png' %>) }
 
 .answer-link {
   float: left;
@@ -159,7 +160,7 @@
   left: -32px;
   width: 24px;
   height: 25px;
-  background-image: url("answer.png");
+  background-image: image-url("answer.png");
 
 }
 
@@ -188,7 +189,7 @@
   left: -32px;
   width: 25px;
   height: 25px;
-  background-image: url("notifications.png");
+  background-image: image-url("notifications.png");
 
 }
 

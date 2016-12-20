@@ -13,8 +13,8 @@ class UserTopicsMenu extends React.Component {
           <ul>
             {this.props.currentUser.topics.map((topic, i) => {
               return (
-                <Link to={`/topics/${topic.id}/questions`}>
-                  <li key={`${i}`}>{topic.title}</li>
+                <Link to={`/topics/${topic.id}/questions`} key={`${topic.id}`}>
+                  <li>{topic.title}</li>
                 </Link>
               );
             })}

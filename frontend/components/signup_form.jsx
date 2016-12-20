@@ -71,8 +71,8 @@ class SignUpForm extends React.Component {
 
 				<section className="name-errors">
 					<ul>
-						<li>{this.renderSpecificError("First name")}</li>
-						<li>{this.renderSpecificError("Last name")}</li>
+						<li key={`first_name_error`}>{this.renderSpecificError("First name")}</li>
+						<li key={`last_name_error`}>{this.renderSpecificError("Last name")}</li>
 					</ul>
 				</section>
 
