@@ -37,6 +37,7 @@
 
  body {
   box-sizing: content-box;
+  font-family: 'Roboto', sans-serif;
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 16px;
   background: #fff;
