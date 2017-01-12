@@ -106,6 +106,7 @@ class SingleQuestion extends React.Component {
     const question_id = parseInt(this.props.params.question_id);
     const newAnswer = {question_id: question_id, author_id: currentUser.id, body: this.state.answer_body }
     this.props.createAnswer(newAnswer, topic_id)
+    this.setState({answer: false});
   }
 
   render () {
