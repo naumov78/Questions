@@ -10,6 +10,8 @@ class Greeting extends React.Component  {
 		this.handleMenuToggle = this.handleMenuToggle.bind(this);
 	}
 
+
+
 	createDropDown() {
 		return (
 	  	<div id="myDropdown" className="dropdown-content">
@@ -28,11 +30,11 @@ class Greeting extends React.Component  {
     if (this.props.location.pathname !== `/users/${this.props.currentUser.id}`) {
       this.props.router.push(`/users/${this.props.currentUser.id}`)
     }
+		document.getElementById("myDropdown").classList.toggle("show");
   }
 
   handleLogout(e) {
     this.props.logout().then(() => {
-			debugger
 			this.props.router.push("/login")
 		})
   }
@@ -65,13 +67,22 @@ class Greeting extends React.Component  {
 		return name;
 	}
 
+	hideMenu(e) {
+		const menu = document.getElementById("myDropdown");
+		if (menu && menu.classList.contains('show')) {
+			menu.classList.toggle('show');
+		}
+	}
+
 	render() {
+		document.addEventListener('click', this.hideMenu());
+
 		if(this.props.loggedIn){
 			return (
 				<div className="dropdown">
 						<a className="drop-btn" onClick={this.renderDropDown}>{this.formatName()}</a>
 							<div id="myDropdown" className="dropdown-content">
-					    	<a onClick={(e) => this.setState( {dropDownMenu: false}, this.goToUserProfile(e)) }>Profile&nbsp;</a>
+								<a onClick={(e) => this.setState( {dropDownMenu: false}, this.goToUserProfile(e)) }>Profile&nbsp;</a>
 								<a onClick={(e) => this.handleLogout(e)}>Logout</a>
 					  	</div>
 				</div>
