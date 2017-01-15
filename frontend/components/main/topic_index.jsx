@@ -43,6 +43,7 @@ class TopicIndex extends React.Component {
   }
 
   render() {
+    debugger
     return (
        <div>{this.renderQuestions()}</div>
      );

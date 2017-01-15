@@ -19,10 +19,13 @@
 
 class User < ActiveRecord::Base
 
+  VALID_EMAIL_REGEX = /\A[\w+\-._]+@[a-z\d\-.]+\.[a-z]+\z/i
 
-  validates :first_name, :last_name, :email, :password_digest, :session_token, presence: true
+  validates :first_name, :last_name, presence: true, length: { maximum: 40 }
+  validates :email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
   validates :password, length: { minimum: 5 }, allow_nil: true
-  validates :email, :session_token, uniqueness: true
+  validates :password_digest, presence: true
+  validates :session_token, uniqueness: true, presence: true
 
   has_attached_file :userpic, default_url: "missing-userpic.png"
   validates_attachment_content_type :userpic, content_type: /\Aimage\/.*\z/
