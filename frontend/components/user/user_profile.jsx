@@ -6,7 +6,6 @@ import { Link, withRouter } from 'react-router';
 class UserProfile extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = { edit: false, first_name: "", last_name: "", description: "", userpicFile: null, userpicUrl: null }
     this.changeToEdit = this.changeToEdit.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
@@ -51,7 +50,7 @@ class UserProfile extends React.Component {
       });
     }
 
-  
+
 
   changeToEdit(e) {
     e.preventDefault();
@@ -127,10 +126,10 @@ class UserProfile extends React.Component {
             className="uu-form">
             <div className="userpic-profile">
               <img src={this.props.currentUser.userpic_url} />
-
+              <br />
               <input type="file" onChange={(e) => this.updateFile(e)} />
             </div>
-
+            <br />
             <div className="uu-input">
               <label className="uu-field-title">First Name</label>
               <input
@@ -180,7 +179,7 @@ class UserProfile extends React.Component {
           <div className="userpic-profile">
             <img src={this.props.currentUser.userpic_url} />
           </div>
-
+          <br />
           <div className="user-info-profile">
             <div className="user-name">
               <p>{this.props.currentUser.first_name}&nbsp;&nbsp;{this.props.currentUser.last_name}</p>

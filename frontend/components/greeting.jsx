@@ -1,56 +1,37 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { Link, withRouter } from 'react-router';
+import UserMenuContainer from './user_menu_container';
 
 
 class Greeting extends React.Component  {
 	constructor(props) {
 		super(props);
-		this.state = { dropDownMenu: false }
-		this.handleSubmit = this.handleSubmit.bind(this);
-		this.handleMenuToggle = this.handleMenuToggle.bind(this);
+		this.state = { showMenu: false }
+    this.hide = this.hide.bind(this);
 	}
 
-
-
-	createDropDown() {
-		return (
-	  	<div id="myDropdown" className="dropdown-content">
-	    	<a onClick={(e) => this.setState( {dropDownMenu: false}, this.goToUserProfile(e)) }>Profile</a>
-	    	<a onClick={(e) => this.handleLogout(e)}>Logout</a>
-	  	</div>
-		);
-	}
-
-	renderDropDown() {
-		document.getElementById("myDropdown").classList.toggle("show");
-}
-
-  goToUserProfile(e) {
-    e.preventDefault();
-    if (this.props.location.pathname !== `/users/${this.props.currentUser.id}`) {
-      this.props.router.push(`/users/${this.props.currentUser.id}`)
+  hide(e){
+    if (!ReactDOM.findDOMNode(this).contains(e.target)) {
+      if (this.state.showMenu) {
+        this.setState({showMenu: false})
+      }
     }
-		document.getElementById("myDropdown").classList.toggle("show");
   }
 
-  handleLogout(e) {
-    this.props.logout().then(() => {
-			this.props.router.push("/login")
-		})
+  addHideListener() {
+    window.addEventListener('click', this.hide);
   }
 
-	handleMenuToggle(e) {
+  removeHideListener() {
+    window.removeEventListener('click', this.hide);
+  }
+
+  handleMenuToggle(e) {
 		e.preventDefault();
 		this.setState(prevState => ({
-			dropDownMenu: !prevState.dropDownMenu
+			showMenu: !prevState.showMenu
 		}));
-	}
-
-	handleSubmit(e) {
-		e.preventDefault();
-		this.props.logout().then(() => {
-			this.props.router.push("/");
-		})
 	}
 
 	redirectIfNotLoggedIn() {
@@ -61,30 +42,25 @@ class Greeting extends React.Component  {
 
 	formatName() {
 		let name = this.props.currentUser.first_name;
-		if (name.length > 6) {
-			name = name.slice(0, 3) + "...";
+		if (name.length > 14) {
+			name = name.slice(0, 12) + "...";
 		}
 		return name;
 	}
 
-	hideMenu(e) {
-		const menu = document.getElementById("myDropdown");
-		if (menu && menu.classList.contains('show')) {
-			menu.classList.toggle('show');
-		}
-	}
-
 	render() {
-		document.addEventListener('click', this.hideMenu());
-
+    let dropmenu = this.state.showMenu ? <UserMenuContainer /> : null;
+    this.state.showMenu ? this.addHideListener() : this.removeHideListener();
 		if(this.props.loggedIn){
 			return (
-				<div className="dropdown">
-						<a className="drop-btn" onClick={this.renderDropDown}>{this.formatName()}</a>
-							<div id="myDropdown" className="dropdown-content">
-								<a onClick={(e) => this.setState( {dropDownMenu: false}, this.goToUserProfile(e)) }>Profile&nbsp;</a>
-								<a onClick={(e) => this.handleLogout(e)}>Logout</a>
-					  	</div>
+				<div className="dropdown-wrapper">
+          <a className="drop-btn" onClick={e => this.handleMenuToggle(e)}>
+					<div className="dropdown">
+							<span className="header-userpic"><img src={this.props.currentUser.userpic_url} /></span>
+              <span className="header-username">{this.formatName()}</span>
+              {dropmenu}
+					</div>
+          </a>
 				</div>
 				);
 		}

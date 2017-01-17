@@ -10,7 +10,7 @@
   box-sizing: border-box;
   position: relative;
   padding: 0 0 0 55px;
-  width: 1032px;
+  width: 1100px;
   margin: 0 auto;
   line-height: 1.4;
 }
@@ -133,9 +133,6 @@
   background-image: image-url("read.png");
 }
 
-// background-image: url(<%= asset_path 'read.png' %>);
-// background-image: url(<%= asset_path 'image.png' %>) }
-
 .answer-link {
   float: left;
   color: #999;
@@ -200,16 +197,17 @@
 
 
 .greeting-container {
+  padding-top: 5px;
   float: left;
   color: #999;
-  padding: 23px 14px 11px 38px;
+  width: 165px;
 
   a {
     margin: -4px 0 0 0;
     float: right;
     position: relative;
     }
-  }
+}
 
   .greeting-container:hover {
   background: #f2f2f2;

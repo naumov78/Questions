@@ -1,16 +1,34 @@
 
+.dropdown-wrapper {
+  float: left;
+  width: 160px;
+}
+
+.dropdown-wrapper img {
+  position: absolute;
+  left: -26px;
+  top: 8px;
+  display: block;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #f9f9f9;
+  border-radius: 50%;
+}
+
+
 .dropdown {
     position: relative;
     display: inline-block;
+    width: 132px;
 }
 
 .dropdown-content {
     border-radius: 3px;
     border: 1px solid #ccc;
-    display: none;
+    display: block;
     position: absolute;
-    left: -70px;
-    top: 30px;
+    left: -65px;
+    top: 56px;
     background-color: #f9f9f9;
     overflow: auto;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -29,6 +47,17 @@
   cursor: pointer;
 }
 
-.show {
-  display:block;
+.hide {
+  display: none;
+}
+
+.header-userpic {
+  float: left;
+  padding: 10px 0 0 0;
+}
+
+.header-username {
+  float: left;
+  margin: -1px 0 0 0;
+  padding: 19px 0 2px 16px;
 }
