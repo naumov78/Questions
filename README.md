@@ -29,7 +29,7 @@ Page view
 
 ### To-Do
 * [ ] Index view for User
-* [ ] Rendering question/answer author
+* [x] Rendering question/answer author
 * [ ] Add comments on answers
 * [ ] Add upvote/downvote
 * [ ] Add question search
