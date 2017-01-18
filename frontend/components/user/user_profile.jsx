@@ -173,6 +173,11 @@ class UserProfile extends React.Component {
         </div>
       );
     } else {
+      const date = new Date(this.props.currentUser.created_at);
+      const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      const qMon = monthNames[date.getMonth()];
+      const qDay = date.getDate();
+      const qYr = date.getFullYear();
       return (
       <div className="ui_container">
         <div className="user-profile">
@@ -186,6 +191,9 @@ class UserProfile extends React.Component {
             </div>
             <div className="user-descr">
               <p>{this.props.currentUser.description}</p>
+            </div>
+            <div className="user-since">
+              <p>Member since {qMon} {qDay} {qYr}</p>
             </div>
           </div>
         </div>

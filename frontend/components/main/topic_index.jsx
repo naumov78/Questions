@@ -18,6 +18,13 @@ class TopicIndex extends React.Component {
     }
   }
 
+  updateDescrLength(str){
+    if (str && str.length > 125) {
+      return str.slice(0, 124) + '...';
+    }
+    return str;
+  }
+
   renderQuestions() {
     const topic_id = parseInt(this.props.params.topic_id);
     return (
@@ -25,14 +32,28 @@ class TopicIndex extends React.Component {
         <ul>
           {this.props.questions.map(q => {
             const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-            const date = new Date(q.created_at);
+            const authName = q.author_first_name + ' ' + q.author_last_name;
+            const date = new Date(q.date);
+            const qMon = monthNames[date.getMonth()];
+            const qDay = date.getDate();
+            const qYr = date.getFullYear();
             return <li key={q.id}>
               <div className="single-q-list">
+                <div className="question-author-info">
+                  <div className="question-author-userpic">
+                    <Link to={`/users/${q.author_id}`}><img src={q.author_userpic_url} /></Link>
+                  </div>
+                  <div className="question-author-name">
+                    <span id="link-auth-name"><Link to={`/users/${q.author_id}`}>{authName}</Link></span>
+                      <span className="question-author-descr">, {this.updateDescrLength(q.author_descr)}</span>
+                      <p className="question-date">asked on {qMon} {qDay} {qYr}</p>
+                  </div>
+                </div>
+
+
+
                 <div className="q-body">
                   <Link to={`/topics/${topic_id}/questions/${q.id}`}>{q.body}</Link>
-                </div>
-                <div className="q-date">
-                  <p>Written {monthNames[date.getMonth()]} {date.getDate()}</p>
                 </div>
               </div>
             </li>

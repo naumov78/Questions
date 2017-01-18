@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   validates :session_token, uniqueness: true, presence: true
 
   has_attached_file :userpic, default_url: "missing-userpic.png"
-  validates_attachment_content_type :userpic, content_type: /\Aimage\/.*\z/
+  validates_attachment_content_type :userpic, content_type: /\Aimage\/.*\Z/
 
   has_many :user_subscribed_topics, inverse_of: :user
   has_many :topics, through: :user_subscribed_topics

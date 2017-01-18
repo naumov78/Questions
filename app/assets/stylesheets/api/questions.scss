@@ -1,7 +1,4 @@
 
-
-
-
 .dd-topic {
   width: 200px;
 
@@ -15,12 +12,60 @@
 .single-question-container {
   float: left;
   padding: 10px 0 0 40px;
+
+}
+
+
+.question-author-info {
+  position: relative;
+  display: inline-block;
+  width: 480px;
+  height: 52px;
+}
+
+.question-author-userpic {
+  display: block;
+  height: 40px;
+  width: 42px;
+  float: left;
+  padding: 0 5px 0 0;
+
+
+img {
+  display: block;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #f9f9f9;
+  border-radius: 50%;
+  }
+
+}
+
+.question-author-name {
+  float: left;
+  display: block;
+  position: absolute;
+  left: 45px;
+}
+
+#link-auth-name:hover {
+  text-decoration: underline;
+}
+
+.question-date {
+  font-size: 14px;
+  color: grey;
+}
+
+.question-author-descr {
+  font-size: 14px;
 }
 
 .single-question-body {
   width: 500px;
   font-size: 20px;
   font-weight: 500;
+  letter-spacing: 0.6px;
 
 }
 
@@ -70,6 +115,34 @@
   font-size: 15px;
   font-family: 'Roboto', sans-serif;
   line-height: 20px;
+  letter-spacing: 0.7px;
+}
+
+
+.auth-answer-pic {
+  display: block;
+  height: 40px;
+  width: 42px;
+  float: left;
+  padding: 0 5px 0 0;
+
+
+img {
+  display: block;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #f9f9f9;
+  border-radius: 50%;
+  }
+
+}
+
+#ans-auth {
+  font-size: 14px;
+}
+
+#ans-auth:hover {
+  text-decoration: underline;
 }
 
 .questions-attr{

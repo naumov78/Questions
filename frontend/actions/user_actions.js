@@ -20,8 +20,19 @@ export const receiveErrors = (errors) => {
 
 
 export const fetchUser = (id) => {
-  // debugger
   return (dispatch) => {
-    return APIUtil.fetchUser(id).then(user => dispatch(receiveUser(user)) );
+    return APIUtil.fetchUser(id).then(
+    user => dispatch(receiveUser(user)),
+    errors => dispatch(receiveErrors(errors)) );
   }
 }
+
+
+// export const getUser = (userId) => {
+//   return (dispatch) => {
+//     return APIUtil.getUser(userId).then(
+//       (success) => dispatch(receiveUser(success)),
+//       (err) => dispatch(receiveErrors(err))
+//     );
+//   };
+// };
