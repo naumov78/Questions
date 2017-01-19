@@ -8,6 +8,8 @@
 #  body        :string           not null
 #  views       :integer          default(0)
 #  rating      :integer          default(0)
+#  created_at  :datetime
+#  updated_at  :datetime
 #
 
 class Answer < ActiveRecord::Base

@@ -32,4 +32,7 @@ class Question < ActiveRecord::Base
   primary_key: :id,
   foreign_key: :question_id
 
+  has_many :user_liked_questions, inverse_of: :question
+  has_many :liked_users, through: :user_liked_questions
+
 end

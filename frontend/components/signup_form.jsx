@@ -19,7 +19,6 @@ class SignUpForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const user = this.state;
-		// debugger
     this.props.signup({user}).then(() => {
 			this.props.router.push("/settopics");
 		});

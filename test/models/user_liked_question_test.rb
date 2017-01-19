@@ -1,20 +1,17 @@
 # == Schema Information
 #
-# Table name: answers
+# Table name: user_liked_questions
 #
 #  id          :integer          not null, primary key
+#  user_id     :integer          not null
 #  question_id :integer          not null
-#  author_id   :integer          not null
-#  body        :string           not null
-#  views       :integer          default(0)
-#  rating      :integer          default(0)
 #  created_at  :datetime
 #  updated_at  :datetime
 #
 
 require 'test_helper'
 
-class AnswerTest < ActiveSupport::TestCase
+class UserLikedQuestionTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

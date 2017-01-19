@@ -22,3 +22,20 @@ export const fetchQuestions = (topic_id) => {
     url: `/api/topics/${topic_id}/questions`
   });
 }
+
+
+export const likeQuestion = (user_id, question_id) => {
+  return $.ajax({
+    method: "POST",
+    url: '/api/user_liked_questions',
+    data: {user_liked_question: {user_id: user_id, question_id: question_id}}
+  });
+};
+
+export const dislikeQuestion = (user_id, question_id) => {
+  return $.ajax({
+    method: "DELETE",
+    url: `/api/user_liked_questions/1`,
+    data: {user_liked_question: {user_id: user_id, question_id: question_id}}
+  });
+};

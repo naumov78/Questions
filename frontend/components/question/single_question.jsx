@@ -82,7 +82,7 @@ class SingleQuestion extends React.Component {
                       </div>
                       <div className="questions-attr">
                         <div className="views-count">{Math.ceil(this.props.params.topic_id/5+i)}.{Math.ceil(this.props.params.topic_id/10+i)}k Views</div>
-                        <button className="upvote-btn">Upvote | {Math.ceil(this.props.params.topic_id/20+i)}</button>
+                        <button className="upvote-btn">Upvoters | {Math.ceil(this.props.params.topic_id/20+i)}</button>
                         <button className="attt-links">Downvote</button>
                         <button className="attt-links">Comments</button>
                         <button className="comments-count">{Math.ceil(this.props.params.topic_id/2-i)}+</button>

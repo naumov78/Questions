@@ -43,6 +43,11 @@ class User < ActiveRecord::Base
   primary_key: :id,
   foreign_key: :author_id
 
+  has_many :user_liked_questions, inverse_of: :user
+  has_many :liked_questions, through: :user_liked_questions
+
+
+
   attr_reader :password
 
   after_initialize :ensure_session_token

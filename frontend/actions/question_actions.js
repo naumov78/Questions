@@ -16,14 +16,14 @@ export const receiveQuestions = (questions) => {
   return ({
     type: RECEIVE_QUESTIONS,
     questions
-  })
+  });
 }
 
 export const receiveErrors = (errors) => {
   return ({
     type: RECEIVE_ERRORS,
     errors
-  })
+  });
 }
 
 export const createQuestion = (question) => {
@@ -33,7 +33,7 @@ export const createQuestion = (question) => {
       },
       (errors) => {
         return dispatch(receiveErrors(errors));
-      })
+      });
   }
 }
 
@@ -49,6 +49,23 @@ export const fetchQuestions = (topic_id) => {
   return (dispatch) => {
     return APIUtil.fetchQuestions(topic_id).then((result) => {
       return dispatch(receiveQuestions(result))
+    });
+  }
+}
+
+export const likeQuestion = (user_id, question_id) => {
+  return (dispatch) => {
+    return APIUtil.likeQuestion(user_id, question_id).then((question) => {
+      return dispatch(receiveSingleQuestion(question))
+    });
+  }
+}
+
+
+export const dislikeQuestion = (user_id, question_id) => {
+  return (dispatch) => {
+    return APIUtil.dislikeQuestion(user_id, question_id).then((question) => {
+      return dispatch(receiveSingleQuestion(question))
     });
   }
 }

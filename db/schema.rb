@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161215231641) do
+ActiveRecord::Schema.define(version: 20170119173516) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,15 @@ ActiveRecord::Schema.define(version: 20161215231641) do
 
   add_index "user_answers", ["answer_id"], name: "index_user_answers_on_answer_id", using: :btree
   add_index "user_answers", ["user_id"], name: "index_user_answers_on_user_id", using: :btree
+
+  create_table "user_liked_questions", force: :cascade do |t|
+    t.integer  "user_id",     null: false
+    t.integer  "question_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_liked_questions", ["user_id", "question_id"], name: "index_user_liked_questions_on_user_id_and_question_id", unique: true, using: :btree
 
   create_table "user_subscribed_topics", force: :cascade do |t|
     t.integer "user_id"
