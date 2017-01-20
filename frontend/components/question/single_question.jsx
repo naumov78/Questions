@@ -61,10 +61,10 @@ class SingleQuestion extends React.Component {
     let likeBtn;
     if (question && question.length !== 0) {
       if (this.checkIfLiked(question)) {
-        likeBtn = <button id="vote-btn" onClick={() => this.dislike(question)} className="upvote-btn">Downvote | {question.liked_users.length}</button>
+        likeBtn = <button className="ans-btn" id="vote-btn" onClick={() => this.dislike(question)}>Downvote | {question.liked_users.length}</button>
       } else {
         const likes = question.liked_users.length;
-        likeBtn = <button id="vote-btn" onClick={() => this.addLike(question)} className="upvote-btn">Upvote | {likes}</button>
+        likeBtn = <button className="ans-btn" id="vote-btn" onClick={() => this.addLike(question)}>Upvote | {likes}</button>
       }
     } else {
       likeBtn = null;
