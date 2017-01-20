@@ -8,7 +8,7 @@ export const RECEIVE_ERRORS = "RECEIVE_ERRORS"
 export const receiveSingleQuestion = (question) => {
   return ({
     type: RECEIVE_SINGLE_QUESTION,
-    question: question,
+    question: question
   });
 }
 
@@ -62,9 +62,9 @@ export const likeQuestion = (user_id, question_id) => {
 }
 
 
-export const dislikeQuestion = (user_id, question_id) => {
+export const dislikeQuestion = (user_id, question_id, idx) => {
   return (dispatch) => {
-    return APIUtil.dislikeQuestion(user_id, question_id).then((question) => {
+    return APIUtil.dislikeQuestion(user_id, question_id, idx).then((question) => {
       return dispatch(receiveSingleQuestion(question))
     });
   }

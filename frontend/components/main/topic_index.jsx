@@ -36,15 +36,15 @@ class TopicIndex extends React.Component {
   }
 
   addLike(question) {
-    const id =Number(this.props.params.topic_id);
+    const id = Number(this.props.params.topic_id);
     this.props.likeQuestion(currentUser.id, question.id).then(() => {
       this.getQuestions(id);
     });
   }
 
   dislike(question) {
-    const id =Number(this.props.params.topic_id);
-    this.props.dislikeQuestion(currentUser.id, question.id).then(() => {
+    const id = Number(this.props.params.topic_id);
+    this.props.dislikeQuestion(currentUser.id, question.id, 1).then(() => {
       this.getQuestions(id);
     });
   }

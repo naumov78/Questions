@@ -22,7 +22,8 @@ const QuestionReducer = (state = initState, action) => {
       return newState;
     case RECEIVE_SINGLE_QUESTION:
       newState = { question: action.question, errors: [] }
-      return merge({}, state, newState);
+      const updatedState = Object.assign({}, state, newState);
+      return updatedState;
     case RECEIVE_ERRORS:
       newState = { question: {}, errors: action.errors }
       return merge({}, state, newState);

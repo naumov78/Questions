@@ -31,7 +31,7 @@ Page view
 * [ ] Index view for User
 * [x] Rendering question/answer author
 * [ ] Add comments on answers
-* [ ] Add upvote/downvote
+* [x] Add upvote/downvote
 * [ ] Add question search
 * [ ] Rendering question/answers views and rating
 * [ ] Add edit/update of user subscribed topics

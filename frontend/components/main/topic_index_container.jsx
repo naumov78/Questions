@@ -16,7 +16,7 @@ const mapDispatchToProps = (dispatch) => {
     fetchSingleTopic: topic_id => dispatch(fetchSingleTopic(topic_id)),
     fetchUser: id => dispatch(fetchUser(id)),
     likeQuestion: (user_id, question_id) => dispatch(likeQuestion(user_id, question_id)),
-    dislikeQuestion: (user_id, question_id) => dispatch(dislikeQuestion(user_id, question_id))
+    dislikeQuestion: (user_id, question_id, idx) => dispatch(dislikeQuestion(user_id, question_id, idx))
   });
 }
 

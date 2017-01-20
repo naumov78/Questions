@@ -32,10 +32,10 @@ export const likeQuestion = (user_id, question_id) => {
   });
 };
 
-export const dislikeQuestion = (user_id, question_id) => {
+export const dislikeQuestion = (user_id, question_id, idx) => {
   return $.ajax({
     method: "DELETE",
-    url: `/api/user_liked_questions/1`,
+    url: `/api/user_liked_questions/${idx}`,
     data: {user_liked_question: {user_id: user_id, question_id: question_id}}
   });
 };

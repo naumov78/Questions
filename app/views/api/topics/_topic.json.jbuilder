@@ -1,3 +1,4 @@
+
 json.array! topic do |question|
   json.body question.body
   json.id question.id

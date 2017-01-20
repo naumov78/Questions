@@ -7,7 +7,7 @@ class Api::QuestionsController < ApplicationController
 
   def show
     @question = Question.includes(:answers).find(params[:id])
-    @user = current_user 
+    @user = @question.user
     render :show
   end
 

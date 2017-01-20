@@ -11,10 +11,13 @@ class SingleQuestion extends React.Component {
 
 
   componentDidMount() {
+    this.getQuestion();
+  }
+
+  getQuestion() {
     const question_data = {topic_id: this.props.params.topic_id , question_id: this.props.params.question_id };
     this.props.fetchSingleQuestion({question_data});
   }
-
 
   componentWillReceiveProps(nextProps) {
     if (this.props !== nextProps) {
@@ -29,6 +32,44 @@ class SingleQuestion extends React.Component {
     return e => this.setState({
       [field]: e.currentTarget.value
     });
+  }
+
+  addLike(question) {
+    this.props.likeQuestion(currentUser.id, question.id).then(() => {
+      this.getQuestion();
+    });
+  }
+
+  dislike(question) {
+    this.props.dislikeQuestion(currentUser.id, question.id, 2).then(() => {
+      this.getQuestion();
+    });
+  }
+
+  checkIfLiked(question) {
+  if (question && question.length !== 0) {
+    for (let i = 0; i < question.liked_users.length; i++ ) {
+      if (question.liked_users[i].id === currentUser.id) {
+        return true;
+      }
+    }
+  }
+  return false;
+  }
+
+  getLikeButton(question) {
+    let likeBtn;
+    if (question && question.length !== 0) {
+      if (this.checkIfLiked(question)) {
+        likeBtn = <button id="vote-btn" onClick={() => this.dislike(question)} className="upvote-btn">Downvote | {question.liked_users.length}</button>
+      } else {
+        const likes = question.liked_users.length;
+        likeBtn = <button id="vote-btn" onClick={() => this.addLike(question)} className="upvote-btn">Upvote | {likes}</button>
+      }
+    } else {
+      likeBtn = null;
+    }
+    return likeBtn;
   }
 
   renderAnswersQuntity() {
@@ -69,12 +110,12 @@ class SingleQuestion extends React.Component {
               {this.props.answers.map((ans, i) => {
                 const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
                 const date = new Date(ans.created_at);
-                const author = ans.author_first_name + ' ' + ans.author_last_name;
+                const author = ans.ans_auth_first_name + ' ' + ans.ans_auth_last_name;
                 return (
-                  <li key={ans.id}>
+                  <li key={ans.id + date}>
                     <div className="single-answer-list">
                       <div className="ans-date">
-                        <div className="auth-answer-pic"><Link to={`/users/${ans.author_id}`}><img src={ans.author_userpic_url} /></Link></div>
+                        <div className="auth-answer-pic"><Link to={`/users/${ans.author_id}`}><img src={ans.ans_auth_userpic_url} /></Link></div>
                         <p className="ans-date"><span id="ans-auth"><Link to={`/users/${ans.author_id}`}>{author}</Link></span> wrote {monthNames[date.getMonth()]} {date.getDate()}</p>
                       </div>
                       <div className="answer-body">
@@ -160,7 +201,7 @@ class SingleQuestion extends React.Component {
           <div className="single-question-body">{this.props.question.body}</div>
           <div className="question-buttons">
             <button className="ans-btn" onClick={() => this.setState({answer: true})}>Add answer</button>
-            <button className="ans-btn" id="request">Request</button>
+            <span>{this.getLikeButton(this.state.question)}</span>
             <button className="attt-links">Follow</button>
             <button className="comments-count">{Math.ceil(this.props.params.topic_id/8)}</button>
             <button className="attt-links">Comment</button>
