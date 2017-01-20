@@ -50,9 +50,11 @@ class TopicIndex extends React.Component {
   }
 
   checkIfLiked(question) {
-    for (let i = 0; i < question.liked_users.length; i++ ) {
-      if (question.liked_users[i].id === currentUser.id) {
-        return true;
+    if (this.props.currentUser) {
+      for (let i = 0; i < question.liked_users.length; i++ ) {
+        if (question.liked_users[i].id === this.props.currentUser.id) {
+          return true;
+        }
       }
     }
     return false;

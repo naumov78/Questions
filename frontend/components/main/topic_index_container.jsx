@@ -4,9 +4,10 @@ import { fetchQuestions, likeQuestion, dislikeQuestion } from '../../actions/que
 import { fetchSingleTopic } from '../../actions/topic_actions';
 import { fetchUser } from '../../actions/user_actions';
 
-const mapStateToProps = ({topic}) => {
+const mapStateToProps = ({topic, session}) => {
   return ({
-    questions: topic.questions
+    questions: topic.questions,
+    currentUser: session.currentUser
   })
 }
 
