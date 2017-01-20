@@ -49,28 +49,28 @@ children = Topic.create!(title: 'Children')
 
 
 user1 = User.new(first_name: 'Padme', last_name: 'Amidala', email: 'padme_amidala@starwars.com', description: 'Teenage queen', password: '12345')
-user1.userpic = File.open('https://s3.amazonaws.com/questions-pro/users/padme.jpg')
+user1.userpic.url = 'https://s3.amazonaws.com/questions-pro/users/padme.jpg'
 user1.save!
 user2 = User.new(first_name: 'Jango', last_name: 'Fett', email: 'jango_fett@starwars.com', description: 'Bounty hunter', password: '12345')
-user2.userpic = File.open('https://s3.amazonaws.com/questions-pro/users/jango.jpg')
+user2.userpic.url = 'https://s3.amazonaws.com/questions-pro/users/jango.jpg'
 user2.save!
 user3 = User.new(first_name: 'Jabba', last_name: 'the Hutt', email: 'jabba_hutt@starwars.com', description: 'Crime boss', password: '12345')
-user3.userpic = File.open('https://s3.amazonaws.com/questions-pro/users/jabba.jpg')
+user3.userpic.url = 'https://s3.amazonaws.com/questions-pro/users/jabba.jpg'
 user3.save!
 user4 = User.new(first_name: 'Qui-Gon', last_name: 'Jinn', email: 'quigon_jinn@starwars.com', description: 'Jedi Master', password: '12345')
-user4.userpic = File.open('https://s3.amazonaws.com/questions-pro/users/quigon.png')
+user4.userpic.url = 'https://s3.amazonaws.com/questions-pro/users/quigon.png'
 user4.save!
 user5 = User.new(first_name: 'Obi-Wan', last_name: 'Kenobi', email: 'obiwan_kenobi@starwars.com', description: 'Wise and skilled Jedi Master', password: '12345')
-user5.userpic = File.open('https://s3.amazonaws.com/questions-pro/users/obione.jpg')
+user5.userpic.url = 'https://s3.amazonaws.com/questions-pro/users/obione.jpg'
 user5.save!
 user6 = User.new(first_name: 'Leia Amidala', last_name: 'Skywalker Organa Solo', email: 'leia@starwars.com', description: 'Luke Skywalker\'s sister and Han Solo\'s wife', password: '12345')
-user6.userpic = File.open('https://s3.amazonaws.com/questions-pro/users/leia.jpg')
+user6.userpic.url = 'https://s3.amazonaws.com/questions-pro/users/leia.jpg'
 user6.save!
 user7 = User.new(first_name: 'Anakin', last_name: 'Skywalker', email: 'anakin_skywalker@starwars.com', description: 'aka Darth Vader', password: '12345')
-user7.userpic = File.open('https://s3.amazonaws.com/questions-pro/users/anakin.jpg')
+user7.userpic.url = 'https://s3.amazonaws.com/questions-pro/users/anakin.jpg'
 user7.save!
-user8 = User.create!(first_name: 'Han', last_name: 'Solo', email: 'han_solo@starwars.com', description: 'Captain of the Millennium Falcon', password: '12345')
-user8.userpic = File.open('https://s3.amazonaws.com/questions-pro/users/hansolo.png')
+user8 = User.new(first_name: 'Han', last_name: 'Solo', email: 'han_solo@starwars.com', description: 'Captain of the Millennium Falcon', password: '12345')
+user8.userpic.url = 'https://s3.amazonaws.com/questions-pro/users/hansolo.png'
 user8.save!
 
 
