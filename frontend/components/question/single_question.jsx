@@ -34,6 +34,8 @@ class SingleQuestion extends React.Component {
     });
   }
 
+// question likes
+
   addLike(question) {
     this.props.likeQuestion(currentUser.id, question.id).then(() => {
       this.getQuestion();
@@ -71,6 +73,49 @@ class SingleQuestion extends React.Component {
     }
     return likeBtn;
   }
+
+// answer likes
+
+addAnswerLike(answer) {
+  this.props.likeAnswer(currentUser.id, answer.id).then(() => {
+    this.getQuestion();
+  });
+}
+
+dislikeAnswer(answer) {
+  this.props.dislikeAnswer(currentUser.id, answer.id).then(() => {
+    this.getQuestion();
+  });
+}
+
+checkIfAnswerLiked(answer) {
+if (answer.liked_users && answer.liked_users.length !== 0) {
+  for (let i = 0; i < answer.liked_users.length; i++ ) {
+    if (answer.liked_users[i].id === currentUser.id) {
+      return true;
+    }
+  }
+}
+return false;
+}
+
+getAnswerLikeButton(answer) {
+  let likeBtn;
+    if (this.checkIfAnswerLiked(answer)) {
+      likeBtn = <button className="ans-btn" id="vote-btn" onClick={() => this.dislikeAnswer(answer)}>Downvote | {answer.liked_users.length}</button>
+    } else {
+      let likes;
+       if (typeof answer.liked_users === 'undefined') {
+         likes = 0;
+       } else {
+         likes = answer.liked_users.length;
+       }
+      likeBtn = <button className="ans-btn" id="vote-btn" onClick={() => this.addAnswerLike(answer)}>Upvote | {likes}</button>
+    }
+  return likeBtn;
+}
+
+
 
   renderAnswersQuntity() {
     if (typeof this.props.answers === 'undefined'){
@@ -111,6 +156,7 @@ class SingleQuestion extends React.Component {
                 const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
                 const date = new Date(ans.created_at);
                 const author = ans.ans_auth_first_name + ' ' + ans.ans_auth_last_name;
+                const singleAnswer = ans;
                 return (
                   <li key={ans.id + date}>
                     <div className="single-answer-list">
@@ -123,7 +169,7 @@ class SingleQuestion extends React.Component {
                       </div>
                       <div className="questions-attr">
                         <div className="views-count">{Math.ceil(this.props.params.topic_id/5+i)}.{Math.ceil(this.props.params.topic_id/10+i)}k Views</div>
-                        <button className="upvote-btn">Upvoters | {Math.ceil(this.props.params.topic_id/20+i)}</button>
+                        {this.getAnswerLikeButton(singleAnswer)}
                         <button className="attt-links">Downvote</button>
                         <button className="attt-links">Comments</button>
                         <button className="comments-count">{Math.ceil(this.props.params.topic_id/2-i)}+</button>
@@ -151,8 +197,10 @@ class SingleQuestion extends React.Component {
     const topic_id = parseInt(this.props.params.topic_id);
     const question_id = parseInt(this.props.params.question_id);
     const newAnswer = {question_id: question_id, author_id: currentUser.id, body: this.state.answer_body }
-    this.props.createAnswer(newAnswer, topic_id)
     this.setState({answer: false});
+    this.props.createAnswer(newAnswer, topic_id).then(() => {
+      this.getQuestion();
+    });
   }
 
   goToUserProfile(e) {

@@ -46,6 +46,9 @@ class User < ActiveRecord::Base
   has_many :user_liked_questions, inverse_of: :user
   has_many :liked_questions, through: :user_liked_questions
 
+  has_many :user_liked_answers, inverse_of: :user
+  has_many :liked_answers, through: :user_liked_answers
+
 
 
   attr_reader :password

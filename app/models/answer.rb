@@ -26,4 +26,7 @@ class Answer < ActiveRecord::Base
   foreign_key: :author_id,
   primary_key: :id
 
+  has_many :user_liked_answers, inverse_of: :answer
+  has_many :liked_users, through: :user_liked_answers
+
 end

@@ -39,3 +39,20 @@ export const dislikeQuestion = (user_id, question_id, idx) => {
     data: {user_liked_question: {user_id: user_id, question_id: question_id}}
   });
 };
+
+
+export const likeAnswer = (user_id, answer_id) => {
+  return $.ajax({
+    method: "POST",
+    url: '/api/user_liked_answers',
+    data: {user_liked_answer: {user_id: user_id, answer_id: answer_id}}
+  });
+};
+
+export const dislikeAnswer = (user_id, answer_id) => {
+  return $.ajax({
+    method: "DELETE",
+    url: `/api/user_liked_answers/1`,
+    data: {user_liked_answer: {user_id: user_id, answer_id: answer_id}}
+  });
+};

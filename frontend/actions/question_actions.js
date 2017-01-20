@@ -69,3 +69,22 @@ export const dislikeQuestion = (user_id, question_id, idx) => {
     });
   }
 }
+
+
+
+export const likeAnswer = (user_id, answer_id) => {
+  return (dispatch) => {
+    return APIUtil.likeAnswer(user_id, answer_id).then((question) => {
+      return dispatch(receiveSingleQuestion(question))
+    });
+  }
+}
+
+
+export const dislikeAnswer = (user_id, answer_id) => {
+  return (dispatch) => {
+    return APIUtil.dislikeAnswer(user_id, answer_id).then((question) => {
+      return dispatch(receiveSingleQuestion(question))
+    });
+  }
+}

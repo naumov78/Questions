@@ -10,4 +10,5 @@ json.answers question.answers do |answer|
   json.ans_auth_last_name answer.user.last_name
   json.ans_auth_descr answer.user.description
   json.ans_auth_userpic_url asset_path(answer.user.userpic.url)
+  json.liked_users answer.liked_users
 end
