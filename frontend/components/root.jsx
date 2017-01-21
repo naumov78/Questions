@@ -37,8 +37,8 @@ return (
         <Route path="/login" component={ AuthForm } />
         <Route path="/settopics" component={ TopicFormContainer } onEnter={_ensureLogIn}/>
         <Route path="/users/:id" component={ UserProfileContainer } onEnter={_ensureLogIn}/>
-        <Route path="/topics/:topic_id/questions" component={ TopicIndexContainer } />
-        <Route path="/topics/:topic_id/questions/:question_id" component={ SingleQuestionContainer } />
+        <Route path="/topics/:topic_id/questions" component={ TopicIndexContainer } onEnter={_ensureLogIn} />
+        <Route path="/topics/:topic_id/questions/:question_id" component={ SingleQuestionContainer } onEnter={_ensureLogIn} />
         <Route path="/createq" component={ QuestionFormContainer } onEnter={_ensureLogIn}/>
       </Route>
     </Router>

@@ -6,12 +6,13 @@ import { createAnswer } from '../../actions/answer_actions';
 import { fetchUser } from '../../actions/user_actions';
 
 
-const mapStateToProps = ({question}) => {
+const mapStateToProps = ({question, session}) => {
   return ({
     question: question.question,
     answers: question.question.answers,
     views: question.question.views,
-    rating: question.question.rating
+    rating: question.question.rating,
+    currentUser: session.currentUser
   })
 }
 

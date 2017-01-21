@@ -37,53 +37,64 @@ class SingleQuestion extends React.Component {
 // question likes
 
   addLike(question) {
-    this.props.likeQuestion(currentUser.id, question.id).then(() => {
+    this.props.likeQuestion(this.props.currentUser.id, question.id).then(() => {
       this.getQuestion();
     });
   }
 
   dislike(question) {
-    this.props.dislikeQuestion(currentUser.id, question.id, 2).then(() => {
+    this.props.dislikeQuestion(this.props.currentUser.id, question.id, 2).then(() => {
       this.getQuestion();
     });
   }
 
   checkIfLiked(question) {
-  if (question && question.length !== 0) {
-    for (let i = 0; i < question.liked_users.length; i++ ) {
-      if (question.liked_users[i].id === currentUser.id) {
-        return true;
+    debugger
+  if (question) {
+    debugger
+    if (question.liked_users && question.liked_users.length > 0) {
+      for (let i = 0; i < question.liked_users.length; i++ ) {
+        debugger
+        if (question.liked_users[i].id === this.props.currentUser.id) {
+          return true;
+        }
       }
     }
-  }
+  } else {
   return false;
   }
+}
 
   getLikeButton(question) {
+  if (question) {
     let likeBtn;
-    if (question && question.length !== 0) {
       if (this.checkIfLiked(question)) {
         likeBtn = <button className="ans-btn" id="vote-btn" onClick={() => this.dislike(question)}>Downvote | {question.liked_users.length}</button>
       } else {
-        const likes = question.liked_users.length;
+        let likes;
+        if (typeof question.liked_users === 'undefined') {
+          likes = 0
+        } else {
+          likes = question.liked_users.length;
+        }
         likeBtn = <button className="ans-btn" id="vote-btn" onClick={() => this.addLike(question)}>Upvote | {likes}</button>
       }
-    } else {
-      likeBtn = null;
-    }
     return likeBtn;
+  } else {
+    return null;
+  }
   }
 
 // answer likes
 
 addAnswerLike(answer) {
-  this.props.likeAnswer(currentUser.id, answer.id).then(() => {
+  this.props.likeAnswer(this.props.currentUser.id, answer.id).then(() => {
     this.getQuestion();
   });
 }
 
 dislikeAnswer(answer) {
-  this.props.dislikeAnswer(currentUser.id, answer.id).then(() => {
+  this.props.dislikeAnswer(this.props.currentUser.id, answer.id).then(() => {
     this.getQuestion();
   });
 }
@@ -91,7 +102,7 @@ dislikeAnswer(answer) {
 checkIfAnswerLiked(answer) {
 if (answer.liked_users && answer.liked_users.length !== 0) {
   for (let i = 0; i < answer.liked_users.length; i++ ) {
-    if (answer.liked_users[i].id === currentUser.id) {
+    if (answer.liked_users[i].id === this.props.currentUser.id) {
       return true;
     }
   }
@@ -196,7 +207,7 @@ getAnswerLikeButton(answer) {
     e.preventDefault();
     const topic_id = parseInt(this.props.params.topic_id);
     const question_id = parseInt(this.props.params.question_id);
-    const newAnswer = {question_id: question_id, author_id: currentUser.id, body: this.state.answer_body }
+    const newAnswer = {question_id: question_id, author_id: this.props.currentUser.id, body: this.state.answer_body }
     this.setState({answer: false});
     this.props.createAnswer(newAnswer, topic_id).then(() => {
       this.getQuestion();

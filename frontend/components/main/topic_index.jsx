@@ -99,7 +99,7 @@ class TopicIndex extends React.Component {
                 </div>
 
                 <div className="q-body">
-                  <Link to={`/topics/${topic_id}/questions/${q.id}`}>{q.body}</Link>
+                  <Link to={`/topics/${topic_id}/questions/${q.id}`}><span>{q.body}</span></Link>
                 </div>
                 <div className="question-stats">
                   {this.getLikeButton(q)}
