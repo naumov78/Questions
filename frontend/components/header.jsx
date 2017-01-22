@@ -19,6 +19,14 @@ class Header extends React.Component {
   }
 
 
+  // checkLoggedIn(){
+  //   if (!this.props.currentUser) {
+  //     this.props.router.push("/login");
+  //   }
+  // }
+
+
+
   render() {
     if(this.props.currentUser && this.props.location.pathname !== "/settopics"){
       return (
@@ -58,7 +66,7 @@ class Header extends React.Component {
         </div>
       );
     } else {
-      return (<div></div>);
+      return <div></div>
     }
   }
 

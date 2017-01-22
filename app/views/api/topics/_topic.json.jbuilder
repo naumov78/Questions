@@ -9,4 +9,5 @@ json.array! topic do |question|
   json.author_descr question.user.description
   json.author_userpic_url asset_path(question.user.userpic.url)
   json.liked_users question.liked_users
+  json.answers question.answers
 end

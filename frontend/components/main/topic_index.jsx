@@ -63,10 +63,13 @@ class TopicIndex extends React.Component {
   getLikeButton(question) {
     let likeBtn;
     if (this.checkIfLiked(question)) {
-      likeBtn = <button onClick={() => this.dislike(question)} className="upvote-btn">Downvote | {question.liked_users.length}</button>
+      likeBtn = <span>
+      <button className="upvote-btn-liked">Upvoters | {question.liked_users.length}</button>
+      <span><a onClick={() => this.dislike(question)} className="downvote-link">Downvote</a></span>
+      </span>
     } else {
       const likes = question.liked_users.length;
-      likeBtn = <button onClick={() => this.addLike(question)} className="upvote-btn">Upvote | {likes}</button>
+      likeBtn = <button onClick={() => this.addLike(question)} className="upvote-btn">Upvoters | {likes}</button>
     }
     return likeBtn;
   }
@@ -85,6 +88,7 @@ class TopicIndex extends React.Component {
             const qMon = monthNames[date.getMonth()];
             const qDay = date.getDate();
             const qYr = date.getFullYear();
+            const ansNumber = q.answers.length;
             return <li key={q.id}>
               <div className="single-q-list">
                 <div className="question-author-info">
@@ -102,7 +106,8 @@ class TopicIndex extends React.Component {
                   <Link to={`/topics/${topic_id}/questions/${q.id}`}><span>{q.body}</span></Link>
                 </div>
                 <div className="question-stats">
-                  {this.getLikeButton(q)}
+                  <span>{this.getLikeButton(q)}</span>
+                  <span id="topic-ans-num">Answers: {ansNumber}</span>
                 </div>
               </div>
             </li>
@@ -112,7 +117,14 @@ class TopicIndex extends React.Component {
     );
   }
 
-  render() {
+  checkLoggedIn(){
+    if (!this.props.currentUser) {
+      this.props.router.push("/login");
+    }
+  }
+
+  render () {
+    this.checkLoggedIn();
     return (
        <div>{this.renderQuestions()}</div>
      );

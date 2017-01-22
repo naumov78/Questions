@@ -5,8 +5,8 @@ import { Link, withRouter } from 'react-router';
 class UserMenu extends React.Component  {
 	constructor(props) {
 		super(props);
-
 	}
+
 
   goToUserProfile(e) {
     e.preventDefault();
@@ -16,9 +16,7 @@ class UserMenu extends React.Component  {
   }
 
   handleLogout(e) {
-    this.props.logout().then(() => {
-			this.props.router.push("/")
-		})
+    this.props.logout();
   }
 
   render() {

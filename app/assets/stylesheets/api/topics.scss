@@ -29,3 +29,20 @@
 .question-stats {
   padding: 13px 0 0 0;
 }
+
+
+#topic-ans-num {
+  padding: 0 0 0 20px;
+  font-size: 13px;
+  color: #999;
+}
+
+.downvote-link {
+  padding: 0 0 0 20px;
+  font-size: 13px;
+  color: #999;
+}
+
+.downvote-link:hover {
+  text-decoration: underline;
+}

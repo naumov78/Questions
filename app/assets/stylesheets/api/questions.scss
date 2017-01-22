@@ -65,8 +65,7 @@ img {
   width: 500px;
   font-size: 20px;
   font-weight: 500;
-  letter-spacing: 0.6px;
-
+  padding: 0 0 10px 0;
 }
 
 .answer-form {
@@ -87,6 +86,8 @@ img {
 .answer-buttons {
   display: inline;
   float: right;
+  padding: 20px 0 0 0;
+
 
 
   button {
@@ -102,7 +103,11 @@ img {
 
 
 .answers {
-  padding: 20px 0 0 0;
+  padding: 30px 0 0 0;
+}
+
+.answers-2 {
+  padding: 75px 0 0 0;
 }
 
 .question-part {
@@ -115,7 +120,8 @@ img {
   font-size: 15px;
   font-family: 'Roboto', sans-serif;
   line-height: 20px;
-  letter-spacing: 0.7px;
+  // letter-spacing: 0.7px;
+  width: 506px;
 }
 
 
@@ -139,6 +145,7 @@ img {
 
 #ans-auth {
   font-size: 14px;
+  color: #b82b28;
 }
 
 #ans-auth:hover {
@@ -163,6 +170,17 @@ img {
 .upvote-btn:hover {
   border: 1px solid #577ba8;
   cursor: pointer;
+}
+
+.upvote-btn-liked {
+  border: 1px solid #a6a6a6;
+  background: #f2f2f2;
+  border-radius: 3px;
+  font-weight: 500;
+  font-family: 'Roboto Condenced', sans-serif;
+  padding: 3px 7px 4px 7px;
+  color: #a6a6a6;
+  font-size: 12px;
 }
 
 .attt-links {
@@ -196,16 +214,21 @@ img {
 .ans-date {
   color: #999;
   font-size: 12px;
+  padding-top: 5px;
+}
+
+.answer-body {
+  padding: 10px 0 0 0;
 }
 
 .ans-btn {
   border: 1px solid #bbcadc;
   background: #f1f8fb;
   border-radius: 3px;
-  font-weight: 500;
+  font-weight: 400;
   padding: 3px 7px 4px 7px;
   color: #2b6dad;
-  font-size: 15px;
+  // font-size: 12px;
 }
 
 .ans-btn:hover {
@@ -213,13 +236,31 @@ img {
   cursor: pointer;
 }
 
+.ans-btn-liked {
+  border: 1px solid #a6a6a6;
+  background: #f2f2f2;
+  border-radius: 3px;
+  font-weight: 400;
+  padding: 3px 7px 4px 7px;
+  color: #a6a6a6;
+  // font-size: 12px;
+}
+
 
 #vote-btn {
   margin: 0 0 0 20px;
 }
 
+.ans-number {
+  padding: 0 0 0 20px;
+  font-size: 13px;
+  color: #999;
+}
+
+
 .question-buttons {
   padding: 10px 0 0 0;
+  display: inline-block;;
 }
 
 .answers-quan {
