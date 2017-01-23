@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter, Link } from 'react-router';
+import QuestionFormContainer from '../question/question_form_container';
 
 
 class TopicIndex extends React.Component {
@@ -77,10 +78,15 @@ class TopicIndex extends React.Component {
 
   renderQuestions() {
     const topic_id = parseInt(this.props.params.topic_id);
+    if (this.props.questions.length === 0) {
+      const topicId = Number(this.props.params.topic_id);
+      return (
+        <div><QuestionFormContainer topicId = {topicId} fromTopic = {true} /></div>
+      );
+    }
     return (
       <div className="topic-questions">
         <ul>
-
           {this.props.questions.map(q => {
             const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
             const authName = q.author_first_name + ' ' + q.author_last_name;

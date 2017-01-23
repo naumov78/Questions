@@ -13,6 +13,7 @@ class Api::QuestionsController < ApplicationController
 
   def create
     @question = current_user.questions.new(question_params)
+    @user = current_user
     if @question.save
       render :show
     else

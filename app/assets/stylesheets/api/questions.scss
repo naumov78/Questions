@@ -1,13 +1,5 @@
 
-.dd-topic {
-  width: 200px;
 
-  select {
-    width: 200px;
-    height: 20px;
-    font-size: 16px;
-  }
-}
 
 .single-question-container {
   float: left;
@@ -290,6 +282,11 @@ img {
 
 }
 
+.noquestions-topic {
+  padding: 10px 0 20px 0;
+  width: 500px;
+  text-align: center;
+}
 
 .button-part {
   display: block;
@@ -297,11 +294,34 @@ img {
 }
 
 .dd-topic {
+  width: 200px;
   float: left;
-  margin: 25px 0 0 160px;
+  padding: 22px 0 0 160px;
+
+  select {
+    width: 200px;
+    height: 25px;
+    font-size: 16px;
+  }
+
+}
+
+.dd-topic-notopic {
+  width: 280px;
+  float: left;
+  padding-top: 24px;
+}
+
+.current-topic-warning {
+  font-size: 13px;
+  color: #999;
+}
+
+.change-topic-btn-container {
+  float: left;
+  padding: 20px 0 0 0;
 }
 
 #add-question {
   float: right;
-  margin: 20px 0 0 10px;
 }
