@@ -12,7 +12,11 @@ constructor(props) {
 
 
 componentDidMount() {
-  this.getQuestion();
+  this.getQuestion()
+    if (this.props.question.body === "") {
+      const topicId = this.props.params.topic_id;
+      this.props.router.push(`/topics/${topicId}/questions/`);
+    }
 }
 
 getQuestion() {

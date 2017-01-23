@@ -34,19 +34,14 @@ class QuestionForm extends React.Component {
         this.props.router.push(`/topics/${success.question.topic_id}/questions/${success.question.id}`)
       });
     }
-    return this.props.createQuestion(newQuestion).then(() => {
-      this.props.router.push(`/topics/${this.state.topic_id}/questions`)
+    if (newQuestion.topic_id === 0) {
+      newQuestion.topic_id = this.props.topics[0].id
+    }
+    return this.props.createQuestion(newQuestion).then((success) => {
+        this.props.router.push(`/topics/${success.question.topic_id}/questions/${success.question.id}`)
     });
   }
 
-
-  handleSubmit_1(e) {
-    e.preventDefault();
-    const newQuestion = {topic_id: this.state.topic_id, body: this.state.body};
-    this.props.createQuestion(newQuestion).then(() => {
-      this.props.router.push(`/topics/${this.state.topic_id}/questions`)
-    });
-  }
 
   selectTopic(field) {
     return (e) => this.setState({
