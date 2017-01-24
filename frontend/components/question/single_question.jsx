@@ -175,16 +175,15 @@ renderAnswers() {
 
         <ul className="answers-list">
             {this.props.answers.map((ans, i) => {
-              const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-              const date = new Date(ans.created_at);
               const author = ans.ans_auth_first_name + ' ' + ans.ans_auth_last_name;
               const singleAnswer = ans;
+              const now = new Date();
               return (
-                <li key={ans.id + date}>
+                <li key={ans.id + now}>
                   <div className="single-answer-list">
                     <div className="ans-date">
                       <div className="auth-answer-pic"><Link to={`/users/${ans.author_id}`}><img src={ans.ans_auth_userpic_url} /></Link></div>
-                      <p className="ans-date"><span id="ans-auth"><Link to={`/users/${ans.author_id}`}>{author}</Link></span> wrote {monthNames[date.getMonth()]} {date.getDate()}</p>
+                      <p className="ans-date"><span id="ans-auth"><Link to={`/users/${ans.author_id}`}>{author}</Link></span>{this.getAnswerDate(ans, now)}</p>
                     </div>
                     <div className="answer-body">
                       {ans.body}
@@ -265,20 +264,72 @@ getInnerNav() {
   }
 }
 
+getAnswerDate(answer, now) {
+  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const date = new Date(answer.created_at);
+  const qMon = monthNames[date.getMonth()];
+  const qDay = date.getDate();
+  const qYr = date.getFullYear()
+  const dif = Math.floor((now - date) / 1000);
+  if (dif < 30) {
+    return ' wrote just now'
+  } else if (dif < 60) {
+    return ' wrote less than a minute ago'
+  } else if (dif < 120) {
+    return ' wrote less than 2 minutes ago'
+  } else if (dif < 300) {
+    return ' wrote less than 5 minutes ago'
+  } else if (dif < 600) {
+    return ' wrote less than 10 minutes ago'
+  } else if (dif < 3600) {
+    return ' wrote less than an hour ago'
+  } else if (dif < 86400) {
+    return ' wrote today'
+  } else if (dif < 172800) {
+    return ' wrote yesterday'
+  } else {
+    return ` wrote on ${qMon} ${qDay} ${qYr}`
+  }
+}
+
+getQuestionDate(question, now) {
+  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const date = new Date(question.created_at);
+  const qMon = monthNames[date.getMonth()];
+  const qDay = date.getDate();
+  const qYr = date.getFullYear()
+  const dif = Math.floor((now - date) / 1000);
+  if (dif < 30) {
+    return 'asked just now'
+  } else if (dif < 60) {
+    return 'asked less than a minute ago'
+  } else if (dif < 120) {
+    return 'asked less than 2 minutes ago'
+  } else if (dif < 300) {
+    return 'asked less than 5 minutes ago'
+  } else if (dif < 600) {
+    return 'asked less than 10 minutes ago'
+  } else if (dif < 3600) {
+    return 'asked less than an hour ago'
+  } else if (dif < 86400) {
+    return 'asked today'
+  } else if (dif < 172800) {
+    return 'asked yesterday'
+  } else {
+    return `asked on ${qMon} ${qDay} ${qYr}`
+  }
+}
+
 render () {
   this.checkLoggedIn();
-  let authName, userpic, userId, descr, date, qMon, qDay, qYr;
+  let authName, userpic, userId, descr, now;
   if (this.props.question.topic_id !== 0) {
-    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     const author = this.props.question.user;
+    now = new Date();
     authName = this.props.question.first_name + ' ' + this.props.question.last_name;
     userpic = this.props.question.author_userpic_url;
     userId = this.props.question.author_id;
     descr = this.props.question.description;
-    date = new Date(this.props.question.created_at);
-    qMon = monthNames[date.getMonth()];
-    qDay = date.getDate();
-    qYr = date.getFullYear();
   }
 
   if (!this.state.answer) {
@@ -293,7 +344,7 @@ render () {
           <div className="question-author-name">
             <span id="link-auth-name"><Link to={`/users/${userId}`}>{authName}</Link></span>
             <span className="question-author-descr">, {this.updateDescrLength(descr)}</span>
-            <p className="question-date">asked on {qMon} {qDay} {qYr}</p>
+            <p className="question-date">{this.getQuestionDate(this.props.question, now)}</p>
           </div>
         </div>
         <div className="single-question-body">{this.props.question.body}</div>
@@ -311,6 +362,7 @@ render () {
     </div>
   );
 } else {
+  now = new Date();
   return (
     <div className="single-question-container">
       {this.getInnerNav()}
@@ -322,7 +374,7 @@ render () {
           <div className="question-author-name">
             <span id="link-auth-name"><Link to={`/users/${userId}`}>{authName}</Link></span>
             <span className="question-author-descr">, {this.updateDescrLength(descr)}</span>
-            <p className="question-date">asked on {qMon} {qDay} {qYr}</p>
+            <p className="question-date">{this.renderAnswersQuntity()}</p>
           </div>
         </div>
         <div className="single-question-body">{this.props.question.body}</div>

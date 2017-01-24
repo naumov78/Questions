@@ -55,6 +55,34 @@ sortByKey(array, key) {
   });
 }
 
+getDate(question, now) {
+  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const date = new Date(question.created_at);
+  const qMon = monthNames[date.getMonth()];
+  const qDay = date.getDate();
+  const qYr = date.getFullYear()
+  const dif = Math.floor((now - date) / 1000);
+  if (dif < 30) {
+    return 'asked just now'
+  } else if (dif < 60) {
+    return 'asked less than a minute ago'
+  } else if (dif < 120) {
+    return 'asked less than 2 minutes ago'
+  } else if (dif < 300) {
+    return 'asked less than 5 minutes ago'
+  } else if (dif < 600) {
+    return 'asked less than 10 minutes ago'
+  } else if (dif < 3600) {
+    return 'asked less than an hour ago'
+  } else if (dif < 86400) {
+    return 'asked today'
+  } else if (dif < 172800) {
+    return 'asked yesterday'
+  } else {
+    return `asked on ${qMon} ${qDay} ${qYr}`
+  }
+}
+
 
 renderIndexQuestions() {
   const questions = this.getIndexQuestions();
@@ -62,11 +90,7 @@ renderIndexQuestions() {
   return (
     <ul>
       {questions.map((q, i) => {
-        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        const date = new Date(q.created_at);
-        const qMon = monthNames[date.getMonth()];
-        const qDay = date.getDate();
-        const qYr = date.getFullYear()
+        const now = new Date();
         const authName = q.auth_first_name + ' ' + q.auth_last_name;
         const ansNumber = q.answers.length;
         debugger
@@ -86,7 +110,7 @@ renderIndexQuestions() {
                 <div className="question-author-name">
                   <span id="link-auth-name"><Link to={`/users/${q.author_id}`}>{authName}</Link></span>
                     <span className="question-author-descr">, {this.updateDescrLength(q.auth_descr)}</span>
-                    <p className="question-date">asked on {qMon} {qDay} {qYr}</p>
+                    <p className="question-date">{this.getDate(q, now)}</p>
                 </div>
               </div>
 

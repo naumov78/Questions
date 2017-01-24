@@ -106,14 +106,10 @@ class TopicIndex extends React.Component {
         {this.getInnerNav()}
         <ul>
           {this.props.questions.map(q => {
-            const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
             const authName = q.author_first_name + ' ' + q.author_last_name;
-            const date = new Date(q.date);
-            const qMon = monthNames[date.getMonth()];
-            const qDay = date.getDate();
-            const qYr = date.getFullYear();
             const ansNumber = q.answers.length;
-            return <li key={q.id}>
+            const now = new Date();
+            return <li key={q.id * now}>
               <div className="single-q-list">
                 <div className="question-author-info">
                   <div className="question-author-userpic">
@@ -122,7 +118,7 @@ class TopicIndex extends React.Component {
                   <div className="question-author-name">
                     <span id="link-auth-name"><Link to={`/users/${q.author_id}`}>{authName}</Link></span>
                       <span className="question-author-descr">, {this.updateDescrLength(q.author_descr)}</span>
-                      <p className="question-date">asked on {qMon} {qDay} {qYr}</p>
+                      <p className="question-date">{this.getQuestionDate(q, now)}</p>
                   </div>
                 </div>
 
@@ -146,6 +142,35 @@ class TopicIndex extends React.Component {
       this.props.router.push("/login");
     }
   }
+
+  getQuestionDate(question, now) {
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const date = new Date(question.date);
+    const qMon = monthNames[date.getMonth()];
+    const qDay = date.getDate();
+    const qYr = date.getFullYear()
+    const dif = Math.floor((now - date) / 1000);
+    if (dif < 30) {
+      return 'asked just now'
+    } else if (dif < 60) {
+      return 'asked less than a minute ago'
+    } else if (dif < 120) {
+      return 'asked less than 2 minutes ago'
+    } else if (dif < 300) {
+      return 'asked less than 5 minutes ago'
+    } else if (dif < 600) {
+      return 'asked less than 10 minutes ago'
+    } else if (dif < 3600) {
+      return 'asked less than an hour ago'
+    } else if (dif < 86400) {
+      return 'asked today'
+    } else if (dif < 172800) {
+      return 'asked yesterday'
+    } else {
+      return `asked on ${qMon} ${qDay} ${qYr}`
+    }
+  }
+
 
   getInnerNav() {
     const id = this.state.topic_id;
