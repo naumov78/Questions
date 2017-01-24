@@ -1,6 +1,8 @@
 import React from 'react';
 import SideBar from './sidebar/sidebar';
 import Feed from './feed/feed';
+import UserIndex from './feed/user_index';
+import TopicIndexContainer from './topic_index_container';
 import { withRouter } from 'react-router';
 
 class Main extends React.Component {
@@ -15,7 +17,16 @@ class Main extends React.Component {
   componentWillReceiveProps(newProps) {
   }
 
+  getIndexPage() {
+    if (this.props.location.pathname === '/') {
+      return <UserIndex currentUser={this.props.currentUser} />
+    } else {
+      return null;
+    }
+  }
+
   render() {
+    debugger
     if(this.props.currentUser && this.props.location.pathname !== "/settopics"){
       return (
         <div className="page-wraper">
@@ -23,7 +34,9 @@ class Main extends React.Component {
             <div className="sidebar-container">
               <SideBar currentUser={this.props.currentUser} />
             </div>
-
+            <div className="index-topics">
+              {this.getIndexPage()}
+            </div>
           </div>
         </div>
       );

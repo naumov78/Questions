@@ -1,0 +1,30 @@
+.index-topics {
+  float: left;
+  padding: 0 0 0 40px;
+  margin: 0 0 0 20px;
+  width: 520px
+}
+
+.user-index-title {
+  background: #e2e2e2;
+}
+
+.topic-info {
+  font-size: 15px;
+  // color: #b82b28;
+  padding: 10px 0 10px 5px;
+
+  a {
+    font-size: 15px;
+    color: #b82b28;
+    padding: 0 0 20px 0;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}
+
+.topic-info:hover {
+  background: #e2e2e2;
+}
