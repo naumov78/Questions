@@ -4,8 +4,22 @@
 .single-question-container {
   float: left;
   padding: 10px 0 0 40px;
+  font-family: 'Roboto', sans-serif;
+  width: 500px;
 
 }
+
+
+.inner-nav {
+  color: #999;
+  font-size: 13px;
+
+  a:hover {
+    color: #b82b28;
+  }
+
+}
+
 
 
 .question-author-info {
@@ -103,7 +117,7 @@ img {
 }
 
 .question-part {
-
+  padding: 20px 0 0 0;
 }
 
 .single-answer-list {

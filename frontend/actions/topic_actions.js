@@ -13,7 +13,9 @@ export const receiveTopics = (topics) => {
 export const receiveSingleTopic = (questions) => {
   return ({
     type: RECEIVE_SINGLE_TOPIC,
-    questions
+    topic_title: questions.title,
+    topic_id: questions.id,
+    questions: questions.questions
   });
 }
 

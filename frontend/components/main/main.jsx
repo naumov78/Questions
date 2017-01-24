@@ -8,6 +8,13 @@ class Main extends React.Component {
     super(props);
   }
 
+
+  componentDidMount() {
+  }
+
+  componentWillReceiveProps(newProps) {
+  }
+
   render() {
     if(this.props.currentUser && this.props.location.pathname !== "/settopics"){
       return (
@@ -16,8 +23,7 @@ class Main extends React.Component {
             <div className="sidebar-container">
               <SideBar currentUser={this.props.currentUser} />
             </div>
-            <div className="feed-container">
-            </div>
+
           </div>
         </div>
       );
@@ -28,3 +34,7 @@ class Main extends React.Component {
 
 
 export default withRouter(Main);
+
+
+// <div className="feed-container">
+// </div>

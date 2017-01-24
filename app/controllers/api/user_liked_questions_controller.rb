@@ -21,6 +21,8 @@ class Api::UserLikedQuestionsController < ApplicationController
     idx = params[:id].to_i
     liked_question = UserLikedQuestion.all.where({user_id: question_params[:user_id]}).where({question_id: question_params[:question_id]})
     @question = liked_question[0].liked_question
+    @topic = @question.topic
+    @topic_questions = @topic.questions
     @user = current_user
     unless liked_question.nil?
       UserLikedQuestion.delete(liked_question)

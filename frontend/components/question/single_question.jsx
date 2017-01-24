@@ -13,10 +13,10 @@ constructor(props) {
 
 componentDidMount() {
   this.getQuestion()
-    if (this.props.question.body === "") {
-      const topicId = this.props.params.topic_id;
-      this.props.router.push(`/topics/${topicId}/questions/`);
-    }
+    // if (this.props.question.body === "") {
+    //   const topicId = this.props.params.topic_id;
+    //   this.props.router.push(`/topics/${topicId}/questions/`);
+    // }
 }
 
 getQuestion() {
@@ -243,6 +243,28 @@ checkLoggedIn(){
   }
 }
 
+cutTitle(str) {
+  if (str.length > 75) {
+    return str.slice(0, 70) + "...";
+  }
+  return str;
+}
+
+getInnerNav() {
+  if (this.props.question.body !== "") {
+    const topic_id = this.props.question.topic_id;
+    const topic_title = this.props.question.topic_title;
+    const quest_id = this.props.question.id;
+    const quest_title = this.cutTitle(this.props.question.body);
+    return (
+    <div className="inner-nav">
+      <Link to={`/topics/${topic_id}/questions`}>{topic_title}</Link>
+      <span>{` >> `}</span><Link to={`/topics/${topic_id}/questions/${quest_id}`}>{quest_title}</Link>
+    </div>
+    );
+  }
+}
+
 render () {
   this.checkLoggedIn();
   let authName, userpic, userId, descr, date, qMon, qDay, qYr;
@@ -259,9 +281,10 @@ render () {
     qYr = date.getFullYear();
   }
 
-  if (!this.state.answer){
+  if (!this.state.answer) {
   return (
     <div className="single-question-container">
+      {this.getInnerNav()}
       <div className="question-part">
         <div className="question-author-info">
           <div className="question-author-userpic">
@@ -290,32 +313,35 @@ render () {
 } else {
   return (
     <div className="single-question-container">
-      <div className="question-author-info">
-        <div className="question-author-userpic">
-          <Link to={`/users/${userId}`}><img src={userpic} /></Link>
-        </div>
-        <div className="question-author-name">
-          <span id="link-auth-name"><Link to={`/users/${userId}`}>{authName}</Link></span>
-          <span className="question-author-descr">, {this.updateDescrLength(descr)}</span>
-          <p className="question-date">asked on {qMon} {qDay} {qYr}</p>
-        </div>
-      </div>
-      <div className="single-question-body">{this.props.question.body}</div>
-      <div className="ans-form">
-        <form className="answer-form" onSubmit={(e) => this.handleCreateAnswer(e)}>
-          <div className="answer-input">
-              <textarea
-              onChange={this.update("answer_body")}
-              className="auth-form-input answer-input"/>
+      {this.getInnerNav()}
+      <div className="question-part">
+        <div className="question-author-info">
+          <div className="question-author-userpic">
+            <Link to={`/users/${userId}`}><img src={userpic} /></Link>
           </div>
+          <div className="question-author-name">
+            <span id="link-auth-name"><Link to={`/users/${userId}`}>{authName}</Link></span>
+            <span className="question-author-descr">, {this.updateDescrLength(descr)}</span>
+            <p className="question-date">asked on {qMon} {qDay} {qYr}</p>
+          </div>
+        </div>
+        <div className="single-question-body">{this.props.question.body}</div>
+        <div className="ans-form">
+          <form className="answer-form" onSubmit={(e) => this.handleCreateAnswer(e)}>
+            <div className="answer-input">
+                <textarea
+                onChange={this.update("answer_body")}
+                className="auth-form-input answer-input"/>
+            </div>
 
-          <div className="answer-buttons">
-              <button onClick={() => this.setState({answer: false})}>Cancel</button>
-              <input className="ans-btn"
-                type="submit"
-                value="Add answer"/>
-          </div>
-        </form>
+            <div className="answer-buttons">
+                <button onClick={() => this.setState({answer: false})}>Cancel</button>
+                <input className="ans-btn"
+                  type="submit"
+                  value="Add answer"/>
+            </div>
+          </form>
+        </div>
       </div>
       <div className="answers-part">
         <div className="answers-2">

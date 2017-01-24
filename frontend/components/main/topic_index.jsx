@@ -6,7 +6,7 @@ import QuestionFormContainer from '../question/question_form_container';
 class TopicIndex extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { questions: {} }
+    this.state = { topic_id: null, topic_title: null, questions: {} }
     this.renderQuestions = this.renderQuestions.bind(this);
   }
 
@@ -16,8 +16,11 @@ class TopicIndex extends React.Component {
   }
 
   getQuestions(id) {
-    this.props.fetchSingleTopic(id).then(({questions}) => {
-      this.setState({ questions: questions })
+    this.props.fetchSingleTopic(id).then((success) => {
+      const topic_id = success.topic_id;
+      const topic_title = success.topic_title;
+      const questions = success.questions;
+      this.setState({ topic_id: topic_id, topic_title: topic_title, questions: questions })
     });
   }
 
@@ -75,17 +78,32 @@ class TopicIndex extends React.Component {
     return likeBtn;
   }
 
+  renderAnswersQuntity(num) {
+    if (typeof num === 'undefined'){
+      return null;
+    } else {
+      if (num === 0) {
+        return 'No answers yet...';
+      } else {
+        return (
+          `Answers: ${num}`
+        );
+      }
+    }
+  }
 
   renderQuestions() {
     const topic_id = parseInt(this.props.params.topic_id);
     if (this.props.questions.length === 0) {
       const topicId = Number(this.props.params.topic_id);
+      const topicTitle = this.state.topic_title;
       return (
-        <div><QuestionFormContainer topicId = {topicId} fromTopic = {true} /></div>
+        <div><QuestionFormContainer topicId = {topicId} topicTitle = {topicTitle} fromTopic = {true} /></div>
       );
     }
     return (
       <div className="topic-questions">
+        {this.getInnerNav()}
         <ul>
           {this.props.questions.map(q => {
             const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -113,7 +131,7 @@ class TopicIndex extends React.Component {
                 </div>
                 <div className="question-stats">
                   <span>{this.getLikeButton(q)}</span>
-                  <span id="topic-ans-num">Answers: {ansNumber}</span>
+                  <span id="topic-ans-num">{this.renderAnswersQuntity(ansNumber)}</span>
                 </div>
               </div>
             </li>
@@ -129,10 +147,22 @@ class TopicIndex extends React.Component {
     }
   }
 
+  getInnerNav() {
+    const id = this.state.topic_id;
+    const title = this.state.topic_title;
+    return (
+    <div className="inner-nav">
+      <Link to={`/topics/${id}/questions`}>{title}</Link>
+    </div>
+    );
+  }
+
   render () {
     this.checkLoggedIn();
     return (
-       <div>{this.renderQuestions()}</div>
+      <div>
+        {this.renderQuestions()}
+      </div>
      );
   }
 

@@ -5,7 +5,9 @@ class Api::TopicsController < ApplicationController
   end
 
   def show
-    @topic = Topic.find(params[:id]).questions.order(created_at: :desc)
+    # @topic = Topic.find(params[:id]).questions.order(created_at: :desc)
+    @topic = Topic.find(params[:id])
+    @topic_questions = Topic.find(params[:id]).questions.order(created_at: :desc)
   end
 
 end
