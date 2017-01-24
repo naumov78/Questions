@@ -5,10 +5,10 @@ import { updateUser } from '../../actions/session_actions';
 
 
 const mapStateToProps = ({ session, user }) => {
-
   return ({
     currentUser: session.currentUser,
     topics: session.currentUser? session.currentUser.topics : [],
+    user: user.user,
     errors: user.errors
   });
 };

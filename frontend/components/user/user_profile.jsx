@@ -6,7 +6,7 @@ import { Link, withRouter } from 'react-router';
 class UserProfile extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { edit: false, first_name: "", last_name: "", description: "", userpicFile: null, userpicUrl: null }
+    this.state = { ownProfile: true, edit: false, first_name: "", last_name: "", description: "", userpicFile: null, userpicUrl: null }
     this.changeToEdit = this.changeToEdit.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
     this.updateFile = this.updateFile.bind(this);
@@ -14,14 +14,16 @@ class UserProfile extends React.Component {
 
 
   componentDidMount() {
-    this.props.fetchUser(this.props.params.id).then(() => this.validateUser());
+    this.props.fetchUser(Number(this.props.params.id))
   }
 
-  validateUser() {
-    if (parseInt(this.props.params.id) !== this.props.currentUser.id) {
-      return this.props.router.push("/")
+
+  componentWillMount() {
+    if (currentUser.id !== Number(this.props.params.id)) {
+      this.setState({ ownProfile: false })
     }
   }
+
 
   update(field) {
     return e => {
@@ -118,14 +120,29 @@ class UserProfile extends React.Component {
   };
 }
 
+  getEditBtn() {
+    if (this.state.ownProfile) {
+      return (
+        <div className="edit-btn">
+           <form onSubmit={this.changeToEdit}>
+             <input type="submit" className="ans-btn" value="Edit" />
+           </form>
+        </div>
+      );
+    } else {
+      return null;
+    }
+
+  }
+
   render() {
-    if (this.state.edit) {
+    if (this.state.edit && this.state.ownProfile) {
       return (
         <div className="uu-form-container">
           <form onSubmit={ this.handleUpdate }
             className="uu-form">
             <div className="userpic-profile">
-              <img src={this.props.currentUser.userpic_url} />
+              <img src={this.props.user.userpic_url} />
               <br />
               <input type="file" onChange={(e) => this.updateFile(e)} />
             </div>
@@ -173,7 +190,7 @@ class UserProfile extends React.Component {
         </div>
       );
     } else {
-      const date = new Date(this.props.currentUser.created_at);
+      const date = new Date(this.props.user.created_at);
       const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
       const qMon = monthNames[date.getMonth()];
       const qDay = date.getDate();
@@ -182,26 +199,22 @@ class UserProfile extends React.Component {
       <div className="ui_container">
         <div className="user-profile">
           <div className="userpic-profile">
-            <img src={this.props.currentUser.userpic_url} />
+            <img src={this.props.user.userpic_url} />
           </div>
           <br />
           <div className="user-info-profile">
             <div className="user-name">
-              <p>{this.props.currentUser.first_name}&nbsp;&nbsp;{this.props.currentUser.last_name}</p>
+              <p>{this.props.user.first_name}&nbsp;&nbsp;{this.props.user.last_name}</p>
             </div>
             <div className="user-descr">
-              <p>{this.props.currentUser.description}</p>
+              <p>{this.props.user.description}</p>
             </div>
             <div className="user-since">
               <p>Member since {qMon} {qDay} {qYr}</p>
             </div>
           </div>
         </div>
-        <div className="edit-btn">
-           <form onSubmit={this.changeToEdit}>
-             <input type="submit" className="ans-btn" value="Edit" />
-           </form>
-        </div>
+          {this.getEditBtn()}
       </div>
         );
       }
