@@ -56,3 +56,12 @@ export const dislikeAnswer = (user_id, answer_id) => {
     data: {user_liked_answer: {user_id: user_id, answer_id: answer_id}}
   });
 };
+
+
+export const createComment = (new_comment) => {
+  return $.ajax({
+    method: "POST",
+    url: 'api/comments',
+    data: {comment: {answer_id: new_comment.answer_id, body: new_comment.body}}
+  });
+};

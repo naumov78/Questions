@@ -16,7 +16,6 @@ getIndexTopics() {
 
 getIndexQuestions() {
   const topics = this.getIndexTopics();
-  debugger
   const questions = [];
   topics.forEach((topic) => {
     for (let i = 0; i < topic.index_questions.length && i < 3; i++) {
@@ -93,7 +92,6 @@ renderIndexQuestions() {
         const now = new Date();
         const authName = q.auth_first_name + ' ' + q.auth_last_name;
         const ansNumber = q.answers.length;
-        debugger
 
         return (
           <li key={q.id}>

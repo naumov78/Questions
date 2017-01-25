@@ -1,0 +1,111 @@
+// Place all the styles related to the Api::Comments controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.comments-container {
+  padding-bottom: 15px;
+}
+
+.comments {
+  width: 650px;
+  max-height: 400px;
+  overflow-y: auto;
+  margin-left: -50px;
+  border: 1px solid #e2e2e2;
+  border-radius: 5px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 10px;
+  font-size: 12px;
+}
+
+.comment-form-container {
+
+}
+
+.comment-form {
+
+}
+
+.add-comment-btn {
+  position: absolute;
+  left: 420px;
+  top: 59px;
+  // float: left;
+
+  input {
+  }
+}
+
+.comment-input {
+  position: relative;
+  width: 530px;
+
+  textarea {
+    // float: left;
+    width: 400px;
+    height: 70px;
+  }
+}
+
+.comment-input {
+
+}
+
+.comments-list {
+
+}
+
+.single-comment {
+  border-top: 1px solid #e2e2e2;
+  padding: 5px;
+  box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.2);
+  margin-top: 8px;
+  border-radius: 3px;
+
+}
+
+.single-comment:last-child {
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.author-info {
+  font-size: 13px;
+  color: #999;
+  display: inline-block;
+  border-bottom: 1px solid #e2e2e2;
+  padding-bottom: 3px;
+
+  img {
+    display: block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid;
+    border-radius: 50%;
+  }
+
+  #comment-userpic {
+    float: left;
+  }
+
+  #comment-author {
+    float: left;
+    padding: 4px 0 0 6px;
+  }
+
+  #comment-author:hover {
+    color: #b82b28;
+    text-decoration: underline;
+  }
+
+  #comment-date {
+    float: left;
+    padding: 4px 0 0 3px;
+  }
+
+}
+
+.comment-boby {
+  padding: 5px 0 5px 0;
+
+}

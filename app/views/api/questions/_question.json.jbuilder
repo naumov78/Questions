@@ -1,3 +1,4 @@
+
 json.extract! question, :id, :author_id, :body, :topic_id, :views, :rating, :answers, :created_at
 json.extract! user, :first_name, :last_name, :description
 json.author_userpic_url asset_path(user.userpic.url)
@@ -12,4 +13,11 @@ json.liked_users question.liked_users
     json.ans_auth_descr answer.user.description
     json.ans_auth_userpic_url asset_path(answer.user.userpic.url)
     json.liked_users answer.liked_users
+
+    json.comments answer.comments do |comment|
+      json.extract! comment, :id, :author_id, :body, :created_at
+      json.author comment.author
+      json.author_userpic_url asset_path(comment.author.userpic.url)
+    end
+
   end

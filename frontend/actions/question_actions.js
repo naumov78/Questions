@@ -88,3 +88,12 @@ export const dislikeAnswer = (user_id, answer_id) => {
     });
   }
 }
+
+
+export const createComment = (new_comment) => {
+  return (dispatch) => {
+    return APIUtil.createComment(new_comment).then((question) => {
+      return dispatch(receiveSingleQuestion(question))
+    });
+  }
+}

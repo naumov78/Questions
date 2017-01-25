@@ -26,7 +26,6 @@ class Main extends React.Component {
   }
 
   render() {
-    debugger
     if(this.props.currentUser && this.props.location.pathname !== "/settopics"){
       return (
         <div className="page-wraper">

@@ -7,7 +7,7 @@ class SingleQuestion extends React.Component {
 
 constructor(props) {
   super(props);
-  this.state = { answer: false, answer_body: "" };
+  this.state = { answer: false, answer_body: "", showComments: 0, addComment: false, commentBody: "eee" };
 }
 
 
@@ -38,6 +38,7 @@ componentWillMount() {
 
 componentWillUnmount() {
 }
+
 
 update(field) {
   return e => this.setState({
@@ -165,6 +166,113 @@ sortByKey(array, key) {
   });
 }
 
+// comments
+
+getComments(ans) {
+  if (this.state.showComments === ans.id) {
+    const comments = ans.comments;
+    this.sortByKey(comments, 'created_at');
+    const id = ans.id
+    if (ans.comments.length === 0) {
+      return (
+        <div className="comments">
+        {this.renderAddCommentForm(id)}
+        {`No comments yet...`}
+      </div>
+    );
+    }
+    return (
+      <div className="comments">
+        {this.renderAddCommentForm(id)}
+        <ul className="comments-list">
+          {comments.map((comment, i) => {
+            const author = comment.author.first_name + ' ' + comment.author.last_name;
+            const userpic = comment.author_userpic_url;
+            const now = new Date();
+            return (
+            <li key={(i + 5) * new Date()} className="single-comment">
+              <div className="author-info">
+                <Link to={`users/${comment.author_id}`} id="comment-userpic"><img src={userpic} /></Link>
+                <Link to={`users/${comment.author_id}`} id="comment-author">{author}</Link>
+                <span id="comment-date">{this.getDate(comment, now, "left a comment")}</span>
+              </div>
+              <div className="comment-boby">{comment.body}</div>
+            </li>
+          );
+          })}
+        </ul>
+      </div>
+    );
+  } else {
+    return null;
+  }
+}
+
+renderAddCommentForm(id) {
+  if (this.state.addComment) {
+    return (
+      <div className="comment-form-container">
+        <form className="comment-form" onSubmit={(e) => this.handleCreateComment(e, id)}>
+          <div className="comment-input">
+            <textarea autoFocus={true}
+              onChange={this.update("commentBody")}
+              value={this.state.commentBody}
+              className="auth-form-input comment-input"/>
+            <span className="add-comment-btn">
+              <input className="ans-btn"
+                type="submit"
+                value="Add comment"/>
+            </span>
+          </div>
+        </form>
+      </div>
+    )
+  } else {
+    return null;
+  }
+}
+// <button onClick={() => this.setState({commentBody: ""})}>Clear</button>
+
+getCommentsNumber(ans) {
+  const num = ans.comments.length;
+  if (num === 0) {
+    return null;
+  } else if (num > 999) {
+    return (<span className="comments-count">{`999+`}</span>);
+  }
+  return (<span className="comments-count">{num}</span>);
+}
+
+toggleComments(id) {
+  if (this.state.showComments === id) {
+    return this.setState({ showComments: 0, addComment: false })
+  } else {
+    return this.setState({ showComments: id, addComment: false })
+  }
+}
+
+toggleAddComment(id) {
+  if (this.state.showComments === id && !this.state.addComment) {
+    return this.setState({ addComment: true, commentBody: "", answer: false})
+  } else if (this.state.showComments !== id && !this.state.addComment) {
+    return this.setState({ showComments: id, addComment: true, commentBody: "", answer: false })
+  } else if (this.state.showComments === id && this.state.addComment) {
+    return this.setState({ addComment: false })
+  } else if (this.state.showComments !== id && this.state.addComment) {
+    return this.setState({ showComments: id, addComment: true, commentBody: "", answer: false })
+  }
+}
+
+
+handleCreateComment(e, id) {
+  e.preventDefault();
+  const newComment = { answer_id: id, body: this.state.commentBody }
+  this.props.createComment(newComment).then(() => {
+    this.setState({ showComments: id, addComment: false })
+  });
+}
+
+
 renderAnswers() {
   if (typeof this.props.answers === 'undefined'){
     return null;
@@ -172,7 +280,6 @@ renderAnswers() {
     this.sortByKey(this.props.answers, "created_at");
     return (
       <div>
-
         <ul className="answers-list">
             {this.props.answers.map((ans, i) => {
               const author = ans.ans_auth_first_name + ' ' + ans.ans_auth_last_name;
@@ -183,17 +290,19 @@ renderAnswers() {
                   <div className="single-answer-list">
                     <div className="ans-date">
                       <div className="auth-answer-pic"><Link to={`/users/${ans.author_id}`}><img src={ans.ans_auth_userpic_url} /></Link></div>
-                      <p className="ans-date"><span id="ans-auth"><Link to={`/users/${ans.author_id}`}>{author}</Link></span>{this.getAnswerDate(ans, now)}</p>
+                      <p className="ans-date"><span id="ans-auth"><Link to={`/users/${ans.author_id}`}>{author}</Link></span>{this.getDate(ans, now, "wrote")}</p>
                     </div>
                     <div className="answer-body">
                       {ans.body}
                     </div>
                     <div className="questions-attr">
                       {this.getAnswerLikeButton(singleAnswer)}
-                      <button className="attt-links">Comments</button>
-                      <button className="comments-count">{Math.ceil(this.props.params.topic_id/2-i)}+</button>
+                      <button className="attt-links" onClick={() => this.toggleComments(ans.id)}>Comments</button>
+                      {this.getCommentsNumber(ans)}
+                      <button className="attt-links" onClick={() => this.toggleAddComment(ans.id)}>Add comment</button>
                     </div>
                   </div>
+                  <div className="comments-container">{this.getComments(ans)}</div>
                 </li>
               );
             })}
@@ -203,24 +312,20 @@ renderAnswers() {
   }
 }
 
-getRandomTen() {
-  return Math.ceil(Math.random()*10)
-}
-
-getRandomHundred() {
-  return Math.ceil(Math.random()*100)
-}
 
 handleCreateAnswer(e) {
   e.preventDefault();
   const topic_id = parseInt(this.props.params.topic_id);
   const question_id = parseInt(this.props.params.question_id);
   const newAnswer = {question_id: question_id, author_id: this.props.currentUser.id, body: this.state.answer_body }
+
   this.setState({answer: false});
   this.props.createAnswer(newAnswer, topic_id).then(() => {
     this.getQuestion();
   });
 }
+
+
 
 goToUserProfile(e) {
   e.preventDefault();
@@ -264,61 +369,34 @@ getInnerNav() {
   }
 }
 
-getAnswerDate(answer, now) {
+getDate(obj, now, str) {
   const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  const date = new Date(answer.created_at);
+  const date = new Date(obj.created_at);
   const qMon = monthNames[date.getMonth()];
   const qDay = date.getDate();
   const qYr = date.getFullYear()
   const dif = Math.floor((now - date) / 1000);
   if (dif < 30) {
-    return ' wrote just now'
+    return ` ${str} just now`
   } else if (dif < 60) {
-    return ' wrote less than a minute ago'
+    return ` ${str} less than a minute ago`
   } else if (dif < 120) {
-    return ' wrote less than 2 minutes ago'
+    return ` ${str} less than 2 minutes ago`
   } else if (dif < 300) {
-    return ' wrote less than 5 minutes ago'
+    return ` ${str} less than 5 minutes ago`
   } else if (dif < 600) {
-    return ' wrote less than 10 minutes ago'
+    return ` ${str} less than 10 minutes ago`
   } else if (dif < 3600) {
-    return ' wrote less than an hour ago'
+    return ` ${str} less than an hour ago`
   } else if (dif < 86400) {
-    return ' wrote today'
+    return ` ${str} today`
   } else if (dif < 172800) {
-    return ' wrote yesterday'
+    return ` ${str} yesterday`
   } else {
-    return ` wrote on ${qMon} ${qDay} ${qYr}`
+    return ` ${str} on ${qMon} ${qDay} ${qYr}`
   }
 }
 
-getQuestionDate(question, now) {
-  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  const date = new Date(question.created_at);
-  const qMon = monthNames[date.getMonth()];
-  const qDay = date.getDate();
-  const qYr = date.getFullYear()
-  const dif = Math.floor((now - date) / 1000);
-  if (dif < 30) {
-    return 'asked just now'
-  } else if (dif < 60) {
-    return 'asked less than a minute ago'
-  } else if (dif < 120) {
-    return 'asked less than 2 minutes ago'
-  } else if (dif < 300) {
-    return 'asked less than 5 minutes ago'
-  } else if (dif < 600) {
-    return 'asked less than 10 minutes ago'
-  } else if (dif < 3600) {
-    return 'asked less than an hour ago'
-  } else if (dif < 86400) {
-    return 'asked today'
-  } else if (dif < 172800) {
-    return 'asked yesterday'
-  } else {
-    return `asked on ${qMon} ${qDay} ${qYr}`
-  }
-}
 
 render () {
   this.checkLoggedIn();
@@ -344,12 +422,12 @@ render () {
           <div className="question-author-name">
             <span id="link-auth-name"><Link to={`/users/${userId}`}>{authName}</Link></span>
             <span className="question-author-descr">, {this.updateDescrLength(descr)}</span>
-            <p className="question-date">{this.getQuestionDate(this.props.question, now)}</p>
+            <p className="question-date">{this.getDate(this.props.question, now, "asked")}</p>
           </div>
         </div>
         <div className="single-question-body">{this.props.question.body}</div>
         <div className="question-buttons">
-          <button className="ans-btn" onClick={() => this.setState({answer: true})}>Add answer</button>
+          <button className="ans-btn" onClick={() => this.setState({answer: true, addComment: false})}>Add answer</button>
           {this.getLikeButton(this.state.question)}
           <span className="ans-number">{this.renderAnswersQuntity()}</span>
         </div>
@@ -381,7 +459,7 @@ render () {
         <div className="ans-form">
           <form className="answer-form" onSubmit={(e) => this.handleCreateAnswer(e)}>
             <div className="answer-input">
-                <textarea
+                <textarea autoFocus={true}
                 onChange={this.update("answer_body")}
                 className="auth-form-input answer-input"/>
             </div>

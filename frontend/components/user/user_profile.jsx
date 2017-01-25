@@ -149,7 +149,7 @@ class UserProfile extends React.Component {
             <br />
             <div className="uu-input">
               <label className="uu-field-title">First Name</label>
-              <input
+              <input 
                 className="auth-form-input"
                 type="text"
                 value={`${this.state.first_name}`}

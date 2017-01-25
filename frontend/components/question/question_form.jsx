@@ -91,7 +91,7 @@ class QuestionForm extends React.Component {
       {this.showMessage()}
       <form id="ask-question-form" onSubmit={this.handleSubmit} className="create-question-form">
         <div className="question-input">
-          <textarea
+          <textarea autoFocus={true}
           onChange={this.update("body")}
           className="auth-form-input answer-input"/>
         </div>
@@ -118,7 +118,7 @@ class QuestionForm extends React.Component {
         {this.showMessage()}
         <form id="ask-question-form" onSubmit={this.handleSubmit} className="create-question-form">
           <div className="question-input">
-            <textarea
+            <textarea autoFocus={true}
             onChange={this.update("body")}
             className="auth-form-input answer-input"/>
           </div>

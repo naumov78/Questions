@@ -49,6 +49,10 @@ class User < ActiveRecord::Base
   has_many :user_liked_answers, inverse_of: :user
   has_many :liked_answers, through: :user_liked_answers
 
+  has_many :comments,
+  class_name: "Comment",
+  primary_key: :id,
+  foreign_key: :author_id
 
 
   attr_reader :password
