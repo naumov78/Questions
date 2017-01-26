@@ -4,14 +4,17 @@
 
 
 .comments-container {
+  position: relative;
   padding-bottom: 15px;
+  z-index: 1;
 }
 
 .comments {
+
   width: 550px;
   max-height: 400px;
   overflow-y: auto;
-  // margin-left: -50px;
+  // margin-left: -200px;
   // border: 1px solid #bbcadc;
   border: 1px solid #dde5ee;
   border-radius: 5px;

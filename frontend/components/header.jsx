@@ -26,7 +26,6 @@ class Header extends React.Component {
   // }
 
 
-
   render() {
     if(this.props.currentUser && this.props.location.pathname !== "/settopics"){
       return (

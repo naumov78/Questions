@@ -3,8 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-.topic-question-container {
-}
+
 
 .topic-questions {
   float: left;
@@ -14,6 +13,9 @@
 
 }
 
+
+.topic-question-container {
+}
 
 .single-q-list {
   border-bottom: 1px solid #e2e2e2;
@@ -31,6 +33,7 @@
 
 .question-stats {
   padding: 13px 0 0 0;
+  position: relative;
 }
 
 
@@ -49,3 +52,59 @@
 .downvote-link:hover {
   text-decoration: underline;
 }
+
+
+.quick-ans-container {
+  position: absolute;
+  top: -55px;
+  left: 510px;
+  width: 360px;
+  border: 1px solid #dde5ee;
+  border-radius: 5px;
+  box-shadow: 0px 8px 16px 0px rgba(187,202,220,0.2);
+  padding: 10px;
+  z-index: 1;
+}
+
+.quick-answer {
+
+  form {
+  }
+
+  textarea {
+    width: 353px;
+    height: 100px;
+    font-size: 13px;
+  }
+
+  input {
+    float:right;
+  }
+
+}
+
+.add-quick-ans-btn {
+  float: right;
+  font-size: 12px;
+}
+
+#not-active-quickans {
+  float: right;
+  font-size: 12px;
+}
+
+.invisible {
+  display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+//

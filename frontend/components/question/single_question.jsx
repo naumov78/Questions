@@ -7,12 +7,14 @@ class SingleQuestion extends React.Component {
 
 constructor(props) {
   super(props);
-  this.state = { answer: false, answer_body: "", showComments: 0, addComment: false, commentBody: "eee" };
+  this.state = { answer: false, answer_body: "", showComments: 0, addComment: false, commentBody: "" };
 }
 
 
+
+
 componentDidMount() {
-  this.getQuestion()
+
     // if (this.props.question.body === "") {
     //   const topicId = this.props.params.topic_id;
     //   this.props.router.push(`/topics/${topicId}/questions/`);
@@ -20,8 +22,9 @@ componentDidMount() {
 }
 
 getQuestion() {
-  const question_data = {topic_id: this.props.params.topic_id , question_id: this.props.params.question_id };
-  this.props.fetchSingleQuestion({question_data})
+  const question_data = {topic_id: this.props.params.topic_id, question_id: this.props.params.question_id };
+  this.props.fetchSingleQuestion({question_data});
+  this.props.fetchAnswers(this.props.params.topic_id, this.props.params.question_id);
 }
 
 
@@ -35,6 +38,7 @@ componentDidUpdate() {
 }
 
 componentWillMount() {
+  this.getQuestion()
 }
 
 componentWillUnmount() {
@@ -146,14 +150,14 @@ getAnswerLikeButton(answer) {
 
 
 renderAnswersQuntity() {
-  if (typeof this.props.answers === 'undefined'){
+  if (typeof this.props.question.answers === 'undefined'){
     return null;
   } else {
-    if (this.props.answers.length === 0) {
+    if (this.props.question.answers.length === 0) {
       return 'No answers yet...';
     } else {
       return (
-        `Answers: ${this.props.answers.length}`
+        `Answers: ${this.props.question.answers.length}`
       );
     }
   }
@@ -276,14 +280,14 @@ handleCreateComment(e, id) {
 
 
 renderAnswers() {
-  if (typeof this.props.answers === 'undefined'){
+  if (typeof this.props.question.answers === 'undefined'){
     return null;
   } else {
-    this.sortByKey(this.props.answers, "created_at");
+    this.sortByKey(this.props.question.answers, "created_at");
     return (
       <div>
         <ul className="answers-list">
-            {this.props.answers.map((ans, i) => {
+            {this.props.question.answers.map((ans, i) => {
               const author = ans.ans_auth_first_name + ' ' + ans.ans_auth_last_name;
               const singleAnswer = ans;
               const now = new Date();
@@ -321,8 +325,9 @@ handleCreateAnswer(e) {
   const question_id = parseInt(this.props.params.question_id);
   const newAnswer = {question_id: question_id, author_id: this.props.currentUser.id, body: this.state.answer_body }
 
-  this.setState({answer: false});
+
   this.props.createAnswer(newAnswer, topic_id).then(() => {
+    this.setState({answer: false});
     this.getQuestion();
   });
 }

@@ -17,7 +17,7 @@ export const fetchSingeleAnswer = (answer) => {
   });
 }
 
-export const fetchAnswers = (question_id) => {
+export const fetchAnswers = (topic_id, question_id) => {
   return $.ajax({
     method: "GET",
     url: `/api/topics/${topic_id}/questions/${question_id}/answers`

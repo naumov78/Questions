@@ -47,9 +47,9 @@ export const fetchSingleAnswer = (answer_data) => {
   }
 }
 
-export const fetchAnswers = (question_id) => {
+export const fetchAnswers = (topic_id, question_id) => {
   return (dispatch) => {
-    return APIUtil.fetchAnswers(question_id).then((result) => {
+    return APIUtil.fetchAnswers(topic_id, question_id).then((result) => {
       return dispatch(receiveAnswers(result))
     });
   }
