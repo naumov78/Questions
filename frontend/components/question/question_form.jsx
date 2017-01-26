@@ -84,6 +84,13 @@ class QuestionForm extends React.Component {
     }
   }
 
+  getAddBtn(field, value) {
+    if (field.length > 0) {
+      return <input className="ans-btn" type="submit" value={value}/>
+    }
+    return <button className="not-active-btn">{value}</button>
+  }
+
   render() {
     if (this.state.showMenu === false) {
     return (
@@ -92,6 +99,7 @@ class QuestionForm extends React.Component {
       <form id="ask-question-form" onSubmit={this.handleSubmit} className="create-question-form">
         <div className="question-input">
           <textarea autoFocus={true}
+          placeholder="Start writing your question"
           onChange={this.update("body")}
           className="auth-form-input answer-input"/>
         </div>
@@ -104,9 +112,7 @@ class QuestionForm extends React.Component {
             <button className="ans-btn" onClick={() => this.setState({showMenu: true})}>Change Topic</button>
           </div>
           <div id="add-question" className="answer-buttons">
-            <input type="submit"
-              className="ans-btn"
-              value="Ask Question" />
+            {this.getAddBtn(this.state.body, 'Ask Question')}
           </div>
         </div>
       </form>
@@ -119,6 +125,7 @@ class QuestionForm extends React.Component {
         <form id="ask-question-form" onSubmit={this.handleSubmit} className="create-question-form">
           <div className="question-input">
             <textarea autoFocus={true}
+            placeholder="Start writing your question"
             onChange={this.update("body")}
             className="auth-form-input answer-input"/>
           </div>
@@ -126,9 +133,7 @@ class QuestionForm extends React.Component {
           <div className="button-part">
             <div className="dd-topic">{this.getTopics()}</div>
             <div id="add-question" className="answer-buttons">
-              <input type="submit"
-                className="ans-btn"
-                value="Ask Question" />
+              {this.getAddBtn(this.state.body, 'Ask Question')}
             </div>
           </div>
         </form>

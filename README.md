@@ -28,9 +28,9 @@ Page view
 
 
 ### To-Do
-* [ ] Index view for User
+* [x] Index view for User
 * [x] Rendering question/answer author
-* [ ] Add comments on answers
+* [x] Add comments on answers
 * [x] Add upvote/downvote
 * [ ] Add question search
 * [ ] Rendering question/answers views and rating

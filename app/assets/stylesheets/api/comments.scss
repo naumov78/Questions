@@ -8,24 +8,33 @@
 }
 
 .comments {
-  width: 650px;
+  width: 550px;
   max-height: 400px;
   overflow-y: auto;
-  margin-left: -50px;
-  border: 1px solid #e2e2e2;
+  // margin-left: -50px;
+  // border: 1px solid #bbcadc;
+  border: 1px solid #dde5ee;
   border-radius: 5px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(187,202,220,0.2);
+  // box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   padding: 10px;
   font-size: 12px;
+  background: #f1f8fb;
+
 }
 
 .comment-form-container {
+  background: #ffffff;
 
 }
 
 .comment-form {
-
+  box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.2);
+  padding: 8px 0 5px 8px;
+  border-radius: 3px;
 }
+
+
 
 .add-comment-btn {
   position: absolute;
@@ -45,6 +54,7 @@
     // float: left;
     width: 400px;
     height: 70px;
+    font-size: 13px;
   }
 }
 
@@ -53,15 +63,19 @@
 }
 
 .comments-list {
-
+  background: #e6f2ff;
 }
 
 .single-comment {
   border-top: 1px solid #e2e2e2;
-  padding: 5px;
-  box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.2);
-  margin-top: 8px;
+  border-left: 1px solid #f2f2f2;
+  padding: 8px 15px 8px 15px;
+  // box-shadow: 2px 2px 2px 0px rgba(187,202,220,0.2);
+  box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.2);
+  // background: #f2f2f2;
+  margin-top: 5px;
   border-radius: 3px;
+  background: #ffffff;
 
 }
 
@@ -75,6 +89,8 @@
   display: inline-block;
   border-bottom: 1px solid #e2e2e2;
   padding-bottom: 3px;
+  border-color: #dde5ee;
+
 
   img {
     display: block;
@@ -106,6 +122,6 @@
 }
 
 .comment-boby {
-  padding: 5px 0 5px 0;
+  padding: 5px 0 5px 5px;
 
 }

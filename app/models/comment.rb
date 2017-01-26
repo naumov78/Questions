@@ -12,6 +12,9 @@
 
 class Comment < ActiveRecord::Base
 
+
+  validates :body, length: { minimum: 1 }
+
   belongs_to :author,
   class_name: "User",
   primary_key: :id,

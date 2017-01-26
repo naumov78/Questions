@@ -96,13 +96,13 @@ img {
 
 
 
-  button {
+  .cancel-button {
     color: #2b6dad;
     font-size: 14px;
     padding: 0 20px 0 0;
   }
 
-  button:hover {
+  .cancel-button:hover {
     text-decoration: underline;
   }
 }
@@ -252,6 +252,14 @@ img {
   // font-size: 12px;
 }
 
+.not-active-btn {
+  border: 1px solid #a6a6a6;
+  background: #f2f2f2;
+  border-radius: 3px;
+  font-weight: 400;
+  padding: 3px 7px 4px 7px;
+  color: #a6a6a6;
+}
 
 #vote-btn {
   margin: 0 0 0 20px;

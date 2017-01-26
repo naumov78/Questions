@@ -21,8 +21,9 @@ componentDidMount() {
 
 getQuestion() {
   const question_data = {topic_id: this.props.params.topic_id , question_id: this.props.params.question_id };
-  this.props.fetchSingleQuestion({question_data});
+  this.props.fetchSingleQuestion({question_data})
 }
+
 
 componentWillReceiveProps(nextProps) {
   if (this.props !== nextProps) {
@@ -177,7 +178,7 @@ getComments(ans) {
       return (
         <div className="comments">
         {this.renderAddCommentForm(id)}
-        {`No comments yet...`}
+        <div className="single-comment">{`No comments yet...`}</div>
       </div>
     );
     }
@@ -215,13 +216,12 @@ renderAddCommentForm(id) {
         <form className="comment-form" onSubmit={(e) => this.handleCreateComment(e, id)}>
           <div className="comment-input">
             <textarea autoFocus={true}
+              placeholder='Start writing your comment'
               onChange={this.update("commentBody")}
               value={this.state.commentBody}
               className="auth-form-input comment-input"/>
             <span className="add-comment-btn">
-              <input className="ans-btn"
-                type="submit"
-                value="Add comment"/>
+              {this.getAddBtn(this.state.commentBody, 'Add comment')}
             </span>
           </div>
         </form>
@@ -231,16 +231,18 @@ renderAddCommentForm(id) {
     return null;
   }
 }
-// <button onClick={() => this.setState({commentBody: ""})}>Clear</button>
+
 
 getCommentsNumber(ans) {
-  const num = ans.comments.length;
-  if (num === 0) {
-    return null;
-  } else if (num > 999) {
-    return (<span className="comments-count">{`999+`}</span>);
+  if (typeof ans.comments !== 'undefined') {
+    const num = ans.comments.length;
+    if (num === 0) {
+      return null;
+    } else if (num > 999) {
+      return (<span className="comments-count">{`999+`}</span>);
+    }
+    return (<span className="comments-count">{num}</span>);
   }
-  return (<span className="comments-count">{num}</span>);
 }
 
 toggleComments(id) {
@@ -253,13 +255,13 @@ toggleComments(id) {
 
 toggleAddComment(id) {
   if (this.state.showComments === id && !this.state.addComment) {
-    return this.setState({ addComment: true, commentBody: "", answer: false})
+    return this.setState({ addComment: true, commentBody: "", answer: false, answer_body: ""})
   } else if (this.state.showComments !== id && !this.state.addComment) {
-    return this.setState({ showComments: id, addComment: true, commentBody: "", answer: false })
+    return this.setState({ showComments: id, addComment: true, commentBody: "", answer: false, answer_body: ""})
   } else if (this.state.showComments === id && this.state.addComment) {
     return this.setState({ addComment: false })
   } else if (this.state.showComments !== id && this.state.addComment) {
-    return this.setState({ showComments: id, addComment: true, commentBody: "", answer: false })
+    return this.setState({ showComments: id, addComment: true, commentBody: "", answer: false, answer_body: ""})
   }
 }
 
@@ -398,6 +400,13 @@ getDate(obj, now, str) {
 }
 
 
+getAddBtn(field, value) {
+  if (field.length > 0) {
+    return <input className="ans-btn" type="submit" value={value}/>
+  }
+  return <button className="not-active-btn">{value}</button>
+}
+
 render () {
   this.checkLoggedIn();
   let authName, userpic, userId, descr, now;
@@ -460,15 +469,14 @@ render () {
           <form className="answer-form" onSubmit={(e) => this.handleCreateAnswer(e)}>
             <div className="answer-input">
                 <textarea autoFocus={true}
+                  placeholder="Start writing your answer"
                 onChange={this.update("answer_body")}
                 className="auth-form-input answer-input"/>
             </div>
 
             <div className="answer-buttons">
-                <button onClick={() => this.setState({answer: false})}>Cancel</button>
-                <input className="ans-btn"
-                  type="submit"
-                  value="Add answer"/>
+                <button className="cancel-button" onClick={() => this.setState({answer: false, answer_body: ""})}>Cancel</button>
+                {this.getAddBtn(this.state.answer_body, 'Add answer')}
             </div>
           </form>
         </div>
