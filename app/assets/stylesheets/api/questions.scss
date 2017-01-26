@@ -82,6 +82,10 @@ img {
     height: 100px;
   }
 
+  textarea:focus {
+    border-color: #577ba8;
+  }
+
   input[type="text"] {
     width: 500px;
     height: 200px;
@@ -295,6 +299,10 @@ img {
     height: 100px;
   }
 
+  textarea:focus {
+    border-color: #577ba8;
+  }
+
 }
 
 .create-question-container {
@@ -346,4 +354,34 @@ img {
 
 #add-question {
   float: right;
+}
+
+.test-answer-quantity {
+  width: 500px;
+  margin-top: 10px;
+  background: #577ba8;
+  padding: 3px 0 3px 5px;
+  // border-bottom-left-radius: 25%;
+  // border-bottom-right-radius: 25%;
+  text-align: center;
+}
+
+.test-answer-quantity-light {
+  width: 500px;
+  margin-top: 10px;
+  background: #f2f2f2;
+  padding: 3px 0 3px 5px;
+  // border-bottom-left-radius: 25%;
+  // border-bottom-right-radius: 25%;
+  text-align: center;
+}
+
+.test-ans-number {
+  font-size: 12px;
+  color: #f1f8fb;
+}
+
+.test-ans-number-light {
+  font-size: 12px;
+  color: #577ba8;
 }

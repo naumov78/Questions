@@ -59,6 +59,10 @@
     height: 70px;
     font-size: 13px;
   }
+
+  textarea:focus {
+    border-color: #577ba8;
+  }
 }
 
 .comment-input {
@@ -72,7 +76,7 @@
 .single-comment {
   border-top: 1px solid #e2e2e2;
   border-left: 1px solid #f2f2f2;
-  padding: 8px 15px 8px 15px;
+  padding: 5px;
   // box-shadow: 2px 2px 2px 0px rgba(187,202,220,0.2);
   box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.2);
   // background: #f2f2f2;
@@ -84,6 +88,13 @@
 
 .single-comment:last-child {
   border-bottom: 1px solid #e2e2e2;
+}
+
+.comment-data {
+  border: 1px solid #dde5ee;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+  padding: 5px;
 }
 
 .author-info {
@@ -126,5 +137,8 @@
 
 .comment-boby {
   padding: 5px 0 5px 5px;
+}
 
+.comment-like-buttons {
+  padding-top: 5px;
 }

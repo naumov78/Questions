@@ -54,7 +54,10 @@ class User < ActiveRecord::Base
   primary_key: :id,
   foreign_key: :author_id
 
+  has_many :user_liked_comments
+  has_many :liked_comments, through: :user_liked_comments
 
+# , inverse_of: :user
   attr_reader :password
 
   after_initialize :ensure_session_token

@@ -18,6 +18,7 @@ json.liked_users question.liked_users
       json.extract! comment, :id, :author_id, :body, :created_at
       json.author comment.author
       json.author_userpic_url asset_path(comment.author.userpic.url)
+      json.liked_users comment.liked_users
     end
 
   end

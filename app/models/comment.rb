@@ -22,5 +22,10 @@ class Comment < ActiveRecord::Base
 
   belongs_to :answer
 
+  has_many :user_liked_comments
+  has_many :liked_users, through: :user_liked_comments
 
 end
+
+
+# , inverse_of: :comment

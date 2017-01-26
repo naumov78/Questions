@@ -24,9 +24,8 @@ componentDidMount() {
 getQuestion() {
   const question_data = {topic_id: this.props.params.topic_id, question_id: this.props.params.question_id };
   this.props.fetchSingleQuestion({question_data});
-  this.props.fetchAnswers(this.props.params.topic_id, this.props.params.question_id);
+  // this.props.fetchAnswers(this.props.params.topic_id, this.props.params.question_id);
 }
-
 
 componentWillReceiveProps(nextProps) {
   if (this.props !== nextProps) {
@@ -150,18 +149,25 @@ getAnswerLikeButton(answer) {
 
 
 renderAnswersQuntity() {
-  if (typeof this.props.question.answers === 'undefined'){
+  if (typeof this.props.answers === 'undefined'){
     return null;
   } else {
-    if (this.props.question.answers.length === 0) {
-      return 'No answers yet...';
+    if (this.props.answers.length === 0) {
+      return (
+      <div className="test-answer-quantity-light">
+        <span className="test-ans-number-light">No answers yet...</span>
+      </div>
+      );
     } else {
       return (
-        `Answers: ${this.props.question.answers.length}`
+        <div className="test-answer-quantity">
+          <span className="test-ans-number">{`Answers: ${this.props.answers.length}`}</span>
+      </div>
       );
     }
   }
 }
+
 
 sortByKey(array, key) {
   return array.sort((a, b) => {
@@ -196,12 +202,15 @@ getComments(ans) {
             const now = new Date();
             return (
             <li key={(i + 5) * new Date()} className="single-comment">
-              <div className="author-info">
-                <Link to={`users/${comment.author_id}`} id="comment-userpic"><img src={userpic} /></Link>
-                <Link to={`users/${comment.author_id}`} id="comment-author">{author}</Link>
-                <span id="comment-date">{this.getDate(comment, now, "left a comment")}</span>
+              <div className="comment-data">
+                <div className="author-info">
+                  <Link to={`users/${comment.author_id}`} id="comment-userpic"><img src={userpic} /></Link>
+                  <Link to={`users/${comment.author_id}`} id="comment-author">{author}</Link>
+                  <span id="comment-date">{this.getDate(comment, now, "left a comment")}</span>
+                </div>
+                <div className="comment-boby">{comment.body}</div>
               </div>
-              <div className="comment-boby">{comment.body}</div>
+              <div className="comment-like-buttons">{this.getCommentLikeButton(comment)}</div>
             </li>
           );
           })}
@@ -279,15 +288,68 @@ handleCreateComment(e, id) {
 }
 
 
+
+// comments likes
+
+addCommentLike(comment) {
+  debugger
+  this.props.likeComment(comment.id).then(() => {
+    this.getQuestion();
+  });
+}
+
+dislikeComment(comment) {
+  debugger
+  this.props.dislikeComment(comment.id).then(() => {
+    this.getQuestion();
+  });
+}
+
+checkIfCommentLiked(comment) {
+if (comment.liked_users && comment.liked_users.length !== 0) {
+  for (let i = 0; i < comment.liked_users.length; i++ ) {
+    if (comment.liked_users[i].id === this.props.currentUser.id) {
+      return true;
+    }
+  }
+}
+return false;
+}
+
+getCommentLikeButton(comment) {
+  let likeBtn;
+    if (this.checkIfCommentLiked(comment)) {
+      likeBtn =
+      <span>
+      <button className="ans-btn-liked">Upvoters | {comment.liked_users.length}</button>
+      <span><a onClick={() => this.dislikeComment(comment)} className="downvote-link">Downvote</a></span>
+      </span>
+    } else {
+      let likes;
+       if (typeof comment.liked_users === 'undefined') {
+         likes = 0;
+       } else {
+         likes = comment.liked_users.length;
+       }
+      likeBtn = <button className="ans-btn" onClick={() => this.addCommentLike(comment)}>Upvoters | {likes}</button>
+    }
+  return likeBtn;
+}
+
+
+///////
+
+
 renderAnswers() {
-  if (typeof this.props.question.answers === 'undefined'){
+  if (typeof this.props.answers === 'undefined'){
     return null;
   } else {
-    this.sortByKey(this.props.question.answers, "created_at");
+    this.sortByKey(this.props.answers, "created_at");
+    debugger
     return (
       <div>
         <ul className="answers-list">
-            {this.props.question.answers.map((ans, i) => {
+            {this.props.answers.map((ans, i) => {
               const author = ans.ans_auth_first_name + ' ' + ans.ans_auth_last_name;
               const singleAnswer = ans;
               const now = new Date();
@@ -443,8 +505,9 @@ render () {
         <div className="question-buttons">
           <button className="ans-btn" onClick={() => this.setState({answer: true, addComment: false})}>Add answer</button>
           {this.getLikeButton(this.state.question)}
-          <span className="ans-number">{this.renderAnswersQuntity()}</span>
+
         </div>
+        {this.renderAnswersQuntity()}
       </div>
       <div className="answers-part">
         <div className="answers">
@@ -466,7 +529,7 @@ render () {
           <div className="question-author-name">
             <span id="link-auth-name"><Link to={`/users/${userId}`}>{authName}</Link></span>
             <span className="question-author-descr">, {this.updateDescrLength(descr)}</span>
-            <p className="question-date">{this.renderAnswersQuntity()}</p>
+            <p className="question-date">{this.getDate(this.props.question, now, "asked")}</p>
           </div>
         </div>
         <div className="single-question-body">{this.props.question.body}</div>

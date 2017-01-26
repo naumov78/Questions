@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import SingleQuestion from './single_question';
-import { fetchSingleQuestion, likeQuestion, dislikeQuestion, likeAnswer, dislikeAnswer, createComment } from '../../actions/question_actions';
+import { fetchSingleQuestion, likeQuestion, dislikeQuestion, likeAnswer, dislikeAnswer, createComment, likeComment, dislikeComment } from '../../actions/question_actions';
 import { createAnswer, fetchAnswers } from '../../actions/answer_actions';
 import { fetchUser } from '../../actions/user_actions';
 
@@ -9,12 +9,12 @@ import { fetchUser } from '../../actions/user_actions';
 const mapStateToProps = ({question, session}) => {
   return ({
     question: question.question,
+    answers: question.question.answers,
     views: question.question.views,
     rating: question.question.rating,
     currentUser: session.currentUser
   })
 }
-// answers: question.question.answers,
 
 const mapDispatchToProps = (dispatch) => {
   return ({
@@ -26,7 +26,9 @@ const mapDispatchToProps = (dispatch) => {
     dislikeQuestion: (user_id, question_id, idx) => dispatch(dislikeQuestion(user_id, question_id, idx)),
     likeAnswer: (user_id, answer_id) => dispatch(likeAnswer(user_id, answer_id)),
     dislikeAnswer: (user_id, answer_id) => dispatch(dislikeAnswer(user_id, answer_id)),
-    createComment: (new_comment) => dispatch(createComment(new_comment))
+    createComment: (new_comment) => dispatch(createComment(new_comment)),
+    likeComment: (comment_id) => dispatch(likeComment(comment_id)),
+    dislikeComment: (comment_id) => dispatch(dislikeComment(comment_id))
   });
 }
 

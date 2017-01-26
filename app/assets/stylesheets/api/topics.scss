@@ -77,6 +77,10 @@
     font-size: 13px;
   }
 
+  textarea:focus {
+    border-color: #577ba8;
+  }
+
   input {
     float:right;
   }

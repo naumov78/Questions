@@ -65,3 +65,22 @@ export const createComment = (new_comment) => {
     data: {comment: {answer_id: new_comment.answer_id, body: new_comment.body}}
   });
 };
+
+
+export const likeComment = (comment_id) => {
+  debugger
+  return $.ajax({
+    method: "POST",
+    url: '/api/user_liked_comments',
+    data: {user_liked_comment: {comment_id: comment_id}}
+  });
+};
+
+export const dislikeComment = (comment_id) => {
+  debugger
+  return $.ajax({
+    method: "DELETE",
+    url: `/api/user_liked_comments/1`,
+    data: {user_liked_comment: {comment_id: comment_id}}
+  });
+};

@@ -18,8 +18,12 @@ export const fetchSingeleAnswer = (answer) => {
 }
 
 export const fetchAnswers = (topic_id, question_id) => {
+  topic_id = Number(topic_id);
+  question_id = Number(question_id);
+  debugger
   return $.ajax({
     method: "GET",
-    url: `/api/topics/${topic_id}/questions/${question_id}/answers`
+    url: `/api/topics/${topic_id}/questions/${question_id}/answers`,
+    data: {answer: {question_id: question_id}}
   });
 }

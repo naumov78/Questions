@@ -6,8 +6,7 @@ import merge from 'lodash/merge';
 const initState = {
   question: {
     topic_id: 0,
-    body: "",
-    answers: []
+    body: ""
   },
   errors: []
 }
@@ -21,15 +20,10 @@ const QuestionReducer = (state = initState, action) => {
       newState = merge({}, state);
       newState.question.answers.push(action.answer);
       return newState;
-    case RECEIVE_ANSWERS:
-      const ans = action.answers;
-      newState = merge({}, state);
-      newState.answers = ans;
-      return newState;
     case RECEIVE_SINGLE_QUESTION:
       newState = { question: action.question, errors: [] }
-      // const updatedState = Object.assign({}, state, newState);
-      const updatedState = merge({}, state, newState);
+      const updatedState = Object.assign({}, state, newState);
+      // const updatedState = merge({}, state, newState);
       return updatedState;
     case RECEIVE_ERRORS:
       newState = { question: {}, errors: action.errors }
@@ -41,3 +35,10 @@ const QuestionReducer = (state = initState, action) => {
 
 
 export default QuestionReducer;
+
+
+// case RECEIVE_ANSWERS:
+//   const ans = action.answers;
+//   newState = merge({}, state);
+//   newState.answers = ans;
+//   return newState;
