@@ -100,11 +100,8 @@ export const createComment = (new_comment) => {
 
 
 export const likeComment = (comment_id) => {
-  debugger
   return (dispatch) => {
-    debugger
     return APIUtil.likeComment(comment_id).then((question) => {
-      debugger
       return dispatch(receiveSingleQuestion(question))
     });
   }
@@ -112,10 +109,8 @@ export const likeComment = (comment_id) => {
 
 
 export const dislikeComment = (comment_id) => {
-  debugger
   return (dispatch) => {
     return APIUtil.dislikeComment(comment_id).then((question) => {
-      debugger
       return dispatch(receiveSingleQuestion(question))
     });
   }

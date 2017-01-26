@@ -68,7 +68,6 @@ export const createComment = (new_comment) => {
 
 
 export const likeComment = (comment_id) => {
-  debugger
   return $.ajax({
     method: "POST",
     url: '/api/user_liked_comments',
@@ -77,7 +76,6 @@ export const likeComment = (comment_id) => {
 };
 
 export const dislikeComment = (comment_id) => {
-  debugger
   return $.ajax({
     method: "DELETE",
     url: `/api/user_liked_comments/1`,

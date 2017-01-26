@@ -6,7 +6,6 @@ class Api::UserLikedCommentsController < ApplicationController
 
 
   def create
-    # debugger
     user_liked_comment = current_user.user_liked_comments.new(comment_params)
     if user_liked_comment.save
       @question = Comment.find(user_liked_comment.comment_id).answer.question
@@ -21,7 +20,7 @@ class Api::UserLikedCommentsController < ApplicationController
   def destroy
     liked_comment = UserLikedComment.all.where({user_id: current_user.id}).where({comment_id: comment_params[:comment_id]})
     @question = Comment.find(liked_comment[0].comment_id).answer.question
-    @user = current_user
+    @user = @question.user
     unless liked_comment.nil?
       UserLikedComment.delete(liked_comment)
       render 'api/questions/show'

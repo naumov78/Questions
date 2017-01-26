@@ -23,7 +23,7 @@ class Api::UserLikedQuestionsController < ApplicationController
     @question = liked_question[0].liked_question
     @topic = @question.topic
     @topic_questions = @topic.questions
-    @user = current_user
+    @user = @question.user
     unless liked_question.nil?
       UserLikedQuestion.delete(liked_question)
       render 'api/topics/show' if idx == 1

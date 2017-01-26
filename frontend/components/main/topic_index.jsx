@@ -39,8 +39,15 @@ class TopicIndex extends React.Component {
   }
 
   updateDescrLength(str){
-    if (str && str.length > 125) {
-      return str.slice(0, 124) + '...';
+    if (str && str.length > 40) {
+      return str.slice(0, 37) + '...';
+    }
+    return str;
+  }
+
+  updateNameLength(str){
+    if (str && str.length > 25) {
+      return str.slice(0, 22) + '...';
     }
     return str;
   }
@@ -98,6 +105,15 @@ class TopicIndex extends React.Component {
     }
   }
 
+  sortByKey(array, key) {
+    return array.sort((a, b) => {
+        const x = a[key];
+        const y = b[key];
+        return ((x < y) ? 1 : ((x > y) ? -1 : 0));
+    });
+  }
+
+
   renderQuestions() {
     const topic_id = parseInt(this.props.params.topic_id);
     if (this.props.questions.length === 0) {
@@ -117,6 +133,12 @@ class TopicIndex extends React.Component {
           {this.props.questions.map(q => {
             const authName = q.author_first_name + ' ' + q.author_last_name;
             const ansNumber = q.answers.length;
+            let lastAnswerDate;
+              if (q.answers.length > 0) {
+                const answers = q.answers;
+                {this.sortByKey(answers, "created_at")}
+                lastAnswerDate = new Date(answers[0].created_at);
+              }
             const now = new Date();
             return (
             <li key={q.id * now} className="topic-question-container">
@@ -126,9 +148,10 @@ class TopicIndex extends React.Component {
                     <Link to={`/users/${q.author_id}`}><img src={q.author_userpic_url} /></Link>
                   </div>
                   <div className="question-author-name">
-                    <span id="link-auth-name"><Link to={`/users/${q.author_id}`}>{authName}</Link></span>
+                    <span id="link-auth-name"><Link to={`/users/${q.author_id}`}>{this.updateNameLength(authName)}</Link></span>
                       <span className="question-author-descr">, {this.updateDescrLength(q.author_descr)}</span>
                       <p className="question-date">{this.getQuestionDate(q, now)}</p>
+                      <p className="question-date">{this.renderAnswersQuntity(ansNumber)}</p>
                   </div>
                 </div>
 
@@ -137,7 +160,7 @@ class TopicIndex extends React.Component {
                 </div>
                 <div className="question-stats">
                   <span>{this.getLikeButton(q)}</span>
-                  <span id="topic-ans-num">{this.renderAnswersQuntity(ansNumber)}</span>
+                  <span id="topic-ans-num">{this.getLastAnswerDate(lastAnswerDate, now)}</span>
                   <span><button className="ans-btn add-quick-ans-btn" onClick={() => this.toggleQuickAnswer(q)}>Quick Answer</button></span>
                   {this.getQuickAnswerForm(q)}
                 </div>
@@ -233,6 +256,36 @@ class TopicIndex extends React.Component {
     }
   }
 
+
+  getLastAnswerDate(date, now) {
+    if (typeof date === 'undefined') {
+      return null;
+    }
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const qMon = monthNames[date.getMonth()];
+    const qDay = date.getDate();
+    const qYr = date.getFullYear()
+    const dif = Math.floor((now - date) / 1000);
+    if (dif < 30) {
+      return <span className="ans-date-rendering-1">answered just now</span>
+    } else if (dif < 60) {
+      return <span className="ans-date-rendering-2">answered less than a minute ago</span>
+    } else if (dif < 120) {
+      return <span className="ans-date-rendering-3">answered less than 2 minutes ago</span>
+    } else if (dif < 300) {
+      return <span className="ans-date-rendering-4">answered less than 5 minutes ago</span>
+    } else if (dif < 600) {
+      return <span className="ans-date-rendering-5">answered less than 10 minutes ago</span>
+    } else if (dif < 3600) {
+      return <span className="ans-date-rendering-6">answered less than an hour ago</span>
+    } else if (dif < 86400) {
+      return <span className="ans-date-rendering-7">answered today</span>
+    } else if (dif < 172800) {
+      return <span className="ans-date-rendering-8">answered yesterday</span>
+    } else {
+      return <span className="ans-date-rendering-9">{`answered on ${qMon} ${qDay} ${qYr}`}</span>
+    }
+  }
 
   getInnerNav() {
     const id = this.state.topic_id;

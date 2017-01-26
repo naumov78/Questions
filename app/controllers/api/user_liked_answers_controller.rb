@@ -20,7 +20,7 @@ class Api::UserLikedAnswersController < ApplicationController
   def destroy
     liked_answer = UserLikedAnswer.all.where({user_id: answer_params[:user_id]}).where({answer_id: answer_params[:answer_id]})
     @question = Answer.find(liked_answer[0].answer_id).question
-    @user = current_user
+    @user = @question.user
     unless liked_answer.nil?
       UserLikedAnswer.delete(liked_answer)
       render 'api/questions/show'

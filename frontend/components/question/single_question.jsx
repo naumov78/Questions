@@ -154,14 +154,14 @@ renderAnswersQuntity() {
   } else {
     if (this.props.answers.length === 0) {
       return (
-      <div className="test-answer-quantity-light">
-        <span className="test-ans-number-light">No answers yet...</span>
+      <div className="answer-quantity-light">
+        <span className="answer-number-light">No answers yet...</span>
       </div>
       );
     } else {
       return (
-        <div className="test-answer-quantity">
-          <span className="test-ans-number">{`Answers: ${this.props.answers.length}`}</span>
+        <div className="answer-quantity">
+          <span className="answer-number">{`Answers: ${this.props.answers.length}`}</span>
       </div>
       );
     }
@@ -292,14 +292,12 @@ handleCreateComment(e, id) {
 // comments likes
 
 addCommentLike(comment) {
-  debugger
   this.props.likeComment(comment.id).then(() => {
     this.getQuestion();
   });
 }
 
 dislikeComment(comment) {
-  debugger
   this.props.dislikeComment(comment.id).then(() => {
     this.getQuestion();
   });
@@ -345,7 +343,6 @@ renderAnswers() {
     return null;
   } else {
     this.sortByKey(this.props.answers, "created_at");
-    debugger
     return (
       <div>
         <ul className="answers-list">
