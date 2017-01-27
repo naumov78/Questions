@@ -35,10 +35,3 @@ const QuestionReducer = (state = initState, action) => {
 
 
 export default QuestionReducer;
-
-
-// case RECEIVE_ANSWERS:
-//   const ans = action.answers;
-//   newState = merge({}, state);
-//   newState.answers = ans;
-//   return newState;

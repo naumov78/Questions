@@ -10,6 +10,7 @@ class Api::UserLikedAnswersController < ApplicationController
     if user_liked_answer.save
       @question = Answer.find(user_liked_answer.answer_id).question
       @user = @question.user
+      @current_user = current_user
       render 'api/questions/show'
     else
       render json: user_liked_answer.errors.full_messages, status: 422
@@ -21,6 +22,7 @@ class Api::UserLikedAnswersController < ApplicationController
     liked_answer = UserLikedAnswer.all.where({user_id: answer_params[:user_id]}).where({answer_id: answer_params[:answer_id]})
     @question = Answer.find(liked_answer[0].answer_id).question
     @user = @question.user
+    @current_user = current_user
     unless liked_answer.nil?
       UserLikedAnswer.delete(liked_answer)
       render 'api/questions/show'

@@ -57,6 +57,19 @@ class User < ActiveRecord::Base
   has_many :user_liked_comments
   has_many :liked_comments, through: :user_liked_comments
 
+  has_many :in_follows,
+  class_name: "Follow",
+  foreign_key: :followee_id
+
+  has_many :out_follows,
+  class_name: "Follow",
+  foreign_key: :follower_id
+
+  has_many :followers, through: :in_follows, source: :follower
+  has_many :followees, through: :out_follows, source: :followee
+
+
+
 # , inverse_of: :user
   attr_reader :password
 
@@ -86,6 +99,10 @@ class User < ActiveRecord::Base
     self.session_token = User.generate_session_token
     self.save!
     self.session_token
+  end
+
+  def follows?(user)
+    out_follows.exists?(followee_id: user.id)
   end
 
   private

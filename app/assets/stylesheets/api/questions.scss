@@ -52,19 +52,67 @@ img {
   display: block;
   position: absolute;
   left: 45px;
+  width: 455px;
 }
+
+#one {
+  width: 320px;
+  float: left;
+}
+
+#two {
+  padding: 5px 0 0 20px;
+  float: right;
+}
+
+
+// follow author buttons
+
+.auth-unfollow-btn {
+  font-size: 0.755em;
+  font-weight: 400;
+  background: #f2f2f2;
+  border: 1px solid #d9d9d9;
+  border-radius: 3px;
+  padding: 3px 7px 3px 7px;
+  color: #577ba8;
+}
+
+.auth-unfollow-btn:hover {
+  border: 1px solid #999;
+  background: #e6e6e6;
+  cursor: pointer;
+}
+
+.auth-follow-btn {
+  font-size: 0.755em;
+  font-weight: 400;
+  background: #577ba8;
+  border: 1px solid #999;
+  border-radius: 3px;
+  padding: 3px 7px 3px 7px;
+  color: #fff;
+}
+
+.auth-follow-btn:hover {
+  border: 1px solid #003366;
+  background: #4e6f97;
+  cursor: pointer;
+}
+
+
 
 #link-auth-name:hover {
   text-decoration: underline;
 }
 
 .question-date {
-  font-size: 14px;
-  color: grey;
+  font-size: 12px;
+  color: #000080;
 }
 
 .question-author-descr {
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .single-question-body {

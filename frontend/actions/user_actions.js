@@ -28,3 +28,21 @@ export const fetchUser = (id) => {
      );
   }
 }
+
+
+export const follow = (current_user_id, user_id) => {
+  return (dispatch) => {
+    return APIUtil.follow(current_user_id, user_id).then((user) => {
+      return dispatch(receiveUser(user))
+    });
+  }
+}
+
+
+export const unfollow = (current_user_id, user_id) => {
+  return (dispatch) => {
+    return APIUtil.unfollow(current_user_id, user_id).then((user) => {
+      return dispatch(receiveUser(user))
+    });
+  }
+}

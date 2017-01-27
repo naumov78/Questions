@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import SingleQuestion from './single_question';
 import { fetchSingleQuestion, likeQuestion, dislikeQuestion, likeAnswer, dislikeAnswer, createComment, likeComment, dislikeComment } from '../../actions/question_actions';
 import { createAnswer, fetchAnswers } from '../../actions/answer_actions';
-import { fetchUser } from '../../actions/user_actions';
+import { fetchUser, follow, unfollow } from '../../actions/user_actions';
 
 
 const mapStateToProps = ({question, session}) => {
@@ -28,7 +28,9 @@ const mapDispatchToProps = (dispatch) => {
     dislikeAnswer: (user_id, answer_id) => dispatch(dislikeAnswer(user_id, answer_id)),
     createComment: (new_comment) => dispatch(createComment(new_comment)),
     likeComment: (comment_id) => dispatch(likeComment(comment_id)),
-    dislikeComment: (comment_id) => dispatch(dislikeComment(comment_id))
+    dislikeComment: (comment_id) => dispatch(dislikeComment(comment_id)),
+    follow: (current_user_id, user_id) => dispatch(follow(current_user_id, user_id)),
+    unfollow: (current_user_id, user_id) => dispatch(unfollow(current_user_id, user_id))
   });
 }
 

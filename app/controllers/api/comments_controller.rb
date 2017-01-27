@@ -8,7 +8,7 @@ class Api::CommentsController < ApplicationController
     comment = current_user.comments.new(comment_params)
     if comment.save
       @question = comment.answer.question
-      @user = current_user
+      @user = @question.user
       render 'api/questions/show'
     else
       render json: comment.errors.full_messages, status: 422

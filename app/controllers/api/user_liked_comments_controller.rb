@@ -10,6 +10,7 @@ class Api::UserLikedCommentsController < ApplicationController
     if user_liked_comment.save
       @question = Comment.find(user_liked_comment.comment_id).answer.question
       @user = @question.user
+      @current_user = current_user
       render 'api/questions/show'
     else
       render json: user_liked_comment.errors.full_messages, status: 422
@@ -21,6 +22,7 @@ class Api::UserLikedCommentsController < ApplicationController
     liked_comment = UserLikedComment.all.where({user_id: current_user.id}).where({comment_id: comment_params[:comment_id]})
     @question = Comment.find(liked_comment[0].comment_id).answer.question
     @user = @question.user
+    @current_user = current_user
     unless liked_comment.nil?
       UserLikedComment.delete(liked_comment)
       render 'api/questions/show'

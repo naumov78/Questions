@@ -10,6 +10,7 @@ class Api::UserLikedQuestionsController < ApplicationController
     if @user_liked_question.save
       @question = @user_liked_question.liked_question
       @user = @question.user
+      @current_user = current_user
       render 'api/questions/show'
     else
       render json: @user_liked_question.errors.full_messages, status: 422
@@ -24,6 +25,7 @@ class Api::UserLikedQuestionsController < ApplicationController
     @topic = @question.topic
     @topic_questions = @topic.questions
     @user = @question.user
+    @current_user = current_user
     unless liked_question.nil?
       UserLikedQuestion.delete(liked_question)
       render 'api/topics/show' if idx == 1

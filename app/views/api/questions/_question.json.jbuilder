@@ -1,10 +1,13 @@
-
-json.extract! question, :id, :author_id, :body, :topic_id, :views, :rating, :answers, :created_at
+json.extract! question, :id, :author_id, :body, :topic_id, :views, :rating, :answers, :created_at, :user
 json.extract! user, :first_name, :last_name, :description
+
 json.author_userpic_url asset_path(user.userpic.url)
 
 json.topic_title question.topic.title
 json.liked_users question.liked_users
+
+
+json.out_follows current_user.out_follows
 
   json.answers question.answers do |answer|
     json.extract! answer, :id, :author_id, :body, :created_at

@@ -14,17 +14,11 @@ constructor(props) {
 
 
 componentDidMount() {
-
-    // if (this.props.question.body === "") {
-    //   const topicId = this.props.params.topic_id;
-    //   this.props.router.push(`/topics/${topicId}/questions/`);
-    // }
 }
 
 getQuestion() {
   const question_data = {topic_id: this.props.params.topic_id, question_id: this.props.params.question_id };
   this.props.fetchSingleQuestion({question_data});
-  // this.props.fetchAnswers(this.props.params.topic_id, this.props.params.question_id);
 }
 
 componentWillReceiveProps(nextProps) {
@@ -335,7 +329,6 @@ getCommentLikeButton(comment) {
 }
 
 
-///////
 
 
 renderAnswers() {
@@ -471,6 +464,43 @@ getAddBtn(field, value) {
   return <button className="not-active-btn">{value}</button>
 }
 
+checkIfFollow(id) {
+  if (id && this.state.question) {
+    const out_follows = this.state.question.out_follows;
+    for (let i = 0; i < out_follows.length; i++) {
+      if (out_follows[i].followee_id === id) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+getFollowBtn(id) {
+  if (id === this.props.currentUser.id) {
+    return null;
+  }
+  if (this.checkIfFollow(id)) {
+    return <button onClick={(e) => this.unfollow(e, id)} className="auth-unfollow-btn">Unfollow author | -</button>
+  } else {
+    return <button onClick={(e) => this.follow(e, id)} className="auth-follow-btn">Follow author | +</button>
+  }
+}
+
+follow(e, id) {
+  e.preventDefault();
+  this.props.follow(this.props.currentUser.id, id).then(() => {
+    this.getQuestion();
+  })
+}
+
+unfollow(e, id) {
+  e.preventDefault();
+  this.props.unfollow(this.props.currentUser.id, id).then(() => {
+    this.getQuestion();
+  })
+}
+
 render () {
   this.checkLoggedIn();
   let authName, userpic, userId, descr, now;
@@ -493,9 +523,12 @@ render () {
             <Link to={`/users/${userId}`}><img src={userpic} /></Link>
           </div>
           <div className="question-author-name">
-            <span id="link-auth-name"><Link to={`/users/${userId}`}>{authName}</Link></span>
-            <span className="question-author-descr">, {this.updateDescrLength(descr)}</span>
-            <p className="question-date">{this.getDate(this.props.question, now, "asked")}</p>
+            <span id="one">
+              <span id="link-auth-name"><Link to={`/users/${userId}`}>{authName}</Link></span>
+              <span className="question-author-descr">, {this.updateDescrLength(descr)}</span>
+              <p className="question-date">{this.getDate(this.props.question, now, "asked")}</p>
+            </span>
+            <span id="two">{this.getFollowBtn(userId)}</span>
           </div>
         </div>
         <div className="single-question-body">{this.props.question.body}</div>
@@ -524,9 +557,12 @@ render () {
             <Link to={`/users/${userId}`}><img src={userpic} /></Link>
           </div>
           <div className="question-author-name">
-            <span id="link-auth-name"><Link to={`/users/${userId}`}>{authName}</Link></span>
-            <span className="question-author-descr">, {this.updateDescrLength(descr)}</span>
-            <p className="question-date">{this.getDate(this.props.question, now, "asked")}</p>
+            <span id="one">
+              <span id="link-auth-name"><Link to={`/users/${userId}`}>{authName}</Link></span>
+              <span className="question-author-descr">, {this.updateDescrLength(descr)}</span>
+              <p className="question-date">{this.getDate(this.props.question, now, "asked")}</p>
+            </span>
+            <span id="two">{this.getFollowBtn(userId)}</span>
           </div>
         </div>
         <div className="single-question-body">{this.props.question.body}</div>
