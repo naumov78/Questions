@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
+import RightPart from '../right_part';
 
 
 class QuestionForm extends React.Component {
@@ -91,35 +92,52 @@ class QuestionForm extends React.Component {
     return <button className="not-active-btn">{value}</button>
   }
 
+
+  getFolloweesQuestionsBlock() {
+    if (currentUser) {
+      if (currentUser.out_follows.length > 0) {
+        return <RightPart followees={currentUser.followees} />
+      } else {
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
+
   render() {
     if (this.state.showMenu === false) {
     return (
-    <div className="create-question-container">
-      {this.showMessage()}
-      <form id="ask-question-form" onSubmit={this.handleSubmit} className="create-question-form">
-        <div className="question-input">
-          <textarea autoFocus={true}
-          placeholder="Start writing your question"
-          onChange={this.update("body")}
-          className="auth-form-input answer-input"/>
-        </div>
-        <br />
-        <div className="button-part">
-          <div className="dd-topic-notopic">
-            <span className="current-topic-warning">{this.showWithoutMenu()}</span>
+    <div>
+      <div className="create-question-container">
+        {this.showMessage()}
+        <form id="ask-question-form" onSubmit={this.handleSubmit} className="create-question-form">
+          <div className="question-input">
+            <textarea autoFocus={true}
+            placeholder="Start writing your question"
+            onChange={this.update("body")}
+            className="auth-form-input answer-input"/>
           </div>
-          <div className="change-topic-btn-container">
-            <button className="ans-btn" onClick={() => this.setState({showMenu: true})}>Change Topic</button>
+          <br />
+          <div className="button-part">
+            <div className="dd-topic-notopic">
+              <span className="current-topic-warning">{this.showWithoutMenu()}</span>
+            </div>
+            <div className="change-topic-btn-container">
+              <button className="ans-btn" onClick={() => this.setState({showMenu: true})}>Change Topic</button>
+            </div>
+            <div id="add-question" className="answer-buttons">
+              {this.getAddBtn(this.state.body, 'Ask Question')}
+            </div>
           </div>
-          <div id="add-question" className="answer-buttons">
-            {this.getAddBtn(this.state.body, 'Ask Question')}
-          </div>
-        </div>
-      </form>
+        </form>
+      </div>
+      {this.getFolloweesQuestionsBlock()}
     </div>
     );
     } else {
     return (
+    <div>
       <div className="create-question-container">
         {this.showMessage()}
         <form id="ask-question-form" onSubmit={this.handleSubmit} className="create-question-form">
@@ -137,8 +155,9 @@ class QuestionForm extends React.Component {
             </div>
           </div>
         </form>
-
       </div>
+      {this.getFolloweesQuestionsBlock()}
+    </div>
     );
 
     }

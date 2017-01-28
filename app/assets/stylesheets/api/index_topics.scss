@@ -1,9 +1,11 @@
+// main
 .index-topics {
   float: left;
-  padding: 0 0 0 40px;
-  margin: 0 0 0 20px;
-  width: 520px
+  padding: 10px 0 0 40px;
+  width: 500px;
 }
+
+
 
 .user-index-title {
   padding: 3px 0 3px 5px;
@@ -11,6 +13,12 @@
   color: #f1f8fb;
   font-size: 14px;
   text-align: center;
+}
+
+
+.user-index {
+  width: 450px;
+  float: left;
 }
 
 .topic-info {
@@ -34,4 +42,8 @@
 
 .empty-space {
   padding: 5px;
+}
+
+#index-question-auth-name {
+  width: 350px;
 }

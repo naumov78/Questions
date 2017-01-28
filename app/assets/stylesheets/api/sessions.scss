@@ -5,20 +5,11 @@
 
 
 .auth-form-general {
-  // background-size: 800px 600px;
-  // background-image: url("background11.png");
-  // background-repeat: no-repeat;
-  // background-attachment: fixed;
-  // background-position: center;
 }
 
 
 .index-page {
   width: 650px;
-  // border: 1px solid black;
-  // padding-top: 150px;
-  // height: 703px;
-  // position: absolute;
   margin: 0 auto;
   padding: 50px;
 
@@ -35,7 +26,6 @@
 }
 
 .logo h1 {
-  // font-size: 85px;
   font-size: 60px;
   color: #b82b28;
   font-family: 'Taviraj', serif;
@@ -51,7 +41,6 @@
 }
 
 .slogan h2 {
-  // font-size: 30px;
   font-size: 19px;
   color: #999999;
   font-family: 'Taviraj', serif;
@@ -135,10 +124,7 @@
 .auth-form-field-titles {
   display: block;
   text-transform: uppercase;
-
-
 }
-
 
 .auth-form-input {
   margin: 6px 0 0 0;
@@ -153,14 +139,10 @@
   color: #000;
 }
 
-
-
 .auth-form-input:focus {
   border: 1px solid #999999;
   background: #eee;
 }
-
-
 
 .auth-form-btn {
   background: #2b6dad;
@@ -179,7 +161,6 @@
 .submit {
   float: right;
 }
-// #3e78ad
 
 .signup-title p {
   color: #000;
@@ -194,9 +175,6 @@
 }
 
 .signup-form-container p {
-  // margin: 10px 0 0 0;
-  // color: #999;
-
 }
 
 #legal-notice {
@@ -205,7 +183,6 @@
 }
 
 .login-form-errors {
-  // border: 1px solid red;
   border-radius: 3px;
   color: red;
   padding: 10px 0 10px 10px;
@@ -215,8 +192,6 @@
 .name-errors {
   overflow: hidden;
   align-content: center;
-  // width: 112px;
-  // border-radius: 3px;
   color: red;
   font-size: 14px;
   padding-top: 2px 0 0 30px;;
@@ -231,9 +206,6 @@
 .signup-form-errors {
   overflow: hidden;
   margin: 5px 0 0 0;
-  // width: 112px;
-  // border-radius: 3px;
   color: red;
   font-size: 14px;
-  // padding: 2px;
 }

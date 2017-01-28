@@ -33,9 +33,7 @@ class Main extends React.Component {
             <div className="sidebar-container">
               <SideBar currentUser={this.props.currentUser} />
             </div>
-            <div className="index-topics">
               {this.getIndexPage()}
-            </div>
           </div>
         </div>
       );
@@ -46,7 +44,3 @@ class Main extends React.Component {
 
 
 export default withRouter(Main);
-
-
-// <div className="feed-container">
-// </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter, Link } from 'react-router';
+import RightPart from '../right_part';
 
 
 
@@ -9,9 +10,6 @@ constructor(props) {
   super(props);
   this.state = { answer: false, answer_body: "", showComments: 0, addComment: false, commentBody: "" };
 }
-
-
-
 
 componentDidMount() {
 }
@@ -24,6 +22,14 @@ getQuestion() {
 componentWillReceiveProps(nextProps) {
   if (this.props !== nextProps) {
     this.setState(nextProps)
+  }
+
+  let id = nextProps.params.question_id;
+  if (id !== this.props.params.question_id) {
+    id = Number(nextProps.params.question_id);
+    const topic_id = Number(nextProps.params.topic_id)
+    const question_data = {topic_id: topic_id, question_id: id };
+    this.props.fetchSingleQuestion({question_data});
   }
 }
 
@@ -140,8 +146,6 @@ getAnswerLikeButton(answer) {
   return likeBtn;
 }
 
-
-
 renderAnswersQuntity() {
   if (typeof this.props.answers === 'undefined'){
     return null;
@@ -161,7 +165,6 @@ renderAnswersQuntity() {
     }
   }
 }
-
 
 sortByKey(array, key) {
   return array.sort((a, b) => {
@@ -239,7 +242,6 @@ renderAddCommentForm(id) {
   }
 }
 
-
 getCommentsNumber(ans) {
   if (typeof ans.comments !== 'undefined') {
     const num = ans.comments.length;
@@ -280,8 +282,6 @@ handleCreateComment(e, id) {
     this.setState({ showComments: id, addComment: false })
   });
 }
-
-
 
 // comments likes
 
@@ -328,9 +328,6 @@ getCommentLikeButton(comment) {
   return likeBtn;
 }
 
-
-
-
 renderAnswers() {
   if (typeof this.props.answers === 'undefined'){
     return null;
@@ -370,7 +367,6 @@ renderAnswers() {
   }
 }
 
-
 handleCreateAnswer(e) {
   e.preventDefault();
   const topic_id = parseInt(this.props.params.topic_id);
@@ -383,8 +379,6 @@ handleCreateAnswer(e) {
     this.getQuestion();
   });
 }
-
-
 
 goToUserProfile(e) {
   e.preventDefault();
@@ -476,6 +470,9 @@ checkIfFollow(id) {
   return false;
 }
 
+
+// follow
+
 getFollowBtn(id) {
   if (id === this.props.currentUser.id) {
     return null;
@@ -501,6 +498,18 @@ unfollow(e, id) {
   })
 }
 
+getFolloweesQuestionsBlock() {
+  if (this.state.question) {
+    if (this.state.question.out_follows.length > 0) {
+      return <RightPart followees={this.state.question.followees} question_id={this.state.question.id}/>
+    } else {
+      return null;
+    }
+  } else {
+    return null;
+  }
+}
+
 render () {
   this.checkLoggedIn();
   let authName, userpic, userId, descr, now;
@@ -512,9 +521,9 @@ render () {
     userId = this.props.question.author_id;
     descr = this.props.question.description;
   }
-
   if (!this.state.answer) {
   return (
+  <div>
     <div className="single-question-container">
       {this.getInnerNav()}
       <div className="question-part">
@@ -535,7 +544,6 @@ render () {
         <div className="question-buttons">
           <button className="ans-btn" onClick={() => this.setState({answer: true, addComment: false})}>Add answer</button>
           {this.getLikeButton(this.state.question)}
-
         </div>
         {this.renderAnswersQuntity()}
       </div>
@@ -545,10 +553,13 @@ render () {
         </div>
       </div>
     </div>
+    {this.getFolloweesQuestionsBlock()}
+  </div>
   );
 } else {
   now = new Date();
   return (
+  <div>
     <div className="single-question-container">
       {this.getInnerNav()}
       <div className="question-part">
@@ -574,7 +585,6 @@ render () {
                 onChange={this.update("answer_body")}
                 className="auth-form-input answer-input"/>
             </div>
-
             <div className="answer-buttons">
                 <button className="cancel-button" onClick={() => this.setState({answer: false, answer_body: ""})}>Cancel</button>
                 {this.getAddBtn(this.state.answer_body, 'Add answer')}
@@ -587,12 +597,13 @@ render () {
           {this.renderAnswers()}
         </div>
       </div>
-
     </div>
+    {this.getFolloweesQuestionsBlock()}
+  </div>
   );
 }
 }
 
 }
 
-export default SingleQuestion;
+export default withRouter(SingleQuestion);

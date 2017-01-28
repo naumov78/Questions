@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter, Link } from 'react-router';
+import RightPart from '../../right_part';
 
 class UserIndex extends React.Component {
 
@@ -113,72 +114,79 @@ getLastAnswerDate(date, now) {
   }
 }
 
+getFolloweesQuestionsBlock() {
+  if (currentUser) {
+    if (currentUser.out_follows.length > 0) {
+      return <RightPart followees={currentUser.followees} />
+    } else {
+      return null;
+    }
+  } else {
+    return null;
+  }
+}
 
 renderIndexQuestions() {
   const questions = this.getIndexQuestions();
   this.sortByKey(questions, "created_at");
   return (
-    <ul>
-      {questions.map((q, i) => {
-        const now = new Date();
-        const authName = q.auth_first_name + ' ' + q.auth_last_name;
-        const ansNumber = q.answers.length;
+  <div>
+  <div className="index-topics">
+    <div className="user-index-title">
+    {`Most recent questions`}
+    </div>
+    <div className="user-index">
+      <ul>
+        {questions.map((q, i) => {
+          const now = new Date();
+          const authName = q.auth_first_name + ' ' + q.auth_last_name;
+          const ansNumber = q.answers.length;
 
-        let lastAnswerDate;
-          if (q.answers.length > 0) {
-            const answers = q.answers;
-            {this.sortByKey(answers, "created_at")}
-            lastAnswerDate = new Date(answers[0].created_at);
-          }
+          let lastAnswerDate;
+            if (q.answers.length > 0) {
+              const answers = q.answers;
+              {this.sortByKey(answers, "created_at")}
+              lastAnswerDate = new Date(answers[0].created_at);
+            }
 
-        return (
-          <li key={q.id}>
-
-
-            <div className="single-q-list">
-              <div className="topic-info">
-                {`from`} <Link to={`/topics/${q.idx_topic_id}/questions/`}>{q.idx_topic_title}</Link>
-              <span id="index-topic-ans-num">{this.getLastAnswerDate(lastAnswerDate, now)}</span>
-              </div>
-              <div className="empty-space"></div>
-              <div className="question-author-info">
-                <div className="question-author-userpic">
-                  <Link to={`/users/${q.author_id}`}><img src={q.auth_userpic_url} /></Link>
+          return (
+            <li key={q.id}>
+              <div className="single-q-list">
+                <div className="topic-info">
+                  {`from`} <Link to={`/topics/${q.idx_topic_id}/questions/`}>{q.idx_topic_title}</Link>
+                <span id="index-topic-ans-num">{this.getLastAnswerDate(lastAnswerDate, now)}</span>
                 </div>
-                <div className="question-author-name">
-                  <span id="link-auth-name"><Link to={`/users/${q.author_id}`}>{authName}</Link></span>
-                    <span className="question-author-descr">, {this.updateDescrLength(q.auth_descr)}</span>
-                    <p className="question-date">{this.getDate(q, now)}</p>
+                <div className="empty-space"></div>
+                <div className="question-author-info">
+                  <div className="question-author-userpic">
+                    <Link to={`/users/${q.author_id}`}><img src={q.auth_userpic_url} /></Link>
+                  </div>
+                  <div className="question-author-name">
+                    <span id="link-auth-name"><Link to={`/users/${q.author_id}`}>{authName}</Link></span>
+                      <span className="question-author-descr">, {this.updateDescrLength(q.auth_descr)}</span>
+                      <p className="question-date">{this.getDate(q, now)}</p>
+                  </div>
+                </div>
+
+                <div className="q-body">
+                  <Link to={`/topics/${q.idx_topic_id}/questions/${q.id}`}><span>{q.body}</span></Link>
                 </div>
               </div>
-
-              <div className="q-body">
-                <Link to={`/topics/${q.idx_topic_id}/questions/${q.id}`}><span>{q.body}</span></Link>
-              </div>
-            </div>
-
-
-
-          </li>
-        )
-      })}
-    </ul>
+            </li>
+          )
+        })}
+      </ul>
+    </div>
+  </div>
+  {this.getFolloweesQuestionsBlock()}
+</div>
   )
 }
 
-// <span>{this.getLikeButton(q)}</span>
-
 render() {
-  return <div>
-    <div className="user-index-title">{`Most recent questions`}</div>
-    {this.renderIndexQuestions()}
-  </div>
+  return <div>{this.renderIndexQuestions()}</div>
 }
-
-
-
 
 }
 
 export default UserIndex;
-// this.props.currentUser.index_topics[5].index_questions[1]

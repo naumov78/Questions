@@ -8,6 +8,17 @@ json.liked_users question.liked_users
 
 
 json.out_follows current_user.out_follows
+json.followees current_user.followees do |followee|
+  json.extract! followee, :id, :description, :first_name, :last_name
+  json.follow_created_at current_user.out_follows.find_by(followee_id: followee.id).created_at
+  json.followee_userpic_url asset_path(followee.userpic.url)
+  json.followee_questions followee.questions do |question|
+    json.extract! question, :id, :author_id, :body, :created_at, :topic_id
+    json.auth_first_name question.user.first_name
+    json.auth_last_name question.user.last_name
+    json.auth_userpic_url asset_path(question.user.userpic.url)
+  end
+end
 
   json.answers question.answers do |answer|
     json.extract! answer, :id, :author_id, :body, :created_at

@@ -1,14 +1,9 @@
-
-
-
 .single-question-container {
   float: left;
   padding: 10px 0 0 40px;
   font-family: 'Roboto', sans-serif;
   width: 500px;
-
 }
-
 
 .inner-nav {
   color: #999;
@@ -19,8 +14,6 @@
   }
 
 }
-
-
 
 .question-author-info {
   position: relative;
@@ -100,8 +93,6 @@ img {
   cursor: pointer;
 }
 
-
-
 #link-auth-name:hover {
   text-decoration: underline;
 }
@@ -178,10 +169,8 @@ img {
   font-size: 15px;
   font-family: 'Roboto', sans-serif;
   line-height: 20px;
-  // letter-spacing: 0.7px;
   width: 506px;
 }
-
 
 .auth-answer-pic {
   display: block;
@@ -189,7 +178,6 @@ img {
   width: 42px;
   float: left;
   padding: 0 5px 0 0;
-
 
 img {
   display: block;
@@ -257,7 +245,7 @@ img {
   padding: 1px 2px;
   font-size: 12px;
   background: #e2e2e2;
-  color: #999;
+  color: #2573a7;
   border: 1px solid #e2e2e2;
   border-radius: 2px;
 }
@@ -286,7 +274,6 @@ img {
   font-weight: 400;
   padding: 3px 7px 4px 7px;
   color: #2b6dad;
-  // font-size: 12px;
 }
 
 .ans-btn:hover {
@@ -301,7 +288,6 @@ img {
   font-weight: 400;
   padding: 3px 7px 4px 7px;
   color: #a6a6a6;
-  // font-size: 12px;
 }
 
 .not-active-btn {
@@ -405,12 +391,10 @@ img {
 }
 
 .answer-quantity {
-  width: 500px;
+  width: 495px;
   margin-top: 10px;
   background: #577ba8;
   padding: 3px 0 3px 5px;
-  // border-bottom-left-radius: 25%;
-  // border-bottom-right-radius: 25%;
   text-align: center;
 }
 
@@ -419,8 +403,6 @@ img {
   margin-top: 10px;
   background: #f2f2f2;
   padding: 3px 0 3px 5px;
-  // border-bottom-left-radius: 25%;
-  // border-bottom-right-radius: 25%;
   text-align: center;
 }
 
