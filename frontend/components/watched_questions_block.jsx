@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter, Link } from 'react-router';
 
-class FollowedQuestionsBlock extends React.Component {
+class WatchedQuestionsBlock extends React.Component {
 constructor(props) {
   super(props);
   this.state = { followees: this.props.followees }
@@ -22,6 +22,29 @@ getQuestionsList() {
   return this.sortByKey(questions, 'created_at');
 }
 
+
+// compareByLastAnswer(question1, question2) {
+//
+// }
+//
+// getQuestionList1() {
+//   const questions = [];
+//   for (i = 0; questions.length < 21; i++) {
+//     currentUser.watched_questions.forEach((question) => {
+//       const answers = question.answers;
+//       this.sortByKey(answers, "created_at");
+//       if (questions.length === 0) {
+//         questions.push(question)
+//       } else {
+//         this.compareByLastAnswer(questions[questions.length - 1], question);
+//
+//       }
+//
+//
+//     })
+//   }
+// }
+
 sortByKey(array, key) {
   return array.sort((a, b) => {
       const x = a[key];
@@ -41,17 +64,17 @@ getFollowQuestionLink(question) {
   if (this.props.question_id === question.id) {
     return null;
   }
-  return `topics/${question.topic_id}/questions/${question.id}#top`;
+  return `topics/${question.topic_id}/questions/${question.id}`;
 }
 
 
 renderQuestions() {
   const questions = this.getQuestionsList();
   return (
-    <div className="questions-list-container">
-      <ul className="questions-list">
+    <div className="watched-questions-list-container">
+      <ul className="watched-questions-list">
         {questions.map((question, i) => {
-          const followSingleQuestion = this.props.question_id === question.id ? "follow-single-question-container-active" : "follow-single-question-container"
+          const followSingleQuestion = this.props.question_id === question.id ? "watched-single-question-container-active" : "watched-single-question-container"
           const now = new Date();
           const author = question.auth_first_name + ' ' + question.auth_last_name;
           const userpic = question.auth_userpic_url;
@@ -74,6 +97,8 @@ renderQuestions() {
     </div>
   )
 }
+
+
 
 getDate(obj, now, str) {
   const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -104,11 +129,11 @@ getDate(obj, now, str) {
 }
 
 render() {
-
+  debugger
   return (
-    <div className="followed-users-questions-container">
-      <div className="followed-question-title">
-        <span>Recent questions from your favorite authors</span>
+    <div className="watched-questions-container">
+      <div className="watched-question-title">
+        <span>Updates on your watched questions</span>
       </div>
       {this.renderQuestions()}
     </div>
@@ -119,4 +144,4 @@ render() {
 }
 
 
-export default withRouter(FollowedQuestionsBlock);
+export default withRouter(WatchedQuestionsBlock);

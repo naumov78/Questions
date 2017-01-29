@@ -115,3 +115,20 @@ export const dislikeComment = (comment_id) => {
     });
   }
 }
+
+export const watchQuestion = (user_id, question_id) => {
+  return (dispatch) => {
+    return APIUtil.watchQuestion(user_id, question_id).then((question) => {
+      return dispatch(receiveSingleQuestion(question))
+    });
+  }
+}
+
+
+export const unwatchQuestion = (user_id, question_id) => {
+  return (dispatch) => {
+    return APIUtil.unwatchQuestion(user_id, question_id).then((question) => {
+      return dispatch(receiveSingleQuestion(question))
+    });
+  }
+}

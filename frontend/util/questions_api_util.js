@@ -82,3 +82,19 @@ export const dislikeComment = (comment_id) => {
     data: {user_liked_comment: {comment_id: comment_id}}
   });
 };
+
+export const watchQuestion = (user_id, question_id) => {
+  return $.ajax({
+    method: "POST",
+    url: '/api/user_watched_questions',
+    data: {user_watched_question: {user_id: user_id, question_id: question_id}}
+  });
+};
+
+export const unwatchQuestion = (user_id, question_id) => {
+  return $.ajax({
+    method: "DELETE",
+    url: `/api/user_watched_questions/1`,
+    data: {user_watched_question: {user_id: user_id, question_id: question_id}}
+  });
+};

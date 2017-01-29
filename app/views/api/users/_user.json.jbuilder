@@ -2,9 +2,20 @@ json.extract! user, :id, :first_name, :last_name, :description, :userpic, :topic
 json.userpic_url asset_path(user.userpic.url)
 
 
+json.watched_questions user.watched_questions do |question|
+  json.extract! question, :id, :author_id, :body, :created_at, :updated_at
+  json.author question.user
+   json.answers question.answers do |answer|
+     json.extract! answer, :id, :author_id, :body, :created_at
+     json.question answer.question
+  end
+end
+
 json.followees user.followees do |followee|
   json.extract! followee, :id, :description, :first_name, :last_name
-  json.follow_created_at current_user.out_follows.find_by(followee_id: followee.id).created_at
+  if !current_user.out_follows.find_by(followee_id: followee.id).nil?
+    json.follow_created_at current_user.out_follows.find_by(followee_id: followee.id).created_at
+  end
   json.followee_userpic_url asset_path(followee.userpic.url)
   json.followee_questions followee.questions do |question|
     json.extract! question, :id, :author_id, :body, :created_at, :topic_id

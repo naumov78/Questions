@@ -1,0 +1,2 @@
+module Api::UserWatchedQuestionsHelper
+end

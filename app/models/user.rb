@@ -69,6 +69,9 @@ class User < ActiveRecord::Base
   has_many :followees, through: :out_follows, source: :followee
 
 
+  has_many :user_watched_questions, inverse_of: :user
+  has_many :watched_questions, through: :user_watched_questions
+
 
 # , inverse_of: :user
   attr_reader :password

@@ -101,6 +101,58 @@ getLikeButton(question) {
   }
 }
 
+
+// watch question
+
+watchQuestion(question) {
+  this.props.watchQuestion(this.props.currentUser.id, question.id).then(() => {
+    this.getQuestion();
+  });
+}
+
+unwatchQuestion(question) {
+  this.props.unwatchQuestion(this.props.currentUser.id, question.id).then(() => {
+    this.getQuestion();
+  });
+}
+
+checkIfWatched(question) {
+  if (question) {
+    if (question.watched_users && question.watched_users.length > 0) {
+      for (let i = 0; i < question.watched_users.length; i++ ) {
+        if (question.watched_users[i].id === this.props.currentUser.id) {
+          return true;
+        }
+      }
+    }
+  } else {
+  return false;
+  }
+}
+
+getWatchButton(question) {
+  if (question) {
+    let watchBtn;
+      if (this.checkIfWatched(question)) {
+        watchBtn = <span>
+        <button onClick={() => this.unwatchQuestion(question)} className="auth-unfollow-btn" id="watch-btn">Unwatch question | {question.watched_users.length}</button>
+        </span>
+      } else {
+        let watchers;
+        if (typeof question.watched_users === 'undefined') {
+          watchers = 0
+        } else {
+          watchers = question.watched_users.length;
+        }
+        watchBtn = <button className="auth-follow-btn" id="watch-btn" onClick={() => this.watchQuestion(question)}>Watch question | {watchers}</button>
+      }
+    return watchBtn;
+  } else {
+    return null;
+  }
+}
+
+
 // answer likes
 
 addAnswerLike(answer) {
@@ -541,9 +593,14 @@ render () {
           </div>
         </div>
         <div className="single-question-body">{this.props.question.body}</div>
-        <div className="question-buttons">
-          <button className="ans-btn" onClick={() => this.setState({answer: true, addComment: false})}>Add answer</button>
-          {this.getLikeButton(this.state.question)}
+        <div className="question-buttons group">
+          <span id="one">
+            <button className="ans-btn" onClick={() => this.setState({answer: true, addComment: false})}>Add answer</button>
+            {this.getLikeButton(this.state.question)}
+          </span>
+          <span id="two">
+            {this.getWatchButton(this.state.question)}
+          </span>
         </div>
         {this.renderAnswersQuntity()}
       </div>

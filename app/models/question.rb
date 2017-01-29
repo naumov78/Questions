@@ -35,4 +35,7 @@ class Question < ActiveRecord::Base
   has_many :user_liked_questions, inverse_of: :question
   has_many :liked_users, through: :user_liked_questions
 
+  has_many :user_watched_questions, inverse_of: :question
+  has_many :watched_users, through: :user_watched_questions
+
 end

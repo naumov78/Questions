@@ -2,17 +2,29 @@
   display: block;
   float: left;
   width: 385px;
-  height: 800px;
+  // height: 800px;
   margin-left: 20px;
   padding: 10px 0 10px 8px;
 }
 
 .followed-users-questions-container {
   width: 375px;
-  height: 800px;
+  // height: 800px;
+}
+
+.watched-questions-container {
+  margin-top: 30px;
 }
 
 .followed-question-title {
+  padding: 5px 5px 5px 15px;
+  background: #ff8c1a;
+  color: #fff;
+  font-size: 14px;
+}
+
+// ff8c1a
+.watched-question-title {
   padding: 5px 5px 5px 15px;
   background: #2980b9;
   color: #fff;
@@ -20,6 +32,12 @@
 }
 
 .questions-list-container {
+  padding: 5px;
+  border-left: 1px solid #e2e2e2;
+}
+
+.watched-questions-list-container {
+  // margin-top: 90px;
   padding: 5px;
   border-left: 1px solid #e2e2e2;
 }
@@ -63,7 +81,7 @@
   cursor: pointer;
 
   .follow-question-body {
-    color: #b82b28;
+    color: #cc6600;
   }
 
   .auth-info {
@@ -82,10 +100,9 @@
   padding: 8px 5px 8px 5px;
   box-shadow: 0px 8px 16px 0px rgba(187,202,220,0.2);
   cursor: default;
-
-  .follow-question-body {
-    color: #b82b28;
-  }
+  border-top: 1px solid #e2e2e2;
+  border-bottom: 1px solid #e2e2e2;
+  border-right: 1px solid #e2e2e2;
 
   .auth-info {
     font-size: 14px;
@@ -100,6 +117,88 @@
     font-size: 12px;
     font-family: arial;
     font-weight: normal;
+    color: #cc6600;
+  }
+
+  .follow-question-date {
+    color: #999;
+    font-size: 12px;
+  }
+}
+
+
+
+//
+
+.watched-single-question-container {
+  font-size: 12px;
+  padding: 8px 5px 8px 5px;
+
+  .auth-info {
+    font-size: 14px;
+    color: #003366;
+  }
+
+  .auth-info:hover {
+    color: #2980b9;
+  }
+
+  .follow-question-date {
+    color: #999;
+    font-size: 12px;
+  }
+
+  .follow-question-body {
+    font-size: 12px;
+    color: #2573a7;
+    font-family: arial;
+    font-weight: normal;
+  }
+
+}
+
+.watched-single-question-container:hover {
+  box-shadow: 0px 8px 16px 0px rgba(187,202,220,0.2);
+  cursor: pointer;
+
+  .follow-question-body {
+    color: #cc6600;
+  }
+
+  .auth-info {
+    font-size: 14px;
+    color: #003366;
+  }
+
+  .auth-info:hover {
+    color: #2980b9;
+  }
+
+}
+
+.watched-single-question-container-active {
+  font-size: 12px;
+  padding: 8px 5px 8px 5px;
+  box-shadow: 0px 8px 16px 0px rgba(187,202,220,0.2);
+  cursor: default;
+  border-top: 1px solid #e2e2e2;
+  border-bottom: 1px solid #e2e2e2;
+  border-right: 1px solid #e2e2e2;
+
+  .auth-info {
+    font-size: 14px;
+    color: #003366;
+  }
+
+  .auth-info:hover {
+    color: #2980b9;
+  }
+
+  .follow-question-body {
+    font-size: 12px;
+    font-family: arial;
+    font-weight: normal;
+    color: #cc6600;
   }
 
   .follow-question-date {

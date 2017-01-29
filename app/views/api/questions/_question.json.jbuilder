@@ -5,6 +5,7 @@ json.author_userpic_url asset_path(user.userpic.url)
 
 json.topic_title question.topic.title
 json.liked_users question.liked_users
+json.watched_users question.watched_users
 
 
 json.out_follows current_user.out_follows
