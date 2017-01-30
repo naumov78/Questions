@@ -4,7 +4,13 @@ User.delete_all
 Topic.delete_all
 Question.delete_all
 Answer.delete_all
+Comment.delete_all
+Follow.delete_all
+UserLikedAnswer.delete_all
+UserLikedComment.delete_all
+UserLikedQuestion.delete_all
 UserSubscribedTopic.delete_all
+UserWatchedQuestion.delete_all
 
 
 culture = Topic.create!(title: 'Culture')
@@ -45,14 +51,50 @@ children = Topic.create!(title: 'Children')
 # user8 = User.create!(first_name: 'Han', last_name: 'Solo', email: 'han_solo@starwars.com', description: 'Captain of the Millennium Falcon', password: '12345', userpic: "https://s3.amazonaws.com/questions-pro/users/hansolo.png")
 
 
-user1 = User.create!(first_name: 'Padme', last_name: 'Amidala', email: 'padme_amidala@starwars.com', description: 'Teenage queen', password: '12345')
-user2 = User.create!(first_name: 'Jango', last_name: 'Fett', email: 'jango_fett@starwars.com', description: 'Bounty hunter', password: '12345')
-user3 = User.create!(first_name: 'Jabba', last_name: 'the Hutt', email: 'jabba_hutt@starwars.com', description: 'Crime boss', password: '12345')
-user4 = User.create!(first_name: 'Qui-Gon', last_name: 'Jinn', email: 'quigon_jinn@starwars.com', description: 'Jedi Master', password: '12345')
-user5 = User.create!(first_name: 'Obi-Wan', last_name: 'Kenobi', email: 'obiwan_kenobi@starwars.com', description: 'Wise and skilled Jedi Master', password: '12345')
-user6 = User.create!(first_name: 'Leia Amidala', last_name: 'Skywalker Organa Solo', email: 'leia@starwars.com', description: 'Luke Skywalker\'s sister and Han Solo\'s wife', password: '12345')
-user7 = User.create!(first_name: 'Anakin', last_name: 'Skywalker', email: 'anakin_skywalker@starwars.com', description: 'aka Darth Vader', password: '12345')
-user8 = User.create!(first_name: 'Han', last_name: 'Solo', email: 'han_solo@starwars.com', description: 'Captain of the Millennium Falcon', password: '12345')
+user1 = User.create!(first_name: 'Padme', last_name: 'Amidala', email: 'padme_amidala@questions.com', description: 'Teenage queen', password: '12345')
+user1.userpic = File.open("app/assets/images/userpics/padme.jpg")
+user1.save!
+user2 = User.create!(first_name: 'Jango', last_name: 'Fett', email: 'jango_fett@questions.com', description: 'Bounty hunter', password: '12345')
+user2.userpic = File.open("app/assets/images/userpics/jango.jpg")
+user2.save!
+user3 = User.create!(first_name: 'Jabba', last_name: 'the Hutt', email: 'jabba_hutt@questions.com', description: 'Crime boss', password: '12345')
+user3.userpic = File.open("app/assets/images/userpics/jabba.jpg")
+user3.save!
+user4 = User.create!(first_name: 'Qui-Gon', last_name: 'Jinn', email: 'quigon_jinn@questions.com', description: 'Jedi Master', password: '12345')
+user4.userpic = File.open("app/assets/images/userpics/quigon.png")
+user4.save!
+user5 = User.create!(first_name: 'Obi-Wan', last_name: 'Kenobi', email: 'obiwan_kenobi@questions.com', description: 'Wise and skilled Jedi Master', password: '12345')
+user5.userpic = File.open("app/assets/images/userpics/obione.jpg")
+user5.save!
+user6 = User.create!(first_name: 'Leia Amidala', last_name: 'Skywalker Organa Solo', email: 'leia@questions.com', description: 'Luke Skywalker\'s sister and Han Solo\'s wife', password: '12345')
+user6.userpic = File.open("app/assets/images/userpics/leia.jpg")
+user6.save!
+user7 = User.create!(first_name: 'Anakin', last_name: 'Skywalker', email: 'anakin_skywalker@questions.com', description: 'aka Darth Vader', password: '12345')
+user7.userpic = File.open("app/assets/images/userpics/anakin.jpg")
+user7.save!
+user8 = User.create!(first_name: 'Han', last_name: 'Solo', email: 'han_solo@questions.com', description: 'Captain of the Millennium Falcon', password: '12345')
+user8.userpic = File.open("app/assets/images/userpics/hansolo.png")
+user8.save!
+user9 = User.create!(first_name: 'Indiana', last_name: 'Jones', email: 'indiana_jones@questions.com', description: 'a fictional archaeologist', password: '12345')
+user9.userpic = File.open("app/assets/images/userpics/indiana_jones.jpg")
+user9.save!
+user10 = User.create!(first_name: 'Forrest', last_name: 'Gump', email: 'forest_gump@questions.com', description: 'Life is like a box of chocolates', password: '12345')
+user11 = User.create!(first_name: 'Chewbacca', last_name: 'Chewie', email: 'chewie@questions.com', description: 'Wookiee from the planet Kashyyyk', password: '12345')
+user12 = User.create!(first_name: 'William', last_name: 'Wallace', email: 'william@questions.com', description: 'Scottish knight who became one of the main leaders during the Wars of Scottish Independence', password: '12345')
+user13 = User.create!(first_name: 'Ace', last_name: 'Ventura', email: 'ace@questions.com', description: 'private detective specializing in the retrieval of missing animals', password: '12345')
+user14 = User.create!(first_name: 'Jack', last_name: 'Sparrow', email: 'sparrow@questions.com', description: 'Pirate Lord of the Caribbean Sea', password: '12345')
+user15 = User.create!(first_name: 'Tony', last_name: 'Montana', email: 'montana@questions.com', description: 'Drug Lord', password: '12345')
+user16 = User.create!(first_name: 'Rocky', last_name: 'Balboa', email: 'roky@questions.com', description: 'Professional boxer (retired), boxing trainer', password: '12345')
+user17 = User.create!(first_name: 'Jeffrey', last_name: 'Lebowski', email: 'lebowski@questions.com', description: 'The Dude aka His Dudeness or El Duderino', password: '12345')
+user18 = User.create!(first_name: 'Freddy', last_name: 'Krueger', email: 'krueger@questions.com', description: 'The Springwood Slasher', password: '12345')
+user19 = User.create!(first_name: 'John', last_name: 'McClane', email: 'mcclane@questions.com', description: 'New York City Police Detective', password: '12345')
+user20 = User.create!(first_name: 'James', last_name: 'Bond', email: 'bond@questions.com', description: 'British Secret Service agent ', password: '12345')
+user21 = User.create!(first_name: 'Vito', last_name: 'Corleone', email: 'vito@questions.com', description: 'The Godfather', password: '12345')
+user22 = User.create!(first_name: 'Ethan', last_name: 'Hunt', email: 'hunt@questions.com', description: 'IMF Agent', password: '12345')
+user23 = User.create!(first_name: 'Jason', last_name: 'Bourne', email: 'bourne@questions.com', description: 'Specialist in Far Eastern affairs', password: '12345')
+user24 = User.create!(first_name: 'Frank', last_name: 'Drebin', email: 'frank@questions.com', description: 'Police officer', password: '12345')
+user25 = User.create!(first_name: 'Harry', last_name: 'Potter', email: 'harry@questions.com', description: 'a half-blood wizard', password: '12345')
+
 
 # :userpic => File.open(File.join('http://apm-assets.s3.amazonaws.com', '/path/to/img.jpg')
 
@@ -83,19 +125,38 @@ user8 = User.create!(first_name: 'Han', last_name: 'Solo', email: 'han_solo@star
 # user8.save!
 
 
+UserSubscribedTopic.create!(user_id: user8.id, topic_id: culture.id)
+UserSubscribedTopic.create!(user_id: user8.id, topic_id: technology.id)
+UserSubscribedTopic.create!(user_id: user8.id, topic_id: science.id)
 UserSubscribedTopic.create!(user_id: user8.id, topic_id: movies.id)
 UserSubscribedTopic.create!(user_id: user8.id, topic_id: books.id)
+UserSubscribedTopic.create!(user_id: user8.id, topic_id: health.id)
 UserSubscribedTopic.create!(user_id: user8.id, topic_id: music.id)
-UserSubscribedTopic.create!(user_id: user8.id, topic_id: business.id)
-UserSubscribedTopic.create!(user_id: user8.id, topic_id: cooking.id)
-UserSubscribedTopic.create!(user_id: user8.id, topic_id: sports.id)
-UserSubscribedTopic.create!(user_id: user8.id, topic_id: finance.id)
-UserSubscribedTopic.create!(user_id: user8.id, topic_id: food.id)
 UserSubscribedTopic.create!(user_id: user8.id, topic_id: education.id)
-UserSubscribedTopic.create!(user_id: user8.id, topic_id: children.id)
+UserSubscribedTopic.create!(user_id: user8.id, topic_id: business.id)
+UserSubscribedTopic.create!(user_id: user8.id, topic_id: food.id)
+UserSubscribedTopic.create!(user_id: user8.id, topic_id: travel.id)
+UserSubscribedTopic.create!(user_id: user8.id, topic_id: psychology.id)
+UserSubscribedTopic.create!(user_id: user8.id, topic_id: history.id)
+UserSubscribedTopic.create!(user_id: user8.id, topic_id: design.id)
+UserSubscribedTopic.create!(user_id: user8.id, topic_id: cooking.id)
 UserSubscribedTopic.create!(user_id: user8.id, topic_id: photography.id)
+UserSubscribedTopic.create!(user_id: user8.id, topic_id: sports.id)
+UserSubscribedTopic.create!(user_id: user8.id, topic_id: economics.id)
+UserSubscribedTopic.create!(user_id: user8.id, topic_id: writing.id)
+UserSubscribedTopic.create!(user_id: user8.id, topic_id: fashion.id)
+UserSubscribedTopic.create!(user_id: user8.id, topic_id: philosophy.id)
+UserSubscribedTopic.create!(user_id: user8.id, topic_id: finance.id)
 UserSubscribedTopic.create!(user_id: user8.id, topic_id: marketing.id)
-UserSubscribedTopic.create!(user_id: user8.id, topic_id: culture.id)
+UserSubscribedTopic.create!(user_id: user8.id, topic_id: mathematics.id)
+UserSubscribedTopic.create!(user_id: user8.id, topic_id: politics.id)
+UserSubscribedTopic.create!(user_id: user8.id, topic_id: literature.id)
+UserSubscribedTopic.create!(user_id: user8.id, topic_id: children.id)
+
+
+
+
+
 
 question1 = Question.create!(author_id: user1.id, topic_id: movies.id, body: 'What is it like working with Christopher Nolan?')
 answer1 = Answer.create!(question_id: question1.id, author_id: user2.id, body: 'I think one of the things that is really great about working with Chris is that he doesn’t, in any way, get in the way of my imagination. In fact, he works very hard at not having me confined by the mechanics of filmmaking. So, our process is usually starting long conversations just riffing on ideas. Then slowly I start writing and experimenting, coming up with sounds, etc., all the while keeping in constant conversation with Chris. In Interstellar, for instance, there’re so many themes, so many pieces, which always got to a certain point during the writing process but never had an ending, because Chris and I would get to a certain point with an idea and then abandon it because we got excited about the next idea. You have to think of how Chris and I work as a sort of breathless, constant sprint because we are just trying to keep up with our own ideas. The ideas are so plentiful when Chris and I get together, but the execution always takes more time and it can be so frustrating. It’s sometimes very frustrating for him as well because he’s trying to make a movie and he’s waiting on the music. When it comes to the music for Interstellar, I can honestly say that in one way or another, the music is our music, not just my music. It’s entirely our music, and that’s a testament to how much I let Chris into my world. The great thing is that as a composer, you can only write from the heart and from your innermost place. So, you have to trust your director. And that’s the thing - there’s a great sense of trust and a great sense of balance that Chris brings to the composing process. Because Chris cuts his movies in his garage, (giving his films a sort of a homemade quality), he never makes me feel that I have the enormous weight of the canvas on my shoulders. His editing process is really helpful for my composing process. The work and the story is always brought back to the personal and the intimate, and that’s perfect for how I work.')
@@ -163,3 +224,110 @@ answer46 = Answer.create!(question_id: question16.id, author_id: user1.id, body:
 question17 = Question.create!(author_id: user1.id, topic_id: business.id, body: 'Why do most "boring" businesses make a lot of money?')
 answer47 = Answer.create!(question_id: question17.id, author_id: user2.id, body: 'Because boring also means it works. It’s the same reason why you invest in blue chip stocks or diversified portfolios when you want to make money for retirement. You aren’t looking to do anything high risk. You just want to invest. Make your return. Move on. Same thing in the proven business model area. People who get into it know exactly what it does and they are happy with that fact. They aren’t looking to change the world or make some kind of revolutionary product. That being said even boring businesses can fail too. The reason being is because proven business models are also expensive to get into because everyone knows the value of them. So if you don’t have the capital to make it work, you can easily find yourself in a whole even with a working business model.')
 answer48 = Answer.create!(question_id: question17.id, author_id: user5.id, body: 'Because “sexy” businesses attract too much attention and people are willing to bid down their ROI to be a part of it and its prestige. There’s a reason why video game programmers have lower salaries and worse work environments than people programming database software. Who says to themselves “When I grow up, I want to program ERP solutions for the downstream oil market”? Therefore, you have to pay someone more to do that over following their childhood dreams of making awesome AAA video games like the ones they played as a kid. The same logic follows in businesses.')
+
+
+# answer50 = Answer.create!(question_id: question18.id, author_id: user11.id, body: '')
+
+# culture
+
+question18 = Question.create!(author_id: user10.id, topic_id: culture.id, body: 'What is Critical Race Theory?')
+answer49 = Answer.create!(question_id: question18.id, author_id: user1.id, body: 'Critical Race Theory is a neo-Marxian critique model or philosophy, with a focus on racial issues (e.g. within a larger system or society) Specifically, it is part of a movement that is often labeled as “intersectional” activism. This was largely borne out of the New Left tradition, and ultimately with roots going back to the Frankfurt School. However, it has been streamlined for the modern era. It is promoted heavily in left-leaning and race-focused media outlets and in academic settings, where it is passed off as the continuation of a broad civil rights movement or straight-forward racial activism. In fact, many proponents are either unaware of its roots or foundational principles or they try to obscure it. They’ll use a cover of “social justice”….that they are simply activists. \n In fact, people that might not bat an eye at the term CRT may not have even looked up Critical Theory.')
+comment1 = Comment.create!(answer_id: answer49.id, author_id: user11.id, body: "There's two other things from the Wikipedia article on CRT that I'd like to know more about: \\n - The emphasis on narrative over analysis \\n - The pursuit of legal remedies \\n \\n Neither of those sound particularly Critical Theory or Marxist to me. Where did they come from, and how do they play out?")
+comment2 = Comment.create!(answer_id: answer49.id, author_id: user3.id, body: "How much is the term actually used? I’ve heard it mostly from critics.")
+answer50 = Answer.create!(question_id: question18.id, author_id: user15.id, body: 'Critical theory is derived from, and is a broadening of Marxist social critique. You can read the academic meaning of critical theory here, but there\'s a lot of gobbledygook. Like a lot of social science writing, it uses a lot of big words to describe very little substance. It can be best described as “bullshit baffles brains”. Here’s the essence: It is born of the notion that there are groups in society (formerly “classes”) which are necessarily in conflict with each other.
+The problem for Marxists, even as early as the 1930s, is that the industrial revolution brought unprecedented wealth to large numbers of people, creating, in western societies at least, a viable and growing middle class (what Marx called the “bourgeoisie”). This class, he knew, would always be opposed to revolution, because they had too much to protect. The Neo-Marxists had to figure out some other way to get groups of people mad at other people. This was the answer for the time.
+There are numerous dimensions through which one can apply critical theory - class (of course), race, sex, ethnicity, (dis-) ability, sexual orientation - even language. It’s all about which group is the oppressor, and which is the oppressed.
+The underlying ideas were formed back in Germany in the 1930s, which might give you some idea of their actual use and applicability.')
+answer51 = Answer.create!(question_id: question18.id, author_id: user11.id, body: 'Critical Race Theory is about systemic and institutionalized racism in societies. It looks at how marginalized groups are affected by discrimination in cultural, social, and legal systems. It combines philosophy, sociology, and law to follow, track, and analyze the evolution of racism throughout a society\'s history, including what factors allow racism to still exist.')
+answer52 = Answer.create!(question_id: question18.id, author_id: user19.id, body: 'It’s a consolidated pseudoacademic theory of oppression/victimization based on melanin content of skin and may be one of the principle reasons why Donald Trump is the next US President and not somebody who isn’t a thin-skinned narcissistic man-child.
+Combined with intersectionality, third-wave feminism and neo-Marxism and an overwheening sense of privilege to shutdown anyone else’s point of view that conflicts with your own and you have a fun way to be as disruptive as possible at college and it’s everybody else’s fault.
+When you leave college with your degree you have a fully-protective coat of near impenetrable victimhood and anti-white, anti-male, anti-Western prejudice that will see your resume canned by prospective employers quicker than a baked bean at a Heinz convention. Which of course will be interpreted as oppression by the white supremacist Patriarchy rather than an understanding that you’re a walking legal liability who everybody else hates to work with.
+Apart from that, it’s fascinating.
+Would you like fries with that?')
+answer53 = Answer.create!(question_id: question18.id, author_id: user22.id, body: 'Critical Race Theory is essentially the analysis of race from a legal point of view. For racism to be stemmed nationally, at a macro level, this kind of analysis is crucial. I find CRT interesting because it is multidisciplinary; questions that a CRT scholar might ask include: How does racial identity shape another’s perception? And to what extent is this perception an attenuation of a potentially criminal act? Some specific issues might include eminent domain for undocumented immigrants, affirmative action and meritocracy, and personal bias from people in positions of authority. (and many more!)
+Analysis of these issues from a pragmatic, legal standpoint is a crucial counterpart to grassroots social justice movements by citizens. The two together make for a balanced, nuanced approach to dealing with the multifaceted issue of race in the US.')
+
+
+# answer50 = Answer.create!(question_id: question18.id, author_id: user11.id, body: '')
+# comment1 = Comment.create!(answer_id: answer49.id, author_id: user11.id, body: '')
+
+question19 = Question.create!(author_id: user21.id, topic_id: culture.id, body: 'Do religion and culture unite or divide a society?')
+answer53 = Answer.create!(question_id: question19.id, author_id: user14.id, body: 'it is the behaviour of society who interprets religion and culture wrongly and harm the society mostly they think they are more powerful and do the wrongs in the name of religion and culture.')
+answer54 = Answer.create!(question_id: question19.id, author_id: user13.id, body: 'Religion. preferably organized , divides people. They have dogma or required beliefs for membership, in their creed. It is required for entrance. There is no free will. Once you enter you are not allowed to exit, depending on what type of religion. Abrahamism of the Islamic variety is the most tough and least accommodative. Of course it divides society,
+Culture is different. A common culture will let different religions coexist, the best example being civilizations based on Dharma, like Jainism, Buddism and Brahmanism, variations of philosophy. Existence of gods is simply a question. You can choose what you need. Atheism is also allowed. You can believe in god, goddess or anything you can think of if it helps you. There is no central authority. Hindu Dharma is super secular in spirit.
+India did not become secular in 1945 after independence from the British. It was fully secular 3000years ago. South East Asia has absorbed the same ideas and culture. It is the sole example of this secularism right from the start.')
+answer55 = Answer.create!(question_id: question19.id, author_id: user15.id, body: 'It unites a group of people but divides humanity.What we fail to understand is culture or religion is something which people created. It\'s nothing but one\'s way of living. When few people get together they tend to do similar things as a group. Their actions becomes their culture. Another set of people who are not aware of the previous set finds some other way of doing things and defines it as their religion, culture. This happens because our world is so huge and people are spread over in all places. The day we realize this, humanity will be united.  Until then there will be wars all across the world over who is great, whose culture is great, whose religion is great!')
+
+
+# technology
+# answer50 = Answer.create!(question_id: question18.id, author_id: user11.id, body: '')
+# comment1 = Comment.create!(answer_id: answer49.id, author_id: user11.id, body: '')
+question20 = Question.create!(author_id: user17.id, topic_id: technology.id, body: 'What are some interesting facts which are not commonly known?')
+answer51 = Answer.create!(question_id: question20.id, author_id: user13.id, body: 'Bill Gates got his degree 32 years after dropping out from Harvard University. He had promised his dad that he would get his degree and fulfilled that promise.')
+
+answer52 = Answer.create!(question_id: question20.id, author_id: user18.id, body: 'Facebook\'s campus in Palo Alto was previously owned by Sun Microsystems. After it got acquired by Oracle, FB moved in but Zuckerburg didn\'t remove the sign and just flipped it over.')
+
+answer53 = Answer.create!(question_id: question20.id, author_id: user4.id, body: 'Matt le Blanc who played Joey in the evergreen TV show \'F.R.I.E.N.D.S\' was down to his last 11 dollars on the day when he landed the role. He would have left New York had he become broke.')
+
+answer54 = Answer.create!(question_id: question20.id, author_id: user23.id, body: 'The island nation Tuvalu generates revenue from the use of its area code for premium rate telephone numbers and from the commercialization of its ".tv" Internet domain name. The ".tv" domain name generates around $2.2 million each year from royalties, which is about ten per cent of the government\'s total revenue.')
+
+answer55 = Answer.create!(question_id: question20.id, author_id: user24.id, body: 'The Romans are alleged by some to have had a toilet god in the form of Crepitus, who was also the god of flatulence and was invoked if a person had diarrhoea or constipation. They additionally propitiated Stercutius (named from stercus or excrement), the god of dung, who was particularly important to farmers when fertilising their fields with manure.')
+
+answer56 = Answer.create!(question_id: question20.id, author_id: user6.id, body: 'Johnny Depp collects Barbies. A source close to the actor says that he has dozens and dozens of Barbies, all of them are limited and special editions. Not only does the collection include his own dolls from his movies but Beyonce, the cast of "High School Musical," Elvis, Paris Hilton, Marilyn Monroe, and Audrey Hepburn, but the strangest one is of Lindsay Lohan complete with ankle monitor bracelet from her time on house arrest.
+Depp says that he plays Barbies a lot with his kids, and claims it\'s one of the things he\'s good at. The source also claims that Johnny will dress and accessorize his collection according to what is going on in show business news.')
+
+
+UserLikedQuestion.create!(user_id: user8.id, question_id: question18.id)
+UserLikedQuestion.create!(user_id: user18.id, question_id: question18.id)
+UserLikedQuestion.create!(user_id: user12.id, question_id: question18.id)
+UserLikedQuestion.create!(user_id: user2.id, question_id: question18.id)
+UserLikedQuestion.create!(user_id: user9.id, question_id: question18.id)
+UserLikedQuestion.create!(user_id: user15.id, question_id: question18.id)
+
+UserLikedAnswer.create!(user_id: user8.id, answer_id: answer49.id)
+UserLikedAnswer.create!(user_id: user14.id, answer_id: answer49.id)
+UserLikedAnswer.create!(user_id: user16.id, answer_id: answer49.id)
+UserLikedAnswer.create!(user_id: user17.id, answer_id: answer49.id)
+UserLikedAnswer.create!(user_id: user19.id, answer_id: answer49.id)
+UserLikedAnswer.create!(user_id: user8.id, answer_id: answer53.id)
+UserLikedAnswer.create!(user_id: user6.id, answer_id: answer53.id)
+UserLikedAnswer.create!(user_id: user5.id, answer_id: answer53.id)
+UserLikedAnswer.create!(user_id: user8.id, answer_id: answer56.id)
+UserLikedAnswer.create!(user_id: user1.id, answer_id: answer56.id)
+UserLikedAnswer.create!(user_id: user2.id, answer_id: answer56.id)
+UserLikedAnswer.create!(user_id: user3.id, answer_id: answer56.id)
+UserLikedAnswer.create!(user_id: user4.id, answer_id: answer56.id)
+
+UserLikedComment.create!(user_id: user8.id, comment_id: comment2.id)
+UserLikedComment.create!(user_id: user1.id, comment_id: comment2.id)
+UserLikedComment.create!(user_id: user2.id, comment_id: comment2.id)
+UserLikedComment.create!(user_id: user3.id, comment_id: comment2.id)
+UserLikedComment.create!(user_id: user4.id, comment_id: comment2.id)
+UserLikedComment.create!(user_id: user5.id, comment_id: comment2.id)
+UserLikedComment.create!(user_id: user6.id, comment_id: comment2.id)
+UserLikedComment.create!(user_id: user7.id, comment_id: comment2.id)
+UserLikedComment.create!(user_id: user9.id, comment_id: comment2.id)
+UserLikedComment.create!(user_id: user11.id, comment_id: comment2.id)
+UserLikedComment.create!(user_id: user12.id, comment_id: comment2.id)
+UserLikedComment.create!(user_id: user14.id, comment_id: comment2.id)
+UserLikedComment.create!(user_id: user15.id, comment_id: comment2.id)
+
+
+Follow.create!(followee_id: user10.id, follower_id: user8.id)
+Follow.create!(followee_id: user12.id, follower_id: user8.id)
+Follow.create!(followee_id: user1.id, follower_id: user8.id)
+Follow.create!(followee_id: user14.id, follower_id: user8.id)
+Follow.create!(followee_id: user18.id, follower_id: user8.id)
+Follow.create!(followee_id: user19.id, follower_id: user8.id)
+Follow.create!(followee_id: user21.id, follower_id: user8.id)
+Follow.create!(followee_id: user3.id, follower_id: user8.id)
+Follow.create!(followee_id: user4.id, follower_id: user8.id)
+Follow.create!(followee_id: user6.id, follower_id: user8.id)
+Follow.create!(followee_id: user2.id, follower_id: user8.id)
+Follow.create!(followee_id: user9.id, follower_id: user8.id)
+Follow.create!(followee_id: user22.id, follower_id: user8.id)
+Follow.create!(followee_id: user25.id, follower_id: user8.id)
+Follow.create!(followee_id: user15.id, follower_id: user8.id)
+
+
+UserWatchedQuestion.create!(user_id: user8.id, question_id: question18.id)
