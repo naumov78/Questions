@@ -36,7 +36,7 @@ class SessionFormNew extends React.Component {
 
 	guestLogin(e) {
 		e.preventDefault();
-		const user = { email: 'han_solo@starwars.com', password: '12345' }
+		const user = { email: 'han_solo@questions.com', password: '12345' }
 		this.props.login({user}).then(() => {
 			this.props.router.push("/");
 		})
