@@ -1,1 +1,1 @@
-json.partial! 'api/topics/topic', topic: @topic, single_question: @question, user: @user, topic_questions: @topic_questions
+json.partial! 'api/topics/topic', topic: @topic, single_question: @question, user: @user, topic_questions: @topic_questions, watched_questions: @watched_questions

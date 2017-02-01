@@ -21,3 +21,20 @@ Rails.application.routes.draw do
     end
   end
 end
+
+
+
+
+
+
+# resources :topics, only: [:index, :show] do
+#   resources :questions, only: [:index]
+# end
+#
+# resources :questions, only: [:create, :show] do
+#   resources :answers, only: [:index]
+# end
+#
+# resources :answers, only: [:create, :show]
+#
+# end

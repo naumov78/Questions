@@ -94,9 +94,9 @@ class QuestionForm extends React.Component {
 
 
   getFolloweesQuestionsBlock() {
-    if (currentUser) {
-      if (currentUser.out_follows.length > 0) {
-        return <RightPart followees={currentUser.followees} />
+    if (this.props.currentUser) {
+      if (this.props.currentUser.out_follows.length > 0) {
+        return <RightPart followees={this.props.currentUser.followees} watched_questions={this.props.currentUser.watched_questions} />
       } else {
         return null;
       }

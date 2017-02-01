@@ -5,6 +5,7 @@ import merge from 'lodash/merge';
 
 const initState = {
     currentUser: null,
+    // watched_questions: [],
     errors: {login: [], signup:[]}
 }
 
@@ -13,6 +14,7 @@ const SessionReducer = (state = initState, action) => {
   switch(action.type){
     case RECEIVE_CURRENT_USER:
       const currentUser = action.currentUser;
+      const watched_questions = action.watched_questions;
       return Object.assign({}, state, { currentUser });
     case logout:
       return initState;

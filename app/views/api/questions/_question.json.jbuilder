@@ -37,3 +37,13 @@ end
     end
 
   end
+
+json.watched_questions watched_questions do |question|
+  json.extract! question, :id, :author_id, :body, :topic_id, :views, :rating, :answers, :created_at
+  json.user question.user
+  json.author_userpic_url asset_path(question.user.userpic.url)
+  json.answers question.answers do |answer|
+    json.extract! answer, :id, :created_at
+    json.user answer.user
+  end
+end

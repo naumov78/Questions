@@ -82,12 +82,12 @@ class TopicIndex extends React.Component {
     let likeBtn;
     if (this.checkIfLiked(question)) {
       likeBtn = <span>
-      <button className="upvote-btn-liked">Upvoters | {question.liked_users.length}</button>
+      <button className="upvote-btn-liked">Upvotes | {question.liked_users.length}</button>
       <span><a onClick={() => this.dislike(question)} className="downvote-link">Downvote</a></span>
       </span>
     } else {
       const likes = question.liked_users.length;
-      likeBtn = <button onClick={() => this.addLike(question)} className="upvote-btn">Upvoters | {likes}</button>
+      likeBtn = <button onClick={() => this.addLike(question)} className="upvote-btn">Upvotes | {likes}</button>
     }
     return likeBtn;
   }
@@ -115,9 +115,9 @@ class TopicIndex extends React.Component {
   }
 
   getFolloweesQuestionsBlock() {
-    if (currentUser) {
-      if (currentUser.out_follows.length > 0) {
-        return <RightPart followees={currentUser.followees} />
+    if (this.props.currentUser) {
+      if (this.props.currentUser.out_follows.length > 0) {
+        return <RightPart followees={this.props.currentUser.followees} watched_questions={this.props.watched_questions} />
       } else {
         return null;
       }

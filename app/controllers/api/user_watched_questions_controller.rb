@@ -27,7 +27,6 @@ class Api::UserWatchedQuestionsController < ApplicationController
     @current_user = current_user
     unless watched_question.nil?
       UserWatchedQuestion.delete(watched_question)
-      # render 'api/topics/show' if idx == 1
       render 'api/questions/show'
     else
       render json: ['no such watched question'], status: 404

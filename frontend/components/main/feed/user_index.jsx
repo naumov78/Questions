@@ -6,6 +6,12 @@ class UserIndex extends React.Component {
 
 constructor(props) {
   super(props);
+  this.state = { watched_questions: this.props.currentUser.watched_questions }
+
+}
+
+
+componentDidMount() {
 }
 
 componentWillMount() {
@@ -13,6 +19,21 @@ componentWillMount() {
 
 getIndexTopics() {
   return this.props.currentUser.index_topics
+}
+
+componentWillReceiveProps(newProps) {
+}
+
+getQuestion() {
+  let question_data = null;
+  for (let i = 0; question_data === null; i++) {
+    if (typeof this.props.currentUser.index_topics[i].index_questions[i] !== 'undefined') {
+      question_data = {topic_id: this.props.currentUser.index_topics[i].id, question_id: this.props.currentUser.index_topics[i].index_questions[i].id };
+      this.props.fetchSingleQuestion({question_data}).then((question) => {
+        this.setState({watched_questions: question.watched_questions})
+      })
+    }
+  }
 }
 
 getIndexQuestions() {
@@ -114,10 +135,12 @@ getLastAnswerDate(date, now) {
   }
 }
 
+
 getFolloweesQuestionsBlock() {
   if (this.props.currentUser) {
     if (this.props.currentUser.out_follows.length > 0) {
-      return <RightPart followees={this.props.currentUser.followees} />
+      this.sortByKey(this.state.watched_questions, "created_at");
+      return <RightPart followees={this.props.currentUser.followees} watched_questions={this.state.watched_questions} />
     } else {
       return null;
     }

@@ -15,7 +15,8 @@ export const receiveSingleTopic = (questions) => {
     type: RECEIVE_SINGLE_TOPIC,
     topic_title: questions.title,
     topic_id: questions.id,
-    questions: questions.questions
+    questions: questions.questions,
+    watched_questions: questions.watched_questions
   });
 }
 

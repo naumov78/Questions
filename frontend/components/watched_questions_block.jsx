@@ -4,46 +4,19 @@ import { withRouter, Link } from 'react-router';
 class WatchedQuestionsBlock extends React.Component {
 constructor(props) {
   super(props);
-  this.state = { followees: this.props.followees }
+  this.state = { watched_questions: this.props.watched_questions }
 }
 
 componentDidMount() {
+
 }
 
-getQuestionsList() {
-  const followees = this.sortByKey(this.props.followees, 'follow_created_at');
-  const questions = [];
-  for (let i = 0; i < 10 && i < followees.length; i++) {
-    const followee_questions = this.sortByKey(followees[i].followee_questions, 'created_at');
-    for (let j = 0; j < 5 && j < followee_questions.length; j++) {
-      questions.push(followee_questions[j]);
-    }
-  }
-  return this.sortByKey(questions, 'created_at');
+componentWillMount() {
 }
 
+componentWillReceiveProps(newProps) {
+}
 
-// compareByLastAnswer(question1, question2) {
-//
-// }
-//
-// getQuestionList1() {
-//   const questions = [];
-//   for (i = 0; questions.length < 21; i++) {
-//     currentUser.watched_questions.forEach((question) => {
-//       const answers = question.answers;
-//       this.sortByKey(answers, "created_at");
-//       if (questions.length === 0) {
-//         questions.push(question)
-//       } else {
-//         this.compareByLastAnswer(questions[questions.length - 1], question);
-//
-//       }
-//
-//
-//     })
-//   }
-// }
 
 sortByKey(array, key) {
   return array.sort((a, b) => {
@@ -67,23 +40,22 @@ getFollowQuestionLink(question) {
   return `topics/${question.topic_id}/questions/${question.id}`;
 }
 
-
 renderQuestions() {
-  const questions = this.getQuestionsList();
+  const questions = this.props.watched_questions;
   return (
     <div className="watched-questions-list-container">
       <ul className="watched-questions-list">
         {questions.map((question, i) => {
           const followSingleQuestion = this.props.question_id === question.id ? "watched-single-question-container-active" : "watched-single-question-container"
           const now = new Date();
-          const author = question.auth_first_name + ' ' + question.auth_last_name;
-          const userpic = question.auth_userpic_url;
+          this.sortByKey(question.answers, "created_at")
+          const author = question.answers[0].user.first_name + ' ' + question.answers[0].user.last_name;
           return (
             <li key={question.id + now} className="follow-question-list-el">
               <Link to={this.getFollowQuestionLink(question)}>
                 <div className={followSingleQuestion}>
-                <div><Link className="auth-info" to={`/users/${question.author_id}`}>{author}</Link>
-                  {this.getDate(question, now, 'asked')}
+                <div><Link className="auth-info" to={`/users/${question.answers[0].user.id}`}>{author}</Link>
+                  {this.getDate(question, now, 'answered')}
                 </div>
                 <div className="follow-question-body">
                   {this.updateBodyLength(question.body)}
@@ -100,36 +72,35 @@ renderQuestions() {
 
 
 
-getDate(obj, now, str) {
+getDate(question, now, str) {
   const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  const date = new Date(obj.created_at);
+  const date = new Date(question.answers[0].created_at);
   const qMon = monthNames[date.getMonth()];
   const qDay = date.getDate();
   const qYr = date.getFullYear()
   const dif = Math.floor((now - date) / 1000);
   if (dif < 30) {
-    return <span className="follow-question-date">{` ${str} just now`}</span>
+    return <span className="recent-watched-question-date">{` ${str} just now`}</span>
   } else if (dif < 60) {
-    return <span className="follow-question-date">{` ${str} less than a minute ago`}</span>
+    return <span className="recent-watched-question-date">{` ${str} less than a minute ago`}</span>
   } else if (dif < 120) {
-    return <span className="follow-question-date">{` ${str} less than 2 minutes ago`}</span>
+    return <span className="recent-watched-question-date">{` ${str} less than 2 minutes ago`}</span>
   } else if (dif < 300) {
-    return <span className="follow-question-date">{` ${str} less than 5 minutes ago`}</span>
+    return <span className="recent-watched-question-date">{` ${str} less than 5 minutes ago`}</span>
   } else if (dif < 600) {
-    return <span className="follow-question-date">{` ${str} less than 10 minutes ago`}</span>
+    return <span className="recent-watched-question-date">{` ${str} less than 10 minutes ago`}</span>
   } else if (dif < 3600) {
-    return <span className="follow-question-date">{` ${str} less than an hour ago`}</span>
+    return <span className="watched-question-date">{` ${str} less than an hour ago`}</span>
   } else if (dif < 86400) {
-    return <span className="follow-question-date">{` ${str} today`}</span>
+    return <span className="watched-question-date">{` ${str} today`}</span>
   } else if (dif < 172800) {
-    return <span className="follow-question-date">{` ${str} yesterday`}</span>
+    return <span className="watched-question-date">{` ${str} yesterday`}</span>
   } else {
-    return <span className="follow-question-date">{` ${str} on ${qMon} ${qDay} ${qYr}`}</span>
+    return <span className="watched-question-date">{` ${str} on ${qMon} ${qDay} ${qYr}`}</span>
   }
 }
 
 render() {
-  debugger
   return (
     <div className="watched-questions-container">
       <div className="watched-question-title">

@@ -8,6 +8,7 @@ import { createAnswer } from '../../actions/answer_actions';
 const mapStateToProps = ({topic, session}) => {
   return ({
     questions: topic.questions,
+    watched_questions: topic.watched_questions,
     currentUser: session.currentUser
   })
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import SideBar from './sidebar/sidebar';
 import Feed from './feed/feed';
-import UserIndex from './feed/user_index';
+import UserIndexContainer from './feed/user_index_container';
 import TopicIndexContainer from './topic_index_container';
 import { withRouter } from 'react-router';
 
@@ -19,7 +19,7 @@ class Main extends React.Component {
 
   getIndexPage() {
     if (this.props.location.pathname === '/') {
-      return <UserIndex currentUser={this.props.currentUser} />
+      return <UserIndexContainer />
     } else {
       return null;
     }
@@ -44,3 +44,6 @@ class Main extends React.Component {
 
 
 export default withRouter(Main);
+
+
+// <UserIndex currentUser={this.props.currentUser} watched_questions={store.getState().session.currentUser.watched_questions}/>

@@ -1,15 +1,16 @@
 json.extract! user, :id, :first_name, :last_name, :description, :userpic, :topics, :created_at, :out_follows
 json.userpic_url asset_path(user.userpic.url)
 
-
 json.watched_questions user.watched_questions do |question|
-  json.extract! question, :id, :author_id, :body, :created_at, :updated_at
-  json.author question.user
-   json.answers question.answers do |answer|
-     json.extract! answer, :id, :author_id, :body, :created_at
-     json.question answer.question
+  json.extract! question, :id, :author_id, :body, :topic_id, :views, :rating, :answers, :created_at
+  json.user question.user
+  json.author_userpic_url asset_path(question.user.userpic.url)
+  json.answers question.answers do |answer|
+    json.extract! answer, :id, :created_at
+    json.user answer.user
   end
 end
+
 
 json.followees user.followees do |followee|
   json.extract! followee, :id, :description, :first_name, :last_name
@@ -27,6 +28,7 @@ end
 
 
 json.index_topics user.topics do |topic|
+  json.id topic.id
   json.index_questions topic.questions.order(created_at: :desc) do |question|
   json.extract! question, :id, :author_id, :body, :created_at, :answers
   json.auth_first_name question.user.first_name

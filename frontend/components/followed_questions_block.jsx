@@ -41,7 +41,7 @@ getFollowQuestionLink(question) {
   if (this.props.question_id === question.id) {
     return null;
   }
-  return `topics/${question.topic_id}/questions/${question.id}#top`;
+  return `topics/${question.topic_id}/questions/${question.id}`;
 }
 
 

@@ -16,7 +16,9 @@ class UserMenu extends React.Component  {
   }
 
   handleLogout(e) {
-    this.props.logout();
+    this.props.logout().then(() => {
+			this.props.router.push(`/`)
+		});
   }
 
   render() {

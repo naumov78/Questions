@@ -45,9 +45,11 @@ componentWillUnmount() {
 
 
 update(field) {
-  return e => this.setState({
+  return (e) => {
+    this.setState({
     [field]: e.currentTarget.value
-  });
+  })
+}
 }
 
 // question likes
@@ -83,7 +85,7 @@ getLikeButton(question) {
     let likeBtn;
       if (this.checkIfLiked(question)) {
         likeBtn = <span>
-        <button className="ans-btn-liked" id="vote-btn">Upvoters | {question.liked_users.length}</button>
+        <button className="ans-btn-liked" id="vote-btn">Upvotes | {question.liked_users.length}</button>
         <span><a onClick={() => this.dislike(question)} className="downvote-link">Downvote</a></span>
         </span>
       } else {
@@ -93,7 +95,7 @@ getLikeButton(question) {
         } else {
           likes = question.liked_users.length;
         }
-        likeBtn = <button className="ans-btn" id="vote-btn" onClick={() => this.addLike(question)}>Upvoters | {likes}</button>
+        likeBtn = <button className="ans-btn" id="vote-btn" onClick={() => this.addLike(question)}>Upvotes | {likes}</button>
       }
     return likeBtn;
   } else {
@@ -183,7 +185,7 @@ getAnswerLikeButton(answer) {
     if (this.checkIfAnswerLiked(answer)) {
       likeBtn =
       <span>
-      <button className="ans-btn-liked">Upvoters | {answer.liked_users.length}</button>
+      <button className="ans-btn-liked">Upvotes | {answer.liked_users.length}</button>
       <span><a onClick={() => this.dislikeAnswer(answer)} className="downvote-link">Downvote</a></span>
       </span>
     } else {
@@ -193,7 +195,7 @@ getAnswerLikeButton(answer) {
        } else {
          likes = answer.liked_users.length;
        }
-      likeBtn = <button className="ans-btn" onClick={() => this.addAnswerLike(answer)}>Upvoters | {likes}</button>
+      likeBtn = <button className="ans-btn" onClick={() => this.addAnswerLike(answer)}>Upvotes | {likes}</button>
     }
   return likeBtn;
 }
@@ -365,7 +367,7 @@ getCommentLikeButton(comment) {
     if (this.checkIfCommentLiked(comment)) {
       likeBtn =
       <span>
-      <button className="ans-btn-liked">Upvoters | {comment.liked_users.length}</button>
+      <button className="ans-btn-liked">Upvotes | {comment.liked_users.length}</button>
       <span><a onClick={() => this.dislikeComment(comment)} className="downvote-link">Downvote</a></span>
       </span>
     } else {
@@ -375,7 +377,7 @@ getCommentLikeButton(comment) {
        } else {
          likes = comment.liked_users.length;
        }
-      likeBtn = <button className="ans-btn" onClick={() => this.addCommentLike(comment)}>Upvoters | {likes}</button>
+      likeBtn = <button className="ans-btn" onClick={() => this.addCommentLike(comment)}>Upvotes | {likes}</button>
     }
   return likeBtn;
 }
@@ -418,6 +420,7 @@ renderAnswers() {
     );
   }
 }
+
 
 handleCreateAnswer(e) {
   e.preventDefault();
@@ -551,9 +554,10 @@ unfollow(e, id) {
 }
 
 getFolloweesQuestionsBlock() {
-  if (this.state.question) {
+  debugger
+  if (typeof this.state.question !== 'undefined') {
     if (this.state.question.out_follows.length > 0) {
-      return <RightPart followees={this.state.question.followees} question_id={this.state.question.id}/>
+      return <RightPart followees={this.state.question.followees} question_id={this.state.question.id} watched_questions={this.state.question.watched_questions}/>
     } else {
       return null;
     }
