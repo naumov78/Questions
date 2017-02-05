@@ -19,7 +19,8 @@ class UserProfile extends React.Component {
 
 
   componentWillMount() {
-    if (currentUser.id !== Number(this.props.params.id)) {
+    debugger
+    if (this.props.currentUser.id !== Number(this.props.params.id)) {
       this.setState({ ownProfile: false })
     }
   }
@@ -149,7 +150,7 @@ class UserProfile extends React.Component {
             <br />
             <div className="uu-input">
               <label className="uu-field-title">First Name</label>
-              <input 
+              <input
                 className="auth-form-input"
                 type="text"
                 value={`${this.state.first_name}`}

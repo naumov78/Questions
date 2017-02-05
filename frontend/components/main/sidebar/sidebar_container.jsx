@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
-import UserTopicsMenu from './user_topic_menu';
+import SideBar from './sidebar';
+import { fetchTopics } from '../../../actions/topic_actions';
 
 
 const mapStateToProps = ({ session }) => {
@@ -17,4 +18,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(UserTopicsMenu)
+)(SideBar)

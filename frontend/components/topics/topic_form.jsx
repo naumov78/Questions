@@ -35,7 +35,7 @@ class TopicForm extends React.Component {
     if (this.state.subscribedTopics.includes(id)) {
       const idx = this.state.subscribedTopics.indexOf(id);
       const arrayOfTopics = this.state.subscribedTopics;
-      const spliced = arrayOfTopics.splice(idx, 1);
+      arrayOfTopics.splice(idx, 1);
       this.setState({ subscribedTopics: arrayOfTopics});
     } else {
       const arrayOfTopics = this.state.subscribedTopics;

@@ -3,11 +3,84 @@
 .sidebar {
   margin: 0 0 0 30px;
   width: 142px;
+  // border: 1px solid black;
 
   h3 {
     padding: 0 0 8px 0;
     margin: 0 0 8px 0;
     border-bottom: 1px solid #e2e2e2;
   }
+
+  .add-topic-btn-container {
+    margin: 15px 0 0 0;
+  }
+
+  .add-topic-btn {
+
+    button {
+      width: 130px;
+      text-align: center;
+      padding: 5px;
+      font-size: 14px;
+      border: 1px solid #e2e2e2;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      color: #cc6600;
+    }
+
+    button:hover {
+      background: #f3f3f3;
+      cursor: pointer;
+    }
+
+}
+
+.add-topic-menu {
+  position: relative;
+  z-index: 3;
+  width: 200px;
+  border: 1px solid #dde5ee;
+  box-shadow: 0px 8px 16px 0px rgba(187,202,220,0.2);
+  opacity: 1;
+  background: #fff;
+  border-radius: 5px;
+  margin-left: -30px;
+  color: #999;
+
+  p {
+    padding: 5px 0 5px 0;
+    text-align: center;
+    background: #ff8c1a;
+    color: #fff;
+    font-size: 14px;
+  }
+
+  .add-topic-list {
+    padding: 3px 0 0 0;
+  }
+
+  .add-topic-single-topic {
+    padding: 5px 0 5px 10px;
+  }
+
+  .add-topic-single-topic:hover {
+    padding-top: 10px;
+    border: 1px solid #f2f2f2;
+    box-shadow: 0px 8px 16px 0px rgba(187,202,220,0.2);
+    // font-size: 18px;
+    color: #cc6600;
+
+    button:hover {
+      cursor: pointer;
+    }
+  }
+
+
+
+  }
+
+
+
+
 
 }

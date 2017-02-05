@@ -1,5 +1,5 @@
 import React from 'react';
-import SideBar from './sidebar/sidebar';
+import SideBarContainer from './sidebar/sidebar_container';
 import Feed from './feed/feed';
 import UserIndexContainer from './feed/user_index_container';
 import TopicIndexContainer from './topic_index_container';
@@ -31,7 +31,7 @@ class Main extends React.Component {
         <div className="page-wraper">
           <div className="grid_page">
             <div className="sidebar-container">
-              <SideBar currentUser={this.props.currentUser} />
+              <SideBarContainer />
             </div>
               {this.getIndexPage()}
           </div>

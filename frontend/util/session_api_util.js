@@ -23,7 +23,9 @@ export const logout = () => {
 };
 
 export const updateUser = (user, id) => {
+  debugger
   if (user instanceof FormData) {
+    debugger
     return $.ajax({
       method: "PATCH",
       url: `/api/users/${id}`,
@@ -32,6 +34,7 @@ export const updateUser = (user, id) => {
       data: user
     });
   } else {
+    debugger
     return $.ajax({
       method: "PATCH",
       url: `/api/users/${id}`,

@@ -1,15 +1,13 @@
 import { connect } from 'react-redux';
-import TopicForm from './topic_form';
-import { fetchTopics } from '../../actions/topic_actions';
-import { createSubscribedTopic } from '../../actions/user_subscribed_topics_actions';
-import { updateUser } from '../../actions/session_actions';
+import AddUserTopics from './add_user_topics';
+import { fetchTopics } from '../../../actions/topic_actions';
+import { updateUser } from '../../../actions/session_actions';
+import { createSubscribedTopic } from '../../../actions/user_subscribed_topics_actions';
 
-
-const mapStateToProps = ({topics, session}) => {
-  return {
-    topics: topics.topics,
+const mapStateToProps = ({ session }) => {
+  return ({
     currentUser: session.currentUser
-  };
+  });
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -23,4 +21,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(TopicForm)
+)(AddUserTopics)

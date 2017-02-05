@@ -31,7 +31,6 @@ class Api::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
       if @user.update_attributes(user_params)
-
         ans = Answer.all.order(created_at: :desc)
         @watched_questions = []
         i = 0

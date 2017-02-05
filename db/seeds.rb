@@ -79,21 +79,51 @@ user9 = User.create!(first_name: 'Indiana', last_name: 'Jones', email: 'indiana_
 # user9.userpic = File.open("app/assets/images/userpics/indiana_jones.jpg")
 # user9.save!
 user10 = User.create!(first_name: 'Forrest', last_name: 'Gump', email: 'forest_gump@questions.com', description: 'Life is like a box of chocolates', password: '12345')
+# user10.userpic = File.open("app/assets/images/userpics/forrest_gump.jpg")
+# user10.save!
 user11 = User.create!(first_name: 'Chewbacca', last_name: 'Chewie', email: 'chewie@questions.com', description: 'Wookiee from the planet Kashyyyk', password: '12345')
+# user11.userpic = File.open("app/assets/images/userpics/choobaka.jpg")
+# user11.save!
 user12 = User.create!(first_name: 'William', last_name: 'Wallace', email: 'william@questions.com', description: 'Scottish knight who became one of the main leaders during the Wars of Scottish Independence', password: '12345')
+# user12.userpic = File.open("app/assets/images/userpics/william_wallas.jpg")
+# user12.save!
 user13 = User.create!(first_name: 'Ace', last_name: 'Ventura', email: 'ace@questions.com', description: 'private detective specializing in the retrieval of missing animals', password: '12345')
+# user13.userpic = File.open("app/assets/images/userpics/ace_ventura.jpg")
+# user13.save!
 user14 = User.create!(first_name: 'Jack', last_name: 'Sparrow', email: 'sparrow@questions.com', description: 'Pirate Lord of the Caribbean Sea', password: '12345')
+# user14.userpic = File.open("app/assets/images/userpics/jack_sparrow.jpg")
+# user14.save!
 user15 = User.create!(first_name: 'Tony', last_name: 'Montana', email: 'montana@questions.com', description: 'Drug Lord', password: '12345')
+# user15.userpic = File.open("app/assets/images/userpics/tonny_montana.jpeg")
+# user15.save!
 user16 = User.create!(first_name: 'Rocky', last_name: 'Balboa', email: 'roky@questions.com', description: 'Professional boxer (retired), boxing trainer', password: '12345')
+# user16.userpic = File.open("app/assets/images/userpics/rocky.jpeg")
+# user16.save!
 user17 = User.create!(first_name: 'Jeffrey', last_name: 'Lebowski', email: 'lebowski@questions.com', description: 'The Dude aka His Dudeness or El Duderino', password: '12345')
+# user17.userpic = File.open("app/assets/images/userpics/lebowsky.jpg")
+# user17.save!
 user18 = User.create!(first_name: 'Freddy', last_name: 'Krueger', email: 'krueger@questions.com', description: 'The Springwood Slasher', password: '12345')
+# user18.userpic = File.open("app/assets/images/userpics/fredy_kruger.jpg")
+# user18.save!
 user19 = User.create!(first_name: 'John', last_name: 'McClane', email: 'mcclane@questions.com', description: 'New York City Police Detective', password: '12345')
+# user19.userpic = File.open("app/assets/images/userpics/mcclain.jpg")
+# user19.save!
 user20 = User.create!(first_name: 'James', last_name: 'Bond', email: 'bond@questions.com', description: 'British Secret Service agent ', password: '12345')
+# user20.userpic = File.open("app/assets/images/userpics/james_bond.jpg")
+# user20.save!
 user21 = User.create!(first_name: 'Vito', last_name: 'Corleone', email: 'vito@questions.com', description: 'The Godfather', password: '12345')
+# user21.userpic = File.open("app/assets/images/userpics/corleone.jpg")
+# user21.save!
 user22 = User.create!(first_name: 'Ethan', last_name: 'Hunt', email: 'hunt@questions.com', description: 'IMF Agent', password: '12345')
+# user22.userpic = File.open("app/assets/images/userpics/hunt.jpeg")
+# user22.save!
 user23 = User.create!(first_name: 'Jason', last_name: 'Bourne', email: 'bourne@questions.com', description: 'Specialist in Far Eastern affairs', password: '12345')
 user24 = User.create!(first_name: 'Frank', last_name: 'Drebin', email: 'frank@questions.com', description: 'Police officer', password: '12345')
+# user24.userpic = File.open("app/assets/images/userpics/frank_drebin.jpg")
+# user24.save!
 user25 = User.create!(first_name: 'Harry', last_name: 'Potter', email: 'harry@questions.com', description: 'a half-blood wizard', password: '12345')
+# user25.userpic = File.open("app/assets/images/userpics/potter.jpeg")
+# user25.save!
 
 
 # :userpic => File.open(File.join('http://apm-assets.s3.amazonaws.com', '/path/to/img.jpg')
@@ -140,18 +170,18 @@ UserSubscribedTopic.create!(user_id: user8.id, topic_id: psychology.id)
 UserSubscribedTopic.create!(user_id: user8.id, topic_id: history.id)
 UserSubscribedTopic.create!(user_id: user8.id, topic_id: design.id)
 UserSubscribedTopic.create!(user_id: user8.id, topic_id: cooking.id)
-UserSubscribedTopic.create!(user_id: user8.id, topic_id: photography.id)
-UserSubscribedTopic.create!(user_id: user8.id, topic_id: sports.id)
-UserSubscribedTopic.create!(user_id: user8.id, topic_id: economics.id)
-UserSubscribedTopic.create!(user_id: user8.id, topic_id: writing.id)
-UserSubscribedTopic.create!(user_id: user8.id, topic_id: fashion.id)
-UserSubscribedTopic.create!(user_id: user8.id, topic_id: philosophy.id)
-UserSubscribedTopic.create!(user_id: user8.id, topic_id: finance.id)
-UserSubscribedTopic.create!(user_id: user8.id, topic_id: marketing.id)
-UserSubscribedTopic.create!(user_id: user8.id, topic_id: mathematics.id)
-UserSubscribedTopic.create!(user_id: user8.id, topic_id: politics.id)
-UserSubscribedTopic.create!(user_id: user8.id, topic_id: literature.id)
-UserSubscribedTopic.create!(user_id: user8.id, topic_id: children.id)
+# UserSubscribedTopic.create!(user_id: user8.id, topic_id: photography.id)
+# UserSubscribedTopic.create!(user_id: user8.id, topic_id: sports.id)
+# UserSubscribedTopic.create!(user_id: user8.id, topic_id: economics.id)
+# UserSubscribedTopic.create!(user_id: user8.id, topic_id: writing.id)
+# UserSubscribedTopic.create!(user_id: user8.id, topic_id: fashion.id)
+# UserSubscribedTopic.create!(user_id: user8.id, topic_id: philosophy.id)
+# UserSubscribedTopic.create!(user_id: user8.id, topic_id: finance.id)
+# UserSubscribedTopic.create!(user_id: user8.id, topic_id: marketing.id)
+# UserSubscribedTopic.create!(user_id: user8.id, topic_id: mathematics.id)
+# UserSubscribedTopic.create!(user_id: user8.id, topic_id: politics.id)
+# UserSubscribedTopic.create!(user_id: user8.id, topic_id: literature.id)
+# UserSubscribedTopic.create!(user_id: user8.id, topic_id: children.id)
 
 
 
@@ -182,7 +212,7 @@ answer14 = Answer.create!(question_id: question6.id, author_id: user3.id, body: 
 answer15 = Answer.create!(question_id: question6.id, author_id: user5.id, body: 'Books can\'t be harmful; it\'s just words on a page. If John tells Jim to kill Joe, and Jim kills Joe, it\'s still Jim\’s fault. That said, Hitler\’s Mein Kampf is probably the most harmful book as it actively incites nazi sentiment, which ultimately led to millions of deaths, but we can\'t blame the book itself for harms. People still have autonomy; liability can\'t be exonerated because of a book.')
 question7 = Question.create!(author_id: user7.id, topic_id: books.id, body: 'What books should all highly gifted teenagers read?')
 answer16 = Answer.create!(question_id: question7.id, author_id: user4.id, body: 'Sophie’s World by Jostein Gaarder is a “history of philosophy” that is written as a novel about a fifteen year-old girl in a very entertaining and engaging way. I’ve read it three, maybe four, times and I always enjoy it. The one thing that bugs me about it is that it is billed as a “history of philosophy” and completely ignores anything but western philosophy: If it didn’t happen west of Baghdad and east of Newfoundland, it didn’t happen. There were huge civilizations with a panoply of philosophies in Asia that happened long before and all during the rise of western philosophy and—believe it or not—continue to exist and comprise a rather huge majority of the worlds population. So, with that in mind, Sophie’s World is a wonderful introduction to philosophy and a really fun read.')
-ßanswer17 = Answer.create!(question_id: question7.id, author_id: user5.id, body: 'This answer may sound like an attempt at sarcasm, but I am very serious about this.  I would highly recommend “A Wrinkle in Time” by Madeleine L\'Engle.  Granted, the book is aimed toward an early teen audience, but I believe this book touches on so many relevant topics that it can promote some seriously critical thinking.')
+answer17 = Answer.create!(question_id: question7.id, author_id: user5.id, body: 'This answer may sound like an attempt at sarcasm, but I am very serious about this.  I would highly recommend “A Wrinkle in Time” by Madeleine L\'Engle.  Granted, the book is aimed toward an early teen audience, but I believe this book touches on so many relevant topics that it can promote some seriously critical thinking.')
 answer18 = Answer.create!(question_id: question7.id, author_id: user8.id, body: '"Gifted" can mean just about anything. Read about whatever it is that interests you. Biographies are usually interesting. Read a lot and develop a lifelong habit. You\'ll discover the best and most useful books for your particular interests.')
 question8 = Question.create!(author_id: user8.id, topic_id: books.id, body: 'Why do most high school students hate reading?')
 answer19 = Answer.create!(question_id: question8.id, author_id: user1.id, body: 'I think your choice of "most" is erroneous. Most of them don\'t hate reading, but some of them hate reading what the schools make them read. Often the literature is irrelevant or is made uninteresting through the teaching methods. Somehow the reader can\'t or won\'t connect with the read, and each non-reader is different. Whether or not to read an assignment  depends as well on variables like what the student has to do after school; what the home life is like; how the student feels about the teacher or even the class as an entity, these kinds of things.')
