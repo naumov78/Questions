@@ -1,29 +1,9 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router';
 import GreetingContainer from './greeting_container';
+import HeaderAskFormContainer from './header_ask_form_container';
 
 class Header extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-    this.props.router.push(`/users/${this.props.currentUser.id}`)
-  }
-
-  handleAskQuestion(e) {
-    e.preventDefault();
-    this.props.router.push("/createq")
-  }
-
-
-  // checkLoggedIn(){
-  //   if (!this.props.currentUser) {
-  //     this.props.router.push("/login");
-  //   }
-  // }
 
 
   render() {
@@ -32,15 +12,12 @@ class Header extends React.Component {
           <div className="header">
             <div className="header-nav">
               <div className="header-logo">
-                <h2><a href="/">Questions</a></h2>
+                <h2><Link to="/">Questions</Link></h2>
               </div>
               <div className="header-content">
 
                 <div className="ask-form-container">
-                  <form className="ask-form" onSubmit={(e) => this.handleAskQuestion(e)}>
-                    <input className="text-input" type="text" placeholder="Ask Question"></input>
-                    <input className="header-ask-btn" type="submit" value="Ask Question"/>
-                  </form>
+                  <HeaderAskFormContainer />
                 </div>
 
                 <div className="nav-container group">

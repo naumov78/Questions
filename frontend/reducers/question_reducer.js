@@ -1,4 +1,4 @@
-import { RECEIVE_SINGLE_QUESTION, RECEIVE_QUESTIONS, RECEIVE_ERRORS, createQuestion } from '../actions/question_actions';
+import { RECEIVE_SINGLE_QUESTION, RECEIVE_QUESTIONS, RECEIVE_ERRORS, UPDATE_ASK_FORM, createQuestion } from '../actions/question_actions';
 import { RECEIVE_SINGLE_ANSWER, RECEIVE_ANSWERS } from '../actions/answer_actions';
 import merge from 'lodash/merge';
 
@@ -8,6 +8,7 @@ const initState = {
     topic_id: 0,
     body: ""
   },
+  askForm: "",
   errors: []
 }
 
@@ -26,6 +27,9 @@ const QuestionReducer = (state = initState, action) => {
       return updatedState;
     case RECEIVE_ERRORS:
       newState = { question: {}, errors: action.errors }
+      return merge({}, state, newState);
+    case UPDATE_ASK_FORM:
+      newState = { question: {}, errors: [], askForm: action.askForm }
       return merge({}, state, newState);
     default:
       return state;

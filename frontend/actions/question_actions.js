@@ -2,7 +2,8 @@ import * as APIUtil from '../util/questions_api_util';
 
 export const RECEIVE_SINGLE_QUESTION = "RECEIVE_SINGLE_QUESTION";
 export const RECEIVE_QUESTIONS = "RECEIVE_QUESTIONS";
-export const RECEIVE_ERRORS = "RECEIVE_ERRORS"
+export const RECEIVE_ERRORS = "RECEIVE_ERRORS";
+export const UPDATE_ASK_FORM = "UPDATE_ASK_FORM";
 
 
 export const receiveSingleQuestion = (question) => {
@@ -25,6 +26,14 @@ export const receiveErrors = (errors) => {
     errors
   });
 }
+
+export const updateAskForm = (askForm) => {
+  return ({
+    type: UPDATE_ASK_FORM,
+    askForm: askForm
+  });
+}
+
 
 export const createQuestion = (question) => {
   return (dispatch) => {

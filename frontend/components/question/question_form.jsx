@@ -6,7 +6,7 @@ import RightPart from '../right_part';
 class QuestionForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { topic_id: 0, body: "", showMenu: true }
+    this.state = { topic_id: 0, body: store.getState().question.askForm, showMenu: true }
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -145,7 +145,8 @@ class QuestionForm extends React.Component {
             <textarea autoFocus={true}
             placeholder="Start writing your question"
             onChange={this.update("body")}
-            className="auth-form-input answer-input"/>
+            className="auth-form-input answer-input"
+            value={this.state.body}/>
           </div>
           <br />
           <div className="button-part">
