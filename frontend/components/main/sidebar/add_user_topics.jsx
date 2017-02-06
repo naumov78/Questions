@@ -57,14 +57,12 @@ class AddUserTopics extends React.Component {
   handleSubmit(e, topic_id) {
     e.preventDefault();
     this.props.updateUser(this.getUser(topic_id), this.props.currentUser.id).then((response) => {
-      debugger
       this.setState({ subscsribedTopics: [] })
     });
   };
 
 
   render() {
-    debugger
     if (this.props.currentUser) {
     return (
         <div>

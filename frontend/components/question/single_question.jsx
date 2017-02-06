@@ -554,7 +554,6 @@ unfollow(e, id) {
 }
 
 getFolloweesQuestionsBlock() {
-  debugger
   if (typeof this.state.question !== 'undefined') {
     if (this.state.question.out_follows.length > 0) {
       return <RightPart followees={this.state.question.followees} question_id={this.state.question.id} watched_questions={this.state.question.watched_questions}/>

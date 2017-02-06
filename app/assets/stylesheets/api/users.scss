@@ -56,19 +56,26 @@
 }
 
 .ui_container {
-  margin: 0 auto;
-  width: 500px;
+  // margin: 0 auto;
+  // width: 500px;
 }
 
 .user-profile {
+  float: left;
+  padding: 10px 0 0 40px;
+  font-family: 'Roboto', sans-serif;
+  width: 500px;
 }
 
 .uu-form-container {
-  margin: 0 auto;
+  float: left;
+  padding: 10px 0 0 40px;
+  font-family: 'Roboto', sans-serif;
   width: 500px;
 }
 
 .uu-form {
+
 }
 
 .uu-input {
@@ -227,6 +234,108 @@
     height: 142px;
     border: 1px solid #e2e2e2;
     border-radius: 50%;
+  }
+
+}
+
+.details-btn {
+  padding: 20px 0 30px 0;
+  margin: 0;
+}
+
+.user-details-container-title {
+  background: #2980b9;
+  color: #fff;
+  font-size: 12px;
+  border-top: 1px solid #e2e2e2;
+  border-left: 1px solid #e2e2e2;
+  border-right: 1px solid #e2e2e2;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  padding: 5px 10px 5px 10px;
+  text-align: center;
+}
+
+
+
+.inactive {
+  background: #e2e2e2;
+  color: grey;
+
+  button:hover {
+    cursor: pointer;
+  }
+}
+
+.inactive:hover {
+  background: #f1f8fb;
+  cursor: pointer;
+}
+
+.details-questions-container {
+  margin-top: 4px;
+  border: 1px solid #e2e2e2;
+  padding: 5px 5px 5px 10px;
+  box-shadow: 0px 8px 16px 0px rgba(187,202,220,0.2);
+  max-height: 700px;
+  overflow-y: auto;
+}
+
+
+.details-single-question {
+  margin: 5px 0 5px 0;
+  border: 1px solid #f2f2f2;
+  padding: 5px;
+  font-size: 13px;
+}
+
+.details-single-question:hover {
+  background: #f1f8fb;
+  border: 1px solid #ff8c1a;
+}
+
+.details-single-answer {
+  margin: 5px 0 5px 0;
+  border: 1px solid #f2f2f2;
+  padding: 5px;
+  font-size: 13px;
+}
+
+.details-single-answer:hover {
+  background: #f1f8fb;
+  border: 1px solid #ff8c1a;
+
+  #question-link {
+    text-decoration: underline;
+    color: #b82b28;
+  }
+
+}
+
+
+.details-question-body {
+  padding: 5px 5px 10px 10px;
+  // border-bottom: 1px solid #ff8c1a;
+}
+
+.details-question-topic {
+  font-size: 11px;
+  padding: 5px 0 0 0;
+}
+
+.details-question-date {
+  font-size: 11px;
+  padding: 5px 0 0 0;
+}
+
+.details-question-stats {
+  font-size: 11px;
+  font-weight: 600;
+  color: #2980b9;
+  padding: 5px 0 0 0;
+
+  .stat-details {
+    padding: 0 10px 0 0;
   }
 
 }

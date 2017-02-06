@@ -2,7 +2,7 @@ import { RECEIVE_USER, RECEIVE_ERRORS } from '../actions/user_actions';
 import merge from 'lodash/merge';
 
 const initState = {
-  user: { topics: [], questions: [], answers: [], comments: [] },
+  user: {},
   errors: []
 }
 
@@ -21,3 +21,6 @@ const UserReducer = (state = initState, action ) => {
 }
 
 export default UserReducer;
+
+
+// user: { topics: [], questions: [], answers: [], comments: [] },

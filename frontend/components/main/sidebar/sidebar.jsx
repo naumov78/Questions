@@ -24,7 +24,6 @@ class SideBar extends React.Component {
 
   getAddTopicsBtn() {
     if (this.props.currentUser.topics.length !== this.state.allTopics.length) {
-      debugger
       if (!this.state.addTopics) {
         return <span className="add-topic-btn"><button onClick={this.toggleAddTopics.bind(this)}>Add More Topics</button></span>
       } else {

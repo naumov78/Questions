@@ -1,5 +1,6 @@
 import React from 'react';
 import GreetingContainer from '../greeting_container';
+import UserDetailsBlock from './user_details_block';
 import { Link, withRouter } from 'react-router';
 
 
@@ -19,7 +20,6 @@ class UserProfile extends React.Component {
 
 
   componentWillMount() {
-    debugger
     if (this.props.currentUser.id !== Number(this.props.params.id)) {
       this.setState({ ownProfile: false })
     }
@@ -133,13 +133,23 @@ class UserProfile extends React.Component {
     } else {
       return null;
     }
+  }
+
+
+  getUserDetailsBlock() {
+    if (this.props.user.id === this.props.params.id) {
+      return <UserDetailsBlock />
+    } else {
+      return null;
+    }
 
   }
 
   render() {
     if (this.state.edit && this.state.ownProfile) {
       return (
-        <div className="uu-form-container">
+        <div>
+          <div className="uu-form-container">
           <form onSubmit={ this.handleUpdate }
             className="uu-form">
             <div className="userpic-profile">
@@ -188,6 +198,15 @@ class UserProfile extends React.Component {
           </div>
 
           </form>
+
+          <div className="user-details">
+            <UserDetailsBlock />
+          </div>
+
+          </div>
+
+
+
         </div>
       );
     } else {
@@ -213,9 +232,14 @@ class UserProfile extends React.Component {
             <div className="user-since">
               <p>Member since {qMon} {qDay} {qYr}</p>
             </div>
+            {this.getEditBtn()}
           </div>
+
+          <div className="user-details">
+            <UserDetailsBlock />
+          </div>
+
         </div>
-          {this.getEditBtn()}
       </div>
         );
       }
