@@ -4,8 +4,6 @@ import { updateAskForm } from '../actions/question_actions';
 import { connect } from 'react-redux'
 
 
-const mapStateToProps = () => {
-}
 
 const mapDispatchToProps = (dispatch) => {
   return ({
@@ -15,6 +13,6 @@ const mapDispatchToProps = (dispatch) => {
 
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(HeaderAskForm);
