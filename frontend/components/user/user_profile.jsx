@@ -1,13 +1,14 @@
 import React from 'react';
 import GreetingContainer from '../greeting_container';
 import UserDetailsBlock from './user_details_block';
+import CurrentUserDetailsBlock from './current_user_details_block';
 import { Link, withRouter } from 'react-router';
 
 
 class UserProfile extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { ownProfile: true, edit: false, first_name: "", last_name: "", description: "", userpicFile: null, userpicUrl: null }
+    this.state = { ownProfile: false, edit: false, first_name: "", last_name: "", description: "", userpicFile: null, userpicUrl: null }
     this.changeToEdit = this.changeToEdit.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
     this.updateFile = this.updateFile.bind(this);
@@ -20,8 +21,17 @@ class UserProfile extends React.Component {
 
 
   componentWillMount() {
-    if (this.props.currentUser.id !== Number(this.props.params.id)) {
-      this.setState({ ownProfile: false })
+    if (store.getState().session.currentUser.id === Number(this.props.params.id)) {
+      this.setState({ ownProfile: true })
+    }
+  }
+
+
+  componentWillReceiveProps(newProps) {
+    const id = newProps.params.id;
+    if (id !== this.props.params.id) {
+      this.setState({ownProfile: false, edit: false, first_name: "", last_name: "", description: "", userpicFile: null, userpicUrl: null})
+      this.props.fetchUser(Number(id))
     }
   }
 
@@ -137,8 +147,12 @@ class UserProfile extends React.Component {
 
 
   getUserDetailsBlock() {
-    if (this.props.user.id === this.props.params.id) {
-      return <UserDetailsBlock />
+    if (typeof this.props.user.id !== 'undefined') {
+      if (Number(this.props.params.id) === store.getState().session.currentUser.id) {
+        return <CurrentUserDetailsBlock />
+      } else {
+        return <UserDetailsBlock />
+        }
     } else {
       return null;
     }
@@ -200,7 +214,7 @@ class UserProfile extends React.Component {
           </form>
 
           <div className="user-details">
-            <UserDetailsBlock />
+            {this.getUserDetailsBlock()}
           </div>
 
           </div>
@@ -236,7 +250,7 @@ class UserProfile extends React.Component {
           </div>
 
           <div className="user-details">
-            <UserDetailsBlock />
+            {this.getUserDetailsBlock()}
           </div>
 
         </div>

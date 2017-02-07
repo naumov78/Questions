@@ -36,6 +36,9 @@ end
 
 json.watched_questions user.watched_questions do |question|
   json.extract! question, :id, :author_id, :body, :topic_id, :views, :rating, :answers, :created_at
+  json.liked_users question.liked_users
+  json.watched_users question.watched_users
+  json.answers_num question.answers.length
   json.user question.user
   json.author_userpic_url asset_path(question.user.userpic.url)
   json.answers question.answers do |answer|

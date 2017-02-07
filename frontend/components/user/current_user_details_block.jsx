@@ -2,10 +2,10 @@ import React from 'react';
 import { Link, withRouter } from 'react-router';
 
 
-class UserDetailsBlock extends React.Component {
+class CurrentUserDetailsBlock extends React.Component {
 constructor(props) {
   super(props);
-  this.state = { details: false, questions: false, answers: false }
+  this.state = { details: false, questions: false, answers: false, followees: false, watched: false }
 }
 
 
@@ -67,9 +67,9 @@ getAnswerStat(answer) {
 
 
 
-getDate(obj, now, str) {
+getDate(date, now, str) {
   const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  const date = new Date(obj.created_at);
+  // const date = new Date(obj.created_at);
   const qMon = monthNames[date.getMonth()];
   const qDay = date.getDate();
   const qYr = date.getFullYear()
@@ -110,6 +110,13 @@ cutName(str) {
   return str;
 }
 
+cutDescr(str) {
+  if (str.length > 68) {
+    return str.slice(0, 65) + "...";
+  }
+  return str;
+}
+
 getQuestionsList(user) {
   const questions = user.questions;
   this.sortByKey(questions, "created_at")
@@ -118,11 +125,14 @@ getQuestionsList(user) {
       <div>
         <span className="user-details-container-title">{`${this.getUserName(user)} Questions`}</span>
         <span className="user-details-container-title inactive"><button onClick={this.switchToAnswers.bind(this)}>{`${this.getUserName(user)} Answers`}</button></span>
+        <span className="user-details-container-title inactive"><button onClick={this.switchToFollowees.bind(this)}>{`${this.getUserName(user)} Followees`}</button></span>
+        <span className="user-details-container-title inactive"><button onClick={this.switchToWatched.bind(this)}>{`${this.getUserName(user)} Watched Questions`}</button></span>
       </div>
       <div className="details-questions-container">
         <ul>
           {questions.map((question, i) => {
             const now = new Date();
+            const date = new Date(question.created_at);
             return (
               <li key={i} className="details-single-question">
                 <Link to={`/topics/${question.topic_id}/questions/${question.id}`}>
@@ -134,7 +144,7 @@ getQuestionsList(user) {
                       Topic: {question.topic}
                     </div>
                     <div className="details-question-date">
-                      {this.getDate(question, now, "asked")}
+                      {this.getDate(date, now, "asked")}
                     </div>
                       {this.getQuestionStat(question)}
                   </div>
@@ -157,11 +167,14 @@ getAnswersList(user) {
       <div>
         <span className="user-details-container-title inactive"><button onClick={this.switchToQuestions.bind(this)}>{`${this.getUserName(user)} Questions`}</button></span>
         <span className="user-details-container-title">{`${this.getUserName(user)} Answers`}</span>
+        <span className="user-details-container-title inactive"><button onClick={this.switchToFollowees.bind(this)}>{`${this.getUserName(user)} Followees`}</button></span>
+        <span className="user-details-container-title inactive"><button onClick={this.switchToWatched.bind(this)}>{`${this.getUserName(user)} Watched Questions`}</button></span>
       </div>
       <div className="details-questions-container">
         <ul>
           {answers.map((answer, i) => {
             const now = new Date();
+            const date = new Date(answer.created_at);
             return (
               <li key={i} className="details-single-answer">
                 <Link to={`/topics/${answer.question.topic_id}/questions/${answer.question_id}`}>
@@ -171,7 +184,7 @@ getAnswersList(user) {
 
                   <div>
                     <div className="details-question-date">
-                        {this.getDate(answer, now, "answered")}
+                        {this.getDate(date, now, "answered")}
                     </div>
                     <div className="details-question-topic">
                       Question: <span id="question-link">{answer.question.body}</span>
@@ -183,6 +196,110 @@ getAnswersList(user) {
                   </div>
 
 
+                </Link>
+              </li>
+            )
+          })}
+        </ul>
+      </div>
+    </div>
+  )
+}
+
+getQuestionsNum(followee) {
+  let questions;
+  if (followee.followee_questions.length === 0) {
+    questions = null;
+  } else {
+    questions = <span>Questions: {followee.followee_questions.length}</span>
+  }
+  return questions;
+}
+
+getFolloweesList(user) {
+  const followees = user.followees;
+  this.sortByKey(followees, "follow_created_at")
+  return (
+    <div>
+      <div>
+        <span className="user-details-container-title inactive"><button onClick={this.switchToQuestions.bind(this)}>{`${this.getUserName(user)} Questions`}</button></span>
+        <span className="user-details-container-title inactive"><button onClick={this.switchToAnswers.bind(this)}>{`${this.getUserName(user)} Answers`}</button></span>
+        <span className="user-details-container-title">{`${this.getUserName(user)} Followees`}</span>
+        <span className="user-details-container-title inactive"><button onClick={this.switchToWatched.bind(this)}>{`${this.getUserName(user)} Watched Questions`}</button></span>
+
+      </div>
+      <div className="details-questions-container">
+        <ul>
+          {followees.map((followee, i) => {
+            const now = new Date();
+            const date = new Date(followee.follow_created_at);
+            const name = followee.first_name + " " + followee.last_name;
+            return (
+              <li key={i} className="details-single-answer">
+                <Link to={`/users/${followee.id}`}>
+                <div>
+                  <div className="details-followee-info group">
+                    <div className="followee-userpic"><img src={followee.followee_userpic_url} /></div>
+                    <div className="followee-info">
+                      <div>{name}</div>
+                      <div className="followee-descr">{this.cutDescr(followee.description)}</div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="details-question-date">
+                        {this.getDate(date, now, "start following")}
+                    </div>
+                    <div className="details-question-topic">
+                      {this.getQuestionsNum(followee)}
+                    </div>
+
+                  </div>
+
+                </div>
+                </Link>
+              </li>
+            )
+          })}
+        </ul>
+      </div>
+    </div>
+  )
+}
+
+
+
+getWatchedList(user) {
+  const questions = user.watched_questions;
+  this.sortByKey(questions, "created_at")
+  return (
+    <div>
+      <div>
+        <span className="user-details-container-title inactive"><button onClick={this.switchToQuestions.bind(this)}>{`${this.getUserName(user)} Questions`}</button></span>
+        <span className="user-details-container-title inactive"><button onClick={this.switchToAnswers.bind(this)}>{`${this.getUserName(user)} Answers`}</button></span>
+        <span className="user-details-container-title inactive"><button onClick={this.switchToFollowees.bind(this)}>{`${this.getUserName(user)} Followees`}</button></span>
+        <span className="user-details-container-title">{`${this.getUserName(user)} Watched Questions`}</span>
+      </div>
+      <div className="details-questions-container">
+        <ul>
+          {questions.map((question, i) => {
+            const now = new Date();
+            const date = new Date(question.created_at);
+            return (
+              <li key={i} className="details-single-question">
+                <Link to={`/topics/${question.topic_id}/questions/${question.id}`}>
+                  <div className="details-question-body">
+                    {question.body}
+                  </div>
+                  <div>
+                    <div className="details-question-topic">
+                      Topic: {question.topic}
+                    </div>
+                    <div className="details-question-date">
+                      {this.getDate(date, now, "asked")}
+                    </div>
+                      {this.getQuestionStat(question)}
+                  </div>
                 </Link>
               </li>
             )
@@ -206,6 +323,10 @@ getDetails(user) {
     return this.getQuestionsList(user)
   } else if (this.state.details && this.state.answers) {
     return this.getAnswersList(user)
+  } else if (this.state.details && this.state.followees) {
+    return this.getFolloweesList(user)
+  } else if (this.state.details && this.state.watched) {
+    return this.getWatchedList(user)
   } else {
     return null;
   }
@@ -219,14 +340,21 @@ hideDetails() {
   this.setState({ details: false });
 }
 
-switchToAnswers() {
-  this.setState({ questions: false, answers: true })
-}
-
 switchToQuestions() {
-  this.setState({ questions: true, answers: false })
+  this.setState({ questions: true, answers: false, followees: false, watched: false })
 }
 
+switchToAnswers() {
+  this.setState({ questions: false, answers: true, followees: false, watched: false })
+}
+
+switchToFollowees() {
+  this.setState({ questions: false, answers: false,  followees: true, watched: false })
+}
+
+switchToWatched() {
+  this.setState({ questions: false, answers: false,  followees: false, watched: true })
+}
 
 getDetailsBtn(user) {
   if (this.state.details) {
@@ -254,4 +382,4 @@ render() {
 
 }
 
-export default withRouter(UserDetailsBlock)
+export default withRouter(CurrentUserDetailsBlock)
