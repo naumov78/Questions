@@ -249,7 +249,7 @@ UserWatchedQuestion.create!(user_id: user14.id, question_id: question3.id)
 UserWatchedQuestion.create!(user_id: user20.id, question_id: question3.id)
 UserWatchedQuestion.create!(user_id: user8.id, question_id: question3.id)
 UserWatchedQuestion.create!(user_id: user21.id, question_id: question3.id)
-UserWatchedQuestion.create!(user_id: user22.id, question_id: question3.id
+UserWatchedQuestion.create!(user_id: user22.id, question_id: question3.id)
 answer6 = Answer.create!(question_id: question3.id, author_id: user8.id, body: 'Marlon Brando stuffed cotton wads into his cheeks slightly distending the walls of his mouth enabling him to assume the Don’s persona. There is nothing physically wrong with Brando’s mouth, you are just watching a consummate performance by a legendary actor. A small group of us went to see the Godfather during it’s opening week and we all were awed by the movie and it’s adherence to the book.')
 UserLikedAnswer.create!(user_id: user7.id, answer_id: answer6.id)
 UserLikedAnswer.create!(user_id: user6.id, answer_id: answer6.id)
