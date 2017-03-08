@@ -41,8 +41,8 @@ getMessagesList() {
     return (
     <div>
       <div>
-        <span className="user-details-container-title inactive">Inbox</span>
-        <span className="user-details-container-title"><button onClick={this.switchToOutbox.bind(this)}>Outbox</button></span>
+        <span className="user-details-container-title">Inbox</span>
+        <span className="user-details-container-title inactive"><button onClick={this.switchToOutbox.bind(this)}>Outbox</button></span>
       </div>
       <div> <Inbox currentUser = {store.getState().user.user} /> </div>
     </div>
@@ -54,8 +54,8 @@ getMessagesList() {
     return (
     <div>
       <div>
-        <span className="user-details-container-title"><button onClick={this.switchToInbox.bind(this)}>Inbox</button></span>
-        <span className="user-details-container-title inactive">Outbox</span>
+        <span className="user-details-container-title inactive"><button onClick={this.switchToInbox.bind(this)}>Inbox</button></span>
+        <span className="user-details-container-title">Outbox</span>
       </div>
       <div> <Outbox currentUser = {store.getState().user.user} /> </div>
     </div>

@@ -9,7 +9,7 @@ class Message extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchMessage(parseInt(this.props.params[id]));
+    this.props.fetchMessage(parseInt(this.props.message_id);
   }
 
   // renderAnswers() {
@@ -23,17 +23,21 @@ class Message extends React.Component {
   // }
 
   render() {
-    return (
-       <div>
+    if (this.props.message) {
+      return (
          <div>
-           <span>{this.props.message.title}</span>
-         </div>
-         <div>
-           <span>{this.props.message.body}</span>
-         </div>
+           <div>
+             <span>{this.props.message.title}</span>
+           </div>
+           <div>
+             <span>{this.props.message.body}</span>
+           </div>
 
-       </div>
-     );
+         </div>
+       );
+    } else {
+      return <div></div>
+    }
   }
 
 }
