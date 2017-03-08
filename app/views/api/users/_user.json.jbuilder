@@ -21,6 +21,14 @@ json.questions user.questions do |question|
 
 end
 
+json.sent_messages user.sent_messages.order(created_at: :desc) do |message|
+  json.extract! message, :addressee_id, :title, :body
+end
+
+json.received_messages user.received_messages.order(created_at: :desc) do |message|
+  json.extract! message, :author_id, :title, :body, :created_at
+end
+
 json.answers user.answers do |answer|
 json.extract! answer, :author_id, :body, :created_at, :id, :question_id
 json.liked_users_num answer.liked_users.length

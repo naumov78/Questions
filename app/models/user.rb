@@ -73,7 +73,16 @@ class User < ActiveRecord::Base
   has_many :watched_questions, through: :user_watched_questions
 
 
-# , inverse_of: :user
+  has_many :sent_messages,
+  class_name: "Message",
+  foreign_key: :author_id
+
+  has_many :received_messages,
+  class_name: "Message",
+  foreign_key: :addressee_id
+
+
+
   attr_reader :password
 
   after_initialize :ensure_session_token

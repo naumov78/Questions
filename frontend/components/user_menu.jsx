@@ -23,7 +23,7 @@ class UserMenu extends React.Component  {
       return (
         <div id="userDropdown" className="dropdown-content">
           <a onClick={(e) => this.goToUserProfile(e)}>Profile&nbsp;</a>
-          <a onClick={(e) => this.handleLogout(e)}>Logout</a>
+					<a onClick={(e) => this.handleLogout(e)}>Logout</a>
         </div>
         );
   }
