@@ -8,7 +8,7 @@ export const RECEIVE_ERRORS = "RECEIVE_ERRORS";
 export const receiveMessage = (message) => {
   return ({
     type: RECEIVE_MESSAGE,
-    question: question
+    message: message
   });
 }
 
