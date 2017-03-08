@@ -22,7 +22,7 @@ json.questions user.questions do |question|
 end
 
 json.sent_messages user.sent_messages.order(created_at: :desc) do |message|
-  json.extract! message, :addressee_id, :title, :body
+  json.extract! message, :addressee_id, :title, :body, :created_at
 end
 
 json.received_messages user.received_messages.order(created_at: :desc) do |message|

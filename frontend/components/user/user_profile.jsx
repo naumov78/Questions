@@ -2,6 +2,7 @@ import React from 'react';
 import GreetingContainer from '../greeting_container';
 import UserDetailsBlock from './user_details_block';
 import CurrentUserDetailsBlock from './current_user_details_block';
+import UserMessagesBlock from './user_messages_block';
 import { Link, withRouter } from 'react-router';
 
 
@@ -156,8 +157,20 @@ class UserProfile extends React.Component {
     } else {
       return null;
     }
-
   }
+
+  getMessagesBlock() {
+    if (typeof this.props.user.id !== 'undefined') {
+      if (Number(this.props.params.id) === store.getState().session.currentUser.id) {
+        return <UserMessagesBlock />
+      } else {
+        return null;
+        }
+    } else {
+      return null;
+    }
+  }
+
 
   render() {
     if (this.state.edit && this.state.ownProfile) {
@@ -215,6 +228,7 @@ class UserProfile extends React.Component {
 
           <div className="user-details">
             {this.getUserDetailsBlock()}
+            {this.getMessagesBlock()}
           </div>
 
           </div>
@@ -251,6 +265,7 @@ class UserProfile extends React.Component {
 
           <div className="user-details">
             {this.getUserDetailsBlock()}
+            {this.getMessagesBlock()}
           </div>
 
         </div>
