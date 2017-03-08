@@ -1,4 +1,4 @@
-import * as APIUtil from '../util/messagess_api_util';
+import * as APIUtil from '../util/messages_api_util';
 
 
 export const RECEIVE_MESSAGE = "RECEIVE_MESSAGE";

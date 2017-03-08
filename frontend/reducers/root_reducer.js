@@ -6,6 +6,7 @@ import TopicReducer from './topic_reducer';
 import QuestionReducer from './question_reducer';
 import SubscribedTopicsReducer from './user_subscribed_topics_reducer';
 import AnswersReducer from './answers_reducer';
+import MessageReducer from './message_reducer';
 
 const rootReducer = combineReducers({
   session: SessionReducer,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   answers: AnswersReducer,
   topic: TopicReducer,
   subscribedTopics: SubscribedTopicsReducer,
-  user: UserReducer
+  user: UserReducer,
+  message: MessageReducer
 })
 
 
