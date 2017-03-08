@@ -5,8 +5,10 @@ Rails.application.routes.draw do
     resource :session, only: [:create, :destroy]
     resources :users, except: [:index, :new] do
       resources :follows, only: [:create, :destroy]
-      resources :messages, only: [:index, :create, :show]
+      resources :messages, only: [:create]
     end
+
+    resources :messages, only: [:show]
 
 
     resources :comments, only: [:create]

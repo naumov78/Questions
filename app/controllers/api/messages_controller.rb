@@ -2,10 +2,10 @@
 class Api::MessagesController < ApplicationController
 
 
-def index
-  @sent_messages = current_user.sent_messages.order(created_at: :desc)
-  @received_messages = current_user.received_messages.order(created_at: :desc)
-end
+# def index
+#   @sent_messages = current_user.sent_messages.order(created_at: :desc)
+#   @received_messages = current_user.received_messages.order(created_at: :desc)
+# end
 
 
 def show
