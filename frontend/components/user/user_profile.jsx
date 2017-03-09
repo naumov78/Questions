@@ -3,13 +3,14 @@ import GreetingContainer from '../greeting_container';
 import UserDetailsBlock from './user_details_block';
 import CurrentUserDetailsBlock from './current_user_details_block';
 import UserMessagesBlock from './user_messages_block';
+import MessageContainer from '../message/message_container';
 import { Link, withRouter } from 'react-router';
 
 
 class UserProfile extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { ownProfile: false, edit: false, first_name: "", last_name: "", description: "", userpicFile: null, userpicUrl: null }
+    this.state = { ownProfile: false, edit: false, first_name: "", last_name: "", description: "", userpicFile: null, userpicUrl: null, messageForm: false }
     this.changeToEdit = this.changeToEdit.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
     this.updateFile = this.updateFile.bind(this);
@@ -171,6 +172,34 @@ class UserProfile extends React.Component {
     }
   }
 
+  getMessageButton() {
+    if (typeof this.props.user.id !== 'undefined') {
+      if (Number(this.props.params.id) !== store.getState().session.currentUser.id) {
+        return (
+          <button onClick={() => this.toggleMessage()}>Message</button>
+        )
+      } else {
+        return null;
+        }
+    } else {
+      return null;
+    }
+  }
+
+  toggleMessage() {
+    this.setState({ messageForm: !this.state.messageForm })
+  }
+
+  getMessageForm() {
+    debugger
+    if (this.state.messageForm) {
+      return <MessageContainer />
+    } else {
+      return null;
+    }
+  }
+
+
 
   render() {
     if (this.state.edit && this.state.ownProfile) {
@@ -252,7 +281,9 @@ class UserProfile extends React.Component {
           <br />
           <div className="user-info-profile">
             <div className="user-name">
-              <p>{this.props.user.first_name}&nbsp;&nbsp;{this.props.user.last_name}</p>
+              <p>{this.props.user.first_name}&nbsp;&nbsp;{this.props.user.last_name}
+                {this.getMessageButton()}
+              </p>
             </div>
             <div className="user-descr">
               <p>{this.props.user.description}</p>
@@ -262,7 +293,7 @@ class UserProfile extends React.Component {
             </div>
             {this.getEditBtn()}
           </div>
-
+          {this.getMessageForm()}
           <div className="user-details">
             {this.getUserDetailsBlock()}
             {this.getMessagesBlock()}

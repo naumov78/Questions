@@ -1,1 +1,1 @@
-json.partial! "api/questions/messages", sent_messages: @sent_messages, received_messages: @received_messages
+json.partial! "api/messages/messages", sent_messages: @sent_messages, received_messages: @received_messages

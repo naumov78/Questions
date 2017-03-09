@@ -5,35 +5,58 @@ import { Link, withRouter } from 'react-router';
 class Message extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { title: "", body: "", messageForm: true }
+    this.sendMessage = this.sendMessage.bind(this)
+    this.hideMessageForm = this.hideMessageForm.bind(this)
 
   }
 
   componentDidMount() {
-    this.props.fetchMessage(parseInt(this.props.message_id);
   }
 
-  // renderAnswers() {
-  //   return (
-  //     <div className="answers-list">
-  //       {this.props.answers.map(ans => {
-  //         return <li key={ans.id}>{ans.body}</li>
-  //       })}
-  //     </div>
-  //   );
-  // }
+  update(field) {
+    return e => this.setState({
+      [field]: e.currentTarget.value
+    });
+  }
+
+  sendMessage(e) {
+    e.preventDefault();
+    const message = {addressee_id: Number(this.props.params.id), title: this.state.title, body: this.state.body}
+    debugger
+    this.props.createMessage(message).then(() => {
+      this.setState({ messageForm: false })
+    })
+  }
+
+  hideMessageForm() {
+    this.setState({ messageForm: false })
+  }
 
   render() {
-    if (this.props.message) {
+    if (this.state.messageForm) {
       return (
          <div>
-           <div>
-             <span>{this.props.message.title}</span>
-           </div>
-           <div>
-             <span>{this.props.message.body}</span>
-           </div>
+           <form onSubmit={this.sendMessage} className="create-question-form">
 
-         </div>
+             <div>
+               <input autoFocus={true} className="auth-form-input answer-input" type="text" placeholder="Message Title" onChange={this.update("title")} />
+             </div>
+             <div className="question-input">
+               <textarea
+               placeholder="Message"
+               onChange={this.update("body")}
+               className="auth-form-input answer-input"/>
+             </div>
+             <br />
+               <div className="button-part">
+                 <div id="add-question" className="answer-buttons">
+                   <button onClick={this.hideMessageForm}>Discard</button>
+                   <input type="submit" value="Send Message" />
+                 </div>
+               </div>
+           </form>
+        </div>
        );
     } else {
       return <div></div>
