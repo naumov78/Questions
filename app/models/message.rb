@@ -7,6 +7,7 @@
 #  addressee_id :integer          not null
 #  title        :string
 #  body         :string           not null
+#  unread       :boolean          default(TRUE)
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #

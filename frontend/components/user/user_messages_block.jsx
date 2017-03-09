@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router';
-import Inbox from './messages/inbox';
+import InboxContainer from './messages/inbox_container';
 import Outbox from './messages/outbox';
 
 
@@ -44,7 +44,7 @@ getMessagesList() {
         <span className="user-details-container-title">Inbox</span>
         <span className="user-details-container-title inactive"><button onClick={this.switchToOutbox.bind(this)}>Outbox</button></span>
       </div>
-      <div> <Inbox currentUser = {store.getState().user.user} /> </div>
+      <div> <InboxContainer /> </div>
     </div>
   )
   }

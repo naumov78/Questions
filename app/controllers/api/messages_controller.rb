@@ -20,9 +20,15 @@ def create
   else
     render json: @message.errors.full_messages, status: 422
   end
-
 end
 
+
+def update
+  message = Message.find(params[:id])
+  message.update_attribute(:unread, false)
+  @user = current_user
+  render 'api/users/show'
+end
 
 private
 

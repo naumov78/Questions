@@ -176,13 +176,21 @@ class UserProfile extends React.Component {
     if (typeof this.props.user.id !== 'undefined') {
       if (Number(this.props.params.id) !== store.getState().session.currentUser.id) {
         return (
-          <button onClick={() => this.toggleMessage()}>Message</button>
+          <button onClick={() => this.toggleMessage()}>{this.messageBtn()}</button>
         )
       } else {
         return null;
         }
     } else {
       return null;
+    }
+  }
+
+  messageBtn() {
+    if (this.state.messageForm) {
+      return 'discard message'
+    } else {
+      return 'compose message'
     }
   }
 

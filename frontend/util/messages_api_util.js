@@ -12,3 +12,11 @@ export const fetchMessage = (id) => {
     url: `/api/messages/${id}`
   });
 }
+
+
+export const readMessage = (id) => {
+  return $.ajax({
+    method: "PATCH",
+    url: `/api/messages/${id}`
+  })
+}

@@ -7,7 +7,7 @@ class Message extends React.Component {
     super(props);
     this.state = { title: "", body: "", messageForm: true }
     this.sendMessage = this.sendMessage.bind(this)
-    this.hideMessageForm = this.hideMessageForm.bind(this)
+    
 
   }
 
@@ -29,9 +29,6 @@ class Message extends React.Component {
     })
   }
 
-  hideMessageForm() {
-    this.setState({ messageForm: false })
-  }
 
   render() {
     if (this.state.messageForm) {
@@ -51,7 +48,6 @@ class Message extends React.Component {
              <br />
                <div className="button-part">
                  <div id="add-question" className="answer-buttons">
-                   <button onClick={this.hideMessageForm}>Discard</button>
                    <input type="submit" value="Send Message" />
                  </div>
                </div>

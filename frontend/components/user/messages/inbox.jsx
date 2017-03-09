@@ -20,11 +20,19 @@ constructor(props) {
     return <span>{msg.title}</span>
   }
 
-  toggleMessage(id) {
-    if (this.state.showMessageContent === id) {
+  toggleMessage(message) {
+    debugger
+    if (this.state.showMessageContent === message.id) {
+      debugger
       this.setState({ showMessageContent: 0 })
     } else {
-      this.setState({ showMessageContent: id })
+      debugger
+      if (message.unread) {
+        debugger
+        this.markMessageAsRead(message.id)
+      } else {
+        this.setState({ showMessageContent: message.id })
+      }
     }
   }
 
@@ -41,7 +49,25 @@ constructor(props) {
     }
   }
 
+
+  markMessageAsRead(id) {
+    debugger
+    this.props.readMessage(id).then(() => {
+      this.setState({ showMessageContent: id })
+    })
+  }
+
+  getClassNameForMessages(message) {
+    debugger
+    if (message.unread) {
+      return 'unread-message'
+    } else {
+      return 'read-message'
+    }
+  }
+
   getMsgList() {
+    debugger
     const messages = this.props.currentUser.received_messages
     return (
       <ul>
@@ -65,14 +91,14 @@ constructor(props) {
           const Day = date.getDate();
           const Yr = date.getFullYear()
           return (
-          <a onClick={() => this.toggleMessage(message.id)}>
+          <a onClick={() => this.toggleMessage(message)}>
           <li key={Number(new Date())}>
             <table>
               <tbody>
                 <tr>
-                  <td width="150px">{`${message.author_id}`}</td>
-                  <td width="250px">{this.getTitle(message)}</td>
-                  <td width="100px">{Mon} {Day}, {Yr}</td>
+                  <td width="150px"><span className={this.getClassNameForMessages(message)}>{`${message.author_id}`}</span></td>
+                  <td width="250px"><span className={this.getClassNameForMessages(message)}>{this.getTitle(message)}</span></td>
+                  <td width="100px"><span className={this.getClassNameForMessages(message)}>{Mon} {Day}, {Yr}</span></td>
                 </tr>
                 <tr>
                   {this.getContent(message)}
