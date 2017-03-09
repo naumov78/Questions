@@ -1,6 +1,7 @@
 json.extract! user, :id, :first_name, :last_name, :description, :userpic, :topics, :created_at, :out_follows
 json.userpic_url asset_path(user.userpic.url)
 
+
 json.questions user.questions do |question|
   json.extract! question, :id, :author_id, :body, :created_at, :topic_id
   json.topic question.topic.title

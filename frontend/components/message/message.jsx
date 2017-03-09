@@ -7,7 +7,7 @@ class Message extends React.Component {
     super(props);
     this.state = { title: "", body: "", messageForm: true }
     this.sendMessage = this.sendMessage.bind(this)
-    
+
 
   }
 
@@ -23,7 +23,6 @@ class Message extends React.Component {
   sendMessage(e) {
     e.preventDefault();
     const message = {addressee_id: Number(this.props.params.id), title: this.state.title, body: this.state.body}
-    debugger
     this.props.createMessage(message).then(() => {
       this.setState({ messageForm: false })
     })

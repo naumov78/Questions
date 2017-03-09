@@ -9,7 +9,6 @@ constructor(props) {
 }
 
   componentDidMount() {
-    debugger
   }
 
 
@@ -21,14 +20,10 @@ constructor(props) {
   }
 
   toggleMessage(message) {
-    debugger
     if (this.state.showMessageContent === message.id) {
-      debugger
       this.setState({ showMessageContent: 0 })
     } else {
-      debugger
       if (message.unread) {
-        debugger
         this.markMessageAsRead(message.id)
       } else {
         this.setState({ showMessageContent: message.id })
@@ -37,7 +32,6 @@ constructor(props) {
   }
 
   getContent(msg) {
-    debugger
     if (this.state.showMessageContent === msg.id) {
       return (
         <td colSpan="3">
@@ -51,14 +45,12 @@ constructor(props) {
 
 
   markMessageAsRead(id) {
-    debugger
     this.props.readMessage(id).then(() => {
       this.setState({ showMessageContent: id })
     })
   }
 
   getClassNameForMessages(message) {
-    debugger
     if (message.unread) {
       return 'unread-message'
     } else {
@@ -67,7 +59,6 @@ constructor(props) {
   }
 
   getMsgList() {
-    debugger
     const messages = this.props.currentUser.received_messages
     return (
       <ul>

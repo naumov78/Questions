@@ -82,8 +82,8 @@ class User < ActiveRecord::Base
   foreign_key: :addressee_id
 
 
-
   attr_reader :password
+
 
   after_initialize :ensure_session_token
 
@@ -122,6 +122,7 @@ class User < ActiveRecord::Base
   def ensure_session_token
     self.session_token ||= User.generate_session_token
   end
+
 
 
 end

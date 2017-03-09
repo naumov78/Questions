@@ -199,7 +199,6 @@ class UserProfile extends React.Component {
   }
 
   getMessageForm() {
-    debugger
     if (this.state.messageForm) {
       return <MessageContainer />
     } else {

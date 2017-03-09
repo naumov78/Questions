@@ -52,7 +52,6 @@ export const fetchMessage = (id) => {
 export const readMessage = (id) => {
   return (dispatch) => {
     return APIUtil.readMessage(id).then((result) => {
-      debugger
       return dispatch(receiveUser(result))
     })
   }

@@ -37,7 +37,6 @@ switchToOutbox() {
 
 getMessagesList() {
   if (this.state.inbox) {
-    debugger
     return (
     <div>
       <div>
@@ -50,7 +49,6 @@ getMessagesList() {
   }
 
   if (this.state.outbox) {
-    debugger
     return (
     <div>
       <div>

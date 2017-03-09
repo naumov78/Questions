@@ -15,6 +15,7 @@ end
 
 def create
   @message = current_user.sent_messages.new(message_params)
+
   if @message.save
     render :show
   else

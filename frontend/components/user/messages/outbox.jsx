@@ -9,7 +9,6 @@ constructor(props) {
 }
 
   componentDidMount() {
-    debugger
   }
 
 
@@ -29,7 +28,6 @@ constructor(props) {
   }
 
   getContent(msg) {
-    debugger
     if (this.state.showMessageContent === msg.id) {
       return (
         <td colSpan="3">
