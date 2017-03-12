@@ -5,7 +5,8 @@ import { createMessage } from '../../actions/message_actions';
 
 const mapStateToProps = ({message}) => {
   return ({
-    message: message
+    message: message.message,
+    errors: message.errors
   });
 }
 

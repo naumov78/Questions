@@ -32,7 +32,7 @@ class UserProfile extends React.Component {
   componentWillReceiveProps(newProps) {
     const id = newProps.params.id;
     if (id !== this.props.params.id) {
-      this.setState({ownProfile: false, edit: false, first_name: "", last_name: "", description: "", userpicFile: null, userpicUrl: null})
+      this.setState({ownProfile: false, edit: false, first_name: "", last_name: "", description: "", userpicFile: null, userpicUrl: null, messageForm: false})
       this.props.fetchUser(Number(id))
     }
   }
@@ -176,7 +176,7 @@ class UserProfile extends React.Component {
     if (typeof this.props.user.id !== 'undefined') {
       if (Number(this.props.params.id) !== store.getState().session.currentUser.id) {
         return (
-          <button onClick={() => this.toggleMessage()}>{this.messageBtn()}</button>
+          <button  className="upvote-btn compose-message-btn-profile" onClick={() => this.toggleMessage()}>{this.messageBtn()}</button>
         )
       } else {
         return null;
@@ -188,9 +188,9 @@ class UserProfile extends React.Component {
 
   messageBtn() {
     if (this.state.messageForm) {
-      return 'discard message'
+      return 'Discard Message'
     } else {
-      return 'compose message'
+      return 'Send Message'
     }
   }
 
@@ -264,6 +264,9 @@ class UserProfile extends React.Component {
 
           <div className="user-details">
             {this.getUserDetailsBlock()}
+          </div>
+
+          <div>
             {this.getMessagesBlock()}
           </div>
 

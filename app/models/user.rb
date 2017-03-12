@@ -15,6 +15,7 @@
 #  userpic_content_type :string
 #  userpic_file_size    :integer
 #  userpic_updated_at   :datetime
+#  unread_messages      :integer          default(0)
 #
 
 class User < ActiveRecord::Base

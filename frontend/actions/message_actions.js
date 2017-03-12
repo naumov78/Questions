@@ -24,7 +24,7 @@ export const receiveMessage = (message) => {
 export const receiveErrors = (errors) => {
   return ({
     type: RECEIVE_ERRORS,
-    errors
+    errors: errors
   });
 }
 
@@ -34,8 +34,8 @@ export const createMessage = (message) => {
     return APIUtil.createMessage(message).then((result) => {
       return dispatch(receiveMessage(result));
       },
-      (errors) => {
-        return dispatch(receiveErrors(errors));
+      ({responseJSON}) => {
+        return dispatch(receiveErrors(responseJSON));
       });
   }
 }

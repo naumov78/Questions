@@ -2,15 +2,126 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.message-box {
+  width: 850px;
+}
+
+.messages-container {
+  font-size: 0.8em;
+  color: #888;
+}
 
 .unread-message {
-  color: red;
   font-weight: 800;
-  background: #f2f2f2;
+  color: #000;
 }
 
 .read-message {
-  // color: blue;
-  font-weight: 100;
+}
 
+.unread-messages-number {
+  position: absolute;
+  padding: 2px 5px 2px 5px;
+  margin-left: -10px;
+  margin-top: -10px;
+  background: red;
+  color: #fff;
+  font-size: 0.75em;
+  font-weight: 800;
+  border: 1px solid #990000;
+  border-radius: 50%;
+}
+
+
+.compose-message-btn-profile {
+  margin-left: 50px;
+}
+
+.open-close-inbox {
+padding: 5px 8px 5px 8px;
+font-size: 32px;
+}
+
+
+.show-hide-container {
+  margin-top: 20px;
+}
+
+.message-form-profile-container {
+  position: absolute;
+  top: 330px;
+  left: 580px;
+  width: 500px;
+  border: 1px solid #dde5ee;
+  border-radius: 5px;
+  box-shadow: 0px 8px 16px 0px rgba(187,202,220,0.2);
+  padding: 10px;
+  z-index: 2;
+  background: #ffffff;
+  opacity: 1;
+}
+
+.message-errors {
+  padding-right: 30px;
+  color: red;
+  font-size: 0.8em;
+}
+
+.message-list-container {
+  margin-top: 20px;
+}
+
+
+.messages-titles {
+  background: #2980b9;
+  color: #fff;
+  font-size: 0.95em;
+  border-top: 1px solid #e2e2e2;
+  border-left: 1px solid #e2e2e2;
+  border-right: 1px solid #e2e2e2;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  padding: 7px 13px 7px 13px;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+
+.inbox-outbox-container {
+  margin-top: 7px;
+  border-top: 1px #e2e2e2 solid;
+  border-right: 1px #e2e2e2 solid;
+  border-left: 1px #e2e2e2 solid;
+  width: 824px;
+}
+
+
+.td-message-author {
+  min-width: 150px;
+}
+
+.td-message-date-time {
+  min-width: 80px;
+  text-align: center;
+}
+
+.td-message-title {
+  min-width: 480px
+}
+
+.message-header {
+  padding-top: 3px;
+  background: #f2f2f2;
+  text-align: center;
+  border-bottom: 1px #e2e2e2 solid;
+}
+
+
+.message-line {
+  border-bottom: 1px #e2e2e2 solid;
+}
+
+.message-line:hover {
+  cursor: pointer;
+  background: #e6f7ff;
 }

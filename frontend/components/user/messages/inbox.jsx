@@ -13,8 +13,8 @@ constructor(props) {
 
 
   getTitle(msg) {
-    if (msg.title == null) {
-      return <span></span>
+    if (msg.title === "") {
+      return <span>(no subject)</span>
     }
     return <span>{msg.title}</span>
   }
@@ -58,18 +58,42 @@ constructor(props) {
     }
   }
 
+  getTime(date) {
+    let Hr = date.getHours()
+    let Mins = date.getMinutes()
+    let amPm;
+    if (Hr < 12) {
+      amPm = 'AM'
+    } else {
+      amPm = 'PM'
+    }
+    if (Hr < 10) {
+      Hr = 0 + Hr.toString()
+    } else {
+      Hr = Hr.toString()
+    }
+    if (Mins < 10) {
+      Mins = 0 + Mins.toString()
+    } else {
+      Mins = Mins.toString()
+    }
+    return `${Hr}:${Mins} ${amPm}`
+  }
+
+
   getMsgList() {
     const messages = this.props.currentUser.received_messages
     return (
       <ul>
 
-        <li key={Number(new Date())}>
+        <li className="message-header" key={Number(new Date())}>
           <table>
             <tbody>
               <tr>
-                <td width="150px">From</td>
-                <td width="250px">Title</td>
-                <td width="100px">Date</td>
+                <td className="td-message-author">From</td>
+                <td className="td-message-title">Subject</td>
+                <td className="td-message-date-time">Date</td>
+                <td className="td-message-date-time">Time</td>
               </tr>
             </tbody>
           </table>
@@ -80,16 +104,17 @@ constructor(props) {
           const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
           const Mon = monthNames[date.getMonth()];
           const Day = date.getDate();
-          const Yr = date.getFullYear()
+
           return (
           <a onClick={() => this.toggleMessage(message)}>
-          <li key={Number(new Date())}>
+          <li className="message-line" key={Number(new Date())}>
             <table>
               <tbody>
                 <tr>
-                  <td width="150px"><span className={this.getClassNameForMessages(message)}>{`${message.author_id}`}</span></td>
-                  <td width="250px"><span className={this.getClassNameForMessages(message)}>{this.getTitle(message)}</span></td>
-                  <td width="100px"><span className={this.getClassNameForMessages(message)}>{Mon} {Day}, {Yr}</span></td>
+                  <td className="td-message-author"><span className={this.getClassNameForMessages(message)}>{`${message.author_id}`}</span></td>
+                  <td className="td-message-title"><span className={this.getClassNameForMessages(message)}>{this.getTitle(message)}</span></td>
+                  <td className="td-message-date-time"><span className={this.getClassNameForMessages(message)}>{Mon} {Day}</span></td>
+                  <td className="td-message-date-time"><span className={this.getClassNameForMessages(message)}>{this.getTime(date)}</span></td>
                 </tr>
                 <tr>
                   {this.getContent(message)}
@@ -108,7 +133,7 @@ constructor(props) {
 
   render() {
     return (
-      <div className="feed">
+      <div className="messages-container">
         {this.getMsgList()}
       </div>
     );

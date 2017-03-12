@@ -1,6 +1,7 @@
 
 
 User.delete_all
+Message.delete_all
 Topic.delete_all
 Question.delete_all
 Answer.delete_all
@@ -52,78 +53,78 @@ children = Topic.create!(title: 'Children')
 
 
 user1 = User.create!(first_name: 'Padme', last_name: 'Amidala', email: 'padme_amidala@questions.com', description: 'Teenage queen', password: '12345')
-# user1.userpic = File.open("app/assets/images/userpics/padme.jpg")
-# user1.save!
+user1.userpic = File.open("app/assets/images/userpics/padme.jpg")
+user1.save!
 user2 = User.create!(first_name: 'Jango', last_name: 'Fett', email: 'jango_fett@questions.com', description: 'Bounty hunter', password: '12345')
-# user2.userpic = File.open("app/assets/images/userpics/jango.jpg")
-# user2.save!
+user2.userpic = File.open("app/assets/images/userpics/jango.jpg")
+user2.save!
 user3 = User.create!(first_name: 'Jabba', last_name: 'the Hutt', email: 'jabba_hutt@questions.com', description: 'Crime boss', password: '12345')
-# user3.userpic = File.open("app/assets/images/userpics/jabba.jpg")
-# user3.save!
+user3.userpic = File.open("app/assets/images/userpics/jabba.jpg")
+user3.save!
 user4 = User.create!(first_name: 'Qui-Gon', last_name: 'Jinn', email: 'quigon_jinn@questions.com', description: 'Jedi Master', password: '12345')
-# user4.userpic = File.open("app/assets/images/userpics/quigon.png")
-# user4.save!
+user4.userpic = File.open("app/assets/images/userpics/quigon.png")
+user4.save!
 user5 = User.create!(first_name: 'Obi-Wan', last_name: 'Kenobi', email: 'obiwan_kenobi@questions.com', description: 'Wise and skilled Jedi Master', password: '12345')
-# user5.userpic = File.open("app/assets/images/userpics/obione.jpg")
-# user5.save!
+user5.userpic = File.open("app/assets/images/userpics/obione.jpg")
+user5.save!
 user6 = User.create!(first_name: 'Leia Amidala', last_name: 'Skywalker Organa Solo', email: 'leia@questions.com', description: 'Luke Skywalker\'s sister and Han Solo\'s wife', password: '12345')
-# user6.userpic = File.open("app/assets/images/userpics/leia.jpg")
-# user6.save!
+user6.userpic = File.open("app/assets/images/userpics/leia.jpg")
+user6.save!
 user7 = User.create!(first_name: 'Anakin', last_name: 'Skywalker', email: 'anakin_skywalker@questions.com', description: 'aka Darth Vader', password: '12345')
-# user7.userpic = File.open("app/assets/images/userpics/anakin.jpg")
-# user7.save!
+user7.userpic = File.open("app/assets/images/userpics/anakin.jpg")
+user7.save!
 user8 = User.create!(first_name: 'Han', last_name: 'Solo', email: 'han_solo@questions.com', description: 'Captain of the Millennium Falcon', password: '12345')
-# user8.userpic = File.open("app/assets/images/userpics/hansolo.png")
-# user8.save!
+user8.userpic = File.open("app/assets/images/userpics/hansolo.png")
+user8.save!
 user9 = User.create!(first_name: 'Indiana', last_name: 'Jones', email: 'indiana_jones@questions.com', description: 'a fictional archaeologist', password: '12345')
-# user9.userpic = File.open("app/assets/images/userpics/indiana_jones.jpg")
-# user9.save!
+user9.userpic = File.open("app/assets/images/userpics/indiana_jones.jpg")
+user9.save!
 user10 = User.create!(first_name: 'Forrest', last_name: 'Gump', email: 'forest_gump@questions.com', description: 'Life is like a box of chocolates', password: '12345')
-# user10.userpic = File.open("app/assets/images/userpics/forrest_gump.jpg")
-# user10.save!
+user10.userpic = File.open("app/assets/images/userpics/forrest_gump.jpg")
+user10.save!
 user11 = User.create!(first_name: 'Chewbacca', last_name: 'Chewie', email: 'chewie@questions.com', description: 'Wookiee from the planet Kashyyyk', password: '12345')
-# user11.userpic = File.open("app/assets/images/userpics/choobaka.jpg")
-# user11.save!
+user11.userpic = File.open("app/assets/images/userpics/choobaka.jpg")
+user11.save!
 user12 = User.create!(first_name: 'William', last_name: 'Wallace', email: 'william@questions.com', description: 'Scottish knight who became one of the main leaders during the Wars of Scottish Independence', password: '12345')
-# user12.userpic = File.open("app/assets/images/userpics/william_wallas.jpg")
-# user12.save!
+user12.userpic = File.open("app/assets/images/userpics/william_wallas.jpg")
+user12.save!
 user13 = User.create!(first_name: 'Ace', last_name: 'Ventura', email: 'ace@questions.com', description: 'private detective specializing in the retrieval of missing animals', password: '12345')
-# user13.userpic = File.open("app/assets/images/userpics/ace_ventura.jpg")
-# user13.save!
+user13.userpic = File.open("app/assets/images/userpics/ace_ventura.jpg")
+user13.save!
 user14 = User.create!(first_name: 'Jack', last_name: 'Sparrow', email: 'sparrow@questions.com', description: 'Pirate Lord of the Caribbean Sea', password: '12345')
-# user14.userpic = File.open("app/assets/images/userpics/jack_sparrow.jpg")
-# user14.save!
+user14.userpic = File.open("app/assets/images/userpics/jack_sparrow.jpg")
+user14.save!
 user15 = User.create!(first_name: 'Tony', last_name: 'Montana', email: 'montana@questions.com', description: 'Drug Lord', password: '12345')
-# user15.userpic = File.open("app/assets/images/userpics/tonny_montana.jpeg")
-# user15.save!
+user15.userpic = File.open("app/assets/images/userpics/tonny_montana.jpeg")
+user15.save!
 user16 = User.create!(first_name: 'Rocky', last_name: 'Balboa', email: 'roky@questions.com', description: 'Professional boxer (retired), boxing trainer', password: '12345')
-# user16.userpic = File.open("app/assets/images/userpics/rocky.jpeg")
-# user16.save!
+user16.userpic = File.open("app/assets/images/userpics/rocky.jpeg")
+user16.save!
 user17 = User.create!(first_name: 'Jeffrey', last_name: 'Lebowski', email: 'lebowski@questions.com', description: 'The Dude aka His Dudeness or El Duderino', password: '12345')
-# user17.userpic = File.open("app/assets/images/userpics/lebowsky.jpg")
-# user17.save!
+user17.userpic = File.open("app/assets/images/userpics/lebowsky.jpg")
+user17.save!
 user18 = User.create!(first_name: 'Freddy', last_name: 'Krueger', email: 'krueger@questions.com', description: 'The Springwood Slasher', password: '12345')
-# user18.userpic = File.open("app/assets/images/userpics/fredy_kruger.jpg")
-# user18.save!
+user18.userpic = File.open("app/assets/images/userpics/fredy_kruger.jpg")
+user18.save!
 user19 = User.create!(first_name: 'John', last_name: 'McClane', email: 'mcclane@questions.com', description: 'New York City Police Detective', password: '12345')
-# user19.userpic = File.open("app/assets/images/userpics/mcclain.jpg")
-# user19.save!
+user19.userpic = File.open("app/assets/images/userpics/mcclain.jpg")
+user19.save!
 user20 = User.create!(first_name: 'James', last_name: 'Bond', email: 'bond@questions.com', description: 'British Secret Service agent ', password: '12345')
-# user20.userpic = File.open("app/assets/images/userpics/james_bond.jpg")
-# user20.save!
+user20.userpic = File.open("app/assets/images/userpics/james_bond.jpg")
+user20.save!
 user21 = User.create!(first_name: 'Vito', last_name: 'Corleone', email: 'vito@questions.com', description: 'The Godfather', password: '12345')
-# user21.userpic = File.open("app/assets/images/userpics/corleone.jpg")
-# user21.save!
+user21.userpic = File.open("app/assets/images/userpics/corleone.jpg")
+user21.save!
 user22 = User.create!(first_name: 'Ethan', last_name: 'Hunt', email: 'hunt@questions.com', description: 'IMF Agent', password: '12345')
-# user22.userpic = File.open("app/assets/images/userpics/hunt.jpeg")
-# user22.save!
+user22.userpic = File.open("app/assets/images/userpics/hunt.jpeg")
+user22.save!
 user23 = User.create!(first_name: 'Jason', last_name: 'Bourne', email: 'bourne@questions.com', description: 'Specialist in Far Eastern affairs', password: '12345')
 user24 = User.create!(first_name: 'Frank', last_name: 'Drebin', email: 'frank@questions.com', description: 'Police officer', password: '12345')
-# user24.userpic = File.open("app/assets/images/userpics/frank_drebin.jpg")
-# user24.save!
+user24.userpic = File.open("app/assets/images/userpics/frank_drebin.jpg")
+user24.save!
 user25 = User.create!(first_name: 'Harry', last_name: 'Potter', email: 'harry@questions.com', description: 'a half-blood wizard', password: '12345')
-# user25.userpic = File.open("app/assets/images/userpics/potter.jpeg")
-# user25.save!
+user25.userpic = File.open("app/assets/images/userpics/potter.jpeg")
+user25.save!
 
 
 # :userpic => File.open(File.join('http://apm-assets.s3.amazonaws.com', '/path/to/img.jpg')
