@@ -37,7 +37,11 @@ constructor(props) {
     if (msg.title === "") {
       return <span>(no subject)</span>
     }
-    return <span>{msg.title}</span>
+    let subject = msg.title
+    if (msg.title.length > 85) {
+      subject = msg.title.slice(0,82)
+    }
+    return <span>{`${subject}...`}</span>
   }
 
   getClassNameForMessages(message) {
