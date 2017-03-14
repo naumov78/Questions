@@ -28,6 +28,8 @@ end
 
 json.received_messages user.received_messages.order(created_at: :desc) do |message|
   json.extract! message, :id, :author_id, :title, :body, :unread, :created_at
+  json.message_author User.find(message.author_id)
+  json.author_userpic_url asset_path(User.find(message.author_id).userpic.url)
 end
 
 json.answers user.answers do |answer|

@@ -92,7 +92,7 @@ font-size: 32px;
   border-top: 1px #e2e2e2 solid;
   border-right: 1px #e2e2e2 solid;
   border-left: 1px #e2e2e2 solid;
-  width: 824px;
+  width: 808px;
 }
 
 
@@ -124,4 +124,67 @@ font-size: 32px;
 .message-line:hover {
   cursor: pointer;
   background: #e6f7ff;
+}
+
+.message-content-container {
+  background: #fff;
+  border: 1px solid black;
+  margin-left: 15px;
+}
+
+.message-details {
+  padding: 10px 20px 10px 20px;
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.red-font {
+  color: #b82b28;
+}
+
+.message-author-info {
+  color: black;
+  display: inline-block;;
+
+
+}
+
+.messsage-author-info-left {
+  img {
+    display: block;
+    width: 47px;
+    height: 47px;
+    border-radius: 50%
+  }
+}
+
+.messsage-author-info-right {
+  padding-left: 10px;
+}
+
+.message-content-img-link:hover {
+  img {
+    box-shadow: 2px 2px 1px 0px rgba(100,100,100,0.5);
+  }
+}
+
+.message-content-link:hover {
+  text-decoration: underline;
+}
+
+
+.message-body {
+  padding: 20px 20px 5px 20px;
+  color: black;
+  font-size: 0.95em;
+
+}
+
+.message-buttons {
+  width: 100%;
+  padding: 20px;
+  align: right;
+
+  button {
+    margin-left: 4px;
+  }
 }
