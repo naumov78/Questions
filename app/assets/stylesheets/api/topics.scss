@@ -17,8 +17,16 @@
 }
 
 .single-q-list {
-  border-bottom: 1px solid #e2e2e2;
-  padding: 20px 0 20px 0;
+  // border-bottom: 1px solid #e2e2e2;
+  border: 1px solid #e2e2e2;
+  // padding: 20px 0 20px 0;
+  padding: 20px;
+  margin-top: 10px;
+}
+
+.single-q-list:hover {
+  background: #f2f2f2;
+  cursor: pointer;
 }
 
 .q-body {

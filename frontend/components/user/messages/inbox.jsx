@@ -23,10 +23,10 @@ constructor(props) {
       return <span>(no subject)</span>
     }
     let subject = msg.title
-    if (msg.title.length > 85) {
-      subject = msg.title.slice(0,82)
+    if (msg.title.length > 78) {
+      subject = msg.title.slice(0,75) + '...'
     }
-    return <span>{`${subject}...`}</span>
+    return <span>{subject}</span>
   }
 
   toggleMessage(message) {

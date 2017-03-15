@@ -17,13 +17,15 @@
 
 
 .user-index {
-  width: 450px;
-  float: left;
+  // width: 450px;
+  justify-content: center;
+  width: 100%
+  // float: left;
 }
 
 .topic-info {
   font-size: 15px;
-  padding: 10px 20px 10px 20px;
+  padding: 10px 20px 10px 0;
 
   a {
     font-size: 15px;

@@ -47,11 +47,17 @@ getIndexQuestions() {
   return questions;
 }
 
-updateDescrLength(str){
-  if (str && str.length > 125) {
-    return str.slice(0, 124) + '...';
+updateDescrLength(name, descr){
+  if (descr) {
+    if (name.length < 10 && descr.length > 70) {
+      return descr.slice(0, 67) + '...';
+    } else if (name.length < 30 && descr.length > 50) {
+      return descr.slice(0, 47) + '...';
+    } else if (name.length > 30 && descr.length > 30) {
+      return descr.slice(0, 27) + '...';
+    }
   }
-  return str;
+  return descr;
 }
 
 renderAnswersQuntity(num) {
@@ -174,9 +180,10 @@ renderIndexQuestions() {
 
           return (
             <li key={q.id}>
+              <Link to={`/topics/${q.idx_topic_id}/questions/${q.id}`}>
               <div className="single-q-list">
                 <div className="topic-info">
-                  {`from`} <Link to={`/topics/${q.idx_topic_id}/questions/`}>{q.idx_topic_title}</Link>
+                  {`Topic:`} <Link to={`/topics/${q.idx_topic_id}/questions/`}>{q.idx_topic_title}</Link>
                 <span id="index-topic-ans-num">{this.getLastAnswerDate(lastAnswerDate, now)}</span>
                 </div>
                 <div className="empty-space"></div>
@@ -186,7 +193,7 @@ renderIndexQuestions() {
                   </div>
                   <div className="question-author-name">
                     <span id="link-auth-name"><Link to={`/users/${q.author_id}`}>{authName}</Link></span>
-                      <span className="question-author-descr">, {this.updateDescrLength(q.auth_descr)}</span>
+                      <span className="question-author-descr">, {this.updateDescrLength(authName, q.auth_descr)}</span>
                       <p className="question-date">{this.getDate(q, now)}</p>
                   </div>
                 </div>
@@ -195,6 +202,7 @@ renderIndexQuestions() {
                   <Link to={`/topics/${q.idx_topic_id}/questions/${q.id}`}><span>{q.body}</span></Link>
                 </div>
               </div>
+              </Link>
             </li>
           )
         })}

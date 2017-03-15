@@ -155,6 +155,7 @@ class TopicIndex extends React.Component {
               const now = new Date();
               return (
               <li key={q.id * now} className="topic-question-container">
+                <Link to={`/topics/${topic_id}/questions/${q.id}`}>
                 <div className="single-q-list">
                   <div className="question-author-info">
                     <div className="question-author-userpic">
@@ -178,6 +179,7 @@ class TopicIndex extends React.Component {
                     {this.getQuickAnswerForm(q)}
                   </div>
                 </div>
+                </Link>
               </li>
               );
             })}
