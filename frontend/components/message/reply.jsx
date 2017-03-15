@@ -54,30 +54,32 @@ class Reply extends React.Component {
     if (this.state.messageForm) {
       debugger
       return (
-        <td colSpan="4" className = "message-content-container reply-container">
-
+        <td colSpan="4" className = "message-content-container">
+          <div className="reply-container">
            <button className="close-reply-form" onClick={this.closeReply}>X</button>
-           <div className="reply-form-container">
-           <form onSubmit={this.sendMessage} className="create-question-form message-form-profile">
+             <div className="reply-form-container">
+             <form onSubmit={this.sendMessage} className="create-question-form message-form-profile">
 
-             <div>
-               <span className="reply-title">Re: {this.props.oldTitle}</span>
-             </div>
-             <div className="question-input">
-               <textarea
-               autoFocus={true}
-               onChange={this.update("body")}
-               className="auth-form-input answer-input"
-               value={this.state.body}/>
-             </div>
-             <br />
-               <div className="button-part">
-                 <div id="add-question" className="answer-buttons">
-                   <span className="message-errors">{this.renderErrors()}</span>
-                   <span><input className="ans-btn" type="submit" value="Send Message" /></span>
-                 </div>
+               <div>
+                 <span className="reply-title">Re: {this.props.oldTitle}</span>
                </div>
-           </form>
+               <div className="question-input centered">
+                 <textarea
+                 id="reply-input"
+                 autoFocus={true}
+                 onChange={this.update("body")}
+                 className="auth-form-input answer-input"
+                 value={this.state.body}/>
+               </div>
+               <br />
+                 <div className="button-part">
+                   <div id="add-question" className="answer-buttons send-reply-btn">
+                     <span className="message-errors">{this.renderErrors()}</span>
+                     <span><input className="ans-btn" type="submit" value="Send Reply" /></span>
+                   </div>
+                 </div>
+             </form>
+             </div>
            </div>
         </td>
        );

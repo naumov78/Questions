@@ -9,7 +9,6 @@ constructor(props) {
   this.state = { showMessageContent: 0, reply: false }
   this.toggleMessage = this.toggleMessage.bind(this);
   this.changeToReply = this.changeToReply.bind(this);
-  this.showMessageContent = this.showMessageContent.bind(this);
   this.hideMessageContent = this.hideMessageContent.bind(this);
 }
 
@@ -42,18 +41,16 @@ constructor(props) {
     }
   }
 
-  showMessageContent(message) {
-    if (message.unread) {
-      this.markMessageAsRead(message.id)
-    } else {
-      this.setState({ showMessageContent: message.id })
-    }
-  }
+  // showMessageContent(message) {
+  //   if (message.unread) {
+  //     this.markMessageAsRead(message.id)
+  //   } else {
+  //     this.setState({ showMessageContent: message.id })
+  //   }
+  // }
 
   hideMessageContent(msg) {
-    debugger
       this.setState({ showMessageContent: 0, reply: false })
-      debugger
   }
 
 
@@ -70,7 +67,7 @@ constructor(props) {
                   <tr>
                     <td className="messsage-author-info-left"><span><Link className="message-content-img-link" to={`/users/${msg.author_id}`}><img src={msg.author_userpic_url} /></Link></span></td>
                     <td className="messsage-author-info-right">
-                      <div><span className="red-font">From:</span> <Link className="message-content-link" to={`api/users/${msg.author_id}`}>{`${msg.message_author.first_name}  ${msg.message_author.last_name} - ${msg.message_author.description}`}</Link></div>
+                      <div><span className="red-font">From:</span> <Link className="message-content-link" to={`/users/${msg.author_id}`}>{`${msg.message_author.first_name}  ${msg.message_author.last_name} - ${msg.message_author.description}`}</Link></div>
                       <div><span className="red-font">Subject:</span> {this.getTitle(msg, true)}</div>
                       <div><span className="red-font">Received:</span> {this.getDate(msg, true)}, {this.getTime(msg)}</div>
                     </td>

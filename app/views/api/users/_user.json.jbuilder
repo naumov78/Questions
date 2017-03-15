@@ -24,6 +24,8 @@ end
 
 json.sent_messages user.sent_messages.order(created_at: :desc) do |message|
   json.extract! message, :id, :addressee_id, :title, :body, :unread, :created_at
+  json.message_addressee User.find(message.addressee_id)
+  json.addressee_userpic_url asset_path(User.find(message.addressee_id).userpic.url)
 end
 
 json.received_messages user.received_messages.order(created_at: :desc) do |message|

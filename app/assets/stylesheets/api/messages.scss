@@ -196,16 +196,17 @@ font-size: 32px;
 .reply-container{
   position: relative;
   padding: 10px 20px 20px 20px;
+  min-height: 180px;
 }
 
 .close-reply-form {
   position: absolute;
-  top: 5px;
-  left: 779px;
+  top: 7px;
+  left: 773px;
   border: 1px solid #e2e2e2;
   border-radius: 5px;
   padding: 4px;
-  font-size: 1.05em;
+  font-size: 1.4em;
 }
 
 .close-reply-form:hover {
@@ -216,12 +217,25 @@ font-size: 32px;
 }
 
 .reply-title {
-  // width: 650px;
   font-size: 0.95em;
   color: #999;
 }
 
+#reply-input {
+  width: 680px;
+}
+
+.centered {
+  width: 720px;
+  margin: 0 auto;
+}
+
+.send-reply-btn {
+  position: absolute;
+  left: 599px;
+  top: 129px;
+}
 
 .reply-form-container {
-
+  position: relative;
 }
