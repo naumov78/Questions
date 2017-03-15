@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter, Link } from 'react-router';
-import MessageContainer from '../../message/message_container';
+import ReplyContainer from '../../message/reply_container';
 
 
 class Inbox extends React.Component {
@@ -17,8 +17,10 @@ constructor(props) {
   }
 
 
-  getTitle(msg) {
-    if (msg.title === "") {
+  getTitle(msg, inside = false) {
+    if (msg.title === "" && inside) {
+      return <span className="grey-font">(no subject)</span>
+    } else if (msg.title === "" && !inside) {
       return <span>(no subject)</span>
     }
     let subject = msg.title
@@ -30,12 +32,12 @@ constructor(props) {
 
   toggleMessage(message) {
     if (this.state.showMessageContent === message.id) {
-      this.setState({ showMessageContent: 0 })
+      this.setState({ showMessageContent: 0, reply: false })
     } else {
       if (message.unread) {
         this.markMessageAsRead(message.id)
       } else {
-        this.setState({ showMessageContent: message.id })
+        this.setState({ showMessageContent: message.id, reply: false })
       }
     }
   }
@@ -50,7 +52,7 @@ constructor(props) {
 
   hideMessageContent(msg) {
     debugger
-      this.setState({ showMessageContent: 0 })
+      this.setState({ showMessageContent: 0, reply: false })
       debugger
   }
 
@@ -69,9 +71,8 @@ constructor(props) {
                     <td className="messsage-author-info-left"><span><Link className="message-content-img-link" to={`/users/${msg.author_id}`}><img src={msg.author_userpic_url} /></Link></span></td>
                     <td className="messsage-author-info-right">
                       <div><span className="red-font">From:</span> <Link className="message-content-link" to={`api/users/${msg.author_id}`}>{`${msg.message_author.first_name}  ${msg.message_author.last_name} - ${msg.message_author.description}`}</Link></div>
-                      <div><span className="red-font">Subject:</span> {this.getTitle(msg)}</div>
+                      <div><span className="red-font">Subject:</span> {this.getTitle(msg, true)}</div>
                       <div><span className="red-font">Received:</span> {this.getDate(msg, true)}, {this.getTime(msg)}</div>
-                      <a>TEST</a>
                     </td>
                   </tr>
                 </tbody>
@@ -102,7 +103,7 @@ constructor(props) {
 
   getReply(msg) {
     if (this.state.showMessageContent === msg.id && this.state.reply) {
-      return <MessageContainer />;
+      return <ReplyContainer oldBody={msg.body} replyTo={msg.author_id} oldTitle={msg.title}/>;
     }
   }
 

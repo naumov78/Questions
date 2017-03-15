@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Message from './message';
+import Reply from './reply';
 import { createMessage } from '../../actions/message_actions';
 
 
@@ -19,4 +19,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Message)
+)(Reply)

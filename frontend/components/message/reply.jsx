@@ -2,16 +2,18 @@ import React from 'react';
 import { Link, withRouter } from 'react-router';
 
 
-class Message extends React.Component {
+class Reply extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { title: "", body: "", messageForm: true }
+    this.state = { title: `Re: ${this.props.oldTitle}`, body: `Re: ${this.props.oldBody}\n\n`, messageForm: true }
     this.sendMessage = this.sendMessage.bind(this)
+    this.closeReply = this.closeReply.bind(this)
 
 
   }
 
   componentDidMount() {
+    debugger
   }
 
   componentWillUnmount() {
@@ -27,7 +29,7 @@ class Message extends React.Component {
 
   sendMessage(e) {
     e.preventDefault();
-    const message = {addressee_id: Number(this.props.params.id), title: this.state.title, body: this.state.body}
+    const message = {addressee_id: this.props.replyTo, title: this.state.title, body: this.state.body}
     this.props.createMessage(message).then((success) => {
       this.setState({ messageForm: false })
     })
@@ -41,21 +43,32 @@ class Message extends React.Component {
     }
   }
 
+  closeReply() {
+    this.setState({ messageForm: false })
+  }
+
+
+// <div className="message-form-profile-container">
+// <input id="reply-title" className="reply-input" type="text" onChange={this.update("title")} value={`Re: ${this.props.oldTitle}`}/>
   render() {
     if (this.state.messageForm) {
       debugger
       return (
-         <div className="message-form-profile-container">
+        <td colSpan="4" className = "message-content-container reply-container">
+
+           <button className="close-reply-form" onClick={this.closeReply}>X</button>
+           <div className="reply-form-container">
            <form onSubmit={this.sendMessage} className="create-question-form message-form-profile">
 
              <div>
-               <input autoFocus={true} className="auth-form-input answer-input" type="text" placeholder="Subject" onChange={this.update("title")} />
+               <span className="reply-title">Re: {this.props.oldTitle}</span>
              </div>
              <div className="question-input">
                <textarea
-               placeholder="Message"
+               autoFocus={true}
                onChange={this.update("body")}
-               className="auth-form-input answer-input"/>
+               className="auth-form-input answer-input"
+               value={this.state.body}/>
              </div>
              <br />
                <div className="button-part">
@@ -65,13 +78,14 @@ class Message extends React.Component {
                  </div>
                </div>
            </form>
-        </div>
+           </div>
+        </td>
        );
     } else {
-      return <div></div>
+      return null;
     }
   }
 
 }
 
-export default withRouter(Message);
+export default withRouter(Reply);
