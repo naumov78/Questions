@@ -155,8 +155,9 @@ class TopicIndex extends React.Component {
               const now = new Date();
               return (
               <li key={q.id * now} className="topic-question-container">
-                <Link to={`/topics/${topic_id}/questions/${q.id}`}>
+
                 <div className="single-q-list">
+                  <Link to={`/topics/${topic_id}/questions/${q.id}`}>
                   <div className="question-author-info">
                     <div className="question-author-userpic">
                       <Link to={`/users/${q.author_id}`}><img src={q.author_userpic_url} /></Link>
@@ -172,6 +173,7 @@ class TopicIndex extends React.Component {
                   <div className="q-body">
                     <Link to={`/topics/${topic_id}/questions/${q.id}`}><span>{q.body}</span></Link>
                   </div>
+                  </Link>
                   <div className="question-stats">
                     <span>{this.getLikeButton(q)}</span>
                     <span id="topic-ans-num">{this.getLastAnswerDate(lastAnswerDate, now)}</span>
@@ -179,7 +181,7 @@ class TopicIndex extends React.Component {
                     {this.getQuickAnswerForm(q)}
                   </div>
                 </div>
-                </Link>
+
               </li>
               );
             })}
@@ -189,6 +191,7 @@ class TopicIndex extends React.Component {
       </div>
     );
   }
+
 
   toggleQuickAnswer(q) {
     if (this.state.showQuickAnswer === q.id) {
