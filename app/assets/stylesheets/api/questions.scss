@@ -25,26 +25,27 @@
 .question-author-userpic {
   display: block;
   height: 40px;
-  width: 42px;
+  width: 48px;
   float: left;
   padding: 0 5px 0 0;
 
 
 img {
   display: block;
-  width: 36px;
-  height: 36px;
+  width: 43px;
+  height: 43px;
   border: 1px solid #f9f9f9;
   border-radius: 50%;
   }
 
 }
 
+
 .question-author-name {
   float: left;
   display: block;
   position: absolute;
-  left: 45px;
+  left: 55px;
   width: 455px;
 }
 
@@ -125,7 +126,7 @@ img {
     border-color: #577ba8;
   }
 
-  
+
   input[type="text"] {
     width: 500px;
     height: 200px;
