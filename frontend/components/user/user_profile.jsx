@@ -23,6 +23,7 @@ class UserProfile extends React.Component {
 
 
   componentWillMount() {
+    debugger
     if (store.getState().session.currentUser.id === Number(this.props.params.id)) {
       this.setState({ ownProfile: true })
     }
@@ -163,7 +164,11 @@ class UserProfile extends React.Component {
   getMessagesBlock() {
     if (typeof this.props.user.id !== 'undefined') {
       if (Number(this.props.params.id) === store.getState().session.currentUser.id) {
-        return <UserMessagesBlock />
+        if (this.props.params.inbox === "inbox") {
+          return <UserMessagesBlock inbox={true} />
+        } else {
+          return <UserMessagesBlock />
+        }
       } else {
         return null;
         }

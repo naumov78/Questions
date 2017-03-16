@@ -11,6 +11,7 @@ export const receiveTopics = (topics) => {
 }
 
 export const receiveSingleTopic = (questions) => {
+  debugger
   return ({
     type: RECEIVE_SINGLE_TOPIC,
     topic_title: questions.title,

@@ -4,9 +4,32 @@ import GreetingContainer from './greeting_container';
 import HeaderAskFormContainer from './header_ask_form_container';
 
 class Header extends React.Component {
+  constructor() {
+    super();
+    // this.state = { unreadMessages: 0 }
+  }
+
+  // componentWillMount() {
+  //   this.setState({ unreadMessages: this.props.currentUser.unread_messages })
+  // }
+
+  getUnreadMessagesNumber() {
+    // const user = store.getState().user.user
+    const unreadMessages = this.props.currentUser.unread_messages
+    debugger
+    if (unreadMessages === 0) {
+      return null;
+    } else {
+      return (
+        <span className="header-unread">{unreadMessages}</span>
+      )
+    }
+  }
+
 
 
   render() {
+    debugger
     if(this.props.currentUser && this.props.location.pathname !== "/settopics"){
       return (
           <div className="header">
@@ -23,17 +46,22 @@ class Header extends React.Component {
                 <div className="nav-container group">
                   <div className="nav-links">
                     <div className="read-link">
-                      <a>Read</a>
+                      <span>Read</span>
                     </div>
                     <div className="answer-link">
-                      <a>Answer</a>
+                      <span>Answer</span>
                     </div>
-                    <div className="notifications-link">
-                      <a>Notifications</a>
+                    <Link to={`users/${this.props.currentUser.id}/inbox`}>
+                    <div className="messages-link">
+                      <a>Messages</a>
+                      {this.getUnreadMessagesNumber()}
                     </div>
+                    </Link>
+
                     <div className="greeting-container">
                       <GreetingContainer />
                     </div>
+
                   </div>
                 </div>
 

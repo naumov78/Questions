@@ -1,6 +1,6 @@
 json.extract! topic, :id, :title
 json.extract! topic_questions
-
+# json.extract! user, :id, :first_name, :last_name, :description, :userpic, :topics, :created_at, :out_follows, :unread_messages
 
 json.questions topic_questions do |question|
   json.body question.body

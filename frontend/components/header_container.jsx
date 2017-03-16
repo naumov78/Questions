@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 
 const mapStateToProps = ({ session }) => {
+  debugger
   return ({
     currentUser: session.currentUser
   });

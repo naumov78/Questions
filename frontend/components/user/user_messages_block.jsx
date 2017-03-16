@@ -18,6 +18,12 @@ getSentMessages() {
 
 }
 
+componentDidMount() {
+  if (this.props.inbox) {
+    this.setState({ showMessages: true, inbox: true })
+  }
+}
+
 hideMessages() {
   this.setState({ showMessages: false, inbox: false, outbox: false })
 }

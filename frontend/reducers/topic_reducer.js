@@ -1,4 +1,5 @@
 import { RECEIVE_SINGLE_TOPIC } from '../actions/topic_actions';
+// import { RECEIVE_USER } from '../actions/user_actions';
 import merge from 'lodash/merge';
 
 const initState = {
