@@ -1,13 +1,6 @@
 
 class Api::MessagesController < ApplicationController
 
-
-# def index
-#   @sent_messages = current_user.sent_messages.order(created_at: :desc)
-#   @received_messages = current_user.received_messages.order(created_at: :desc)
-# end
-
-
 def show
   @message = Message.find(params[:id])
 end
@@ -28,9 +21,12 @@ end
 
 def update
   message = Message.find(params[:id])
-  message.update_attribute(:unread, false)
-  updated_unread_messages = current_user.unread_messages - 1
-  current_user.update_attribute(:unread_messages, updated_unread_messages)
+  message_unread = message.unread
+  message.update_attributes(message_params)
+  if message_unread != message.unread
+    updated_unread_messages = current_user.unread_messages - 1
+    current_user.update_attribute(:unread_messages, updated_unread_messages)
+  end
   @user = current_user
   render 'api/users/show'
 end
@@ -38,7 +34,7 @@ end
 private
 
 def message_params
-  params.require(:message).permit(:addressee_id, :title, :body)
+  params.require(:message).permit(:addressee_id, :title, :body, :unread, :author_visible, :addressee_visible)
 end
 
 end

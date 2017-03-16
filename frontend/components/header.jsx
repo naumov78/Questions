@@ -6,17 +6,11 @@ import HeaderAskFormContainer from './header_ask_form_container';
 class Header extends React.Component {
   constructor() {
     super();
-    // this.state = { unreadMessages: 0 }
   }
 
-  // componentWillMount() {
-  //   this.setState({ unreadMessages: this.props.currentUser.unread_messages })
-  // }
 
   getUnreadMessagesNumber() {
-    // const user = store.getState().user.user
     const unreadMessages = this.props.currentUser.unread_messages
-    debugger
     if (unreadMessages === 0) {
       return null;
     } else {
@@ -26,10 +20,7 @@ class Header extends React.Component {
     }
   }
 
-
-
   render() {
-    debugger
     if(this.props.currentUser && this.props.location.pathname !== "/settopics"){
       return (
           <div className="header">

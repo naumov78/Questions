@@ -49,9 +49,9 @@ export const fetchMessage = (id) => {
 }
 
 
-export const readMessage = (id) => {
+export const changeMessage = (id, parameter) => {
   return (dispatch) => {
-    return APIUtil.readMessage(id).then((result) => {
+    return APIUtil.changeMessage(id, parameter).then((result) => {
       return dispatch(receiveUser(result))
     })
   }

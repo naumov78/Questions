@@ -23,13 +23,13 @@ json.questions user.questions do |question|
 end
 
 json.sent_messages user.sent_messages.order(created_at: :desc) do |message|
-  json.extract! message, :id, :addressee_id, :title, :body, :unread, :created_at
+  json.extract! message, :id, :addressee_id, :title, :body, :unread, :author_visible, :created_at
   json.message_addressee User.find(message.addressee_id)
   json.addressee_userpic_url asset_path(User.find(message.addressee_id).userpic.url)
 end
 
 json.received_messages user.received_messages.order(created_at: :desc) do |message|
-  json.extract! message, :id, :author_id, :title, :body, :unread, :created_at
+  json.extract! message, :id, :author_id, :title, :body, :unread, :addressee_visible, :created_at
   json.message_author User.find(message.author_id)
   json.author_userpic_url asset_path(User.find(message.author_id).userpic.url)
 end

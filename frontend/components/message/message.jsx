@@ -15,7 +15,6 @@ class Message extends React.Component {
   }
 
   componentWillUnmount() {
-    debugger
   }
 
 
@@ -43,7 +42,6 @@ class Message extends React.Component {
 
   render() {
     if (this.state.messageForm) {
-      debugger
       return (
          <div className="message-form-profile-container">
            <form onSubmit={this.sendMessage} className="create-question-form message-form-profile">

@@ -23,7 +23,6 @@ class UserProfile extends React.Component {
 
 
   componentWillMount() {
-    debugger
     if (store.getState().session.currentUser.id === Number(this.props.params.id)) {
       this.setState({ ownProfile: true })
     }
@@ -37,7 +36,6 @@ class UserProfile extends React.Component {
       this.props.fetchUser(Number(id))
     }
   }
-
 
   update(field) {
     return e => {
@@ -65,8 +63,6 @@ class UserProfile extends React.Component {
         url: '/api/user_subscribed_topics',
       });
     }
-
-
 
   changeToEdit(e) {
     e.preventDefault();
@@ -212,7 +208,6 @@ class UserProfile extends React.Component {
   }
 
 
-
   render() {
     if (this.state.edit && this.state.ownProfile) {
       return (
@@ -276,9 +271,6 @@ class UserProfile extends React.Component {
           </div>
 
           </div>
-
-
-
         </div>
       );
     } else {

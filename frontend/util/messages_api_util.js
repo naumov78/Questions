@@ -14,9 +14,18 @@ export const fetchMessage = (id) => {
 }
 
 
-export const readMessage = (id) => {
+export const changeMessage = (id, parameter) => {
+  let data;
+  if (parameter === 'unread') {
+    data = {message: { unread: false }}
+  } else if (parameter === 'delete_from_inbox') {
+    data = {message: { addressee_visible: false }}
+  } else if (parameter === "delete_from_outbox") {
+    data = {message: {author_visible: false }}
+  }
   return $.ajax({
     method: "PATCH",
-    url: `/api/messages/${id}`
+    url: `/api/messages/${id}`,
+    data: data
   })
 }

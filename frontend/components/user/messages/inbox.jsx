@@ -10,6 +10,7 @@ constructor(props) {
   this.toggleMessage = this.toggleMessage.bind(this);
   this.changeToReply = this.changeToReply.bind(this);
   this.hideMessageContent = this.hideMessageContent.bind(this);
+  this.deleteMessage = this.deleteMessage.bind(this);
 }
 
   componentDidMount() {
@@ -41,22 +42,12 @@ constructor(props) {
     }
   }
 
-  // showMessageContent(message) {
-  //   if (message.unread) {
-  //     this.markMessageAsRead(message.id)
-  //   } else {
-  //     this.setState({ showMessageContent: message.id })
-  //   }
-  // }
 
   hideMessageContent(msg) {
       this.setState({ showMessageContent: 0, reply: false })
   }
 
-
-
   getContent(msg) {
-    debugger
     if (this.state.showMessageContent === msg.id) {
       return (
         <td colSpan="4" className = "message-content-container">
@@ -84,7 +75,7 @@ constructor(props) {
           </div>
           <div className="message-buttons">
             <button className="ans-btn" onClick={this.changeToReply}>Reply</button>
-            <button className="ans-btn">Delete</button>
+            <button className="ans-btn" onClick={this.deleteMessage}>Delete</button>
             <button className="ans-btn" onClick={this.hideMessageContent}>Close</button>
           </div>
         </td>
@@ -93,6 +84,7 @@ constructor(props) {
       return null;
     }
   }
+
 
   changeToReply() {
     this.setState({ showMessageContent: this.state.showMessageContent, reply: true })
@@ -106,8 +98,14 @@ constructor(props) {
 
 
   markMessageAsRead(id) {
-    this.props.readMessage(id).then(() => {
+    this.props.changeMessage(id, "unread").then(() => {
       this.setState({ showMessageContent: id })
+    })
+  }
+
+  deleteMessage() {
+    this.props.changeMessage(this.state.showMessageContent, "delete_from_inbox").then(() => {
+      this.setState({ showMessageContent: 0 })
     })
   }
 
@@ -143,6 +141,7 @@ constructor(props) {
   }
 
 
+
   getDate(msg, fullMonth = false) {
     const date = new Date(msg.created_at)
     let monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -173,6 +172,7 @@ constructor(props) {
         </li>
 
         {messages.map(message => {
+          if (message.addressee_visible) {
 
           const author = message.message_author.first_name + ' ' + message.message_author.last_name;
 
@@ -201,6 +201,7 @@ constructor(props) {
 
 
         )
+        }
         })}
   </ul>
     )
@@ -208,7 +209,6 @@ constructor(props) {
 
 
   render() {
-    debugger
     return (
       <div className="messages-container">
         {this.getMsgList()}

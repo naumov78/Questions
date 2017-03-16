@@ -7,6 +7,7 @@ constructor(props) {
   this.state = { showMessageContent: 0 }
   this.toggleMessage = this.toggleMessage.bind(this);
   this.hideMessageContent = this.hideMessageContent.bind(this);
+  this.deleteMessage = this.deleteMessage.bind(this);
 }
 
   componentDidMount() {
@@ -77,8 +78,13 @@ constructor(props) {
     return `${Mon} ${Day}`
   }
 
+  deleteMessage() {
+    this.props.changeMessage(this.state.showMessageContent, "delete_from_outbox").then(() => {
+      this.setState({ showMessageContent: 0 })
+    })
+  }
+
   getContent(msg) {
-    debugger
     if (this.state.showMessageContent === msg.id) {
       return (
         <td colSpan="4" className = "message-content-container">
@@ -105,7 +111,7 @@ constructor(props) {
             {`${msg.body}`}
           </div>
           <div className="message-buttons">
-            <button className="ans-btn">Delete</button>
+            <button className="ans-btn" onClick={this.deleteMessage}>Delete</button>
             <button className="ans-btn" onClick={this.hideMessageContent}>Close</button>
           </div>
         </td>
@@ -134,6 +140,7 @@ constructor(props) {
         </li>
 
         {messages.map(message => {
+          if (message.author_visible) {
           const addressee = message.message_addressee.first_name + ' ' + message.message_addressee.last_name;
 
           return (
@@ -154,6 +161,7 @@ constructor(props) {
           </li>
 
         )
+        }
         })}
   </ul>
     )
@@ -169,4 +177,4 @@ constructor(props) {
   }
 }
 
-export default Outbox;
+export default withRouter(Outbox);

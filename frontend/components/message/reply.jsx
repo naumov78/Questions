@@ -8,16 +8,12 @@ class Reply extends React.Component {
     this.state = { title: `Re: ${this.props.oldTitle}`, body: `Re: ${this.props.oldBody}\n\n`, messageForm: true }
     this.sendMessage = this.sendMessage.bind(this)
     this.closeReply = this.closeReply.bind(this)
-
-
   }
 
   componentDidMount() {
-    debugger
   }
 
   componentWillUnmount() {
-    debugger
   }
 
 
@@ -48,11 +44,8 @@ class Reply extends React.Component {
   }
 
 
-// <div className="message-form-profile-container">
-// <input id="reply-title" className="reply-input" type="text" onChange={this.update("title")} value={`Re: ${this.props.oldTitle}`}/>
   render() {
     if (this.state.messageForm) {
-      debugger
       return (
         <td colSpan="4" className = "message-content-container">
           <div className="reply-container">
