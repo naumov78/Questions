@@ -27,6 +27,10 @@
 .single-q-list:hover {
   background: #f2f2f2;
   cursor: pointer;
+
+  .q-body {
+    color: #2b6dad;
+  }
 }
 
 .q-body {
@@ -34,9 +38,6 @@
   letter-spacing: 0.6px;
 }
 
-.q-body:hover {
-  color: #2b6dad;
-}
 
 .question-stats {
   padding: 13px 0 0 0;
