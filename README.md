@@ -85,7 +85,7 @@ Show Messages button renders Inbox tab with the list of received messages sorted
 
 ![Inbox](/docs/wireframes/screenshots/inbox.png)
 
-After click on the message in the list message content with message details will be rendered. Any message may be deleted by receiver or sender. If it's deleted by receiver it won't be render in receiver's inbox anymore, but still be rendered in sender's outbox. The same happens when sender delete the message - it will be deleted from outbox only, not from receiver's inbox.
+After click on the message in the list message content with message details will be rendered. Any message may be deleted by receiver or sender. If it's deleted by receiver it won't be rendered in receiver's inbox anymore, but still be rendered in sender's outbox. The same happens when sender deletes the message - it will be deleted from outbox only, not from receiver's inbox.
 
 ![Message](/docs/wireframes/screenshots/message.png)
 
