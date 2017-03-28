@@ -2,7 +2,7 @@ class Api::AnswersController < ApplicationController
 
 
   def index
-    @answers = Answer.all.where({question_id: answer_params[:question_id]})
+    @answers = Answer.where("question_id = ?", answer_params[:question_id])
   end
 
   def show

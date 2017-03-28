@@ -19,7 +19,7 @@ class Api::UserLikedCommentsController < ApplicationController
 
 
   def destroy
-    liked_comment = UserLikedComment.all.where({user_id: current_user.id}).where({comment_id: comment_params[:comment_id]})
+    liked_comment = UserLikedComment.where(user_id: current_user.id).where("comment_id = ?", comment_params[:comment_id])
     @question = Comment.find(liked_comment[0].comment_id).answer.question
     @user = @question.user
     @current_user = current_user

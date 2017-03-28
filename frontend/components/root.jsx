@@ -28,7 +28,6 @@ const _redirectIfLoggedIn = () => {
 const redirectToQuestions = (topic_id) => {
   replace(`/topics/${topic_id}/questions`);
 }
-
 return (
     <Provider store={ store }>
     <Router history={ hashHistory }>

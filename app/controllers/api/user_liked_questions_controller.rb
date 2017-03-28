@@ -20,8 +20,8 @@ class Api::UserLikedQuestionsController < ApplicationController
 
   def destroy
     idx = params[:id].to_i
-    liked_question = UserLikedQuestion.all.where({user_id: question_params[:user_id]}).where({question_id: question_params[:question_id]})
-    @question = liked_question[0].liked_question
+    liked_question = UserLikedQuestion.where("user_id = ?", question_params[:user_id]).where("question_id = ?", question_params[:question_id])
+    @question = liked_question.first.liked_question
     @topic = @question.topic
     @topic_questions = @topic.questions
     @user = @question.user

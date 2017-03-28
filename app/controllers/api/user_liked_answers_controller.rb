@@ -19,7 +19,7 @@ class Api::UserLikedAnswersController < ApplicationController
 
 
   def destroy
-    liked_answer = UserLikedAnswer.all.where({user_id: answer_params[:user_id]}).where({answer_id: answer_params[:answer_id]})
+    liked_answer = UserLikedAnswer.where("user_id = ?", answer_params[:user_id]).where("answer_id = ?", answer_params[:answer_id])
     @question = Answer.find(liked_answer[0].answer_id).question
     @user = @question.user
     @current_user = current_user

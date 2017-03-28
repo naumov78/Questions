@@ -4,6 +4,11 @@
 "Questions" is a web application inspired by "[Quora](https://www.quora.com/)" built using Ruby on Rails and React/Redux.
 It allows users to ask questions and get answers as well as answer the questions of others.
 
+I used React.JS and Redux to build responsive App.
+Used Rails because it has friendly convention that make it easier to build an App.
+It supports full CRUD operations
+
+
 Ask your question [here](https://allquestions.herokuapp.com/#/) (Live application)
 
 Welcome page - RegEx is used for email validation during sign up.

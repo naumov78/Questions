@@ -19,8 +19,8 @@ class Api::UserWatchedQuestionsController < ApplicationController
 
 
   def destroy
-    watched_question = UserWatchedQuestion.all.where({user_id: question_params[:user_id]}).where({question_id: question_params[:question_id]})
-    @question = watched_question[0].watched_question
+    watched_question = UserWatchedQuestion.where("user_id = ?", question_params[:user_id]).where("question_id = ?", question_params[:question_id])
+    @question = watched_question.first.watched_question
     @topic = @question.topic
     @topic_questions = @topic.questions
     @user = @question.user
