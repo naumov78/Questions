@@ -8,20 +8,24 @@ class SingleQuestion extends React.Component {
 
 constructor(props) {
   super(props);
-  this.state = { answer: false, answer_body: "", showComments: 0, addComment: false, commentBody: "" };
+  this.state = { answer: false, answer_body: "", showComments: 0, addComment: false, commentBody: "", fetching: true };
 }
 
 componentDidMount() {
+
 }
 
 getQuestion() {
   const question_data = {topic_id: this.props.params.topic_id, question_id: this.props.params.question_id };
-  this.props.fetchSingleQuestion({question_data});
+  this.props.fetchSingleQuestion({question_data}).then(() => {
+    this.setState({fetching: false})
+  });
 }
 
 componentWillReceiveProps(nextProps) {
+  debugger
   if (this.props !== nextProps) {
-    this.setState(nextProps)
+    this.setState(nextProps, this.setState({fetching: true}))
   }
 
   let id = nextProps.params.question_id;
@@ -29,8 +33,10 @@ componentWillReceiveProps(nextProps) {
     id = Number(nextProps.params.question_id);
     const topic_id = Number(nextProps.params.topic_id)
     const question_data = {topic_id: topic_id, question_id: id };
-    this.props.fetchSingleQuestion({question_data});
-  }
+    this.props.fetchSingleQuestion({question_data}).then(() => {
+      this.setState({fetching: false})
+    });
+  } 
 }
 
 componentDidUpdate() {
@@ -566,102 +572,115 @@ getFolloweesQuestionsBlock() {
 }
 
 render () {
+  debugger
   this.checkLoggedIn();
   let authName, userpic, userId, descr, now;
-  if (this.props.question.topic_id !== 0) {
+  // if (this.props.question.topic_id !== 0) {
+  if (!this.state.fetching) {
     const author = this.props.question.user;
     now = new Date();
     authName = this.props.question.first_name + ' ' + this.props.question.last_name;
     userpic = this.props.question.author_userpic_url;
     userId = this.props.question.author_id;
     descr = this.props.question.description;
+
+      if (!this.state.answer) {
+      return (
+      <div>
+        <div className="single-question-container">
+          {this.getInnerNav()}
+          <div className="question-part">
+            <div className="question-author-info">
+              <div className="question-author-userpic">
+                <Link to={`/users/${userId}`}><img src={userpic} /></Link>
+              </div>
+              <div className="question-author-name">
+                <span id="one">
+                  <span id="link-auth-name"><Link to={`/users/${userId}`}>{authName}</Link></span>
+                  <span className="question-author-descr">, {this.updateDescrLength(descr)}</span>
+                  <p className="question-date">{this.getDate(this.props.question, now, "asked")}</p>
+                </span>
+                <span id="two">{this.getFollowBtn(userId)}</span>
+              </div>
+            </div>
+            <div className="single-question-body">{this.props.question.body}</div>
+            <div className="question-buttons group">
+              <span id="one">
+                <button className="ans-btn" onClick={() => this.setState({answer: true, addComment: false})}>Add answer</button>
+                {this.getLikeButton(this.state.question)}
+              </span>
+              <span id="two">
+                {this.getWatchButton(this.state.question)}
+              </span>
+            </div>
+            {this.renderAnswersQuntity()}
+          </div>
+          <div className="answers-part">
+            <div className="answers">
+              {this.renderAnswers()}
+            </div>
+          </div>
+        </div>
+        {this.getFolloweesQuestionsBlock()}
+      </div>
+      );
+    } else {
+      now = new Date();
+      return (
+      <div>
+        <div className="single-question-container">
+          {this.getInnerNav()}
+          <div className="question-part">
+            <div className="question-author-info">
+              <div className="question-author-userpic">
+                <Link to={`/users/${userId}`}><img src={userpic} /></Link>
+              </div>
+              <div className="question-author-name">
+                <span id="one">
+                  <span id="link-auth-name"><Link to={`/users/${userId}`}>{authName}</Link></span>
+                  <span className="question-author-descr">, {this.updateDescrLength(descr)}</span>
+                  <p className="question-date">{this.getDate(this.props.question, now, "asked")}</p>
+                </span>
+                <span id="two">{this.getFollowBtn(userId)}</span>
+              </div>
+            </div>
+            <div className="single-question-body">{this.props.question.body}</div>
+            <div className="ans-form">
+              <form className="answer-form" onSubmit={(e) => this.handleCreateAnswer(e)}>
+                <div className="answer-input">
+                    <textarea autoFocus={true}
+                      placeholder="Start writing your answer"
+                    onChange={this.update("answer_body")}
+                    className="auth-form-input answer-input"/>
+                </div>
+                <div className="answer-buttons">
+                    <button className="cancel-button" onClick={() => this.setState({answer: false, answer_body: ""})}>Cancel</button>
+                    {this.getAddBtn(this.state.answer_body, 'Add answer')}
+                </div>
+              </form>
+            </div>
+          </div>
+          <div className="answers-part">
+            <div className="answers-2">
+              {this.renderAnswers()}
+            </div>
+          </div>
+        </div>
+        {this.getFolloweesQuestionsBlock()}
+      </div>
+      );
+    }
+  } else {
+    debugger
+    return (
+      <div>
+        <div className="loading-container">
+          <i className="fa fa-quora fa-spin fa-3x" aria-hidden="true"></i>
+        </div>
+      </div>
+    )
   }
-  if (!this.state.answer) {
-  return (
-  <div>
-    <div className="single-question-container">
-      {this.getInnerNav()}
-      <div className="question-part">
-        <div className="question-author-info">
-          <div className="question-author-userpic">
-            <Link to={`/users/${userId}`}><img src={userpic} /></Link>
-          </div>
-          <div className="question-author-name">
-            <span id="one">
-              <span id="link-auth-name"><Link to={`/users/${userId}`}>{authName}</Link></span>
-              <span className="question-author-descr">, {this.updateDescrLength(descr)}</span>
-              <p className="question-date">{this.getDate(this.props.question, now, "asked")}</p>
-            </span>
-            <span id="two">{this.getFollowBtn(userId)}</span>
-          </div>
-        </div>
-        <div className="single-question-body">{this.props.question.body}</div>
-        <div className="question-buttons group">
-          <span id="one">
-            <button className="ans-btn" onClick={() => this.setState({answer: true, addComment: false})}>Add answer</button>
-            {this.getLikeButton(this.state.question)}
-          </span>
-          <span id="two">
-            {this.getWatchButton(this.state.question)}
-          </span>
-        </div>
-        {this.renderAnswersQuntity()}
-      </div>
-      <div className="answers-part">
-        <div className="answers">
-          {this.renderAnswers()}
-        </div>
-      </div>
-    </div>
-    {this.getFolloweesQuestionsBlock()}
-  </div>
-  );
-} else {
-  now = new Date();
-  return (
-  <div>
-    <div className="single-question-container">
-      {this.getInnerNav()}
-      <div className="question-part">
-        <div className="question-author-info">
-          <div className="question-author-userpic">
-            <Link to={`/users/${userId}`}><img src={userpic} /></Link>
-          </div>
-          <div className="question-author-name">
-            <span id="one">
-              <span id="link-auth-name"><Link to={`/users/${userId}`}>{authName}</Link></span>
-              <span className="question-author-descr">, {this.updateDescrLength(descr)}</span>
-              <p className="question-date">{this.getDate(this.props.question, now, "asked")}</p>
-            </span>
-            <span id="two">{this.getFollowBtn(userId)}</span>
-          </div>
-        </div>
-        <div className="single-question-body">{this.props.question.body}</div>
-        <div className="ans-form">
-          <form className="answer-form" onSubmit={(e) => this.handleCreateAnswer(e)}>
-            <div className="answer-input">
-                <textarea autoFocus={true}
-                  placeholder="Start writing your answer"
-                onChange={this.update("answer_body")}
-                className="auth-form-input answer-input"/>
-            </div>
-            <div className="answer-buttons">
-                <button className="cancel-button" onClick={() => this.setState({answer: false, answer_body: ""})}>Cancel</button>
-                {this.getAddBtn(this.state.answer_body, 'Add answer')}
-            </div>
-          </form>
-        </div>
-      </div>
-      <div className="answers-part">
-        <div className="answers-2">
-          {this.renderAnswers()}
-        </div>
-      </div>
-    </div>
-    {this.getFolloweesQuestionsBlock()}
-  </div>
-  );
-}
+
 }
 
 }

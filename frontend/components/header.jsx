@@ -6,11 +6,27 @@ import HeaderAskFormContainer from './header_ask_form_container';
 class Header extends React.Component {
   constructor() {
     super();
+    this.state = { unreadMessages: 0 }
   }
 
+  componentWillReceiveProps(nextProps) {
+    debugger
+    if (typeof nextProps.user.unread_messages !== 'undefined') {
+      this.setState({ unreadMessages: nextProps.user.unread_messages })
+    } else {
+      this.setState({ unreadMessages: nextProps.currentUser.unread_messages })
+    }
+  }
+
+  componentWillMount() {
+    if (this.props.currentUser) {
+      this.setState({ unreadMessages: this.props.currentUser.unread_messages })
+    }
+  }
 
   getUnreadMessagesNumber() {
-    const unreadMessages = this.props.currentUser.unread_messages
+    const unreadMessages = this.state.unreadMessages
+    debugger
     if (unreadMessages === 0) {
       return null;
     } else {
