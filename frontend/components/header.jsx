@@ -10,15 +10,10 @@ class Header extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    debugger
-    if (typeof nextProps.user.unread_messages !== 'undefined') {
-      this.setState({ unreadMessages: nextProps.user.unread_messages })
-    } else {
       this.setState({ unreadMessages: nextProps.currentUser.unread_messages })
-    }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if (this.props.currentUser) {
       this.setState({ unreadMessages: this.props.currentUser.unread_messages })
     }
@@ -26,7 +21,6 @@ class Header extends React.Component {
 
   getUnreadMessagesNumber() {
     const unreadMessages = this.state.unreadMessages
-    debugger
     if (unreadMessages === 0) {
       return null;
     } else {

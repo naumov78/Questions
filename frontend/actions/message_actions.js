@@ -1,10 +1,17 @@
 import * as APIUtil from '../util/messages_api_util';
 
-
 export const RECEIVE_MESSAGE = "RECEIVE_MESSAGE";
 export const RECEIVE_ERRORS = "RECEIVE_ERRORS";
 export const RECEIVE_USER = "RECEIVE_USER";
+export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
 
+
+export const receiveCurrentUser = (currentUser) => {
+  return {
+    type: RECEIVE_CURRENT_USER,
+    currentUser: currentUser,
+  };
+}
 
 export const receiveUser = (user) => {
   return {
@@ -52,7 +59,7 @@ export const fetchMessage = (id) => {
 export const changeMessage = (id, parameter) => {
   return (dispatch) => {
     return APIUtil.changeMessage(id, parameter).then((result) => {
-      return dispatch(receiveUser(result))
+      return dispatch(receiveCurrentUser(result))
     })
   }
 }

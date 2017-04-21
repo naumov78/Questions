@@ -23,7 +23,6 @@ getQuestion() {
 }
 
 componentWillReceiveProps(nextProps) {
-  debugger
   if (this.props !== nextProps) {
     this.setState(nextProps, this.setState({fetching: true}))
   }
@@ -572,7 +571,6 @@ getFolloweesQuestionsBlock() {
 }
 
 render () {
-  debugger
   this.checkLoggedIn();
   let authName, userpic, userId, descr, now;
   // if (this.props.question.topic_id !== 0) {
@@ -671,7 +669,6 @@ render () {
       );
     }
   } else {
-    debugger
     return (
       <div>
         <div className="loading-container">

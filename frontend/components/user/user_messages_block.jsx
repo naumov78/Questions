@@ -78,7 +78,7 @@ getMessagesBtn(user) {
 }
 
 getUnreadMessagesNumber() {
-  const user = store.getState().user.user
+  const user = store.getState().session.currentUser
   const unreadMessages = user.unread_messages
   if (unreadMessages === 0) {
     return null;

@@ -4,9 +4,9 @@ import { changeMessage, createMessage } from '../../../actions/message_actions';
 
 
 
-const mapStateToProps = ({user, message}) => {
+const mapStateToProps = ({session, message}) => {
   return ({
-    currentUser: user.user,
+    currentUser: session.currentUser,
     message: message
   });
 }

@@ -18,7 +18,6 @@ class UserProfile extends React.Component {
 
 
   componentDidMount() {
-    debugger
     this.props.fetchUser(Number(this.props.params.id)).then(() => {
       this.setState({ fetching: false })
     })
@@ -26,19 +25,13 @@ class UserProfile extends React.Component {
 
 
   componentWillMount() {
-    debugger
     if (store.getState().session.currentUser.id === Number(this.props.params.id)) {
       this.setState({ ownProfile: true })
     }
   }
 
-  componentDidUpdate(){
-    debugger
-  }
-
 
   componentWillReceiveProps(newProps) {
-    debugger
     const id = newProps.params.id;
     if (id !== this.props.params.id) {
       this.setState({ownProfile: false, edit: false, first_name: "", last_name: "", description: "", userpicFile: null, userpicUrl: null, messageForm: false, fetching: true})

@@ -14,7 +14,7 @@ constructor(props) {
 }
 
   componentDidMount() {
-    
+
   }
 
 
@@ -43,6 +43,11 @@ constructor(props) {
     }
   }
 
+  markMessageAsRead(id) {
+    this.props.changeMessage(id, "unread").then((res) => {
+      this.setState({ showMessageContent: id })
+    })
+  }
 
   hideMessageContent(msg) {
       this.setState({ showMessageContent: 0, reply: false })
@@ -95,13 +100,6 @@ constructor(props) {
     if (this.state.showMessageContent === msg.id && this.state.reply) {
       return <ReplyContainer oldBody={msg.body} replyTo={msg.author_id} oldTitle={msg.title}/>;
     }
-  }
-
-
-  markMessageAsRead(id) {
-    this.props.changeMessage(id, "unread").then(() => {
-      this.setState({ showMessageContent: id })
-    })
   }
 
   deleteMessage() {
