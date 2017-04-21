@@ -7,13 +7,13 @@ import RightPart from '../right_part';
 class TopicIndex extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { topic_id: null, topic_title: null, questions: {}, showQuickAnswer: 0, answer_body: ""}
+    this.state = { topic_id: null, topic_title: null, questions: {}, showQuickAnswer: 0, answer_body: "", fetching: true}
     this.renderQuestions = this.renderQuestions.bind(this);
   }
 
   componentDidMount() {
     const id = parseInt(this.props.params.topic_id);
-    this.getQuestions(id);
+    this.getQuestions(id)
   }
 
   getQuestions(id) {
@@ -21,7 +21,7 @@ class TopicIndex extends React.Component {
       const topic_id = success.topic_id;
       const topic_title = success.topic_title;
       const questions = success.questions;
-      this.setState({ topic_id: topic_id, topic_title: topic_title, questions: questions })
+      this.setState({ topic_id: topic_id, topic_title: topic_title, questions: questions, fetching: false })
     });
   }
 
@@ -34,8 +34,8 @@ class TopicIndex extends React.Component {
   componentWillReceiveProps(newProps) {
     const id = newProps.params.topic_id;
     if (id !== this.props.params.topic_id) {
-      this.setState({showQuickAnswer: 0, answer_body: ""})
-      this.getQuestions(id);
+      this.setState({showQuickAnswer: 0, answer_body: "", fetching: true})
+      this.getQuestions(id)
     }
   }
 
@@ -317,11 +317,21 @@ class TopicIndex extends React.Component {
 
   render () {
     this.checkLoggedIn();
-    return (
+    if (!this.state.fetching) {
+      return (
+        <div>
+          {this.renderQuestions()}
+        </div>
+       );
+    } else {
+      return (
       <div>
-        {this.renderQuestions()}
+        <div className="loading-container">
+          <i className="fa fa-quora fa-spin fa-3x" aria-hidden="true"></i>
+        </div>
       </div>
-     );
+      );
+    }
   }
 
   getQuestion(question) {

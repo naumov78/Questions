@@ -36,7 +36,7 @@ componentWillReceiveProps(nextProps) {
     this.props.fetchSingleQuestion({question_data}).then(() => {
       this.setState({fetching: false})
     });
-  } 
+  }
 }
 
 componentDidUpdate() {
@@ -477,7 +477,7 @@ getInnerNav() {
     return (
     <div className="inner-nav">
       <Link to={`/topics/${topic_id}/questions`}>{topic_title}</Link>
-      <span>{` >> `}</span><Link to={`/topics/${topic_id}/questions/${quest_id}`}>{quest_title}</Link>
+      <span>{` >> `}</span>{quest_title}
     </div>
     );
   }

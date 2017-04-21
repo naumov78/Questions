@@ -10,7 +10,7 @@ import { Link, withRouter } from 'react-router';
 class UserProfile extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { ownProfile: false, edit: false, first_name: "", last_name: "", description: "", userpicFile: null, userpicUrl: null, messageForm: false }
+    this.state = { ownProfile: false, edit: false, first_name: "", last_name: "", description: "", userpicFile: null, userpicUrl: null, messageForm: false, fetching: true }
     this.changeToEdit = this.changeToEdit.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
     this.updateFile = this.updateFile.bind(this);
@@ -18,22 +18,33 @@ class UserProfile extends React.Component {
 
 
   componentDidMount() {
-    this.props.fetchUser(Number(this.props.params.id))
+    debugger
+    this.props.fetchUser(Number(this.props.params.id)).then(() => {
+      this.setState({ fetching: false })
+    })
   }
 
 
   componentWillMount() {
+    debugger
     if (store.getState().session.currentUser.id === Number(this.props.params.id)) {
       this.setState({ ownProfile: true })
     }
   }
 
+  componentDidUpdate(){
+    debugger
+  }
+
 
   componentWillReceiveProps(newProps) {
+    debugger
     const id = newProps.params.id;
     if (id !== this.props.params.id) {
-      this.setState({ownProfile: false, edit: false, first_name: "", last_name: "", description: "", userpicFile: null, userpicUrl: null, messageForm: false})
-      this.props.fetchUser(Number(id))
+      this.setState({ownProfile: false, edit: false, first_name: "", last_name: "", description: "", userpicFile: null, userpicUrl: null, messageForm: false, fetching: true})
+      this.props.fetchUser(Number(id)).then(() => {
+        this.setState({ fetching: false })
+      })
     }
   }
 
@@ -209,105 +220,115 @@ class UserProfile extends React.Component {
 
 
   render() {
-    if (this.state.edit && this.state.ownProfile) {
-      return (
+    if (!this.state.fetching) {
+        if (this.state.edit && this.state.ownProfile) {
+          return (
+            <div>
+              <div className="uu-form-container">
+              <form onSubmit={ this.handleUpdate }
+                className="uu-form">
+                <div className="userpic-profile">
+                  <img src={this.props.user.userpic_url} />
+                  <br />
+                  <input type="file" onChange={(e) => this.updateFile(e)} />
+                </div>
+                <br />
+                <div className="uu-input">
+                  <label className="uu-field-title">First Name</label>
+                  <input
+                    className="auth-form-input"
+                    type="text"
+                    value={`${this.state.first_name}`}
+                    onChange={this.update("first_name")} />
+                  <div className="signup-form-errors">{this.renderSpecificError("First name")}</div>
+                  <br />
+                </div>
+
+                <div className="uu-input">
+                  <label className="uu-field-title">Last Name</label>
+                  <input
+                    className="auth-form-input"
+                    type="text"
+                    value={`${this.state.last_name}`}
+                    onChange={this.update("last_name")} />
+                  <div className="signup-form-errors">{this.renderSpecificError("Last name")}</div>
+                  <br />
+
+                </div>
+
+                <div className="uu-input">
+                  <label className="uu-field-title">Description</label>
+                  <input
+                    className="auth-form-input"
+                    type = "text"
+                    value={this.state.description}
+                    onChange={this.update("description")} />
+                  <div className="signup-form-errors">{this.renderSpecificError("Description")}</div>
+                </div>
+
+                <br />
+              <div className="uu-buttons group">
+                  <Link className="cancel-link link" onClick={() => this.setState({edit: false})}>Cancel</Link>
+                  <input type="submit" className="ans-btn" value="Update" />
+              </div>
+
+              </form>
+
+              <div className="user-details">
+                {this.getUserDetailsBlock()}
+              </div>
+
+              <div>
+                {this.getMessagesBlock()}
+              </div>
+
+              </div>
+            </div>
+          );
+        } else {
+          const date = new Date(this.props.user.created_at);
+          const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+          const qMon = monthNames[date.getMonth()];
+          const qDay = date.getDate();
+          const qYr = date.getFullYear();
+          return (
+          <div className="ui_container">
+            <div className="user-profile">
+              <div className="userpic-profile">
+                <img src={this.props.user.userpic_url} />
+              </div>
+              <br />
+              <div className="user-info-profile">
+                <div className="user-name">
+                  <p>{this.props.user.first_name}&nbsp;&nbsp;{this.props.user.last_name}
+                    {this.getMessageButton()}
+                  </p>
+                </div>
+                <div className="user-descr">
+                  <p>{this.props.user.description}</p>
+                </div>
+                <div className="user-since">
+                  <p>Member since {qMon} {qDay} {qYr}</p>
+                </div>
+                {this.getEditBtn()}
+              </div>
+              {this.getMessageForm()}
+              <div className="user-details">
+                {this.getUserDetailsBlock()}
+                {this.getMessagesBlock()}
+              </div>
+
+            </div>
+          </div>
+            );
+          }
+      } else {
+        return (
         <div>
-          <div className="uu-form-container">
-          <form onSubmit={ this.handleUpdate }
-            className="uu-form">
-            <div className="userpic-profile">
-              <img src={this.props.user.userpic_url} />
-              <br />
-              <input type="file" onChange={(e) => this.updateFile(e)} />
-            </div>
-            <br />
-            <div className="uu-input">
-              <label className="uu-field-title">First Name</label>
-              <input
-                className="auth-form-input"
-                type="text"
-                value={`${this.state.first_name}`}
-                onChange={this.update("first_name")} />
-              <div className="signup-form-errors">{this.renderSpecificError("First name")}</div>
-              <br />
-            </div>
-
-            <div className="uu-input">
-              <label className="uu-field-title">Last Name</label>
-              <input
-                className="auth-form-input"
-                type="text"
-                value={`${this.state.last_name}`}
-                onChange={this.update("last_name")} />
-              <div className="signup-form-errors">{this.renderSpecificError("Last name")}</div>
-              <br />
-
-            </div>
-
-            <div className="uu-input">
-              <label className="uu-field-title">Description</label>
-              <input
-                className="auth-form-input"
-                type = "text"
-                value={this.state.description}
-                onChange={this.update("description")} />
-              <div className="signup-form-errors">{this.renderSpecificError("Description")}</div>
-            </div>
-
-            <br />
-          <div className="uu-buttons group">
-              <Link className="cancel-link link" onClick={() => this.setState({edit: false})}>Cancel</Link>
-              <input type="submit" className="ans-btn" value="Update" />
-          </div>
-
-          </form>
-
-          <div className="user-details">
-            {this.getUserDetailsBlock()}
-          </div>
-
-          <div>
-            {this.getMessagesBlock()}
-          </div>
-
+          <div className="loading-container">
+            <i className="fa fa-quora fa-spin fa-3x" aria-hidden="true"></i>
           </div>
         </div>
-      );
-    } else {
-      const date = new Date(this.props.user.created_at);
-      const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-      const qMon = monthNames[date.getMonth()];
-      const qDay = date.getDate();
-      const qYr = date.getFullYear();
-      return (
-      <div className="ui_container">
-        <div className="user-profile">
-          <div className="userpic-profile">
-            <img src={this.props.user.userpic_url} />
-          </div>
-          <br />
-          <div className="user-info-profile">
-            <div className="user-name">
-              <p>{this.props.user.first_name}&nbsp;&nbsp;{this.props.user.last_name}
-                {this.getMessageButton()}
-              </p>
-            </div>
-            <div className="user-descr">
-              <p>{this.props.user.description}</p>
-            </div>
-            <div className="user-since">
-              <p>Member since {qMon} {qDay} {qYr}</p>
-            </div>
-            {this.getEditBtn()}
-          </div>
-          {this.getMessageForm()}
-          <div className="user-details">
-            {this.getUserDetailsBlock()}
-            {this.getMessagesBlock()}
-          </div>
-
-        </div>
-      </div>
         );
       }
     }
