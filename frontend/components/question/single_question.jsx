@@ -339,7 +339,7 @@ handleCreateComment(e, id) {
   e.preventDefault();
   const newComment = { answer_id: id, body: this.state.commentBody }
   this.props.createComment(newComment).then(() => {
-    this.setState({ showComments: id, addComment: false })
+    this.setState({ showComments: id, addComment: false, fetching: false })
   });
 }
 
