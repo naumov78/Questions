@@ -10,7 +10,9 @@ class Header extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if (nextProps.currentUser) {
       this.setState({ unreadMessages: nextProps.currentUser.unread_messages })
+    }
   }
 
   componentDidMount() {
