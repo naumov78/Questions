@@ -192,14 +192,13 @@
 
 .header-unread {
   position: absolute;
-  padding: 3px 8px 3px 8px;
-  margin-left: -52px;
+  padding: 2px 5px 2px 5px;
+  margin-left: -45px;
   margin-top: 7px;
-  background: red;
+  background: red - 25;
   color: #fff;
-  font-size: 0.85em;
-  font-weight: 800;
-  border: 2px solid #990000;
+  font-size: 0.61em;
+  border: 2px solid red - 75;
   border-radius: 50%;
 }
 
