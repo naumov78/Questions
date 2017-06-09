@@ -482,13 +482,7 @@ getInnerNav() {
   }
 }
 
-getDate(obj, now, str) {
-  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  const date = new Date(obj.created_at);
-  const qMon = monthNames[date.getMonth()];
-  const qDay = date.getDate();
-  const qYr = date.getFullYear()
-  const dif = Math.floor((now - date) / 1000);
+getDateText(dif, str, qMon, qDay, qYr) {
   if (dif < 30) {
     return ` ${str} just now`
   } else if (dif < 60) {
@@ -508,6 +502,16 @@ getDate(obj, now, str) {
   } else {
     return ` ${str} on ${qMon} ${qDay} ${qYr}`
   }
+}
+
+getDate(obj, now, str) {
+  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const date = new Date(obj.created_at);
+  const qMon = monthNames[date.getMonth()];
+  const qDay = date.getDate();
+  const qYr = date.getFullYear()
+  const dif = Math.floor((now - date) / 1000);
+  return this.getDateText(dif, str, qMon, qDay, qYr);
 }
 
 
