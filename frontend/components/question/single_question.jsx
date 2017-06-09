@@ -353,13 +353,13 @@ handleCreateComment(e, id) {
 
 addCommentLike(comment) {
   this.props.likeComment(comment.id).then(() => {
-    this.getQuestion();
+    this.getQuestion(false);
   });
 }
 
 dislikeComment(comment) {
   this.props.dislikeComment(comment.id).then(() => {
-    this.getQuestion();
+    this.getQuestion(false);
   });
 }
 
@@ -679,16 +679,7 @@ render () {
       </div>
       );
     }
-  } else {
-    return (
-      <div>
-        <div className="loading-container">
-          <i className="fa fa-quora fa-spin fa-3x" aria-hidden="true"></i>
-        </div>
-      </div>
-    )
-  }
-
+  } else { return (<div><div className="loader"></div></div>) }
 }
 
 }

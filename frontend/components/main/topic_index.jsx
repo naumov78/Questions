@@ -323,15 +323,7 @@ class TopicIndex extends React.Component {
           {this.renderQuestions()}
         </div>
        );
-    } else {
-      return (
-      <div>
-        <div className="loading-container">
-          <i className="fa fa-quora fa-spin fa-3x" aria-hidden="true"></i>
-        </div>
-      </div>
-      );
-    }
+    } else { return (<div><div className="loader"></div></div>); }
   }
 
   getQuestion(question) {
