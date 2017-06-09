@@ -12,14 +12,21 @@ constructor(props) {
 }
 
 componentDidMount() {
-
+  this.getQuestion(true)
 }
 
-getQuestion() {
+getQuestion(fetching) {
   const question_data = {topic_id: this.props.params.topic_id, question_id: this.props.params.question_id };
-  this.props.fetchSingleQuestion({question_data}).then(() => {
-    this.setState({fetching: false})
-  });
+  if (fetching) {
+    this.props.fetchSingleQuestion({question_data}).then(() => {
+      this.setState({fetching: false})
+    });
+  } else {
+    this.setState({fetching: false });
+    this.props.fetchSingleQuestion({question_data}).then(() => {
+      this.setState({fetching: false})
+    });
+  }
 }
 
 componentWillReceiveProps(nextProps) {
@@ -42,7 +49,7 @@ componentDidUpdate() {
 }
 
 componentWillMount() {
-  this.getQuestion()
+
 }
 
 componentWillUnmount() {
@@ -61,13 +68,13 @@ update(field) {
 
 addLike(question) {
   this.props.likeQuestion(this.props.currentUser.id, question.id).then(() => {
-    this.getQuestion();
+    this.getQuestion(false);
   });
 }
 
 dislike(question) {
   this.props.dislikeQuestion(this.props.currentUser.id, question.id, 2).then(() => {
-    this.getQuestion();
+    this.getQuestion(false);
   });
 }
 
@@ -113,13 +120,13 @@ getLikeButton(question) {
 
 watchQuestion(question) {
   this.props.watchQuestion(this.props.currentUser.id, question.id).then(() => {
-    this.getQuestion();
+    this.getQuestion(false);
   });
 }
 
 unwatchQuestion(question) {
   this.props.unwatchQuestion(this.props.currentUser.id, question.id).then(() => {
-    this.getQuestion();
+    this.getQuestion(false);
   });
 }
 
@@ -164,13 +171,13 @@ getWatchButton(question) {
 
 addAnswerLike(answer) {
   this.props.likeAnswer(this.props.currentUser.id, answer.id).then(() => {
-    this.getQuestion();
+    this.getQuestion(false);
   });
 }
 
 dislikeAnswer(answer) {
   this.props.dislikeAnswer(this.props.currentUser.id, answer.id).then(() => {
-    this.getQuestion();
+    this.getQuestion(false);
   });
 }
 
@@ -436,7 +443,7 @@ handleCreateAnswer(e) {
 
   this.props.createAnswer(newAnswer, topic_id).then(() => {
     this.setState({answer: false});
-    this.getQuestion();
+    this.getQuestion(false);
   });
 }
 
@@ -551,14 +558,14 @@ getFollowBtn(id) {
 follow(e, id) {
   e.preventDefault();
   this.props.follow(this.props.currentUser.id, id).then(() => {
-    this.getQuestion();
+    this.getQuestion(false);
   })
 }
 
 unfollow(e, id) {
   e.preventDefault();
   this.props.unfollow(this.props.currentUser.id, id).then(() => {
-    this.getQuestion();
+    this.getQuestion(false);
   })
 }
 
