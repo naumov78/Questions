@@ -8,7 +8,7 @@ class SingleQuestion extends React.Component {
 
 constructor(props) {
   super(props);
-  this.state = { answer: false, answer_body: "", showComments: 0, addComment: false, commentBody: "", fetching: true };
+  this.state = { answer: false, answer_body: "", showComments: 0, addComment: false, commentBody: "", fetching: true};
 }
 
 componentDidMount() {
@@ -68,13 +68,13 @@ update(field) {
 
 addLike(question) {
   this.props.likeQuestion(this.props.currentUser.id, question.id).then(() => {
-    this.getQuestion(false);
+    this.setState({fetching: false});
   });
 }
 
 dislike(question) {
   this.props.dislikeQuestion(this.props.currentUser.id, question.id, 2).then(() => {
-    this.getQuestion(false);
+    this.setState({fetching: false});
   });
 }
 
@@ -573,6 +573,7 @@ getFolloweesQuestionsBlock() {
   if (typeof this.state.question !== 'undefined') {
     if (this.state.question.out_follows.length > 0) {
       return <RightPart followees={this.state.question.followees} question_id={this.state.question.id} watched_questions={this.state.question.watched_questions}/>
+      // return <RightPart followees={this.state.question.followees} question_id={this.state.question.id} watched_questions={this.props.question.watched_questions}/>
     } else {
       return null;
     }
@@ -593,7 +594,7 @@ render () {
     userId = this.props.question.author_id;
     descr = this.props.question.description;
 
-      if (!this.state.answer) {
+      if (!this.state.answer) { //no answer form
       return (
       <div>
         <div className="single-question-container">
@@ -633,7 +634,7 @@ render () {
         {this.getFolloweesQuestionsBlock()}
       </div>
       );
-    } else {
+    } else { //rendering answer form
       now = new Date();
       return (
       <div>
@@ -679,7 +680,7 @@ render () {
       </div>
       );
     }
-  } else { return (<div><div className="loader"></div></div>) }
+  } else { return (<div><div className="loader"></div></div>) } // spinner
 }
 
 }
