@@ -8,15 +8,16 @@ class Api::UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       login!(@user)
-      ans = Answer.all.order(created_at: :desc)
-      @watched_questions = []
-      i = 0
-      while i < ans.length && @watched_questions.length <= 20
-          if @user.watched_questions.include?(ans[i].question) && !@watched_questions.include?(ans[i].question)
-          @watched_questions.push(ans[i].question)
-        end
-      i += 1
-      end
+
+      # ans = Answer.all.order(created_at: :desc)
+      # @watched_questions = []
+      # i = 0
+      # while i < ans.length && @watched_questions.length < 20
+      #     if @user.watched_questions.include?(ans[i].question) && !@watched_questions.include?(ans[i].question)
+      #     @watched_questions.push(ans[i].question)
+      #   end
+      # i += 1
+      # end
 
       render 'api/users/show'
     else
@@ -28,15 +29,16 @@ class Api::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
       if @user.update_attributes(user_params)
-        ans = Answer.all.order(created_at: :desc)
-        @watched_questions = []
-        i = 0
-        while i < ans.length && @watched_questions.length <= 20
-            if @user.watched_questions.include?(ans[i].question) && !@watched_questions.include?(ans[i].question)
-            @watched_questions.push(ans[i].question)
-          end
-        i += 1
-        end
+
+        # ans = Answer.all.order(created_at: :desc)
+        # @watched_questions = []
+        # i = 0
+        # while i < ans.length && @watched_questions.length < 20
+        #     if @user.watched_questions.include?(ans[i].question) && !@watched_questions.include?(ans[i].question)
+        #     @watched_questions.push(ans[i].question)
+        #   end
+        # i += 1
+        # end
 
         render 'api/users/show'
       else

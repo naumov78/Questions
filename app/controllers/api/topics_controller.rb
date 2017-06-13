@@ -9,6 +9,7 @@ class Api::TopicsController < ApplicationController
     @topic_questions = Topic.find(params[:id]).questions.order(created_at: :desc)
 
     @user = current_user
+
     ans = Answer.all.order(created_at: :desc)
     @watched_questions = []
     i = 0
