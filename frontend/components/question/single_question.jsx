@@ -120,13 +120,13 @@ getLikeButton(question) {
 
 watchQuestion(question) {
   this.props.watchQuestion(this.props.currentUser.id, question.id).then(() => {
-    this.getQuestion(false);
+    this.setState({fetching: false});
   });
 }
 
 unwatchQuestion(question) {
   this.props.unwatchQuestion(this.props.currentUser.id, question.id).then(() => {
-    this.getQuestion(false);
+    this.setState({fetching: false});
   });
 }
 
@@ -171,13 +171,13 @@ getWatchButton(question) {
 
 addAnswerLike(answer) {
   this.props.likeAnswer(this.props.currentUser.id, answer.id).then(() => {
-    this.getQuestion(false);
+    this.setState({fetching: false});
   });
 }
 
 dislikeAnswer(answer) {
   this.props.dislikeAnswer(this.props.currentUser.id, answer.id).then(() => {
-    this.getQuestion(false);
+    this.setState({fetching: false});
   });
 }
 
@@ -353,13 +353,13 @@ handleCreateComment(e, id) {
 
 addCommentLike(comment) {
   this.props.likeComment(comment.id).then(() => {
-    this.getQuestion(false);
+    this.setState({fetching: false});
   });
 }
 
 dislikeComment(comment) {
   this.props.dislikeComment(comment.id).then(() => {
-    this.getQuestion(false);
+    this.setState({fetching: false});
   });
 }
 
@@ -573,7 +573,7 @@ getFolloweesQuestionsBlock() {
   if (typeof this.state.question !== 'undefined') {
     if (this.state.question.out_follows.length > 0) {
       return <RightPart followees={this.state.question.followees} question_id={this.state.question.id} watched_questions={this.state.question.watched_questions}/>
-      // return <RightPart followees={this.state.question.followees} question_id={this.state.question.id} watched_questions={this.props.question.watched_questions}/>
+      // return <RightPart followees={this.props.question.followees} question_id={this.props.question.id} watched_questions={this.props.question.watched_questions}/>
     } else {
       return null;
     }

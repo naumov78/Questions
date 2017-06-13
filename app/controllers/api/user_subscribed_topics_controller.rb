@@ -23,16 +23,6 @@ class Api::UserSubscribedTopicsController < ApplicationController
 
     if @user_subscribed_topic.update_attributes(topics_params)
 
-      # ans = Answer.all.order(created_at: :desc)
-      # @watched_questions = []
-      # i = 0
-      # while i < ans.length && @watched_questions.length <= 20
-      #     if current_user.watched_questions.include?(ans[i].question) && !@watched_questions.include?(ans[i].question)
-      #     @watched_questions.push(ans[i].question)
-      #   end
-      # i += 1
-      # end
-
       render 'api/users/show'
     else
       render json: @user_subscribed_topic.errors.full_messages, status: 422

@@ -11,6 +11,7 @@ class Api::UserWatchedQuestionsController < ApplicationController
       @question = @user_watched_question.watched_question
       @user = @question.user
       @current_user = current_user
+      @watched_questions = update_watched_questions
       render 'api/questions/show'
     else
       render json: @user_watched_question.errors.full_messages, status: 422
@@ -27,6 +28,7 @@ class Api::UserWatchedQuestionsController < ApplicationController
     @current_user = current_user
     unless watched_question.nil?
       UserWatchedQuestion.delete(watched_question)
+      @watched_questions = update_watched_questions
       render 'api/questions/show'
     else
       render json: ['no such watched question'], status: 404
@@ -39,5 +41,6 @@ class Api::UserWatchedQuestionsController < ApplicationController
   def question_params
     params.require(:user_watched_question).permit(:user_id, :question_id)
   end
+
 
 end

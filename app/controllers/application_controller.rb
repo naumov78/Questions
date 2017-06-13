@@ -30,5 +30,17 @@ class ApplicationController < ActionController::Base
     !!current_user
   end
 
+  def update_watched_questions
+    ans = Answer.all.order(created_at: :desc)
+    watched_questions = []
+    i = 0
+    while i < ans.length && watched_questions.length <= 20
+        if @current_user.watched_questions.include?(ans[i].question) && !watched_questions.include?(ans[i].question)
+        watched_questions.push(ans[i].question)
+      end
+    i += 1
+    end
+    watched_questions
+  end
 
 end

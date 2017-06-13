@@ -11,6 +11,7 @@ class Api::UserLikedCommentsController < ApplicationController
       @question = Comment.find(user_liked_comment.comment_id).answer.question
       @user = @question.user
       @current_user = current_user
+      @watched_questions = update_watched_questions
       render 'api/questions/show'
     else
       render json: user_liked_comment.errors.full_messages, status: 422
@@ -23,6 +24,7 @@ class Api::UserLikedCommentsController < ApplicationController
     @question = Comment.find(liked_comment[0].comment_id).answer.question
     @user = @question.user
     @current_user = current_user
+    @watched_questions = update_watched_questions
     unless liked_comment.nil?
       UserLikedComment.delete(liked_comment)
       render 'api/questions/show'
