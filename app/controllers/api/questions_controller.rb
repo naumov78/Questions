@@ -9,16 +9,7 @@ class Api::QuestionsController < ApplicationController
     @question = Question.includes(:answers).find(params[:id])
     @user = @question.user
     @current_user = current_user
-
-    ans = Answer.all.order(created_at: :desc)
-    @watched_questions = []
-    i = 0
-    while i < ans.length && @watched_questions.length <= 20
-        if @current_user.watched_questions.include?(ans[i].question) && !@watched_questions.include?(ans[i].question)
-        @watched_questions.push(ans[i].question)
-      end
-    i += 1
-    end
+    @watched_questions = update_watched_questions
 
     render :show
   end
@@ -38,6 +29,19 @@ class Api::QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit(:topic_id, :body)
+  end
+
+  def update_watched_questions
+    ans = Answer.all.order(created_at: :desc)
+    watched_questions = []
+    i = 0
+    while i < ans.length && watched_questions.length <= 20
+        if @current_user.watched_questions.include?(ans[i].question) && !watched_questions.include?(ans[i].question)
+        watched_questions.push(ans[i].question)
+      end
+    i += 1
+    end
+    watched_questions
   end
 
 
