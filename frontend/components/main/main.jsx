@@ -31,7 +31,7 @@ class Main extends React.Component {
         <div className="page-wraper">
           <div className="grid_page">
             <div className="sidebar-container">
-              <SideBarContainer />
+              <SideBarContainer params={this.props.params} />
             </div>
               {this.getIndexPage()}
           </div>

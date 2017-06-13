@@ -27,7 +27,6 @@ class AddUserTopics extends React.Component {
         });
       return pick
     });
-
   return (
     <div className="add-topic-menu">
     <p>Choose a topic to subscribe</p>

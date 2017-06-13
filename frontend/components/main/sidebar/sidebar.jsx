@@ -23,7 +23,7 @@ class SideBar extends React.Component {
   }
 
   getAddTopicsBtn() {
-    if (this.props.currentUser.topics.length !== this.state.allTopics.length) {
+    if (this.props.currentUser.topics.length !== this.state.allTopics.length && !this.props.params.question_id) {
       if (!this.state.addTopics) {
         return <span className="add-topic-btn"><button onClick={this.toggleAddTopics.bind(this)}>Add More Topics</button></span>
       } else {
@@ -38,7 +38,7 @@ class SideBar extends React.Component {
     if (!this.state.addTopics) {
       return null;
     } else {
-      return <AddUserTopicsContainer />
+      return <AddUserTopicsContainer params={this.props.params}/>
     }
   }
 
