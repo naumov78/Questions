@@ -9,6 +9,7 @@ class Api::CommentsController < ApplicationController
     if comment.save
       @question = comment.answer.question
       @user = @question.user
+      @watched_questions = update_watched_questions
       render 'api/questions/show'
     else
       render json: comment.errors.full_messages, status: 422
